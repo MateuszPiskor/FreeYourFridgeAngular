@@ -17,10 +17,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { FavouredComponent } from './favoured/favoured.component';
+import { MyProfileComponent } from './myProfile/myProfile.component';
 
 
 @NgModule({
-  declarations: [								
+  declarations: [									
     AppComponent,
       NavComponent,
       HomeComponent,
@@ -29,7 +30,8 @@ import { FavouredComponent } from './favoured/favoured.component';
       ContactComponent,
       FridgeComponent,
       RecipesComponent,
-      FavouredComponent
+      FavouredComponent,
+      MyProfileComponent
    ],
   imports: [
     BrowserModule,
