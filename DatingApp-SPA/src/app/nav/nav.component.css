@@ -1,0 +1,12 @@
+.container{
+    font-size: 20px;
+}
+.navbar-brand{
+    margin-left: 0px;
+    font-size: 30px;
+    color: rgb(255, 227, 102);
+}
+
+.dropdown-toggle{
+    cursor:pointer;
+}
