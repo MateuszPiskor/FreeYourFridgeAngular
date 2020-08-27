@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import {Location} from '@angular/common';
-import { AlertifyjsService } from '../_services/alertifyjs.service';
+import {AlertifyjsService } from '../_services/alertifyjs.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
 
-  constructor(private authService: AuthService, private _location: Location, private alertify: AlertifyjsService) { }
+  constructor(private authService: AuthService, private _location: Location, private alertify: AlertifyjsService, private route: Router) { }
 
   ngOnInit() {
   }
@@ -21,8 +22,12 @@ export class RegisterComponent implements OnInit {
       this.alertify.success('Register succesful');
     }, error => {
       this.alertify.error('User alredy exists');
+      this.model.username = '';
+      this.model.password = '';
     });
-    this._location.back();
+    this.route.navigate(['/home']);
+    this.model.username = '';
+    this.model.password = '';
   }
 
   cancel(){
