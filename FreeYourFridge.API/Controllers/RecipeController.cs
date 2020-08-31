@@ -5,6 +5,7 @@ using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace FreeYourFridge.API.Controllers
 {
@@ -14,7 +15,7 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IRecipeRepository _repo;
         private readonly IMapper _mapper;
-        private readonly int _numberOfResipes=10;
+        private readonly int _numberOfResipes=8;
 
         public RecipeController(IRecipeRepository repo, IMapper mapper)
         {
@@ -48,11 +49,22 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRecipeById(int id)
         {
-            var model = await _repo.GetRecipeById(id);
-            if (model == null)
+            string content = await _repo.GetResponseById(id, "information");
+            if (content == "")
                 return NotFound();
+            Recipes recipes = JsonConvert.DeserializeObject<Recipes>(content);
 
-            var recipesForDetailedDto = _mapper.Map<RecipeForDetailDto>(model);
+            RecipeForDetailDto recipesForDetailedDto = _mapper.Map<RecipeForDetailDto>(recipes);
+
+            content = await _repo.GetResponseById(id, "nutritionWidget.json");
+
+            Nutrition nutrition = JsonConvert.DeserializeObject<Nutrition>(content);
+
+            recipesForDetailedDto.Calories = nutrition.Calories;
+            recipesForDetailedDto.Fat = nutrition.Fat;
+            recipesForDetailedDto.Carbs = nutrition.Carbs;
+            recipesForDetailedDto.Protein = nutrition.Protein;
+            
             return Ok(recipesForDetailedDto);
         }
     }

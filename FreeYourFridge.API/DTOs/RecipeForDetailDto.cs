@@ -9,6 +9,10 @@
         public int ReadyInMinutes { get; set; }
         public string Instructions { get; set; }
         public double SpoonacularScore { get; set; }
-        public bool Cheap { get; set; }
+        public int Calories { get; set; }
+        public string Carbs { get; set; }
+        public string Fat { get; set; }
+        public string Protein{ get; set; }
+        //public bool Cheap { get; set; }
     }
 }

@@ -10,6 +10,12 @@ namespace FreeYourFridge.API.Data
     {
         private readonly string _baseUrl = "https://api.spoonacular.com/recipes/";
         private readonly string _apiKey = "apiKey=ab1efb6fc9184c32b51bd7ee08cc8891";
+        private readonly RestClient client=new RestClient();
+
+        public RecipeRepository()
+        {
+            ;
+        }
 
         public async Task<IEnumerable<Recipes>> GetRecipesByIndegrients(IEnumerable<Ingredients> ingredients, int numberOfRecipes)
         {
@@ -34,15 +40,14 @@ namespace FreeYourFridge.API.Data
             return null;
         }
 
-        public async Task<Recipes> GetRecipeById(int id)
+        public async Task<string> GetResponseById(int id, string information)
         {
-            RestClient client = new RestClient($"{_baseUrl}{id}/information?{_apiKey}");
+            RestClient client = new RestClient($"{_baseUrl}{id}/{information}/?{_apiKey}");
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)
             {
-                Recipes recipes = JsonConvert.DeserializeObject<Recipes>(response.Content);
-                return recipes;
+                return response.Content;
             }
 
             //TODO: log error, throw exception or do other stuffs for failed requests here.

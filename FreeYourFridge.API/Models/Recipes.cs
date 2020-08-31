@@ -12,6 +12,10 @@ namespace FreeYourFridge.API.Models
         public double SpoonacularScore { get; set; }
         public string Instructions { get; set; }
         public string Cheap { get; set; }
+        public object Calories { get; set; }
+        public string Carbs { get; set; }
+        public string Fat { get; set; }
+        public string Protein { get; set; }       
 
     }
 }
