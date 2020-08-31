@@ -39,6 +39,7 @@ namespace FreeYourFridge.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IFridgeRepository, FridgeRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IWidgetRepository, WidgetRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
