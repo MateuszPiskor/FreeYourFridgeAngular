@@ -11,9 +11,15 @@ namespace FreeYourFridge.API.Data
         private readonly string _baseUrl = "https://api.spoonacular.com/recipes/";
         private readonly string _apiKey = "apiKey=ab1efb6fc9184c32b51bd7ee08cc8891";
 
-        public async Task<IEnumerable<Recipes>> GetRecipesByIndegrients(int number)
+        public async Task<IEnumerable<Recipes>> GetRecipesByIndegrients(IEnumerable<Ingredients> ingredients, int numberOfRecipes)
         {
-            RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients=apples&number=" + number);
+            string partUrlPath = "";
+            foreach(var ingredient in ingredients)
+            {
+                partUrlPath +=",+"+ingredient.Name;
+            }
+            partUrlPath = partUrlPath.Substring(2);
+            RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients={partUrlPath}"+"&number=" + numberOfRecipes);
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)

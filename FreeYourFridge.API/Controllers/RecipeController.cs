@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeYourFridge.API.Controllers
@@ -13,6 +14,7 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IRecipeRepository _repo;
         private readonly IMapper _mapper;
+        private readonly int _numberOfResipes=10;
 
         public RecipeController(IRecipeRepository repo, IMapper mapper)
         {
@@ -23,7 +25,19 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetRecipes()
         {
-            var model = await _repo.GetRecipesByIndegrients(8);
+            //later change to frige.getIndgredients
+            List<Ingredients> ingredients = new List<Ingredients>()
+            {
+                new Ingredients()
+                {
+                    Name="chicken"
+                },
+                new Ingredients()
+                {
+                    Name="orange"
+                }
+            };
+            var model = await _repo.GetRecipesByIndegrients(ingredients, _numberOfResipes);
             if (model == null)
                 return NotFound();
 
