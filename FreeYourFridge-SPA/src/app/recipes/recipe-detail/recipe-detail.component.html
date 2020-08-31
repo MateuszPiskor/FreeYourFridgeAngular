@@ -2,11 +2,9 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img
-          class="card-img-top img-thumbnail"
-          src="{{ recipe?.photoUrl }}"
-          alt="{{ recipe?.title }}"
-        />
+        <img class="card-img-top img-thumbnail"
+             src="{{ recipe?.photoUrl }}"
+             alt="{{ recipe?.title }}" />
         <div class="card-body">
           <div class="mb-4">
             <strong>Ready in: {{ recipe?.title }}</strong>
@@ -18,33 +16,38 @@
             <strong>Score: {{ recipe?.spoonacularScore }}</strong>
           </div>
           <div>
-            <strong
-              >Cheap: {{ recipe?.cheap ? "yes" : "no" }}{{ widget }}</strong
-            >
+            <strong>Calories: {{ recipe?.calories}} / 100g</strong>
           </div>
+          <div>Carbs: {{recipe?.carbs}}</div>
+          <div>Fat: {{recipe?.fat}}</div>
+          <div>Protein: {{recipe?.protein}}</div>
         </div>
         <div class="card-footer">
-          <div class="btn-group d-flex">
-            <button class="btn btn-primary w-100">Add</button>
-            <button class="btn btn-success w-100">Share</button>
-          </div>
+
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="g">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Add</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="Ingredients">
-            <div id="scroll" [innerHTML]="slideHtml"></div>
-          </tab>
-          <tab heading="Interests">
-            <h4>Interests</h4>
+
+          <tab heading="Instruction">
+            <h4>Instruction</h4>
             <p>{{ recipe?.title }}</p>
           </tab>
-          <!-- <tab heading="Photos">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-          </tab> -->
-          <tab heading="Messages">
+          <tab heading="Ingredients">
+            <div class="card" id="scroll" [innerHTML]="slideHtml"></div>
+          </tab>
+
+          <tab heading="Notes">
             <p>Messages will go here</p>
           </tab>
         </tabset>

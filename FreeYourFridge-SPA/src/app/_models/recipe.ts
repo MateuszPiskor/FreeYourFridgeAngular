@@ -11,6 +11,9 @@ export interface Recipe {
   score: number;
   cheap: boolean;
   widget: string;
+  calories: number;
   photos?: Photo[];
+  carbs: string;
+  fat: string;
+  protein: string;
 }
-
