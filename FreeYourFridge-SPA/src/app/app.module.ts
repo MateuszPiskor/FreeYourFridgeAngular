@@ -23,6 +23,7 @@ import { DailyMealComponent } from './dailyMeal/dailyMeal.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-instruction.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
     ShoppingListComponent,
     DailyMealComponent,
     RecipeDetailComponent,
+    RecipeInstructionComponent
   ],
   imports: [
     BrowserModule,
