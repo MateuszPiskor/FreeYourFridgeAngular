@@ -13,6 +13,5 @@ namespace FreeYourFridge.API.Models
         public DateTime DateOfBirth {get;set;}
         public decimal Weight{get;set;}
         public decimal Height {get;set;}
-        public ICollection<Photo> Photo {get;set;}
     }
 }

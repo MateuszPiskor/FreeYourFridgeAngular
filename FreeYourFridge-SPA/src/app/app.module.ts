@@ -5,6 +5,8 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import {RouterModule} from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
+
 import {AuthService} from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -17,13 +19,21 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FridgeComponent } from './fridge/fridge.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { FavouredComponent } from './favoured/favoured.component';
-import { MyProfileComponent } from './myProfile/myProfile.component';
+import { MyProfileComponent } from './member/myProfile/myProfile.component';
 import { ShoppingListComponent } from './shoppingList/shoppingList.component';
 import { DailyMealComponent } from './dailyMeal/dailyMeal.component';
+import {MemberEditComponent} from './member/member-edit/member-edit.component';
+import { AlertifyjsService } from './_services/alertifyjs.service';
+import { AuthGuard } from './_guards/auth.guard';
+import { UserService } from './_services/user.service';
+import {MemberEditResolver} from './_resolvers/member-edit.resolver';
 
+export function tokenGetter(){
+  return localStorage.getItem('token');
+}
 
 @NgModule({
-  declarations: [											
+  declarations: [												
     AppComponent,
       NavComponent,
       HomeComponent,
@@ -35,7 +45,8 @@ import { DailyMealComponent } from './dailyMeal/dailyMeal.component';
       FavouredComponent,
       MyProfileComponent,
       ShoppingListComponent,
-      DailyMealComponent
+      DailyMealComponent,
+      MemberEditComponent
    ],
   imports: [
     BrowserModule,
@@ -43,11 +54,22 @@ import { DailyMealComponent } from './dailyMeal/dailyMeal.component';
     FormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: ['localhost:5000/api/auth']
+      }
+    })
   ],
   providers: [
     ErrorInterceptorProvider,
-    AuthService
+    AuthService,
+    AlertifyjsService,
+    AuthGuard,
+    UserService,
+    MemberEditResolver
   ],
   bootstrap: [AppComponent]
 })
