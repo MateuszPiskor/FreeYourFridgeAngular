@@ -37,7 +37,7 @@ namespace FreeYourFridge.API
             services.AddCors();
             services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<UserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
