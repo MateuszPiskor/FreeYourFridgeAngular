@@ -4,8 +4,8 @@ namespace FreeYourFridge.API.Models
 {
     public class Recipes
     {
-        public int Id{get;set;}
-        public string Title{get;set;}
+        public int Id { get; set; }
+        public string Title { get; set; }
         public string Image { get; set; }
         public string Summary { get; set; }
         public int ReadyInMinutes { get; set; }
@@ -15,7 +15,9 @@ namespace FreeYourFridge.API.Models
         public object Calories { get; set; }
         public string Carbs { get; set; }
         public string Fat { get; set; }
-        public string Protein { get; set; }       
-
+        public string Protein { get; set; }
+        public Missedingredient[] MissedIngredients { get; set; }
+        public Usedingredient[] UsedIngredients { get; set; }
     }
+
 }

@@ -13,6 +13,8 @@
         public string Carbs { get; set; }
         public string Fat { get; set; }
         public string Protein{ get; set; }
+        public MissedingredientDto[] MissedingredientDto { get; set; }
+        public UsedingredientDto[] UsedingredientDto { get; set; }
         //public bool Cheap { get; set; }
     }
 }

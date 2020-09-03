@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using AutoMapper;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
@@ -11,8 +9,12 @@ namespace FreeYourFridge.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForListDto>();
-            CreateMap<Recipes, RecipeForListDto>().ForMember(dest=>dest.PhotoUrl,opt=>opt.MapFrom(src=>src.Image));
-            CreateMap<Recipes, RecipeForDetailDto>().ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<Missedingredient, MissedingredientDto>();
+            CreateMap<Usedingredient, UsedingredientDto>();
+            CreateMap<Recipes, RecipeForDetailDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Image))
+                .ForMember(dest => dest.UsedingredientDto, opt => opt.MapFrom(src => src.UsedIngredients))
+                .ForMember(dest => dest.MissedingredientDto, opt => opt.MapFrom(src => src.MissedIngredients));
         }
     }
 }

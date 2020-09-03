@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Recipe } from '../_models/recipe';
 import { Instruction } from '../_models/instruction';
+import { Ingredient } from '../_models/ingredient';
 
 
 const httpOptions = {
@@ -36,6 +37,10 @@ constructor(private http: HttpClient) {}
 
   getInstruction(id): Observable<Instruction[]>{
     return this.http.get<Instruction[]>(this.baseUrl + 'recipe/' + id + '/instruction', httpOptions);
+  }
+
+  getIngredients(id): Observable<Ingredient[]>{
+    return this.http.get<Ingredient[]>(this.baseUrl + 'recipe/' + id + '/ingredients', httpOptions);
   }
 
 

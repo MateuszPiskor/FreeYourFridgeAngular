@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../../_models/recipe';
 import { Instruction } from '../../_models/instruction';
+import { Ingredient } from '../../_models/ingredient';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,8 +17,11 @@ export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
   widget: string;
   data: string;
-  instructions: Instruction [];
+  instructions: Instruction[];
+  ingredient: Ingredient[];
   slideHtml;
+  @Input()
+  recipes;
 
   constructor(
     private recipeService: RecipeService,
@@ -30,6 +34,7 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
     this.loadRecipe();
     this.loadInstruction();
+    //this.loadIngredient();
   }
 
   loadRecipe() {
@@ -46,26 +51,37 @@ export class RecipeDetailComponent implements OnInit {
 
   loadWidget() {
     this.http
-      .get(
-        'https://api.spoonacular.com/recipes/749013/ingredientWidget?apiKey=ab1efb6fc9184c32b51bd7ee08cc8891',
-        { responseType: 'text' }
-      )
+      .get('https://api.spoonacular.com/recipes/749013/ingredientWidget?', {
+        responseType: 'text',
+      })
       .subscribe((res) => {
         this.slideHtml = this.sanitizer.bypassSecurityTrustHtml(res);
         console.log(this.slideHtml);
       });
   }
-  justTest(){
-    console.log("just test");
+  justTest() {
+    console.log('just test');
   }
   loadInstruction() {
-    this.recipeService.getInstruction(+this.route.snapshot.params['id']).subscribe(
-      (instructions: Instruction[]) => {
-        this.instructions = instructions;
-      },
-      (error) => {
-        this.alertify.error(error);
-      }
-    );
+    this.recipeService
+      .getInstruction(+this.route.snapshot.params['id'])
+      .subscribe(
+        (instructions: Instruction[]) => {
+          this.instructions = instructions;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
+  // loadIngredient() {
+  //   this.recipeService.getIngredients(+this.route.snapshot.params['id']).subscribe(
+  //     (ingredient: Ingredient[]) => {
+  //       this.ingredient = ingredient;
+  //     },
+  //     (error) => {
+  //       this.alertify.error(error);
+  //     }
+  //   );
+  // }
 }

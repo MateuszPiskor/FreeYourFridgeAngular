@@ -1,4 +1,6 @@
 import { Photo } from './photo';
+import { MissedIngredients} from './missedIngredients';
+import { UsedIngredients} from './usedIngredients';
 
 export interface Recipe {
   id: number;
@@ -16,4 +18,6 @@ export interface Recipe {
   carbs: string;
   fat: string;
   protein: string;
+  missedIngredients: MissedIngredients[];
+  usedIngredients: UsedIngredients[];
 }

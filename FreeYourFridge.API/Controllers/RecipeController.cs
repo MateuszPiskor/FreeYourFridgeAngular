@@ -38,11 +38,11 @@ namespace FreeYourFridge.API.Controllers
                     Name="orange"
                 }
             };
-            var model = await _repo.GetRecipesByIndegrients(ingredients, _numberOfResipes);
+            IEnumerable<Recipes> model = await _repo.GetRecipesByIndegrients(ingredients, _numberOfResipes);
             if (model == null)
                 return NotFound();
 
-            var recipesForDetailedDto = _mapper.Map<IEnumerable<RecipeForListDto>>(model);
+            IEnumerable<RecipeForDetailDto> recipesForDetailedDto =_mapper.Map<IEnumerable<RecipeForDetailDto>>(model);
             return Ok(recipesForDetailedDto);
         }
 

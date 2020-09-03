@@ -16,7 +16,7 @@
             <strong>Score: {{ recipe?.spoonacularScore }}</strong>
           </div>
           <div>
-            <strong>Calories: {{ recipe?.calories}} / 100g</strong>
+            <strong>Calories: {{ recipe?.calories}} kcal </strong>
           </div>
           <div>Carbs: {{recipe?.carbs}}</div>
           <div>Fat: {{recipe?.fat}}</div>
@@ -48,7 +48,8 @@
             </div>
           </tab>
           <tab heading="Ingredients">
-            <div class="card" id="scroll" [innerHTML]="slideHtml"></div>
+            <div>Missed Ingredients</div>
+            <!-- <div class="card" id="scroll" [innerHTML]="slideHtml"></div> -->
           </tab>
 
           <tab heading="Notes">
