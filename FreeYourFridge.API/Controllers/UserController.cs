@@ -34,5 +34,6 @@ namespace FreeYourFridge.API.Controllers
             var userToReturn = _mapper.Map<UserForListDto>(user);
             return Ok(userToReturn);
         }
+        
     }
 }

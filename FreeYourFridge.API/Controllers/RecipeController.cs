@@ -67,5 +67,16 @@ namespace FreeYourFridge.API.Controllers
             
             return Ok(recipesForDetailedDto);
         }
+
+        [HttpGet("{id}/instruction")]
+        public async Task<IActionResult> GetInstructionById(int id)
+        {
+            string content = await _repo.GetResponseById(id, "analyzedInstructions");
+            if (content == "")
+                return NotFound();
+            List<Instruction> recipes = JsonConvert.DeserializeObject<List<Instruction>>(content);
+
+             return Ok(recipes[0].steps);
+        }
     }
 }

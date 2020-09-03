@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../_models/recipe';
+import { Instruction } from '../../_models/instruction';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +16,7 @@ export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
   widget: string;
   data: string;
+  instructions: Instruction [];
   slideHtml;
 
   constructor(
@@ -27,6 +29,7 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loadRecipe();
+    this.loadInstruction();
   }
 
   loadRecipe() {
@@ -51,5 +54,18 @@ export class RecipeDetailComponent implements OnInit {
         this.slideHtml = this.sanitizer.bypassSecurityTrustHtml(res);
         console.log(this.slideHtml);
       });
+  }
+  justTest(){
+    console.log("just test");
+  }
+  loadInstruction() {
+    this.recipeService.getInstruction(+this.route.snapshot.params['id']).subscribe(
+      (instructions: Instruction[]) => {
+        this.instructions = instructions;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
   }
 }

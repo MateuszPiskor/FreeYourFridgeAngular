@@ -37,18 +37,22 @@
     </div>
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset class="member-tabset">
+        <tabset class="member-tabset" >
 
           <tab heading="Instruction">
-            <h4>Instruction</h4>
-            <p>{{ recipe?.title }}</p>
+            <div class="card">
+              <ul>
+
+            <li *ngFor="let instruciton of instructions">{{instruciton.number+". "+instruciton.step}}</li>
+              </ul>
+            </div>
           </tab>
           <tab heading="Ingredients">
             <div class="card" id="scroll" [innerHTML]="slideHtml"></div>
           </tab>
 
           <tab heading="Notes">
-            <p>Messages will go here</p>
+            <button class="btn btn-danger" (click)=justTest()>click me</button>
           </tab>
         </tabset>
       </div>

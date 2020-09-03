@@ -16,9 +16,9 @@ export class RecipeInstructionComponent implements OnInit {
     this.loadInstruction();
   }
   loadInstruction() {
-      this.recipeSerivice.getInstruction(+this.route.snapshot.params['id']).subscribe(data=>{
-        this.instruction = data;
-      })
+      // this.recipeSerivice.getInstruction(+this.route.snapshot.params['id']).subscribe(data=>{
+      //   this.instruction = data;
+      // })
   }
 
 }
