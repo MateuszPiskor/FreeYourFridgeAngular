@@ -9,7 +9,7 @@ namespace FreeYourFridge.API.Data
     public class RecipeRepository : IRecipeRepository
     {
         private readonly string _baseUrl = "https://api.spoonacular.com/recipes/";
-        private readonly string _apiKey = "apiKey=ab1efb6fc9184c32b51bd7ee08cc8891";
+        private readonly string _apiKey ="apiKey=410c59bf9317462d8f0c3a0b3b0f0586";
         private readonly RestClient client=new RestClient();
 
         public RecipeRepository()
