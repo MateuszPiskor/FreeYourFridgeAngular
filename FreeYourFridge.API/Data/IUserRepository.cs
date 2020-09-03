@@ -4,7 +4,7 @@ using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Data
 {
-    public interface IFridgeRepository
+    public interface IUserRepository
     {
          void Add<T>(T entity) where T: class;
          void Delete<T>(T entity) where T: class;

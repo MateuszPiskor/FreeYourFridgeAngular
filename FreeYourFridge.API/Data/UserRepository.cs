@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreeYourFridge.API.Data
 {
-    public class FridgeRepository : IFridgeRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-        public FridgeRepository(DataContext context)
+        public UserRepository(DataContext context)
         {
             _context = context;
         }

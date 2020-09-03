@@ -12,9 +12,9 @@ namespace FreeYourFridge.API.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IFridgeRepository _repo;
+        private readonly IUserRepository _repo;
         private readonly IMapper _mapper;
-        public UserController(IFridgeRepository repo, IMapper mapper)
+        public UserController(IUserRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
