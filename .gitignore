@@ -4,3 +4,10 @@
 
 /.vs
 FreeYourFridge.API/FreeYourFridge.db
+/FreeYourFridge.API/SpoonacularApiKey.txt
+/FreeYourFridge.API/Refactoring.txt
+/XUnitTestProject1/obj/Debug/netcoreapp3.1
+/XUnitTestProject1/obj/project.nuget.cache
+/XUnitTestProject1/obj/XUnitTestProject1.csproj.nuget.g.targets
+/XUnitTestProject1/obj/XUnitTestProject1.csproj.nuget.g.props
+/XUnitTestProject1/obj
