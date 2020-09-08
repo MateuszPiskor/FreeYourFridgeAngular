@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
@@ -15,7 +16,6 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IRecipeRepository _repo;
         private readonly IMapper _mapper;
-        private readonly int _numberOfResipes=8;
 
         public RecipeController(IRecipeRepository repo, IMapper mapper)
         {
@@ -23,60 +23,87 @@ namespace FreeYourFridge.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetRecipes()
+        [HttpGet("")]
+        [HttpGet("number={amount}")]
+        public async Task<IActionResult> GetRecipes(int amount = 10)
         {
-            //later change to frige.getIndgredients
             List<Ingredients> ingredients = new List<Ingredients>()
             {
                 new Ingredients()
                 {
-                    Name="chicken"
+                    Name="apple"
                 },
                 new Ingredients()
                 {
                     Name="orange"
+                },
+                new Ingredients()
+                {
+                    Name="milk"
                 }
             };
-            IEnumerable<Recipes> model = await _repo.GetRecipesByIndegrients(ingredients, _numberOfResipes);
+            IEnumerable<Recipe> model = await _repo.GetRecipesByIndegrients(ingredients, amount);
             if (model == null)
                 return NotFound();
 
-            IEnumerable<RecipeForDetailDto> recipesForDetailedDto =_mapper.Map<IEnumerable<RecipeForDetailDto>>(model);
+            IEnumerable<RecipeForDetailDto> recipesForDetailedDto = _mapper.Map<IEnumerable<RecipeForDetailDto>>(model);
+
             return Ok(recipesForDetailedDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRecipeById(int id)
+        public async Task<IActionResult> GetAditionalInforationAboutRecipeById(int id)
         {
             string content = await _repo.GetResponseById(id, "information");
-            if (content == "")
+            if (content == null)
                 return NotFound();
-            Recipes recipes = JsonConvert.DeserializeObject<Recipes>(content);
+            Recipe recipes = JsonConvert.DeserializeObject<Recipe>(content);
 
             RecipeForDetailDto recipesForDetailedDto = _mapper.Map<RecipeForDetailDto>(recipes);
+            return Ok(recipesForDetailedDto);
+        }
 
-            content = await _repo.GetResponseById(id, "nutritionWidget.json");
+        [HttpGet("{id}/nutritions")]
+        public async Task<IActionResult> GetNutritionsById(int id)
+        {
+            string content = await _repo.GetResponseById(id, "nutritionWidget.json");
+
+            if (content == null)
+                return NotFound();
 
             Nutrition nutrition = JsonConvert.DeserializeObject<Nutrition>(content);
 
-            recipesForDetailedDto.Calories = nutrition.Calories;
-            recipesForDetailedDto.Fat = nutrition.Fat;
-            recipesForDetailedDto.Carbs = nutrition.Carbs;
-            recipesForDetailedDto.Protein = nutrition.Protein;
-            
+            NutriotionForDetailDto recipesForDetailedDto = _mapper.Map<NutriotionForDetailDto>(nutrition);
+
             return Ok(recipesForDetailedDto);
         }
 
         [HttpGet("{id}/instruction")]
-        public async Task<IActionResult> GetInstructionById(int id)
+        public async Task<IActionResult> GetInstructionStepsById(int id)
         {
             string content = await _repo.GetResponseById(id, "analyzedInstructions");
-            if (content == "")
-                return NotFound();
-            List<Instruction> recipes = JsonConvert.DeserializeObject<List<Instruction>>(content);
 
-             return Ok(recipes[0].steps);
+            if (content == null)
+                return NotFound();
+
+            Instruction instruction = JsonConvert.DeserializeObject<IEnumerable<Instruction>>(content).First();
+
+            return Ok(instruction.steps);
+        }
+
+        [HttpGet("{id}/ingredients")]
+        public async Task<IActionResult> GetIngredients(int id)
+        {
+            IActionResult recipes = await GetRecipes();
+            if (recipes == null)
+            {
+                return NotFound();
+            }
+            var okResult = recipes as OkObjectResult;
+            IEnumerable<RecipeForDetailDto> result = (IEnumerable<RecipeForDetailDto>)okResult.Value;
+
+            RecipeForDetailDto recipeForDetailedDto = result.FirstOrDefault(x => x.Id == id);
+            return Ok(recipeForDetailedDto);
         }
     }
 }
