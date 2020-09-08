@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { AuthService } from './_services/auth.service';
+import { RecipeService } from './_services/recipe.service'; 
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
@@ -52,7 +53,7 @@ import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ErrorInterceptorProvider, AuthService],
+  providers: [ErrorInterceptorProvider, AuthService, RecipeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

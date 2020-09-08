@@ -11,13 +11,7 @@ export interface Recipe {
   readyInMinutes: number;
   spoonacularScore: number;
   score: number;
-  cheap: boolean;
-  widget: string;
-  calories: number;
-  photos?: Photo[];
-  carbs: string;
-  fat: string;
-  protein: string;
+ photos?: Photo[];
   missedIngredients: MissedIngredients[];
   usedIngredients: UsedIngredients[];
 }

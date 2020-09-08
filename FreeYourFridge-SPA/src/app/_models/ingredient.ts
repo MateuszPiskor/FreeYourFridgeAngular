@@ -1,5 +1,8 @@
-export interface Ingredient {
+import { UsedIngredients } from './usedIngredients';
+import { MissedIngredients } from './missedIngredients';
+
+export interface RecipeIngredients {
   name: string;
-  amount: number;
-  unit: number;
+  usedingredientDto: UsedIngredients[];
+  missedingredientDto: MissedIngredients[];
 }

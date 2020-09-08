@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../../_models/recipe';
+import { Nutritions } from '../../_models/recipeNutritions';
 import { Instruction } from '../../_models/instruction';
-import { Ingredient } from '../../_models/ingredient';
+import { RecipeIngredients } from '../../_models/ingredient';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,13 +16,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
-  widget: string;
+  nutritions: Nutritions;
   data: string;
   instructions: Instruction[];
-  ingredient: Ingredient[];
+  recipeIngredients: RecipeIngredients;
   slideHtml;
-  @Input()
-  recipes;
+  recipes: Recipe[];
+  // @Input()
+  // recipes;
 
   constructor(
     private recipeService: RecipeService,
@@ -33,15 +35,16 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loadRecipe();
+    this.loadNutritions();
     this.loadInstruction();
-    //this.loadIngredient();
+    this.loadIngredient();
   }
+
 
   loadRecipe() {
     this.recipeService.getRecipe(+this.route.snapshot.params['id']).subscribe(
       (recipe: Recipe) => {
         this.recipe = recipe;
-        this.loadWidget();
       },
       (error) => {
         this.alertify.error(error);
@@ -49,19 +52,17 @@ export class RecipeDetailComponent implements OnInit {
     );
   }
 
-  loadWidget() {
-    this.http
-      .get('https://api.spoonacular.com/recipes/749013/ingredientWidget?', {
-        responseType: 'text',
-      })
-      .subscribe((res) => {
-        this.slideHtml = this.sanitizer.bypassSecurityTrustHtml(res);
-        console.log(this.slideHtml);
-      });
+  loadNutritions() {
+    this.recipeService.getNutrition(+this.route.snapshot.params['id']).subscribe(
+      (nutritions: Nutritions) => {
+        this.nutritions = nutritions;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
   }
-  justTest() {
-    console.log('just test');
-  }
+
   loadInstruction() {
     this.recipeService
       .getInstruction(+this.route.snapshot.params['id'])
@@ -74,14 +75,15 @@ export class RecipeDetailComponent implements OnInit {
         }
       );
   }
-  // loadIngredient() {
-  //   this.recipeService.getIngredients(+this.route.snapshot.params['id']).subscribe(
-  //     (ingredient: Ingredient[]) => {
-  //       this.ingredient = ingredient;
-  //     },
-  //     (error) => {
-  //       this.alertify.error(error);
-  //     }
-  //   );
-  // }
+
+  loadIngredient() {
+    this.recipeService.getIngredients(+this.route.snapshot.params['id']).subscribe(
+      (recipeIngredients: RecipeIngredients) => {
+        this.recipeIngredients = recipeIngredients;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+  }
 }

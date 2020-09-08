@@ -2,9 +2,11 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail"
-             src="{{ recipe?.photoUrl }}"
-             alt="{{ recipe?.title }}" />
+        <img
+          class="card-img-top img-thumbnail"
+          src="{{ recipe?.photoUrl }}"
+          alt="{{ recipe?.title }}"
+        />
         <div class="card-body">
           <div class="mb-4">
             <strong>Ready in: {{ recipe?.title }}</strong>
@@ -16,17 +18,16 @@
             <strong>Score: {{ recipe?.spoonacularScore }}</strong>
           </div>
           <div>
-            <strong>Calories: {{ recipe?.calories}} kcal </strong>
+            <strong>Calories: {{ nutritions?.calories }} kcal </strong>
           </div>
-          <div>Carbs: {{recipe?.carbs}}</div>
-          <div>Fat: {{recipe?.fat}}</div>
-          <div>Protein: {{recipe?.protein}}</div>
+          <div>Carbs: {{ nutritions?.carbs }}</div>
+          <div>Fat: {{ nutritions?.fat }}</div>
+          <div>Protein: {{ nutritions?.protein }}</div>
         </div>
         <div class="card-footer">
-
           <form class="card p-2">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="g">
+              <input type="text" class="form-control" placeholder="g" />
               <div class="input-group-append">
                 <button type="submit" class="btn btn-secondary">Add</button>
               </div>
@@ -37,24 +38,51 @@
     </div>
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset class="member-tabset" >
-
+        <tabset class="member-tabset">
           <tab heading="Instruction">
             <div class="card">
-              <ul>
-
-            <li *ngFor="let instruciton of instructions">{{instruciton.number+". "+instruciton.step}}</li>
+              <ul class="list-group">
+                <li *ngFor="let instruciton of instructions">
+                  {{ instruciton.number + ". " + instruciton.step }}
+                </li>
               </ul>
             </div>
           </tab>
           <tab heading="Ingredients">
-            <div>Missed Ingredients</div>
-            <!-- <div class="card" id="scroll" [innerHTML]="slideHtml"></div> -->
+            <div class="card">
+              <div *ngIf="recipeIngredients != undefined">
+                <div>Missed Ingredients</div>
+                <ul class="list-group">
+                  <li
+                    class="list-group-item list-group-item-primary"
+                    *ngFor="
+                      let missedIngredient of recipeIngredients.missedingredientDto
+                    "
+                  >
+                    {{
+                      missedIngredient.amount +
+                        missedIngredient.unit +
+                        " " +
+                        missedIngredient?.name
+                    }}
+                  </li>
+                </ul>
+                <div>In your fridge:</div>
+                <ul class="list-group">
+                  <li
+                    class="list-group-item list-group-item-primary"
+                    *ngFor="
+                      let usedIngredient of recipeIngredients.usedingredientDto
+                    "
+                  >
+                    {{ usedIngredient?.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </tab>
 
-          <tab heading="Notes">
-            <button class="btn btn-danger" (click)=justTest()>click me</button>
-          </tab>
+          <tab heading="Notes"> </tab>
         </tabset>
       </div>
     </div>

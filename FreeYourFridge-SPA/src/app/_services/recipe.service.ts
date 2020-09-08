@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Recipe } from '../_models/recipe';
 import { Instruction } from '../_models/instruction';
-import { Ingredient } from '../_models/ingredient';
+import { Nutritions } from '../_models/recipeNutritions';
+import { RecipeIngredients } from '../_models/ingredient';
 
 
 const httpOptions = {
@@ -13,7 +14,6 @@ const httpOptions = {
     'headers': 'headers',
     'responseType': 'text'
 
-
   })
 };
 
@@ -21,6 +21,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RecipeService {
+
+
+  getNutrition(id): Observable<Nutritions> {
+    return this.http.get<Nutritions>(this.baseUrl + 'recipe/' + id + '/nutritions', httpOptions);
+  }
   baseUrl = environment.apiUrl;
 constructor(private http: HttpClient) {}
   getRecipes(): Observable<Recipe[]>{
@@ -39,8 +44,8 @@ constructor(private http: HttpClient) {}
     return this.http.get<Instruction[]>(this.baseUrl + 'recipe/' + id + '/instruction', httpOptions);
   }
 
-  getIngredients(id): Observable<Ingredient[]>{
-    return this.http.get<Ingredient[]>(this.baseUrl + 'recipe/' + id + '/ingredients', httpOptions);
+  getIngredients(id): Observable<RecipeIngredients>{
+    return this.http.get<RecipeIngredients>(this.baseUrl + 'recipe/' + id + '/ingredients', httpOptions);
   }
 
 
