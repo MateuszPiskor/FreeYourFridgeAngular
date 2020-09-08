@@ -11,3 +11,6 @@ FreeYourFridge.API/FreeYourFridge.db
 /XUnitTestProject1/obj/XUnitTestProject1.csproj.nuget.g.targets
 /XUnitTestProject1/obj/XUnitTestProject1.csproj.nuget.g.props
 /XUnitTestProject1/obj
+/FreeYourFridge.API/AddedToGitIgnore/RecipeDto.cs
+/FreeYourFridge.API/AddedToGitIgnore/Recipe.cs
+/XUnitTestProject1/bin/Debug/netcoreapp3.1
