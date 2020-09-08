@@ -7,7 +7,7 @@ namespace FreeYourFridge.API.Data
 {
     public interface IRecipeRepository
     {
-         Task<IEnumerable<Recipes>> GetRecipesByIndegrients(IEnumerable<Ingredients> ingredients, int numberOfResipes);
+         Task<IEnumerable<Recipe>> GetRecipesByIndegrients(IEnumerable<Ingredients> ingredients, int numberOfResipes);
          Task<string> GetResponseById(int id, string information);
        
     }
