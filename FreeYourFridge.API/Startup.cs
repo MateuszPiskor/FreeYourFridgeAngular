@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using RestSharp;
 
 namespace FreeYourFridge.API
 {
@@ -31,6 +32,9 @@ namespace FreeYourFridge.API
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new ApiKeyReader());
+            services.AddScoped<RestClient>();
+            services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false);
@@ -39,7 +43,6 @@ namespace FreeYourFridge.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IFridgeRepository, FridgeRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
-            services.AddScoped<IWidgetRepository, WidgetRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
