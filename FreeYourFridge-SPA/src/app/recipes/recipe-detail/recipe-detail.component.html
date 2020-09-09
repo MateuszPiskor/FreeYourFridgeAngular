@@ -2,11 +2,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img
-          class="card-img-top img-thumbnail"
-          src="{{ recipe?.photoUrl }}"
-          alt="{{ recipe?.title }}"
-        />
+        <img class="card-img-top img-thumbnail" src="{{ recipe?.photoUrl }}" alt="{{ recipe?.title }}" />
         <div class="card-body">
           <div class="mb-4">
             <strong>Ready in: {{ recipe?.title }}</strong>
@@ -20,9 +16,11 @@
           <div>
             <strong>Calories: {{ nutritions?.calories }} kcal </strong>
           </div>
-          <div>Carbs: {{ nutritions?.carbs }}</div>
-          <div>Fat: {{ nutritions?.fat }}</div>
-          <div>Protein: {{ nutritions?.protein }}</div>
+          <div class="mb-4">
+            <div>Carbs: {{ nutritions?.carbs }}</div>
+            <div>Fat: {{ nutritions?.fat }}</div>
+            <div>Protein: {{ nutritions?.protein }}</div>
+          </div>
         </div>
         <div class="card-footer">
           <form class="card p-2">
@@ -40,41 +38,40 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="Instruction">
-            <div class="card">
-              <ul class="list-group">
-                <li *ngFor="let instruciton of instructions">
+            <div class="card noHover">
+              <ul class="list-group-item">
+                <li class="list-group-item noHover" *ngFor="let instruciton of instructions">
                   {{ instruciton.number + ". " + instruciton.step }}
                 </li>
               </ul>
             </div>
           </tab>
           <tab heading="Ingredients">
-            <div class="card">
+            <div class="card noHover">
               <div *ngIf="recipeIngredients != undefined">
-                <div>Missed Ingredients</div>
-                <ul class="list-group">
-                  <li
-                    class="list-group-item list-group-item-primary"
-                    *ngFor="
-                      let missedIngredient of recipeIngredients.missedingredientDto
-                    "
-                  >
+
+                <ul class="list-group-item">
+                  <h4><span class="badge badge-secondary">Missed Ingredients</span></h4>
+                  <div class="flex-space-between" *ngFor="
+                  let missedIngredient of recipeIngredients.missedingredientDto
+                ">
+                  <li style="display:block" class="list-group-item noHover noBoard" >
                     {{
-                      missedIngredient.amount +
+                      missedIngredient.amount + " " +
                         missedIngredient.unit +
                         " " +
                         missedIngredient?.name
                     }}
+
                   </li>
-                </ul>
-                <div>In your fridge:</div>
-                <ul class="list-group">
-                  <li
-                    class="list-group-item list-group-item-primary"
-                    *ngFor="
+                  <button type="button" class="btn btn-success">Shop list</button>
+               </div>
+              </ul>
+                <ul class="list-group-item">
+                  <h4><span class="badge badge-secondary">In your frige</span></h4>
+                  <li class="list-group-item noHover noBoard" *ngFor="
                       let usedIngredient of recipeIngredients.usedingredientDto
-                    "
-                  >
+                    ">
                     {{ usedIngredient?.name }}
                   </li>
                 </ul>
@@ -82,7 +79,7 @@
             </div>
           </tab>
 
-          <tab heading="Notes"> </tab>
+          <!-- <tab heading="Notes"> </tab> -->
         </tabset>
       </div>
     </div>
