@@ -8,7 +8,9 @@ namespace FreeYourFridge.API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<User, UserForListDto>();
+            CreateMap<User,UserForListDto>();
+            CreateMap<UserDetails,UserForListDto>();
+            CreateMap<UserForUpdateDto ,UserDetails>();
         }
     }
 }

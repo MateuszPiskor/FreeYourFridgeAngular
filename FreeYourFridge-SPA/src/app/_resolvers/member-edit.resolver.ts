@@ -9,9 +9,8 @@ import {AuthService} from '../_services/auth.service';
 
 @Injectable()
 export class MemberEditResolver implements Resolve<User>{
-    constructor(private userService: UserService, private authService: AuthService,
-        private router: Router, private alertify: AlertifyjsService) {}
-
+    // tslint:disable-next-line: max-line-length
+    constructor(private userService: UserService, private authService: AuthService, private router: Router, private alertify: AlertifyjsService) {}
         resolve(router: ActivatedRouteSnapshot): Observable<User>{
             return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
                 catchError(error => {

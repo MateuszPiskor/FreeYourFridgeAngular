@@ -1,11 +1,15 @@
 
 export interface User {
-    id: number;
     email: string;
     username: string;
     gender: string;
     age: Date;
     weight: number;
     height: number;
+    dailyDemand: number;
+    carbohydrates: number;
+    fats: number;
+    protein: number;
+    description: string;
 }
 

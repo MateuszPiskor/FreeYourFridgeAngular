@@ -24,10 +24,20 @@ export class RegisterComponent implements OnInit {
       this.alertify.error('User alredy exists');
       this.model.username = '';
       this.model.password = '';
+      this.model.email = '';
+      this.model.gender = '';
+      this.model.age = '';
+      this.model.weight = '';
+      this.model.height = '';
     });
     this.route.navigate(['/home']);
     this.model.username = '';
     this.model.password = '';
+    this.model.email = '';
+    this.model.gender = '';
+    this.model.age = '';
+    this.model.weight = '';
+    this.model.height = '';
   }
 
   cancel(){

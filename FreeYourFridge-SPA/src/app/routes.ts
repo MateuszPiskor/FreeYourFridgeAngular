@@ -10,6 +10,7 @@ import {ShoppingListComponent} from './shoppingList/shoppingList.component';
 import {DailyMealComponent} from './dailyMeal/dailyMeal.component';
 import {MemberEditComponent} from './member/member-edit/member-edit.component';
 import {MemberEditResolver} from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,7 +21,8 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {path: 'myProfile', component: MyProfileComponent, resolve: {user: MemberEditResolver}},
-            {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}},
+            // tslint:disable-next-line: max-line-length
+            {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
             {path: 'fridge', component: FridgeComponent},
             {path: 'recipes', component: RecipesComponent},
             {path: 'favoured', component: FavouredComponent},
