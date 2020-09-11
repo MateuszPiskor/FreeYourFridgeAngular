@@ -2,16 +2,20 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{ recipe?.photoUrl }}" alt="{{ recipe?.title }}" />
+        <img
+          class="card-img-top img-thumbnail"
+          src="{{ recipeToDetail?.image }}"
+          alt="{{ recipeToDetail?.title }}"
+        />
         <div class="card-body">
           <div class="mb-4">
-            <strong>Ready in: {{ recipe?.title }}</strong>
+            <strong>Ready in: {{ recipeToDetail?.title }}</strong>
           </div>
           <div class="mb-4">
-            <strong>Ready in: {{ recipe?.readyInMinutes }}</strong>
+            <strong>Ready in: {{ recipeToDetail?.readyInMinutes }}</strong>
           </div>
           <div class="mb-4">
-            <strong>Score: {{ recipe?.spoonacularScore }}</strong>
+            <strong>Score: {{ recipeToDetail?.spoonacularScore }}</strong>
           </div>
           <div>
             <strong>Calories: {{ nutritions?.calories }} kcal </strong>
@@ -23,12 +27,17 @@
           </div>
         </div>
         <div class="card-footer">
-          <form class="card p-2">
+          <form #addGramsForm="ngForm" (ngSubmit)="addMeal()">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="g" />
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Add</button>
-              </div>
+              <input
+                type="text"
+                class="form-control"
+                reguired
+                name="grams"
+                [(ngModel)]="model.grams"
+                placeholder=""
+              />
+              <button class="btn btn-secondary" type="submit">Add</button>
             </div>
           </form>
         </div>
@@ -40,7 +49,10 @@
           <tab heading="Instruction">
             <div class="card noHover">
               <ul class="list-group-item">
-                <li class="list-group-item noHover" *ngFor="let instruciton of instructions">
+                <li
+                  class="list-group-item noHover"
+                  *ngFor="let instruciton of instructions"
+                >
                   {{ instruciton.number + ". " + instruciton.step }}
                 </li>
               </ul>
@@ -48,31 +60,44 @@
           </tab>
           <tab heading="Ingredients">
             <div class="card noHover">
-              <div *ngIf="recipeIngredients != undefined">
-
+              <div *ngIf="recipeToList != undefined">
                 <ul class="list-group-item">
-                  <h4><span class="badge badge-secondary">Missed Ingredients</span></h4>
-                  <div class="flex-space-between" *ngFor="
-                  let missedIngredient of recipeIngredients.missedingredientDto
-                ">
-                  <li style="display:block" class="list-group-item noHover noBoard" >
-                    {{
-                      missedIngredient.amount + " " +
-                        missedIngredient.unit +
-                        " " +
-                        missedIngredient?.name
-                    }}
-
-                  </li>
-                  <button type="button" class="btn btn-success">Shop list</button>
-               </div>
-              </ul>
+                  <h4>
+                    <span class="badge badge-secondary"
+                      >Missed Ingredients</span
+                    >
+                  </h4>
+                  <div
+                    class="flex-space-between"
+                    *ngFor="
+                      let missedIngredient of recipeToList.missedIngredients
+                    "
+                  >
+                    <li class="list-group-item noHover noBoard">
+                      {{
+                        missedIngredient?.amount +
+                          " " +
+                          missedIngredient?.unit +
+                          " " +
+                          missedIngredient?.name
+                      }}
+                    </li>
+                    <button type="button" class="btn btn-success">
+                      Shop list
+                    </button>
+                  </div>
+                </ul>
                 <ul class="list-group-item">
-                  <h4><span class="badge badge-secondary">In your frige</span></h4>
-                  <li class="list-group-item noHover noBoard" *ngFor="
-                      let usedIngredient of recipeIngredients.usedingredientDto
-                    ">
-                    {{ usedIngredient?.name }}
+                  <h4>
+                    <span class="badge badge-secondary">In your frige</span>
+                  </h4>
+                  <li
+                    class="list-group-item noHover noBoard"
+                    *ngFor="
+                      let usedIngredient of recipeToList?.usedIngredients
+                    "
+                  >
+                    {{ usedIngredient?.name}}
                   </li>
                 </ul>
               </div>

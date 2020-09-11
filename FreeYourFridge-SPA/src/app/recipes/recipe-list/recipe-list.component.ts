@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../_models/recipe';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { RecipeToList } from 'src/app/_models/recipeToList';
 
 @Component({
   selector: 'app-recipe-list',
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '../../../../node_modules/@angular/router';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[];
+  recipesToList: RecipeToList[];
 
   constructor(
     private recipeService: RecipeService,
@@ -24,8 +24,8 @@ export class RecipeListComponent implements OnInit {
 
   loadRecipes() {
     this.recipeService.getRecipes().subscribe(
-      (recipes: Recipe[]) => {
-        this.recipes = recipes;
+      (recipesToList: RecipeToList[]) => {
+        this.recipesToList = recipesToList;
       },
       (error) => {
         this.alertify.error(error);

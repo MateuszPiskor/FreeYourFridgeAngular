@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { AuthService } from './_services/auth.service';
-import { RecipeService } from './_services/recipe.service'; 
+import { RecipeService } from './_services/recipe.service';
+import { DealMealService } from './_services/dealMeal.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
@@ -25,6 +26,8 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-instruction.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Data } from './data';
 
 @NgModule({
   declarations: [
@@ -52,8 +55,9 @@ import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
-  providers: [ErrorInterceptorProvider, AuthService, RecipeService],
+  providers: [ErrorInterceptorProvider, AuthService, RecipeService, DealMealService, Data],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

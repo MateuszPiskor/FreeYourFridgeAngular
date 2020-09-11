@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Helpers
 {
     public class UrlMaker : IMakePartialUrl
     {
-        public string UrlIngredientMaker(IEnumerable<Ingredients> ingredients)
+        public string UrlIngredientMaker(IEnumerable<Ingredient> ingredients)
         {
             string partUrlPath = "";
             foreach (var ingredient in ingredients)
@@ -17,6 +14,5 @@ namespace FreeYourFridge.API.Helpers
             }
             return partUrlPath.Substring(2);
         }
-
     }
 }

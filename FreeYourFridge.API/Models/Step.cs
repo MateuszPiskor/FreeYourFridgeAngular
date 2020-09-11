@@ -4,8 +4,5 @@
     {
         public int number { get; set; }
         public string step { get; set; }
-        
     }
-
-
 }

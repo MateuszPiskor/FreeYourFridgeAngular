@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Recipe } from '../_models/recipe';
+import { RecipeToDetails } from '../_models/recipeToDetails';
 import { Instruction } from '../_models/instruction';
 import { Nutritions } from '../_models/recipeNutritions';
+import { RecipeToList } from '../_models/recipeToList'
 import { RecipeIngredients } from '../_models/ingredient';
 
 
@@ -28,12 +29,12 @@ export class RecipeService {
   }
   baseUrl = environment.apiUrl;
 constructor(private http: HttpClient) {}
-  getRecipes(): Observable<Recipe[]>{
-    return this.http.get<Recipe[]>(this.baseUrl + 'recipe', httpOptions);
+  getRecipes(): Observable<RecipeToList[]>{
+    return this.http.get<RecipeToList[]>(this.baseUrl + 'recipe', httpOptions);
   }
 
-  getRecipe(id): Observable<Recipe> {
-    return this.http.get<Recipe>(this.baseUrl + 'recipe/' + id, httpOptions);
+  getRecipe(id): Observable<RecipeToDetails> {
+    return this.http.get<RecipeToDetails>(this.baseUrl + 'recipe/' + id, httpOptions);
   }
 
   getWidget(id): Observable<string> {

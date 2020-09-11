@@ -27,46 +27,36 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet("number={amount}")]
         public async Task<IActionResult> GetRecipes(int amount = 10)
         {
-            List<Ingredients> ingredients = new List<Ingredients>()
+            List<Ingredient> ingredients = GetIngredientsFromFridgeTest();
+
+            string content = await _repo.GetRespone(ingredients, amount);
+            if (content == null)
             {
-                new Ingredients()
-                {
-                    Name="apple"
-                },
-                new Ingredients()
-                {
-                    Name="orange"
-                },
-                new Ingredients()
-                {
-                    Name="milk"
-                }
-            };
-            IEnumerable<Recipe> model = await _repo.GetRecipesByIndegrients(ingredients, amount);
-            if (model == null)
                 return NotFound();
+            }
 
-            IEnumerable<RecipeForDetailDto> recipesForDetailedDto = _mapper.Map<IEnumerable<RecipeForDetailDto>>(model);
+            IEnumerable<RecipeToList> recipes = JsonConvert.DeserializeObject<IEnumerable<RecipeToList>>(content);
+            IEnumerable<RecipesToListDto> recipesForListDto = _mapper.Map<IEnumerable<RecipesToListDto>>(recipes);
 
-            return Ok(recipesForDetailedDto);
+            return Ok(recipesForListDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAditionalInforationAboutRecipeById(int id)
+        public async Task<IActionResult> GetRecipePreparationTimeAndScore(int id)
         {
-            string content = await _repo.GetResponseById(id, "information");
+            string content = await _repo.GetRespone(id, "information");
             if (content == null)
                 return NotFound();
-            Recipe recipes = JsonConvert.DeserializeObject<Recipe>(content);
+            RecipeToDetail recipeDetail = JsonConvert.DeserializeObject<RecipeToDetail>(content);
 
-            RecipeForDetailDto recipesForDetailedDto = _mapper.Map<RecipeForDetailDto>(recipes);
+            RecipeToDetailDto recipesForDetailedDto = _mapper.Map<RecipeToDetailDto>(recipeDetail);
             return Ok(recipesForDetailedDto);
         }
 
         [HttpGet("{id}/nutritions")]
         public async Task<IActionResult> GetNutritionsById(int id)
         {
-            string content = await _repo.GetResponseById(id, "nutritionWidget.json");
+            string content = await _repo.GetRespone(id, "nutritionWidget.json");
 
             if (content == null)
                 return NotFound();
@@ -81,7 +71,7 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet("{id}/instruction")]
         public async Task<IActionResult> GetInstructionStepsById(int id)
         {
-            string content = await _repo.GetResponseById(id, "analyzedInstructions");
+            string content = await _repo.GetRespone(id, "analyzedInstructions");
 
             if (content == null)
                 return NotFound();
@@ -91,19 +81,23 @@ namespace FreeYourFridge.API.Controllers
             return Ok(instruction.steps);
         }
 
-        [HttpGet("{id}/ingredients")]
-        public async Task<IActionResult> GetIngredients(int id)
+        private static List<Ingredient> GetIngredientsFromFridgeTest()
         {
-            IActionResult recipes = await GetRecipes();
-            if (recipes == null)
+            return new List<Ingredient>()
             {
-                return NotFound();
-            }
-            var okResult = recipes as OkObjectResult;
-            IEnumerable<RecipeForDetailDto> result = (IEnumerable<RecipeForDetailDto>)okResult.Value;
-
-            RecipeForDetailDto recipeForDetailedDto = result.FirstOrDefault(x => x.Id == id);
-            return Ok(recipeForDetailedDto);
+                new Ingredient()
+                {
+                    Name="apple"
+                },
+                new Ingredient()
+                {
+                    Name="orange"
+                },
+                new Ingredient()
+                {
+                    Name="milk"
+                }
+            };
         }
     }
 }

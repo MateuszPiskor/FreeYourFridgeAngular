@@ -5,6 +5,6 @@ namespace FreeYourFridge.API.Helpers
 {
     public interface IMakePartialUrl
     {
-        string UrlIngredientMaker(IEnumerable<Ingredients> ingredients);
+        string UrlIngredientMaker(IEnumerable<Ingredient> ingredients);
     }
 }

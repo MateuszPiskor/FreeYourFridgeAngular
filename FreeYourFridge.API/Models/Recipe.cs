@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-
 namespace FreeYourFridge.API.Models
 {
-    public class Recipe
+    public class RecipeDetail
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -14,5 +12,4 @@ namespace FreeYourFridge.API.Models
         public Missedingredient[] MissedIngredients { get; set; }
         public Usedingredient[] UsedIngredients { get; set; }
     }
-
 }

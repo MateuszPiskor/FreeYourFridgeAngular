@@ -9,13 +9,11 @@ namespace FreeYourFridge.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForListDto>();
+            CreateMap<RecipeToList, RecipesToListDto>();
+            CreateMap<RecipeToDetail, RecipeToDetailDto>();
             CreateMap<Missedingredient, MissedingredientDto>();
             CreateMap<Usedingredient, UsedingredientDto>();
             CreateMap<Nutrition, NutriotionForDetailDto>();
-            CreateMap<Recipe, RecipeForDetailDto>()
-                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Image))
-                .ForMember(dest => dest.UsedingredientDto, opt => opt.MapFrom(src => src.UsedIngredients))
-                .ForMember(dest => dest.MissedingredientDto, opt => opt.MapFrom(src => src.MissedIngredients));
         }
     }
 }
