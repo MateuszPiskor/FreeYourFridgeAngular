@@ -27,16 +27,11 @@
           </div>
         </div>
         <div class="card-footer">
-          <form #addGramsForm="ngForm" (ngSubmit)="addMeal()">
+          <form #f="ngForm" (ngSubmit)="addMeal(f.value)" novalidate>
+            <!-- <div *ngIf="editMode"> -->
+            <input name="spoonacularId" type="hidden" ngModel="{{ recipeToList.id }}" />
             <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                reguired
-                name="grams"
-                [(ngModel)]="model.grams"
-                placeholder=""
-              />
+              <input class="form-control" name="grams" reguired type="text" ngModel />
               <button class="btn btn-secondary" type="submit">Add</button>
             </div>
           </form>
@@ -93,11 +88,9 @@
                   </h4>
                   <li
                     class="list-group-item noHover noBoard"
-                    *ngFor="
-                      let usedIngredient of recipeToList?.usedIngredients
-                    "
+                    *ngFor="let usedIngredient of recipeToList?.usedIngredients"
                   >
-                    {{ usedIngredient?.name}}
+                    {{ usedIngredient?.name }}
                   </li>
                 </ul>
               </div>

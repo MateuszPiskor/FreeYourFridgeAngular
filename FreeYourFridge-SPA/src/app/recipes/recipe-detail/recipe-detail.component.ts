@@ -7,11 +7,10 @@ import { RecipeIngredients } from '../../_models/ingredient';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
 import { ActivatedRoute } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
 import { DealMealService } from 'src/app/_services/dealMeal.service';
-import { Data } from "../../data";
+import { Data } from '../../data';
 import { RecipeToList } from 'src/app/_models/recipeToList';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -28,14 +27,15 @@ export class RecipeDetailComponent implements OnInit {
   model: any = {};
   mealDto: MealDto;
 
-
   constructor(
     private recipeService: RecipeService,
     private alertify: AlertifyjsService,
     private route: ActivatedRoute,
     private dealMeal: DealMealService,
     private data: Data,
-  ) {}
+    private routeDirection: Router
+  )
+  {}
 
   ngOnInit() {
     this.loadRecipe();
@@ -56,14 +56,16 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   loadNutritions() {
-    this.recipeService.getNutrition(+this.route.snapshot.params['id']).subscribe(
-      (nutritions: Nutritions) => {
-        this.nutritions = nutritions;
-      },
-      (error) => {
-        this.alertify.error(error);
-      }
-    );
+    this.recipeService
+      .getNutrition(+this.route.snapshot.params['id'])
+      .subscribe(
+        (nutritions: Nutritions) => {
+          this.nutritions = nutritions;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
 
   loadInstruction() {
@@ -84,19 +86,20 @@ export class RecipeDetailComponent implements OnInit {
     console.log(this.recipeToList);
   }
 
-  addMeal(){
-    this.mealDto.amount = this.model;
-    this.mealDto.nutrition = this.nutritions;
-    console.log(this.model);
-    this.dealMeal.addMeal(this.mealDto).subscribe(() => {
-      this.alertify.success('Meal added');
-    }, error => {
-      this.alertify.error('Some problem occur');
-      // this.model.username = '';
-      // this.model.password = '';
-    });
-    // this.route.navigate(['/home']);
-    // this.model.username = '';
-    // this.model.password = '';
+  addMeal(meal) {
+    const mealDto = new MealDto();
+    mealDto.Grams = +meal.grams;
+    mealDto.spoonacularId = +meal.spoonacularId;
+    this.dealMeal.addMeal(mealDto).subscribe(
+      () => {
+        this.alertify.success('Meal added');
+      },
+      (error) => {
+        this.alertify.error('Some problem occur');
+        this.model.username = '';
+        this.model.password = '';
+      }
+    );
+    this.routeDirection.navigate(['/dailyMeal']);
   }
 }
