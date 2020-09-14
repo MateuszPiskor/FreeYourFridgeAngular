@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { RecipeService } from './_services/recipe.service';
 import { DealMealService } from './_services/dealMeal.service';
+import { ShoppingListService } from './_services/shoppingList.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
@@ -57,7 +58,7 @@ import { Data } from './data';
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule
   ],
-  providers: [ErrorInterceptorProvider, AuthService, RecipeService, DealMealService, Data],
+  providers: [ErrorInterceptorProvider, AuthService, RecipeService, DealMealService, Data, ShoppingListService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

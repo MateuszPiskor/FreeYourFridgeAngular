@@ -3,6 +3,7 @@ import { RecipeToDetails } from '../../_models/recipeToDetails';
 import { Nutritions } from '../../_models/recipeNutritions';
 import { Instruction } from '../../_models/instruction';
 import { MealDto } from '../../_models/mealDto';
+import { IngredientDto } from '../../_models/ingredientDto';
 import { RecipeIngredients } from '../../_models/ingredient';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
@@ -11,6 +12,7 @@ import { DealMealService } from 'src/app/_services/dealMeal.service';
 import { Data } from '../../data';
 import { RecipeToList } from 'src/app/_models/recipeToList';
 import { Router } from '@angular/router';
+import { ShoppingListService } from 'src/app/_services/shoppingList.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -32,10 +34,10 @@ export class RecipeDetailComponent implements OnInit {
     private alertify: AlertifyjsService,
     private route: ActivatedRoute,
     private dealMeal: DealMealService,
+    private shoppingList: ShoppingListService,
     private data: Data,
     private routeDirection: Router
-  )
-  {}
+  ) {}
 
   ngOnInit() {
     this.loadRecipe();
@@ -98,6 +100,24 @@ export class RecipeDetailComponent implements OnInit {
         this.alertify.error('Some problem occur');
         this.model.username = '';
         this.model.password = '';
+      }
+    );
+    this.routeDirection.navigate(['/dailyMeal']);
+  }
+
+  addIngredientToShoppingList(ingredient) {
+    const ingredientDto = new IngredientDto();
+    ingredientDto.spoonacularId = +ingredient.spoonacularId;
+    ingredientDto.amount = +ingredient.amount;
+    ingredientDto.name = ingredient.name;
+    ingredientDto.unit = ingredient.unit;
+
+    this.shoppingList.addIngredient(ingredientDto).subscribe(
+      () => {
+        this.alertify.success('Added to shoplist');
+      },
+      (error) => {
+        this.alertify.error('Some problem occur');
       }
     );
     this.routeDirection.navigate(['/dailyMeal']);

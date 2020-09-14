@@ -44,6 +44,7 @@ namespace FreeYourFridge.API
             services.AddScoped<IFridgeRepository, FridgeRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IMealRepository, MealRepository>();
+            services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -77,7 +78,6 @@ namespace FreeYourFridge.API
                 });
             }
             
-
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); 
             app.UseAuthentication();
             app.UseAuthorization();
