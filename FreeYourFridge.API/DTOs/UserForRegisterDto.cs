@@ -16,7 +16,7 @@ namespace FreeYourFridge.API.DTOs
         [EmailAddress]
         public string Email{get;set;}
 
-        [Required(ErrorMessage = "Genre must be specified like male or female")]
+        [Required]
         public string Gender{get;set;}
 
         [Required]

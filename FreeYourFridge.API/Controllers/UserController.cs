@@ -30,7 +30,7 @@ namespace FreeYourFridge.API.Controllers
             var userToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
             return Ok(userToReturn);
         }
-        [HttpGet("GetUserById/{id}")]
+        [HttpGet("GetUserById/{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _repo.GetUser(id);
