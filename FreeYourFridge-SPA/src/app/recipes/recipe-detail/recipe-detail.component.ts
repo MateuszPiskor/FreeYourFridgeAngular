@@ -120,6 +120,6 @@ export class RecipeDetailComponent implements OnInit {
         this.alertify.error('Some problem occur');
       }
     );
-    this.routeDirection.navigate(['/dailyMeal']);
+    // this.routeDirection.navigate(['/dailyMeal']);
   }
 }
