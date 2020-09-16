@@ -39,8 +39,8 @@ namespace FreeYourFridge.API.Controllers
             _mapper.Map(userDetail, model);
             return Ok(model);
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUserDetails(int id, UserForUpdateDto userforUpdateDto)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UpdateUserDetails(int id, [FromBody]UserForUpdateDto userforUpdateDto)
         {
             if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) 
                 return Unauthorized();

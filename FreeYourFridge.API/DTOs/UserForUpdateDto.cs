@@ -1,5 +1,9 @@
+using System;
+
 namespace FreeYourFridge.API.DTOs
 {
+
+    [Serializable]    
     public class UserForUpdateDto
     {
         public int DailyDemand {get;set;}
