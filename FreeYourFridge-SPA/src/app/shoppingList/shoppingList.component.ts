@@ -11,7 +11,7 @@ import { ToDoItem } from '../_models/toDoItem';
 export class ShoppingListComponent implements OnInit {
   toDoItems: ToDoItem[];
   constructor(
-    private shoppingService: ShoppingListService,
+    private shoppingList: ShoppingListService,
     private alertify: AlertifyjsService
   ) {}
   ngOnInit() {
@@ -19,7 +19,7 @@ export class ShoppingListComponent implements OnInit {
   }
 
   getAllToDoItems() {
-    this.shoppingService.getToDoItems().subscribe(
+    this.shoppingList.getToDoItems().subscribe(
       (toDoItems: ToDoItem[]) => {
         this.toDoItems = toDoItems;
       },
@@ -30,6 +30,15 @@ export class ShoppingListComponent implements OnInit {
   }
 
   deleteTask(toDoItemId) {
-    this.shoppingService.deleteToDoItems(toDoItemId);
+
+    this.toDoItems = this.toDoItems.filter(i => i.spoonacularId !== toDoItemId);
+    this.shoppingList.deleteToDoItems(+toDoItemId).subscribe(
+      () => {
+        this.alertify.success('Removed from shoplist');
+      },
+      (error) => {
+        this.alertify.error('Some problem occur');
+      }
+    );
   }
 }

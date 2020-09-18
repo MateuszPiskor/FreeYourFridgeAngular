@@ -125,15 +125,8 @@ export class RecipeDetailComponent implements OnInit {
     // this.routeDirection.navigate(['/dailyMeal']);
   }
 
-  removeIngredientFromShoppingList(ingredient){
-    const toDoItem = new ToDoItem();
-    toDoItem.spoonacularId = +ingredient.id;
-    toDoItem.amount = +ingredient.amount;
-    toDoItem.name = ingredient.name;
-    toDoItem.unit = ingredient.unit;
-
-
-    this.shoppingList.deleteToDoItems(toDoItem.spoonacularId).subscribe(
+  removeIngredientFromShoppingList(ingredient) {
+    this.shoppingList.deleteToDoItems(+ingredient.id).subscribe(
       () => {
         this.alertify.success('Removed to shoplist');
       },
@@ -144,10 +137,16 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   private toggleMe(ingredient): void {
-    const element = document.getElementById("btn-"+ingredient.id).innerHTML = document.getElementById("btn-"+ingredient.id).innerHTML == "Remove" ? "Shop" : "Remove";
-    document.getElementById("btn-"+ingredient.id).classList.toggle("red");
-    const isRed = document.getElementById("btn-"+ingredient.id).classList.contains("red");
-   isRed? this.addIngredientToShoppingList(ingredient):this.removeIngredientFromShoppingList(ingredient)
-
+    const element = (document.getElementById('btn-' + ingredient.id).innerHTML =
+      document.getElementById('btn-' + ingredient.id).innerHTML == 'Remove'
+        ? 'Shop'
+        : 'Remove');
+    document.getElementById('btn-' + ingredient.id).classList.toggle('red');
+    const isRed = document
+      .getElementById('btn-' + ingredient.id)
+      .classList.contains('red');
+    isRed
+      ? this.addIngredientToShoppingList(ingredient)
+      : this.removeIngredientFromShoppingList(ingredient);
   }
 }

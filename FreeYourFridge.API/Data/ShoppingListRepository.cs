@@ -31,7 +31,7 @@ namespace FreeYourFridge.API.Data
         public void DeleteToDoItem(int id)
         {
             var elements = _context.ToDoItems.ToList();
-            var itemToRemove = elements.SingleOrDefault(x => x.SpoonacularId == id);
+            var itemToRemove = elements.FirstOrDefault(x => x.SpoonacularId == id);
             
             if (itemToRemove != null) {
                 var element = _context.ToDoItems.Remove(itemToRemove);
