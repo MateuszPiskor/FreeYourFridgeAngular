@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Data
 {
-    public interface IShoppingListRepository    
+    public interface IShoppingListRepository
     {
-        Task<Ingredient> AddIngredientAsync(Ingredient ingredient);
+        Task<ToDoItem> AddIngredientAsync(ToDoItem toDoItem);
+        IEnumerable<ToDoItem> GetToDoItems();
+        void DeleteToDoItem(int id);
     }
 }

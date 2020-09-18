@@ -22,12 +22,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RecipeService {
-
+  baseUrl = environment.apiUrl;
 
   getNutrition(id): Observable<Nutritions> {
     return this.http.get<Nutritions>(this.baseUrl + 'recipe/' + id + '/nutritions', httpOptions);
   }
-  baseUrl = environment.apiUrl;
+
 constructor(private http: HttpClient) {}
   getRecipes(): Observable<RecipeToList[]>{
     return this.http.get<RecipeToList[]>(this.baseUrl + 'recipe', httpOptions);

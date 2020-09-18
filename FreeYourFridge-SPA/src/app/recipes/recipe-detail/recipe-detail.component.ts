@@ -13,6 +13,7 @@ import { Data } from '../../data';
 import { RecipeToList } from 'src/app/_models/recipeToList';
 import { Router } from '@angular/router';
 import { ShoppingListService } from 'src/app/_services/shoppingList.service';
+import { ToDoItem } from 'src/app/_models/toDoItem';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -28,6 +29,7 @@ export class RecipeDetailComponent implements OnInit {
   recipeToList: RecipeToList;
   model: any = {};
   mealDto: MealDto;
+  text = 'Shop';
 
   constructor(
     private recipeService: RecipeService,
@@ -106,13 +108,13 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   addIngredientToShoppingList(ingredient) {
-    const ingredientDto = new IngredientDto();
-    ingredientDto.spoonacularId = +ingredient.spoonacularId;
-    ingredientDto.amount = +ingredient.amount;
-    ingredientDto.name = ingredient.name;
-    ingredientDto.unit = ingredient.unit;
+    const toDoItem = new ToDoItem();
+    toDoItem.spoonacularId = +ingredient.id;
+    toDoItem.amount = +ingredient.amount;
+    toDoItem.name = ingredient.name;
+    toDoItem.unit = ingredient.unit;
 
-    this.shoppingList.addIngredient(ingredientDto).subscribe(
+    this.shoppingList.addToDoItem(toDoItem).subscribe(
       () => {
         this.alertify.success('Added to shoplist');
       },
@@ -121,5 +123,31 @@ export class RecipeDetailComponent implements OnInit {
       }
     );
     // this.routeDirection.navigate(['/dailyMeal']);
+  }
+
+  removeIngredientFromShoppingList(ingredient){
+    const toDoItem = new ToDoItem();
+    toDoItem.spoonacularId = +ingredient.id;
+    toDoItem.amount = +ingredient.amount;
+    toDoItem.name = ingredient.name;
+    toDoItem.unit = ingredient.unit;
+
+
+    this.shoppingList.deleteToDoItems(toDoItem.spoonacularId).subscribe(
+      () => {
+        this.alertify.success('Removed to shoplist');
+      },
+      (error) => {
+        this.alertify.error('Some problem occur');
+      }
+    );
+  }
+
+  private toggleMe(ingredient): void {
+    const element = document.getElementById("btn-"+ingredient.id).innerHTML = document.getElementById("btn-"+ingredient.id).innerHTML == "Remove" ? "Shop" : "Remove";
+    document.getElementById("btn-"+ingredient.id).classList.toggle("red");
+    const isRed = document.getElementById("btn-"+ingredient.id).classList.contains("red");
+   isRed? this.addIngredientToShoppingList(ingredient):this.removeIngredientFromShoppingList(ingredient)
+
   }
 }

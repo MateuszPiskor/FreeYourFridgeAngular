@@ -25,7 +25,7 @@ namespace FreeYourFridge.API.Controllers
 
         [HttpGet("")]
         [HttpGet("number={amount}")]
-        public async Task<IActionResult> GetRecipes(int amount = 10)
+        public async Task<IActionResult> GetRecipes(int amount = 12)
         {
             List<Ingredient> ingredients = GetIngredientsFromFridgeTest();
 
