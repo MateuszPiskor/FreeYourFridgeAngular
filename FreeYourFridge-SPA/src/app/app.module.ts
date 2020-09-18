@@ -6,18 +6,20 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import {RouterModule} from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
-
-import {AuthService} from './_services/auth.service';
+import { AuthService } from './_services/auth.service';
+import { RecipeService } from './_services/recipe.service';
+import { DealMealService } from './_services/dealMeal.service';
+import { ShoppingListService } from './_services/shoppingList.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
-import {appRoutes} from './routes';
-import {ErrorInterceptorProvider} from './_services/error.interceptor';
+import { appRoutes } from './routes';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FridgeComponent } from './fridge/fridge.component';
-import { RecipesComponent } from './recipes/recipes.component';
 import { FavouredComponent } from './favoured/favoured.component';
 import { MyProfileComponent } from './member/myProfile/myProfile.component';
 import { ShoppingListComponent } from './shoppingList/shoppingList.component';
@@ -28,27 +30,35 @@ import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import {MemberEditResolver} from './_resolvers/member-edit.resolver';
 import {PreventUnsavedChanges} from './_guards/prevent-unsaved-changes.guard';
+import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
+import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-instruction.component';
+import { Data } from './data';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [												
+  declarations: [
     AppComponent,
-      NavComponent,
-      HomeComponent,
-      RegisterComponent,
-      FooterComponent,
-      ContactComponent,
-      FridgeComponent,
-      RecipesComponent,
-      FavouredComponent,
-      MyProfileComponent,
-      ShoppingListComponent,
-      DailyMealComponent,
-      MemberEditComponent
-   ],
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    FooterComponent,
+    ContactComponent,
+    FridgeComponent,
+    RecipeListComponent,
+    RecipeCardComponent,
+    FavouredComponent,
+    MyProfileComponent,
+    ShoppingListComponent,
+    DailyMealComponent,
+    RecipeDetailComponent,
+    RecipeInstructionComponent,
+    MemberEditComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -56,6 +66,8 @@ export function tokenGetter(){
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -71,9 +83,14 @@ export function tokenGetter(){
     AlertifyjsService,
     AuthGuard,
     UserService,
+    RecipeService,
+    DealMealService,
     MemberEditResolver,
-    PreventUnsavedChanges
+    Data,
+    ShoppingListService,
+    PreventUnsavedChanges,
+    ReactiveFormsModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

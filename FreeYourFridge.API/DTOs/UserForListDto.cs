@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using FreeYourFridge.API.Models;
-
 namespace FreeYourFridge.API.DTOs
 {
     public class UserForListDto
@@ -17,5 +13,7 @@ namespace FreeYourFridge.API.DTOs
         public int Fats{get;set;}
         public int Protein{get;set;}
         public string Description{get;set;}
+        // public int Id { get; set; }
+        //public string PhotoUrl { get; set; }
     }
 }

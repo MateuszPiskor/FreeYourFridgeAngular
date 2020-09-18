@@ -53,5 +53,6 @@ namespace FreeYourFridge.API.Controllers
                 
             throw new Exception($"Updating user with {id} failed on save");  
         }
+        
     }
 }

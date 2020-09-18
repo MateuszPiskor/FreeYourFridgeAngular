@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand">Free Your Fridge</a>
   <div class="container">
- 
+
     <ul class="navbar-nav mr-auto">
       <li *ngIf="!loggedIn()" class="nav-item"routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/home']">  Main  </a>
@@ -44,6 +44,6 @@
       <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
       <button [disabled]="!loginForm.valid" class="btn btn-warning" type="submit">Login</button>
     </form>
-    
+
   </div>
 </nav>

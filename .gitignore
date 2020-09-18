@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+FreeYourFridge.API/FreeYourFridge.db
+/FreeYourFridge.API/SpoonacularApiKey.txt
+/FreeYourFridge.API/Refactoring.txt
+/XUnitTestProject1/obj/Debug/netcoreapp3.1
+/XUnitTestProject1/obj/project.nuget.cache
+/XUnitTestProject1/obj/XUnitTestProject1.csproj.nuget.g.targets
+/XUnitTestProject1/obj/XUnitTestProject1.csproj.nuget.g.props
+/XUnitTestProject1/obj
+/FreeYourFridge.API/AddedToGitIgnore/RecipeDto.cs
+/FreeYourFridge.API/AddedToGitIgnore/Recipe.cs
+/XUnitTestProject1/bin/Debug/netcoreapp3.1
+FreeYourFridge-SPA/.tajne.txt
+FreeYourFridge-SPA/.tajne.md
+FreeYourFridge.API/Refactoring.md

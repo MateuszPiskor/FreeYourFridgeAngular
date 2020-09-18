@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using RestSharp;
 
 namespace FreeYourFridge.API
 {
@@ -31,16 +32,22 @@ namespace FreeYourFridge.API
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new ApiKeyReader());
+            services.AddScoped<RestClient>();
+            services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
             services.AddCors();
             services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IMealRepository, MealRepository>();
+            services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
+                .AddJwtBearer(options =>
+                {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
@@ -58,22 +65,24 @@ namespace FreeYourFridge.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            else{
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context => {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    var error = context.Features.Get<IExceptionHandlerFeature>();
-                    if (error !=null)
+            else
+            {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
                     {
-                        context.Response.AddApplicationError(error.Error.Message);
-                        await context.Response.WriteAsync(error.Error.Message);
-                    }
-                });
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
                 });
             }
-            
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvc();

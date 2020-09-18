@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,GAAG;CACZ;;AAED,AAAA,UAAU,CAAC;EACT,OAAO,EAAE,MAAM;CAChB;;AAED,AAAA,YAAY,CAAC;EACX,OAAO,EAAE,SAAS;EAClB,gBAAgB,EAAE,IAAI;EACtB,UAAU,EAAE,IAAI;CACjB",
+    "sources": [
+        "../src/app/recipes/recipe-detail/recipe-detail.component.scss"
+    ],
+    "names": [],
+    "file": "recipe-detail.component.css"
+}
