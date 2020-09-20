@@ -29,6 +29,7 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpPost("register")]
+        [Consumes("application/json")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             //validate request
@@ -40,9 +41,12 @@ namespace FreeYourFridge.API.Controllers
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForListDto>(createdUser);
-            return CreatedAtRoute("GetUser", new {Controller= "User", id = createdUser.Id}, userToReturn);
+            return CreatedAtRoute("GetUser", new { Controller = "User", id = createdUser.Id }, userToReturn);
         }
+
         [HttpPost("login")]
+        [Consumes("application/json")]
+        
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);

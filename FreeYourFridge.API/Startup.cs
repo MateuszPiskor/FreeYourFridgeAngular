@@ -1,5 +1,8 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using AutoMapper;
 using FreeYourFridge.API.Data;
@@ -15,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using RestSharp;
 
 namespace FreeYourFridge.API
@@ -36,7 +40,7 @@ namespace FreeYourFridge.API
             services.AddScoped<RestClient>();
             services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
             services.AddCors();
             services.AddAutoMapper(typeof(UserRepository).Assembly);
@@ -56,6 +60,17 @@ namespace FreeYourFridge.API
                         ValidateAudience = false
                     };
                 });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("FreeFridgeSpec", new OpenApiInfo()
+                { 
+                        Title = "FreeYourFridgeAPI", 
+                        Version = "v1" 
+                });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,10 +97,17 @@ namespace FreeYourFridge.API
                 });
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/FreeFridgeSpec/swagger.json", "FreeYourFridgeAPI");
+            });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvc();
+
+            
         }
     }
 }
