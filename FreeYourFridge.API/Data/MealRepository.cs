@@ -16,7 +16,6 @@ namespace FreeYourFridge.API.Data
         {
             await _context.Meals.AddAsync(meal);
             await _context.SaveChangesAsync();
-
             return meal;
         }
     }
