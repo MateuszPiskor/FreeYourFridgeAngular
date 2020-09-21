@@ -34,7 +34,11 @@ export class MemberEditComponent implements OnInit {
       this.editForm.reset(this.user);
     }, error => {
       this.alertify.error(error);
+<<<<<<< HEAD
     }); 
+=======
+    });
+>>>>>>> Merge/feature-user-with-feature-recpices
   }
 
 }

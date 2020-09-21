@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import {RouterModule} from '@angular/router';
@@ -35,7 +35,10 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-instruction.component';
+<<<<<<< HEAD
 import { ReactiveFormsModule } from '@angular/forms';
+=======
+>>>>>>> Merge/feature-user-with-feature-recpices
 import { Data } from './data';
 
 export function tokenGetter(){
@@ -70,7 +73,11 @@ export function tokenGetter(){
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+<<<<<<< HEAD
     ReactiveFormsModule,
+=======
+    RouterModule.forRoot(appRoutes),
+>>>>>>> Merge/feature-user-with-feature-recpices
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

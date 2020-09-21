@@ -25,6 +25,10 @@
           "port": 9222,
           "webRoot": "${workspaceFolder}"
       }
+<<<<<<< HEAD
   ]
     
+=======
+    ]
+>>>>>>> Merge/feature-user-with-feature-recpices
 }
