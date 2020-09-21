@@ -18,10 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-<<<<<<< HEAD
-=======
 using Microsoft.OpenApi.Models;
->>>>>>> Merge/feature-user-with-feature-recpices
 using RestSharp;
 
 namespace FreeYourFridge.API
@@ -43,11 +40,8 @@ namespace FreeYourFridge.API
             services.AddScoped<RestClient>();
             services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-<<<<<<< HEAD
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-=======
             services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
->>>>>>> Merge/feature-user-with-feature-recpices
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
             services.AddCors();
             services.AddAutoMapper(typeof(UserRepository).Assembly);
@@ -104,14 +98,11 @@ namespace FreeYourFridge.API
                 });
             }
 
-<<<<<<< HEAD
-=======
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/FreeFridgeSpec/swagger.json", "FreeYourFridgeAPI");
             });
->>>>>>> Merge/feature-user-with-feature-recpices
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();

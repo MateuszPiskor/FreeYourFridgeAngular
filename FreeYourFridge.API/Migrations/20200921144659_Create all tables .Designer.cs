@@ -9,13 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-<<<<<<< HEAD:FreeYourFridge.API/Migrations/20200921144659_Create all tables .Designer.cs
     [Migration("20200921144659_Create all tables ")]
     partial class Createalltables
-=======
-    [Migration("20200918162634_Initial migration")]
-    partial class Initialmigration
->>>>>>> Merge/feature-user-with-feature-recpices:FreeYourFridge.API/Migrations/20200918162634_Initial migration.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

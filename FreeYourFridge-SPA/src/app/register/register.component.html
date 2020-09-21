@@ -4,11 +4,7 @@
     <hr>
 
     <div class="form-group">
-<<<<<<< HEAD
-      <input type="text" 
-=======
       <input type="text"
->>>>>>> Merge/feature-user-with-feature-recpices
       [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}"
       class="form-control" formControlName="username" placeholder="Username">
       <div class="invalid-feedback">Please choose a username</div>
@@ -33,75 +29,44 @@
     </div>
     <div class="invalid-feedback"
       *ngIf="registerForm.get('confirmPassword').hasError('mismatch') && registerForm.get('confirmPassword').touched">
-<<<<<<< HEAD
-      Password must match 
-=======
       Password must match
->>>>>>> Merge/feature-user-with-feature-recpices
     </div>
     </div>
 
     <div class="form-group">
-<<<<<<< HEAD
-      <input type="email" 
-=======
       <input type="email"
->>>>>>> Merge/feature-user-with-feature-recpices
       [ngClass]="{'is-invalid': registerForm.get('email').hasError('required')&& registerForm.get('email').touched}"
       class="form-control" formControlName="email"  placeholder="Email">
       <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">Email is required</div>
     </div>
 
     <div class="form-group">
-<<<<<<< HEAD
-      <label class="control-label" style="margin-right:10px">I am a: </label>
-      <label class="radio-inline">
-        <input class="mr-3" type="radio" value="male" formControlName="gender">Male
-      </label>
-      <label class="radio-inline ml-3">
-        <input class="mr-3" type="radio" value="female" formControlName="gender">Female
-=======
       <label class="control-label">I am a: </label>
       <label class="radio-inline ml-3">
         <input class="mr-3" type="radio" value="male" formControlName="gender">Male
       </label>
       <label class="radio-inline ml-3">
         <input class="mr-4" type="radio" value="female" formControlName="gender">Female
->>>>>>> Merge/feature-user-with-feature-recpices
       </label>
     </div>
 
     <div class="form-group">
-<<<<<<< HEAD
-      <input type="number" 
-      [ngClass]="{'is-invalid': registerForm.get('age').hasError('required')&& registerForm.get('age').touched}"
-=======
       <input type="number"
       [ngClass]="{'is-invalid': registerForm.get('age').errors && registerForm.get('age').touched}"
->>>>>>> Merge/feature-user-with-feature-recpices
       class="form-control" formControlName="age"  placeholder="age">
       <div class="invalid-feedback" *ngIf="registerForm.get('age').hasError('required') && registerForm.get('age').touched">Age is required</div>
       <div class="invalid-feedback" *ngIf="registerForm.get('age').hasError('min') && registerForm.get('age').touched">You must be 18 years old to register</div>
     </div>
     <div class="form-group">
       <input type="number"
-<<<<<<< HEAD
-      [ngClass]="{'is-invalid': registerForm.get('weight').hasError('required')&& registerForm.get('weight').touched}"
-=======
       [ngClass]="{'is-invalid': registerForm.get('weight').errors && registerForm.get('weight').touched}"
->>>>>>> Merge/feature-user-with-feature-recpices
       class="form-control" formControlName="weight"  placeholder="weight">
       <div class="invalid-feedback" *ngIf="registerForm.get('weight').hasError('required') && registerForm.get('weight').touched">Weight is required</div>
       <div class="invalid-feedback" *ngIf="registerForm.get('weight').hasError('min') && registerForm.get('weight').touched">Lowest possible number - 0</div>
     </div>
     <div class="form-group">
-<<<<<<< HEAD
-      <input type="number" 
-      [ngClass]="{'is-invalid': registerForm.get('height').hasError('required')&& registerForm.get('height').touched}"
-=======
       <input type="number"
       [ngClass]="{'is-invalid': registerForm.get('height').errors && registerForm.get('height').touched}"
->>>>>>> Merge/feature-user-with-feature-recpices
       class="form-control" formControlName="height"  placeholder="height">
       <div class="invalid-feedback" *ngIf="registerForm.get('height').hasError('required') && registerForm.get('height').touched">Weight is required</div>
       <div class="invalid-feedback" *ngIf="registerForm.get('height').hasError('min') && registerForm.get('height').touched">Lowest possible number - 0</div>
@@ -111,11 +76,6 @@
       <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
       <button class="btn btn-warning btn-lg mt-3" type="button" (click)="cancel()">Cancel</button>
     </div>
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> Merge/feature-user-with-feature-recpices
   </form>
 </div>
 

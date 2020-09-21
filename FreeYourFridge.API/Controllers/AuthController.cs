@@ -20,21 +20,13 @@ namespace FreeYourFridge.API.Controllers
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-<<<<<<< HEAD
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
-=======
         private readonly IUserRepository _user;
         public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper, IUserRepository user)
->>>>>>> Merge/feature-user-with-feature-recpices
         {
             _repo = repo;
             _config = config;
             _mapper = mapper;
-<<<<<<< HEAD
-
-=======
             _user = user;
->>>>>>> Merge/feature-user-with-feature-recpices
         }
 
         [HttpPost("register")]
@@ -50,9 +42,6 @@ namespace FreeYourFridge.API.Controllers
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForListDto>(createdUser);
-<<<<<<< HEAD
-            return CreatedAtRoute("GetUser", new {Controller= "User", id = createdUser.Id}, userToReturn);
-=======
             var newUserDetail = new UserDetails(){
                 UserId = createdUser.Id
             };
@@ -60,7 +49,6 @@ namespace FreeYourFridge.API.Controllers
             await _user.SaveAll();
 
             return CreatedAtRoute("GetUser", new { Controller = "User", id = createdUser.Id }, userToReturn);
->>>>>>> Merge/feature-user-with-feature-recpices
         }
 
         [HttpPost("login")]
