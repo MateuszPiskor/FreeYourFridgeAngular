@@ -9,5 +9,9 @@ namespace FreeYourFridge.API.DTOs
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
         public string PhotoUrl { get; set; }
+        public int Carbohydrates {get; set;}
+        public int Fats{get;set;}
+        public int Protein{get;set;}
+        public string Description{get;set;}
     }
 }

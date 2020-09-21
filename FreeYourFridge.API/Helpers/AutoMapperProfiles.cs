@@ -9,6 +9,10 @@ namespace FreeYourFridge.API.Helpers
     {
         public AutoMapperProfiles()
         {
+            CreateMap<User,UserForListDto>();
+            CreateMap<UserDetails,UserForListDto>();
+            CreateMap<UserForUpdateDto ,UserDetails>();
+            CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserForListDto>();
             CreateMap<RecipeToList, RecipesToListDto>();
             CreateMap<RecipeToDetail, RecipeToDetailDto>();

@@ -39,9 +39,9 @@ namespace FreeYourFridge.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
             services.AddCors();
-            services.AddAutoMapper(typeof(FridgeRepository).Assembly);
+            services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IFridgeRepository, FridgeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IMealRepository, MealRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();

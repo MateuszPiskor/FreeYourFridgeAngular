@@ -5,7 +5,8 @@ namespace FreeYourFridge.API.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<User> Users {get;set;} 
+        public DbSet<User> Users {get;set;}
+        public DbSet<UserDetails> UsersDetails {get;set;}
         public DbSet<Photo> Photos {get;set;}
         public DbSet<Meal> Meals { get; set; }
         public DbSet<ToDoItem> ToDoItems { get; set; }

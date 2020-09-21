@@ -2,12 +2,10 @@
     padding:0;
     box-sizing: border-box;
 }
+
 body {
     align-items: center;
-    background: url("/assets/image/background.jpg")no-repeat center center fixed;
     background-size: cover;
-    height: 820px;
-}
- .container{
-    height: 600px;
+    background: url("/assets/image/background.jpg")no-repeat center center fixed;
+    height: 1200px;
 }

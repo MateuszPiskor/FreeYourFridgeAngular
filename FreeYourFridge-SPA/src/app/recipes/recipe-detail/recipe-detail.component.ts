@@ -139,7 +139,7 @@ export class RecipeDetailComponent implements OnInit {
   private toggleMe(ingredient): void {
     const element = (document.getElementById('btn-' + ingredient.id).innerHTML =
       document.getElementById('btn-' + ingredient.id).innerHTML == 'Remove'
-        ? 'Shop'
+        ? 'ShopList'
         : 'Remove');
     document.getElementById('btn-' + ingredient.id).classList.toggle('red');
     const isRed = document

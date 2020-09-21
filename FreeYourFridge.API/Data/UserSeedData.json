@@ -1,133 +1,65 @@
 [
-    {
-      "Username": "Eleanor",
-      "Gender": "female",
-      "DateOfBirth": "1991-11-20",
-      "Password": "password",
-      "Weight": 80,
-      "Height": 169,
-      "Photos": [
-        {
-          "url": "https://randomuser.me/api/portraits/women/37.jpg"
-        }
-      ]
-    },
-    {
-      "Username": "Dena",
-      "Gender": "female",
-      "DateOfBirth": "1967-11-22",
-      "Password": "password",
-      "Weight": 143,
-      "Height": 152,
-      "Photos": [
-        {
-          "url": "https://randomuser.me/api/portraits/women/65.jpg"
-        }
-      ]
-    },
-    {
-      "Username": "Rosella",
-      "Gender": "female",
-      "DateOfBirth": "1998-10-25",
-      "Password": "password",
-      "Weight": 100,
-      "Height": 178,
-      "Photos": [
-        {
-          "url": "https://randomuser.me/api/portraits/women/76.jpg"
-        }
-      ]
-    },
-    {
-      "Username": "Robin",
-      "Gender": "female",
-      "DateOfBirth": "1981-05-04",
-      "Password": "password",
-      "Weight": 155,
-      "Height": 189,
-      "Photos": [
-        {
-          "url": "https://randomuser.me/api/portraits/women/55.jpg"
-        }
-      ]
-    },
-    {
-      "Username": "Kelley",
-      "Gender": "female",
-      "DateOfBirth": "1998-06-06",
-      "Password": "password",
-      "Weight": 143,
-      "Height": 182,
-      "Photos": [
-        {
-          "url": "https://randomuser.me/api/portraits/women/7.jpg"
-        }
-      ]
-    },
-        {
-          "Username": "Newman",
-          "Gender": "male",
-          "DateOfBirth": "1954-11-07",
-          "Password": "password",
-          "Weight": 79,
-          "Height": 152,
-          "Photos": [
-            {
-              "url": "https://randomuser.me/api/portraits/men/80.jpg"
-            }
-          ]
-        },
-        {
-          "Username": "Kane",
-          "Gender": "male",
-          "DateOfBirth": "1956-06-11",
-          "Password": "password",
-          "Weight": 66,
-          "Height": 175,
-          "Photos": [
-            {
-              "url": "https://randomuser.me/api/portraits/men/2.jpg"
-            }
-          ]
-        },
-        {
-          "Username": "Talley",
-          "Gender": "male",
-          "DateOfBirth": "1992-05-23",
-          "Password": "password",
-          "Weight": 101,
-          "Height": 155,
-          "Photos": [
-            {
-              "url": "https://randomuser.me/api/portraits/men/18.jpg"
-            }
-          ]
-        },
-        {
-          "Username": "Gould",
-          "Gender": "male",
-          "DateOfBirth": "1994-07-08",
-          "Password": "password",
-          "Weight": 125,
-          "Height": 178,
-          "Photos": [
-            {
-              "url": "https://randomuser.me/api/portraits/men/82.jpg"
-            }
-          ]
-        },
-        {
-          "Username": "Randolph",
-          "Gender": "male",
-          "DateOfBirth": "1976-12-08",
-          "Password": "password",
-          "Weight": 124,
-          "Height": 188,
-          "Photos": [
-            {
-              "url": "https://randomuser.me/api/portraits/men/39.jpg"
-            }
-          ]
-        }
-      
-  ]
+  {
+    "Username": "Keller",
+    "Email": "kellersawyer@talkola.com",
+    "Gender": "male",
+    "Age": 76,
+    "Password": "password",
+    "Weight": 63,
+    "Height": 166
+  },
+  {
+    "Username": "Mitchell",
+    "Email": "mitchellsawyer@talkola.com",
+    "Gender": "male",
+    "Age": 56,
+    "Password": "password",
+    "Weight": 93,
+    "Height": 186
+  },
+  {
+    "Username": "Isabel",
+    "Email": "isabelsawyer@talkola.com",
+    "Gender": "female",
+    "Age": 92,
+    "Password": "password",
+    "Weight": 70,
+    "Height": 160
+  },
+  {
+    "Username": "Lott",
+    "Email": "lottsawyer@talkola.com",
+    "Gender": "male",
+    "Age": 78,
+    "Password": "password",
+    "Weight": 64,
+    "Height": 162
+  },
+  {
+    "Username": "Raquel",
+    "Email": "raquelsawyer@talkola.com",
+    "Gender": "female",
+    "Age": 71,
+    "Password": "password",
+    "Weight": 137,
+    "Height": 180
+  },
+  {
+    "Username": "Conley",
+    "Email": "conleysawyer@talkola.com",
+    "Gender": "male",
+    "Age": 90,
+    "Password": "password",
+    "Weight": 127,
+    "Height": 168
+  },
+  {
+    "Username": "Amber",
+    "Email": "ambersawyer@talkola.com",
+    "Gender": "female",
+    "Age": 52,
+    "Password": "password",
+    "Weight": 88,
+    "Height": 184
+  }
+]
