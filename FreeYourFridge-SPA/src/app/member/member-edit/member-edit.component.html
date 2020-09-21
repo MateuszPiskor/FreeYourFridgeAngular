@@ -12,12 +12,14 @@
         <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
             <div class="rowUser">kcal :</div>
             <textarea name="dailyDemand" rows="1" class="form-control" [(ngModel)]="user.dailyDemand"></textarea>
-            <div class="rowUser">carbohydrates :</div> 
+            <div class="rowUser">carbohydrates :</div>
             <textarea name="carbohydrates" rows="1" class="form-control" [(ngModel)]="user.carbohydrates"></textarea>
             <div class="rowUser">fats :</div>
             <textarea name="fats" rows="1" class="form-control" [(ngModel)]="user.fats"></textarea>
             <div class="rowUser">protein :</div>
             <textarea name="protein" rows="1" class="form-control" [(ngModel)]="user.protein"></textarea>
+            <div class="rowUser">Description :</div>
+            <textarea name="description" rows="1" class="form-control" [(ngModel)]="user.description"></textarea>
         </form>
     </div>
     </div>
@@ -31,7 +33,6 @@
             <div class="rowUser">Height : {{user.height}}</div>
         </div>
         <div class=column>
-            <div class="rowUser">Description : {{user.description}}</div>  
             <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-succes btn-block mt-4">SAVE CHANGES</button>
         </div>
     </div>

@@ -20,3 +20,14 @@
     border-radius: 15px;
 }
 
+.form-group{
+  width: 160px;
+  color: rgb(0, 0, 0);
+  font-size: large;
+  font-weight: bold;
+}
+.form-control{
+  text-align: center;
+}
+
+
