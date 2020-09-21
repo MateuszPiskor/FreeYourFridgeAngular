@@ -34,7 +34,3 @@ export const appRoutes: Routes = [
     },
     {path: '**', redirectTo: '', pathMatch: 'full'},
     ];
-<<<<<<< HEAD
-=======
-
->>>>>>> Merge/feature-user-with-feature-recpices
