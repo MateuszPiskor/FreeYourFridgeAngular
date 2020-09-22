@@ -14,7 +14,7 @@ namespace FreeYourFridge.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "3.1.8");
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
                 {
@@ -31,28 +31,6 @@ namespace FreeYourFridge.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Meals");
-                });
-
-            modelBuilder.Entity("FreeYourFridge.API.Models.Photo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UrlOfPhoto")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.ToDoItem", b =>
@@ -145,13 +123,6 @@ namespace FreeYourFridge.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UsersDetails");
-                });
-
-            modelBuilder.Entity("FreeYourFridge.API.Models.Photo", b =>
-                {
-                    b.HasOne("FreeYourFridge.API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.UserDetails", b =>
