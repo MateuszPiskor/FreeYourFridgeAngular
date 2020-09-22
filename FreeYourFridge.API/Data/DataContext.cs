@@ -9,6 +9,7 @@ namespace FreeYourFridge.API.Data
         public DbSet<UserDetails> UsersDetails {get;set;}
         public DbSet<Meal> Meals { get; set; }
         public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<Fridge> Fridges { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
