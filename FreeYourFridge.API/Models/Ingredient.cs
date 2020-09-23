@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FreeYourFridge.API.Models
 {
@@ -10,5 +11,7 @@ namespace FreeYourFridge.API.Models
         public double Amount { get; set; }
         public string Unit { get; set; }
         public string Name { get; set; }
+        public Nullable<int> FridgeId{get;set;}
+        public virtual Fridge Fridge{get;set;}
     }
 }

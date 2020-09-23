@@ -22,15 +22,12 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdUser")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Fridges");
                 });
@@ -60,7 +57,7 @@ namespace FreeYourFridge.API.Migrations
 
                     b.HasIndex("FridgeId");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
@@ -176,12 +173,14 @@ namespace FreeYourFridge.API.Migrations
                 {
                     b.HasOne("FreeYourFridge.API.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Ingredient", b =>
                 {
-                    b.HasOne("FreeYourFridge.API.Models.Fridge", null)
+                    b.HasOne("FreeYourFridge.API.Models.Fridge", "Fridge")
                         .WithMany("ListIgredients")
                         .HasForeignKey("FridgeId");
                 });

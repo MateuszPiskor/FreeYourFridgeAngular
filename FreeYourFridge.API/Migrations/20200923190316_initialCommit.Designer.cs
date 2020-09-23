@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200922180935_AddFridgeModel")]
-    partial class AddFridgeModel
+    [Migration("20200923190316_initialCommit")]
+    partial class initialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,15 +24,12 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdUser")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Fridges");
                 });
@@ -62,7 +59,7 @@ namespace FreeYourFridge.API.Migrations
 
                     b.HasIndex("FridgeId");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
@@ -178,12 +175,14 @@ namespace FreeYourFridge.API.Migrations
                 {
                     b.HasOne("FreeYourFridge.API.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Ingredient", b =>
                 {
-                    b.HasOne("FreeYourFridge.API.Models.Fridge", null)
+                    b.HasOne("FreeYourFridge.API.Models.Fridge", "Fridge")
                         .WithMany("ListIgredients")
                         .HasForeignKey("FridgeId");
                 });

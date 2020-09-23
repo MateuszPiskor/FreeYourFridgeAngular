@@ -8,10 +8,8 @@ namespace FreeYourFridge.API.Models
     {
         [Key]
         public int Id{get;set;}
-        
-        [ForeignKey("User")]
-        public int IdUser{get;set;}        
-        public ICollection<Ingredient> ListIgredients{get;set;}
+        public int UserId{get;set;}
         public User user {get;set;}
+        public virtual ICollection<Ingredient> ListIgredients{get;set;}
     }
 }
