@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +10,11 @@ namespace FreeYourFridge.API.Data
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-        public UserRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public UserRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public void Add<T>(T entity) where T : class
         {
@@ -43,6 +47,19 @@ namespace FreeYourFridge.API.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async void UpdateUserDetails(UserDetails userToUpdate, int id)
+        {
+            var updateStudent = await _context.UsersDetails.FirstOrDefaultAsync(uD => uD.UserId == id);
+            if (updateStudent == null)
+            {
+                userToUpdate.UserId = id;
+                _context.Add(userToUpdate);
+                _context.SaveChanges();
+                return;
+            }
+            _context.SaveChanges();
         }
     }
 }

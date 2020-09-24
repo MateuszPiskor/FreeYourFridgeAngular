@@ -45,14 +45,10 @@ namespace FreeYourFridge.API.Controllers
         {
             if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) 
                 return Unauthorized();
-
             var userFromRepo = await _repo.GetUserDetail(id);
-            _mapper.Map(userforUpdateDto, userFromRepo);
-
-            if(await _repo.SaveAll())
-                return NoContent();
-                
-            throw new Exception($"Updating user with {id} failed on save");  
+            var newUserDetails = _mapper.Map(userforUpdateDto, userFromRepo);
+            _repo.UpdateUserDetails(newUserDetails, id);
+            return NoContent();
         }
         
     }
