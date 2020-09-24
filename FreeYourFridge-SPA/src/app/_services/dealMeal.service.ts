@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MealDto } from '../_models/mealDto';
+import { MealDto} from '../_models/mealDto';
+import { DailyMealDto } from '../_models/dailyMealSimpleDto';
 import { Observable } from 'rxjs';
 
 
@@ -22,7 +23,11 @@ const httpOptions = {
 })
 export class DealMealService {
   basedUrl = environment.apiUrl + 'meal';
-  currentDate: number;
+  /**
+   * the second url to not broke someone's else idea with "meal"
+   */
+  basedUrl2 = environment.apiUrl + 'dailymeal';
+  // currentDate: number;
 
   constructor(private http: HttpClient) {}
 
@@ -30,14 +35,18 @@ export class DealMealService {
     return this.http.post(this.basedUrl, model);
   }
 
-  //get current DailyMeal
-  getDailyMeal(id):Observable<MealDto>
-  {
-    return this.http.get<MealDto>(this.basedUrl+'meal/'+id, httpOptions);
+  addDailyMeal(model: any) {
+    return this.http.post(this.basedUrl2+'dailymeal', model, httpOptions);
   }
 
-  getDailyMeals():Observable<MealDto[]>
+  //get current DailyMeal
+  getDailyMeal(id):Observable<DailyMealDto>
   {
-    return this.http.get<MealDto[]>(this.basedUrl+'meal/', httpOptions);
+    return this.http.get<DailyMealDto>(this.basedUrl+'dailymeal/'+id, httpOptions);
+  }
+
+  getDailyMeals():Observable<DailyMealDto[]>
+  {
+    return this.http.get<DailyMealDto[]>(this.basedUrl+'dailymeal/', httpOptions);
   }
 }

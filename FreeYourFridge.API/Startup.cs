@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using AutoMapper;
 using FreeYourFridge.API.Data;
+using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -49,6 +50,7 @@ namespace FreeYourFridge.API
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IMealRepository, MealRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
+            services.AddScoped<IDailyMealRepository, DailyMealRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

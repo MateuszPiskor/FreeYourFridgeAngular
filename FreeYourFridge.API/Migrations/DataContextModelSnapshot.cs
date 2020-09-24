@@ -14,7 +14,48 @@ namespace FreeYourFridge.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "3.1.8");
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.DailyMeal", b =>
+                {
+                    b.Property<Guid>("LocalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Carbs")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Fat")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Grams")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Protein")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("TimeOfLastMeal")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserRemarks")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LocalId");
+
+                    b.ToTable("DailyMeals");
+                });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
                 {
@@ -27,6 +68,9 @@ namespace FreeYourFridge.API.Migrations
 
                     b.Property<int>("SpoonacularId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

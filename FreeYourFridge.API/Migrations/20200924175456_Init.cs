@@ -3,15 +3,37 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreeYourFridge.API.Migrations
 {
-    public partial class Initialmigration : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "DailyMeals",
+                columns: table => new
+                {
+                    LocalId = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    TimeOfLastMeal = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Grams = table.Column<int>(nullable: false),
+                    UserRemarks = table.Column<string>(nullable: true),
+                    Calories = table.Column<int>(nullable: false),
+                    Carbs = table.Column<int>(nullable: false),
+                    Fat = table.Column<int>(nullable: false),
+                    Protein = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyMeals", x => x.LocalId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Meals",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
                     SpoonacularId = table.Column<int>(nullable: false),
                     Grams = table.Column<int>(nullable: false)
                 },
@@ -115,6 +137,9 @@ namespace FreeYourFridge.API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DailyMeals");
+
             migrationBuilder.DropTable(
                 name: "Meals");
 

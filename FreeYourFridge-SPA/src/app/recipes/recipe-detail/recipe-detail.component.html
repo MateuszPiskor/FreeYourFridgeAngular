@@ -2,11 +2,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img
-          class="card-img-top img-thumbnail"
-          src="{{ recipeToDetail?.image }}"
-          alt="{{ recipeToDetail?.title }}"
-        />
+        <img class="card-img-top img-thumbnail" src="{{ recipeToDetail?.image }}" alt="{{ recipeToDetail?.title }}" />
         <div class="card-body">
           <div class="mb-4">
             <strong>Ready in: {{ recipeToDetail?.title }}</strong>
@@ -29,19 +25,13 @@
         <div class="card-footer">
           <form #f="ngForm" (ngSubmit)="addMeal(f.value)" novalidate>
             <!-- <div *ngIf="editMode"> -->
-            <input
-              name="spoonacularId"
-              type="hidden"
-              ngModel="{{ recipeToList.id }}"
-            />
+            <input name="spoonacularId" type="hidden" ngModel="{{ recipeToList.id }}" />
+
+            <input name="title" type="hidden" ngModel="{{ recipeToDetail.title }}" />
+            <input name="title" type="hidden" ngModel="{{ recipeToDetail.image }}" />
+            <!-- end of by @afe-->
             <div class="input-group">
-              <input
-                class="form-control"
-                name="grams"
-                reguired
-                type="text"
-                ngModel
-              />
+              <input class="form-control" name="grams" required type="text" ngModel />
               <button class="btn btn-secondary" type="submit">Add</button>
             </div>
           </form>
@@ -54,10 +44,7 @@
           <tab heading="Instruction">
             <div class="card noHover">
               <ul class="list-group-item">
-                <li
-                  class="list-group-item noHover"
-                  *ngFor="let instruciton of instructions"
-                >
+                <li class="list-group-item noHover" *ngFor="let instruciton of instructions">
                   {{ instruciton.number + ". " + instruciton.step }}
                 </li>
               </ul>
@@ -69,15 +56,11 @@
               <div *ngIf="recipeToList != undefined">
                 <ul class="list-group-item">
                   <h4 class="header">
-                    <span
-                      >Missed Ingredients</span
-                    >
+                    <span>Missed Ingredients</span>
                   </h4>
-                  <div
-                    *ngFor="
+                  <div *ngFor="
                       let missedIngredient of recipeToList.missedIngredients
-                    "
-                  >
+                    ">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                       {{
                         missedIngredient?.amount +
@@ -86,34 +69,15 @@
                           " " +
                           missedIngredient?.name
                       }}
-                      <button id="btn-{{missedIngredient.id}}"(click)="toggleMe(missedIngredient)"
-                        type="button"
-                        type="submit"
-                        class="btn btn-success"
-                      >
+                      <button id="btn-{{missedIngredient.id}}" (click)="toggleMe(missedIngredient)" type="button"
+                        type="submit" class="btn btn-success">
 
-                      {{ text }}
+                        {{ text }}
                       </button>
-                      <input
-                        name="spoonacularId"
-                        type="hidden"
-                        ngModel="{{ missedIngredient.id }}"
-                      />
-                      <input
-                        name="amount"
-                        type="hidden"
-                        ngModel="{{ missedIngredient.amount }}"
-                      />
-                      <input
-                        name="name"
-                        type="hidden"
-                        ngModel="{{ missedIngredient.name }}"
-                      />
-                      <input
-                        name="unit"
-                        type="hidden"
-                        ngModel="{{ missedIngredient.unit }}"
-                      />
+                      <input name="spoonacularId" type="hidden" ngModel="{{ missedIngredient.id }}" />
+                      <input name="amount" type="hidden" ngModel="{{ missedIngredient.amount }}" />
+                      <input name="name" type="hidden" ngModel="{{ missedIngredient.name }}" />
+                      <input name="unit" type="hidden" ngModel="{{ missedIngredient.unit }}" />
                     </li>
 
                     <!-- <form
@@ -121,7 +85,7 @@
                       (ngSubmit)="addIngredientToShoppingList(f.value)"
                       novalidate
                     > -->
-                      <!-- <div *ngIf="editMode"> -->
+                    <!-- <div *ngIf="editMode"> -->
 
 
                     <!-- </form> -->
@@ -131,19 +95,13 @@
                   <h4 class="header">
                     <span>In your frige</span>
                   </h4>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngFor="let usedIngredient of recipeToList?.usedIngredients"
-                  >
+                  <li class="list-group-item d-flex justify-content-between align-items-center"
+                    *ngFor="let usedIngredient of recipeToList?.usedIngredients">
                     {{ usedIngredient?.name }}
-                    <button
-                        type="button"
-                        type="submit"
-                        class="btn btn-success"
-                      >
+                    <button type="button" type="submit" class="btn btn-success">
 
                       Info
-                      </button>
+                    </button>
                   </li>
                 </ul>
               </div>

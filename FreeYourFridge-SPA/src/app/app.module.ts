@@ -35,6 +35,7 @@ import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-instruction.component';
 import { Data } from './data';
+import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-card.component';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -57,7 +58,8 @@ export function tokenGetter(){
     DailyMealComponent,
     RecipeDetailComponent,
     RecipeInstructionComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    DailyMealCardComponent
   ],
   imports: [
     BrowserModule,

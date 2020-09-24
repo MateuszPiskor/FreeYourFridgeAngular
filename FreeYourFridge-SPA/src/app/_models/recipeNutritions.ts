@@ -3,4 +3,5 @@ export interface Nutritions {
   carbs: string;
   fat: string;
   protein: string;
+
 }

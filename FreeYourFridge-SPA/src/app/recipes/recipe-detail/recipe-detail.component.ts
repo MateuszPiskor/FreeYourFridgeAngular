@@ -14,6 +14,7 @@ import { RecipeToList } from 'src/app/_models/recipeToList';
 import { Router } from '@angular/router';
 import { ShoppingListService } from 'src/app/_services/shoppingList.service';
 import { ToDoItem } from 'src/app/_models/toDoItem';
+import {DailyMealToSend} from '../../_models/dailyMealToSendDto'
 
 @Component({
   selector: 'app-recipe-detail',
@@ -148,5 +149,31 @@ export class RecipeDetailComponent implements OnInit {
     isRed
       ? this.addIngredientToShoppingList(ingredient)
       : this.removeIngredientFromShoppingList(ingredient);
+  }
+
+
+  addDailyMeal(meal) {
+    const dailyMealDtoToSend = new DailyMealToSend();
+    dailyMealDtoToSend.grams = +meal.grams;
+    dailyMealDtoToSend.spoonacularId = +meal.spoonacularId;
+    dailyMealDtoToSend.title = this.recipeToList.title;
+    dailyMealDtoToSend.image = this.recipeToList.image;
+    dailyMealDtoToSend.calories = this.nutritions.calories;
+    dailyMealDtoToSend.carbs = this.nutritions.carbs;
+    dailyMealDtoToSend.protein = this.nutritions.protein;
+    dailyMealDtoToSend.fat = this. nutritions.fat;
+
+
+    this.dealMeal.addMeal(dailyMealDtoToSend).subscribe(
+      () => {
+        this.alertify.success('DailyMeal added');
+      },
+      (error) => {
+        this.alertify.error('Some problem occurs');
+        this.model.username = '';
+        this.model.password = '';
+      }
+    );
+    this.routeDirection.navigate(['/dailymeal']);
   }
 }

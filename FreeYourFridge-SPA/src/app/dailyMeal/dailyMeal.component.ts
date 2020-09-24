@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MealDto } from '../_models/mealDto';
+import { DailyMealSimpleDto } from '../_models/dailyMealSimpleDto';
 import { AlertifyjsService } from '../_services/alertifyjs.service';
+import { ActivatedRoute } from '@angular/router';
 import { DealMealService } from '../_services/dealMeal.service';
 
 @Component({
@@ -10,11 +11,13 @@ import { DealMealService } from '../_services/dealMeal.service';
 })
 
 export class DailyMealComponent implements OnInit {
-  mealsEatenToday:Array<MealDto>;
+  dailyMealsToday:Array<DailyMealSimpleDto>;
+  dailyMeal:DailyMealSimpleDto
 
   constructor(
     private mealService:DealMealService,
-    private alertify: AlertifyjsService) { }
+    private alertify: AlertifyjsService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.LoadTodayMeals();
@@ -27,7 +30,19 @@ export class DailyMealComponent implements OnInit {
   {
     this.mealService.getDailyMeals().subscribe(
       response => {
-        this.mealsEatenToday = response;
+        this.dailyMealsToday = response;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+  }
+
+  showDailyMeal(id:number)
+  {
+    this.mealService.getDailyMeal(id).subscribe(
+      response => {
+        this.dailyMeal = response;
       },
       (error) => {
         this.alertify.error(error);
