@@ -44,6 +44,7 @@ namespace FreeYourFridge.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IMealRepository, MealRepository>();
+            services.AddScoped<IFavouredRepository, FavouredRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

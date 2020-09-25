@@ -1,7 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RecipeToList } from 'src/app/_models/recipeToList';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Data } from "../../data";
+import { RecipeToList } from 'src/app/_models/recipeToList';
+import { FavouredDto } from 'src/app/_models/favouredDto';
+import { RecipesToListDto } from 'src/app/_models/RecipesToListDto';
+import { Data } from '../../data';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RatingContentComponent } from 'src/app/rating-content/rating-content.component';
+import { FavouredService } from 'src/app/_services/favoured.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -9,20 +14,43 @@ import { Data } from "../../data";
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent implements OnInit {
-  @Input() recipeToList: RecipeToList;
-  constructor(private _route: ActivatedRoute, private _router: Router, private data: Data) {}
+  @Input()
+  recipeToList: RecipeToList;
+  currentRating: RecipesToListDto;
 
-  private selectedRecipeId: number;
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private data: Data,
+    private modalService: NgbModal,
+    private favouredService: FavouredService
+  ) {}
 
   ngOnInit() {
-    this.selectedRecipeId = +this._route.snapshot.paramMap.get('id');
+    +this._route.snapshot.paramMap.get('id');
   }
 
-  viewDetails(){
+  viewDetails() {
     this.data.storage = this.recipeToList;
-    "['/recipes/', recipe.id]"
+    ("['/recipes/', recipe.id]");
     this._router.navigate(['/recipes/', this.recipeToList.id]);
   }
+
+  openModal() {
+    const favouredDto = new FavouredDto();
+    const modalRef = this.modalService.open(RatingContentComponent);
+    // modalRef.componentInstance.rating = this.rating;
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      favouredDto.score = +receivedEntry;
+      favouredDto.spoonacularId = +this.recipeToList.id;
+      this.favouredService.addFavoured(favouredDto).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    });
+  }
 }
-
-

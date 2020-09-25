@@ -16,6 +16,23 @@ namespace FreeYourFridge.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
 
+            modelBuilder.Entity("FreeYourFridge.API.Models.Favoured", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SpoonacularId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Favoureds");
+                });
+
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
                 {
                     b.Property<string>("Id")

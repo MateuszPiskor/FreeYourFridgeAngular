@@ -5,12 +5,13 @@ using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace FreeYourFridge.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class RecipeController : ControllerBase
     {
@@ -36,7 +37,7 @@ namespace FreeYourFridge.API.Controllers
             }
 
             IEnumerable<RecipeToList> recipes = JsonConvert.DeserializeObject<IEnumerable<RecipeToList>>(content);
-            IEnumerable<RecipesToListDto> recipesForListDto = _mapper.Map<IEnumerable<RecipesToListDto>>(recipes);
+            IEnumerable<Recipe> recipesForListDto = _mapper.Map<IEnumerable<Recipe>>(recipes);
 
             return Ok(recipesForListDto);
         }

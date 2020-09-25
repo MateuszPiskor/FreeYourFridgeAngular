@@ -4,7 +4,28 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeYourFridge.API", "FreeYourFridge.API.csproj", "{2243FA66-CFEC-43BB-8F9A-13122FAC1594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "..\XUnitTestProject1\XUnitTestProject1.csproj", "{05FA2A64-969F-4A91-9DA9-D4AECFB4D427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "..\XUnitTestProject1\XUnitTestProject1.csproj", "{05FA2A64-969F-4A91-9DA9-D4AECFB4D427}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FreeYourFridge-SPA", "..\FreeYourFridge-SPA\", "{9FBBDA99-51A6-42B7-BB46-FA48D864E515}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_56337"
+		Debug.AspNetCompiler.PhysicalPath = "..\FreeYourFridge-SPA\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56337\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_56337"
+		Release.AspNetCompiler.PhysicalPath = "..\FreeYourFridge-SPA\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56337\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "56337"
+		SlnRelativePath = "..\FreeYourFridge-SPA\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +41,10 @@ Global
 		{05FA2A64-969F-4A91-9DA9-D4AECFB4D427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05FA2A64-969F-4A91-9DA9-D4AECFB4D427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05FA2A64-969F-4A91-9DA9-D4AECFB4D427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FBBDA99-51A6-42B7-BB46-FA48D864E515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBBDA99-51A6-42B7-BB46-FA48D864E515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FBBDA99-51A6-42B7-BB46-FA48D864E515}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBBDA99-51A6-42B7-BB46-FA48D864E515}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

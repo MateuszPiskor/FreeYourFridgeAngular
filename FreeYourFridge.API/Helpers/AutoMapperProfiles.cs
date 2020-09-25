@@ -14,7 +14,7 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<UserForUpdateDto ,UserDetails>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserForListDto>();
-            CreateMap<RecipeToList, RecipesToListDto>();
+            CreateMap<RecipeToList, Recipe>();
             CreateMap<RecipeToDetail, RecipeToDetailDto>();
             CreateMap<Missedingredient, MissedingredientDto>();
             CreateMap<Usedingredient, UsedingredientDto>();
