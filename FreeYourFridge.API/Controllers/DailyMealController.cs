@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,6 +8,7 @@ using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Filters;
 using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +34,7 @@ namespace FreeYourFridge.API.Controllers
             return Ok(_mapper.Map<List<DailyMealBasicDto>>(meals));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("{id}", Name="GetDailyMeal")]
         public async Task<IActionResult> GetSingleDailyMeal(int id)
         {
@@ -41,11 +43,15 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpGet("{id}/details")]
-        [Route("{id}", Name = "GetDailyMealDetails")]
+        [DailMealFilter]
         public async Task<IActionResult> GetSingleDailyMealDetails(int id)
         {
-            var dMeal = await _repository.GetDailyMealAsync(id);
-            return Ok(_mapper.Map<DailyMealDetailedDto>(dMeal));
+            var dMealLocal = await _repository.GetDailyMealAsync(id);
+            if (dMealLocal == null) return NotFound();
+            var incomMeal = await _repository.GetExternalDailyMeal(id);
+            (Models.DailyMeal dMeal, ExternalModels.IncomingRecipe iRecipe)
+                bag = (dMealLocal, incomMeal);
+            return Ok((dMealLocal, incomMeal));
         }
 
         /// <summary>

@@ -31,23 +31,27 @@ namespace FreeYourFridge.API.Helpers
                 .ForMember(d => d.Id, o => o.MapFrom(src => src.Id));
 
             CreateMap<Models.DailyMeal, DTOs.DailyMealDetailedDto>();
+
+            CreateMap<ExternalModels.Step, Models.AcceptStep>();
+            CreateMap<ExternalModels.Analyzedinstruction, Models.AcceptAnalyzedinstruction>();
+            CreateMap<ExternalModels.IncomingRecipe, Models.AcceptRecipe>();
+
             CreateMap<ExternalModels.IncomingRecipe, DTOs.DailyMealDetailedDto>()
-                .ForMember(dest=>dest.ReadyInMinute,
-                    opt=>opt.MapFrom(src=>src.readyInMinutes))
-                .ForMember(dest=>dest.Instructions,
-                    opt=>opt.MapFrom(src=>src.analyzedInstructions));
-            CreateMap<ExternalModels.Nutrition, DTOs.DailyMealDetailedDto>()
-                .ForMember(dest => dest.Nutritions, 
-                    opt => opt.MapFrom(src => src.nutrients));
-            CreateMap<ExternalModels.Extendedingredient, DTOs.ExternalUsedIngredientDto>()
-                .ForMember(dest => dest.amount,
-                    opt => opt.MapFrom(src => src.amount))
-                .ForMember(dest => dest.name,
-                    opt => opt.MapFrom(src => src.name))
-                .ForMember(dest => dest.original,
-                    opt => opt.MapFrom(src => src.original))
-                .ForMember(dest => dest.unit,
-                    opt => opt.MapFrom(src => src.unit));
+                .ForMember(dest=>dest.ReadyInMinute,opt=>opt.MapFrom(src=>src.readyInMinutes))
+                .ForMember(dest=>dest.Instructions,opt=>opt.MapFrom(src=>src.analyzedInstructions));
+            
+            //CreateMap<ExternalModels.Nutrition, DTOs.DailyMealDetailedDto>()
+            //    .ForMember(dest => dest.Nutritions, 
+            //        opt => opt.MapFrom(src => src.nutrients));
+            //CreateMap<ExternalModels.Extendedingredient, DTOs.ExternalUsedIngredientDto>()
+            //    .ForMember(dest => dest.amount,
+            //        opt => opt.MapFrom(src => src.amount))
+            //    .ForMember(dest => dest.name,
+            //        opt => opt.MapFrom(src => src.name))
+            //    .ForMember(dest => dest.original,
+            //        opt => opt.MapFrom(src => src.original))
+            //    .ForMember(dest => dest.unit,
+            //        opt => opt.MapFrom(src => src.unit));
 
         }
     }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FreeYourFridge.API.ExternalModels
+namespace FreeYourFridge.API.Models
 {
-
-    public class IncomingRecipe
+    public class AcceptRecipe
     {
         public bool vegetarian { get; set; }
         public bool vegan { get; set; }
@@ -15,40 +14,33 @@ namespace FreeYourFridge.API.ExternalModels
         public bool veryHealthy { get; set; }
         public float spoonacularScore { get; set; } /**/
         public float healthScore { get; set; }
-        public ICollection<Extendedingredient> extendedIngredients { get; set; }
+        public ICollection<AcceptExtendedingredient> extendedIngredients { get; set; }
         public int id { get; set; } /**/
         public string title { get; set; } /**/
         public int readyInMinutes { get; set; } /**/
         public string sourceUrl { get; set; }
         public string image { get; set; } /**/
-        public Nutrition nutrition { get; set; }
+        public AcceptNutrition nutrition { get; set; }
         public string summary { get; set; }
         public string instructions { get; set; } /**/
-        public ICollection<Analyzedinstruction> analyzedInstructions { get; set; } /**/
+        public ICollection<AcceptAnalyzedinstruction> analyzedInstructions { get; set; } /**/
     }
-
-    public class Nutrition
+    public class AcceptNutrition
     {
-        public ICollection<Nutrient> nutrients { get; set; } /**/
-        public ICollection<Ingredient> ingredients { get; set; }
-        public Caloricbreakdown caloricBreakdown { get; set; }
-        public Weightperserving weightPerServing { get; set; }
+        public ICollection<AcceptNutrient> nutrients { get; set; } /**/
+        public ICollection<AcceptIngredient> ingredients { get; set; }
+        public AcceptCaloricbreakdown caloricBreakdown { get; set; }
     }
 
-    public class Caloricbreakdown
+    public class AcceptCaloricbreakdown
     {
         public float percentProtein { get; set; }
         public float percentFat { get; set; }
         public float percentCarbs { get; set; }
     }
 
-    public class Weightperserving
-    {
-        public int amount { get; set; }
-        public string unit { get; set; }
-    }
 
-    public class Nutrient /**/
+    public class AcceptNutrient
     {
         public string title { get; set; }
         public float amount { get; set; }
@@ -56,14 +48,14 @@ namespace FreeYourFridge.API.ExternalModels
         public float percentOfDailyNeeds { get; set; }
     }
 
-    public class Ingredient
+    public class AcceptIngredient
     {
         public string name { get; set; }
         public float amount { get; set; }
         public string unit { get; set; }
     }
 
-    public class Extendedingredient
+    public class AcceptExtendedingredient
     {
         public int id { get; set; }
         public string aisle { get; set; }
@@ -75,43 +67,35 @@ namespace FreeYourFridge.API.ExternalModels
         public string originalName { get; set; }
         public float amount { get; set; }
         public string unit { get; set; }
-        public Measures measures { get; set; }
+        public AcceptMeasures measures { get; set; }
     }
 
-    public class Measures
+    public class AcceptMeasures
     {
-        public Metric metric { get; set; }
+        public AcceptMetric metric { get; set; }
     }
 
 
-    public class Metric
+    public class AcceptMetric
     {
         public float amount { get; set; }
         public string unitShort { get; set; }
         public string unitLong { get; set; }
     }
 
-    public class Analyzedinstruction
+    public class AcceptAnalyzedinstruction
     {
         //public string name { get; set; }
-        public Step[] steps { get; set; }
+        public ICollection<AcceptStep> steps { get; set; }
     }
 
-    public class Step
+    public class AcceptStep
     {
         public int number { get; set; }
         public string step { get; set; }
-        public Ingredient1[] ingredients { get; set; }
-        public Equipment[] equipment { get; set; }
+        
     }
 
-    public class Ingredient1
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string localizedName { get; set; }
-        public string image { get; set; }
-    }
 
     public class Equipment
     {

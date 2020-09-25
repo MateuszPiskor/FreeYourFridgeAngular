@@ -11,7 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using RestSharp;
+using RestSharp.Serialization.Json;
 
 namespace FreeYourFridge.API.Data
 {
@@ -88,7 +90,8 @@ namespace FreeYourFridge.API.Data
             {
                 return null;
             }
-            return response.Data;
+            var incom = JsonConvert.DeserializeObject<IncomingRecipe>(response.Content);
+            return incom;
         }
     }
 }
