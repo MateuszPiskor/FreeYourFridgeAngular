@@ -4,7 +4,7 @@ using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Data
 {
-    public interface IFavouredRepository
+    public interface IFavouredRepository: IGenericRepository
     {
         Task<Favoured> AddFavoured(Favoured favoured);
         Task<IEnumerable<Favoured>> GetFavoureds();

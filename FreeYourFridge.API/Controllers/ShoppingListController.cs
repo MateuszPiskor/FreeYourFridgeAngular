@@ -29,9 +29,10 @@ namespace FreeYourFridge.API.Controllers
                 ToDoItem toDoItem = _mapper.Map<ToDoItem>(toDoItemToAddDto);
                 toDoItem.IsOnShoppingList = true;
 
-                await _repo.AddIngredientAsync(toDoItem);
-                
-                return StatusCode(201, toDoItem);
+                _repo.Add<ToDoItem>(toDoItem);
+                _repo.SaveAll();
+               
+                return StatusCode(201);
             }
             Response.StatusCode = 400;
             return Content("Naughty");
@@ -48,6 +49,7 @@ namespace FreeYourFridge.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteToDoItem(int id)
         {
+
             if(id != 0){
                 _repo.DeleteToDoItem(id);
                 return Ok();

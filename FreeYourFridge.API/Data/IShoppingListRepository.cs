@@ -4,7 +4,7 @@ using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Data
 {
-    public interface IShoppingListRepository
+    public interface IShoppingListRepository: IGenericRepository
     {
         Task<ToDoItem> AddIngredientAsync(ToDoItem toDoItem);
         IEnumerable<ToDoItem> GetToDoItems();

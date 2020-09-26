@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FreeYourFridge.API.Data
 {
-    public class ShoppingListRepository : IShoppingListRepository
+    public class ShoppingListRepository : GenericRepository, IShoppingListRepository
     {
         private readonly DataContext _context;
 
-        public ShoppingListRepository(DataContext context)
+        public ShoppingListRepository(DataContext context): base(context)
         {
             _context = context;
         }

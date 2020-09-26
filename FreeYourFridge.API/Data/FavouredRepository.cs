@@ -8,13 +8,13 @@ using RestSharp;
 
 namespace FreeYourFridge.API.Data
 {
-    public class FavouredRepository : IFavouredRepository
+    public class FavouredRepository : GenericRepository, IFavouredRepository
     {
         private readonly string _baseUrl = "https://api.spoonacular.com/recipes/";
         private DataContext _context;
         private readonly string _apiKey;
 
-        public FavouredRepository(DataContext context, ApiKeyReader apiKeyReader)
+        public FavouredRepository(DataContext context, ApiKeyReader apiKeyReader): base(context)
         {
              _context = context;
             _apiKey = apiKeyReader.getKey(); 

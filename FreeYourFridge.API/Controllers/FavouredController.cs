@@ -32,7 +32,8 @@ namespace FreeYourFridge.API.Controllers
             if (favaouredDto != null)
             {
                 Favoured favoured = _mapper.Map<Favoured>(favaouredDto);
-                await _repo.AddFavoured(favoured);
+                _repo.Add<Favoured>(favoured);
+                 var saveResult = _repo.SaveAll();
                 return StatusCode(201);
             }
             return BadRequest();
