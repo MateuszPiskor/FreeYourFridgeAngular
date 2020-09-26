@@ -10,6 +10,7 @@ import { Data } from "../../data";
 })
 export class DailyMealCardComponent implements OnInit {
   @Input() dailyMeal:DailyMealSimpleDto;
+  private selectedDailyMealId: number;
 
   constructor(
     private _route: ActivatedRoute,
@@ -18,6 +19,14 @@ export class DailyMealCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.selectedDailyMealId = +this._route.snapshot.paramMap.get('id');
+  }
+
+  viewDetails()
+  {
+    this.data.storage = this.dailyMeal;
+    "['dailymeals/',dailymeal.id]"
+    this._router.navigate(['/dailymeals/',this.dailyMeal.spoonacularId]); //wtf??
   }
 
 }

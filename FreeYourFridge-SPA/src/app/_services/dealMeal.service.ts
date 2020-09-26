@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MealDto} from '../_models/mealDto';
-import { DailyMealDto } from '../_models/dailyMealSimpleDto';
+import { DailyMealSimpleDto } from '../_models/dailyMealSimpleDto';
+import { DailyMealDetailsDto } from "../_models/dailyMealDetailsDto";
 import { Observable } from 'rxjs';
 
 
@@ -40,13 +41,20 @@ export class DealMealService {
   }
 
   //get current DailyMeal
-  getDailyMeal(id):Observable<DailyMealDto>
+  getDailyMeal(id):Observable<DailyMealSimpleDto>
   {
-    return this.http.get<DailyMealDto>(this.basedUrl+'dailymeal/'+id, httpOptions);
+    return this.http.get<DailyMealSimpleDto>(this.basedUrl+'dailymeal/'+id, httpOptions);
   }
 
-  getDailyMeals():Observable<DailyMealDto[]>
+  getDailyMealDetails(id):Observable<DailyMealDetailsDto>
   {
-    return this.http.get<DailyMealDto[]>(this.basedUrl+'dailymeal/', httpOptions);
+    return this.http.get<DailyMealDetailsDto>(`${this.basedUrl}dailymeal/${id}/details`);
   }
+
+  getDailyMeals():Observable<DailyMealSimpleDto[]>
+  {
+    return this.http.get<DailyMealSimpleDto[]>(this.basedUrl+'dailymeal/', httpOptions);
+  }
+
+
 }

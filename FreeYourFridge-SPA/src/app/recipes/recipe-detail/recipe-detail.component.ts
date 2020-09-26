@@ -151,7 +151,7 @@ export class RecipeDetailComponent implements OnInit {
       : this.removeIngredientFromShoppingList(ingredient);
   }
 
-
+//by @afe
   addDailyMeal(meal) {
     const dailyMealDtoToSend = new DailyMealToSend();
     dailyMealDtoToSend.grams = +meal.grams;
