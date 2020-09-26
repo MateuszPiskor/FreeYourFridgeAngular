@@ -3,14 +3,16 @@ using System;
 using FreeYourFridge.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200926105431_Fix last migration and now correct update CreateTime, and Title columns")]
+    partial class FixlastmigrationandnowcorrectupdateCreateTimeandTitlecolumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,9 +25,6 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Image")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Score")

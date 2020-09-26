@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.DTOs.ToDoItemDto;
@@ -23,6 +24,8 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<ToDoItem, ToDoItemToListDto>().ForMember(
                         dest => dest.SpoonacularId,
                         opt => opt.MapFrom(src => src.SpoonacularId));
+            CreateMap<FavouredDto, Favoured>().ForMember(dest => dest.CreateTime,
+                 opt => opt.MapFrom(src => DateTime.Now.ToShortDateString()));
         }
     }
 }

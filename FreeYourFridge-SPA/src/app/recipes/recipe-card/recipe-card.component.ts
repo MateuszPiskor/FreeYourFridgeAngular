@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeToList } from 'src/app/_models/recipeToList';
-import { FavouredDto } from 'src/app/_models/favouredDto';
+import { FavouredDto } from 'src/app/_models/Favoured/favouredDto';
 import { RecipesToListDto } from 'src/app/_models/RecipesToListDto';
 import { Data } from '../../data';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -43,6 +43,8 @@ export class RecipeCardComponent implements OnInit {
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       favouredDto.score = +receivedEntry;
       favouredDto.spoonacularId = +this.recipeToList.id;
+      favouredDto.title = this.recipeToList.title;
+      favouredDto.image = this.recipeToList.image;
       this.favouredService.addFavoured(favouredDto).subscribe(
         (res) => {
           console.log(res);

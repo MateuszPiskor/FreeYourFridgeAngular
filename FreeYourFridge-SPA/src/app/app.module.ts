@@ -20,7 +20,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FridgeComponent } from './fridge/fridge.component';
-import { FavouredComponent } from './favoured/favoured.component';
 import { MyProfileComponent } from './member/myProfile/myProfile.component';
 import { ShoppingListComponent } from './shoppingList/shoppingList.component';
 import { DailyMealComponent } from './dailyMeal/dailyMeal.component';
@@ -39,6 +38,8 @@ import { Data } from './data';
 import { RaitingComponent } from './raiting/raiting.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingContentComponent } from './rating-content/rating-content.component';
+import { FavouredListComponent } from './favoured/favoured-list/favoured-list.component';
+import { FavouredCardComponent } from './favoured/favoured-card/favoured-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -55,7 +56,6 @@ export function tokenGetter() {
     FridgeComponent,
     RecipeListComponent,
     RecipeCardComponent,
-    FavouredComponent,
     MyProfileComponent,
     ShoppingListComponent,
     DailyMealComponent,
@@ -64,6 +64,8 @@ export function tokenGetter() {
     MemberEditComponent,
     RaitingComponent,
     RatingContentComponent,
+    FavouredListComponent,
+    FavouredCardComponent
   ],
   imports: [
     BrowserModule,
