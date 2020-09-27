@@ -37,9 +37,7 @@ namespace FreeYourFridge.API.Controllers
             }
 
             IEnumerable<RecipeToList> recipes = JsonConvert.DeserializeObject<IEnumerable<RecipeToList>>(content);
-            IEnumerable<Recipe> recipesForListDto = _mapper.Map<IEnumerable<Recipe>>(recipes);
-
-            return Ok(recipesForListDto);
+            return Ok(recipes);
         }
 
         [HttpGet("{id}")]

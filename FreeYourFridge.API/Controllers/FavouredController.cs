@@ -6,11 +6,13 @@ using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace FreeYourFridge.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     //[ApiController]
 

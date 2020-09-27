@@ -5,10 +5,12 @@ using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.DTOs.ToDoItemDto;
 using FreeYourFridge.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeYourFridge.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ShoppingListController : ControllerBase
     {
