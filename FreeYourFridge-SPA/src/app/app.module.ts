@@ -7,6 +7,7 @@ import { NavComponent } from './nav/nav.component';
 import {RouterModule} from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
+import { FridgeService } from './_services/fridge.service';
 import { RecipeService } from './_services/recipe.service';
 import { DealMealService } from './_services/dealMeal.service';
 import { ShoppingListService } from './_services/shoppingList.service';
@@ -29,6 +30,7 @@ import { AlertifyjsService } from './_services/alertifyjs.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import {MemberEditResolver} from './_resolvers/member-edit.resolver';
+import {FridgeResolver} from './_resolvers/fridge.resolver';
 import {PreventUnsavedChanges} from './_guards/prevent-unsaved-changes.guard';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
@@ -84,8 +86,10 @@ export function tokenGetter(){
     AuthGuard,
     UserService,
     RecipeService,
+    FridgeService,
     DealMealService,
     MemberEditResolver,
+    FridgeResolver,
     Data,
     ShoppingListService,
     PreventUnsavedChanges,

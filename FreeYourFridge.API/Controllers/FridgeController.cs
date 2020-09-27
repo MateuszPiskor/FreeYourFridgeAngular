@@ -2,6 +2,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
+using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +15,15 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IFridgeRepository _repo;
         private DataContext _data {get;set;}
+        public Ingredient newIgredient{get;set;}
+        private readonly IMapper _mapper;
 
-        public FridgeController(IFridgeRepository repo, DataContext data)
+        public FridgeController(IFridgeRepository repo, DataContext data, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
             _data = data;
+            newIgredient = new Ingredient();
         }
         [HttpGet("GetFridgeByUserId/{id}")]
         public async Task<IActionResult> GetFridgeByUserId(int id)
@@ -29,5 +35,28 @@ namespace FreeYourFridge.API.Controllers
             fridge.ListIgredients = allIgredients;
             return Ok(fridge);
         }
+        [HttpPost("AddItemToFridge/{userId}")]
+        public async Task<ActionResult<Ingredient>> AddItemToFridge(int userId, [FromBody]Ingredient newIgredients)
+        {
+            var fridge = await _repo.GetFridge(userId);
+            newIgredient.FridgeId = fridge.Id;
+            newIgredient.Fridge = fridge;
+            newIgredient.Amount = newIgredients.Amount;
+            newIgredient.Name = newIgredients.Name;
+            newIgredient.Unit = newIgredients.Unit;
+            newIgredient.SpoonacularId = 25;
+            _repo.Add(newIgredients);
+            await _repo.SaveAll();
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async void DeleteItemFromFridge(int id)
+        {
+            var item = await _repo.GetIngredient(id);
+            _repo.Delete(item);
+            await _repo.SaveAll();
+        }
+
     }
 }

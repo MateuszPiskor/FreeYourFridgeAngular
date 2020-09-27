@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
+import {Fridge} from 'src/app/_models/fridge';
+import {FridgeService} from '../_services/fridge.service';
+import { AuthService } from '../_services/auth.service';
+import { IngredientDto } from '../_models/ingredientDto';
+import { FridgeResolver } from '../_resolvers/fridge.resolver';
 
 @Component({
   selector: 'app-fridge',
@@ -8,13 +12,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./fridge.component.scss']
 })
 export class FridgeComponent implements OnInit {
-  user: User;
-  constructor(private route: ActivatedRoute) { }
+  fridge: Fridge;
+  ingredient : IngredientDto[];
+  constructor(private route: ActivatedRoute, private fridgeService: FridgeService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data =>{
-      this.user = data['user'];
-    });
+  this.route.data.subscribe(data =>{
+    this.fridge = data['fridge'];
+    this.ingredient = data['fridge'].ListIgredients;
+  });
   }
 
 }

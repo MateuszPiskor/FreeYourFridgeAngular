@@ -42,8 +42,6 @@ namespace FreeYourFridge.API.Data
             var users = await _context.Users.ToListAsync();
             return users;
         }
-        
-
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;

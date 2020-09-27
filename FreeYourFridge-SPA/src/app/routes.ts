@@ -9,6 +9,7 @@ import {ShoppingListComponent} from './shoppingList/shoppingList.component';
 import {DailyMealComponent} from './dailyMeal/dailyMeal.component';
 import {MemberEditComponent} from './member/member-edit/member-edit.component';
 import {MemberEditResolver} from './_resolvers/member-edit.resolver';
+import {FridgeResolver} from './_resolvers/fridge.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
@@ -24,7 +25,7 @@ export const appRoutes: Routes = [
             {path: 'myProfile', component: MyProfileComponent, resolve: {user: MemberEditResolver}},
             // tslint:disable-next-line: max-line-length
             {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            {path: 'fridge', component: FridgeComponent, resolve: {user: MemberEditResolver}},
+            {path: 'fridge', component: FridgeComponent, resolve: {fridge: FridgeResolver}},
             {path: 'favoured', component: FavouredComponent},
             {path: 'recipes', component: RecipeListComponent},
             {path: 'shoppingList', component: ShoppingListComponent},

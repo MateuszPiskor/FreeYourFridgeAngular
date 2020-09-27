@@ -19,7 +19,23 @@ namespace FreeYourFridge.API.Data
             var fridge = await _context.Fridges.FirstOrDefaultAsync(fridge => fridge.user.Id == id);
             return fridge;
         }
-
+        public async Task<Ingredient> GetIngredient(int id)
+        {
+            var ingredient = await _context.Ingredients.FirstOrDefaultAsync(ingredient => ingredient.Id == id);
+            return ingredient;
+        }
+        public void Add<T>(T entity) where T : class
+        {
+            _context.Add(entity);
+        }
+        public void Delete<T>(T entity) where T : class
+        {
+            _context.Remove(entity);
+        }
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
 
     }
 }
