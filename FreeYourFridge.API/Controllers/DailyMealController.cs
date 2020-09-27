@@ -11,6 +11,7 @@ using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Filters;
 using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreeYourFridge.API.Controllers
 {
@@ -49,8 +50,7 @@ namespace FreeYourFridge.API.Controllers
             var dMealLocal = await _repository.GetDailyMealAsync(id);
             if (dMealLocal == null) return NotFound();
             var incomMeal = await _repository.GetExternalDailyMeal(id);
-            (Models.DailyMeal dMeal, ExternalModels.IncomingRecipe iRecipe)
-                bag = (dMealLocal, incomMeal);
+            (Models.DailyMeal dMeal, ExternalModels.IncomingRecipe iRecipe) = (dMealLocal, incomMeal);
             return Ok((dMealLocal, incomMeal));
         }
 
@@ -60,7 +60,7 @@ namespace FreeYourFridge.API.Controllers
         /// <param name="dailyMealToAddDto"></param>
         /// <returns></returns>
         [HttpPost]
-        [Consumes("application/json")]
+        //[Consumes("application/json")]
 
         public async Task<IActionResult> AddDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
@@ -105,6 +105,13 @@ namespace FreeYourFridge.API.Controllers
             return NoContent();
         }
 
+        [HttpDelete]
+        public async Task<ActionResult> ClearDailyMeals()
+        {
+            await _repository.ClearTable();
+            return NoContent();
+        }
+
         private async Task CheckTimeInEntityTable()
         {
             var meals = await _repository.GetDailyMealsAsync();
@@ -113,10 +120,14 @@ namespace FreeYourFridge.API.Controllers
                 .FirstOrDefault();
             if (lastMeal == null)
             {
-                if (lastMeal.TimeOfLastMeal.TimeOfDay > DateTime.Now.TimeOfDay)
+                if ((DateTime.Now.DayOfYear-lastMeal.TimeOfLastMeal.DayOfYear)>=1)
                 {
                     await _repository.ClearTable();
                 }
+                //if (lastMeal.TimeOfLastMeal.TimeOfDay > DateTime.Now.TimeOfDay)
+                //{
+                //    await _repository.ClearTable();
+                //}
             }
             if (lastMeal.TimeOfLastMeal.TimeOfDay > DateTime.Now.TimeOfDay)
             {

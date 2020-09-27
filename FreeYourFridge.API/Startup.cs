@@ -43,7 +43,15 @@ namespace FreeYourFridge.API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
-            services.AddCors();
+            services.AddCors(
+            //    options =>
+            //{
+            //    options.AddPolicy("SPA", builder => builder
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod()
+            //        .WithOrigins("http://localhost:4200")); 
+            //}
+                );
             services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -103,6 +111,7 @@ namespace FreeYourFridge.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/FreeFridgeSpec/swagger.json", "FreeYourFridgeAPI");
+                c.RoutePrefix = "";
             });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();

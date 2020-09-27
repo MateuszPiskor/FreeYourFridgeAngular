@@ -4,6 +4,7 @@ import { AlertifyjsService } from '../_services/alertifyjs.service';
 import { ActivatedRoute } from '@angular/router';
 import { DealMealService } from '../_services/dealMeal.service';
 
+
 @Component({
   selector: 'app-dailyMeal',
   templateUrl: './dailyMeal.component.html',
@@ -31,12 +32,14 @@ export class DailyMealComponent implements OnInit {
     this.mealService.getDailyMeals().subscribe(
       response => {
         this.dailyMealsToday = response;
+        console.log(this.dailyMealsToday[0]);
       },
       (error) => {
         this.alertify.error(error);
       }
     );
   }
+
 
   showDailyMeal(id:number)
   {

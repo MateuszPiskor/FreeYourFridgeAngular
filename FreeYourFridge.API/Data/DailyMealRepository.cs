@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper.Configuration;
 using FreeYourFridge.API.Data.Interfaces;
@@ -70,10 +72,17 @@ namespace FreeYourFridge.API.Data
         /// Removes all elements from the entity "DailyMeals"
         /// </summary>
         /// <returns>void</returns>
+        
         public async Task ClearTable()
         {
-            _context.DailyMeals.RemoveRange();
+            var dmealsToRemove = await _context.DailyMeals.ToListAsync();
+            _context.DailyMeals.RemoveRange(dmealsToRemove);
             await _context.SaveChangesAsync();
+        }
+
+        public void RunClearTable()
+        {
+
         }
 
         /// <summary>
@@ -81,8 +90,11 @@ namespace FreeYourFridge.API.Data
         /// </summary>
         /// <param name="id"> it's SpoonacularId</param>
         /// <returns>deserialized class IncomingRecipe</returns>
-        public async Task<IncomingRecipe> GetExternalDailyMeal(int id) 
+        public async Task<IncomingRecipe> GetExternalDailyMeal(int id)
         {
+
+            //var incom2 = JsonConvert.DeserializeObject<IncomingRecipe>(await File.ReadAllTextAsync("response.json"));
+
             var client = new RestClient($"{UrlToSpoon}/{id}/{QueryContent}{_apiKeyReader.getKey()}");
             var request = new RestRequest(Method.GET);
             var response = await client.ExecuteAsync<IncomingRecipe>(request);
@@ -90,8 +102,8 @@ namespace FreeYourFridge.API.Data
             {
                 return null;
             }
-            var incom = JsonConvert.DeserializeObject<IncomingRecipe>(response.Content);
-            return incom;
+            return JsonConvert.DeserializeObject<IncomingRecipe>(response.Content);
+            
         }
     }
 }

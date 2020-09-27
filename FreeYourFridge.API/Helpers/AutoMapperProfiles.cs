@@ -37,9 +37,21 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<ExternalModels.IncomingRecipe, Models.AcceptRecipe>();
 
             CreateMap<ExternalModels.IncomingRecipe, DTOs.DailyMealDetailedDto>()
-                .ForMember(dest=>dest.ReadyInMinute,opt=>opt.MapFrom(src=>src.readyInMinutes))
-                .ForMember(dest=>dest.Instructions,opt=>opt.MapFrom(src=>src.analyzedInstructions));
-            
+                .ForMember(dest => dest.ReadyInMinute, opt => opt.MapFrom(src => src.readyInMinutes))
+                .ForMember(dest => dest.Instructions, opt => opt.MapFrom(src => src.analyzedInstructions));
+                //.ForMember(d=>d.Nutritions,o=>o.MapFrom(src=>src.nutrition));
+
+            CreateMap<ExternalModels.Nutrient, Models.AcceptNutrient>();
+            CreateMap<ExternalModels.Caloricbreakdown, Models.AcceptCaloricbreakdown>();
+            CreateMap<ExternalModels.Nutrition, Models.AcceptNutrition>()
+                .ForMember(d=>d.nutrients,o=>o.MapFrom(src=>src.nutrients))
+                .ForMember(d=>d.caloricBreakdown,o=>o.MapFrom(src=>src.caloricBreakdown));
+
+            //CreateMap<ExternalModels.Nutrition, DailyMealDetailedDto>();
+            //.ForMember(d => d.Nutritions, o => o.MapFrom(src => src.nutrients));
+
+
+
             //CreateMap<ExternalModels.Nutrition, DTOs.DailyMealDetailedDto>()
             //    .ForMember(dest => dest.Nutritions, 
             //        opt => opt.MapFrom(src => src.nutrients));

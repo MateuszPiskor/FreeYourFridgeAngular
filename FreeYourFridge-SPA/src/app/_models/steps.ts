@@ -1,10 +1,10 @@
-export class Instructions
+export class Instruction2
 {
-  steps:Array<Steps>
+  steps:Array<Step>
 }
 
 
-export class Steps
+export interface Step
 {
   stepNumber:number;
   step:string;

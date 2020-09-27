@@ -12,6 +12,7 @@ import {MemberEditResolver} from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -29,6 +30,7 @@ export const appRoutes: Routes = [
             {path: 'recipes', component: RecipeListComponent},
             {path: 'shoppingList', component: ShoppingListComponent},
             {path: 'dailyMeal', component: DailyMealComponent},
+            {path: 'dailyMeal/:id', component: DailyMealDetailsComponent},
             { path: 'recipes/:id', component: RecipeDetailComponent }
         ]
     },

@@ -30,9 +30,9 @@ namespace FreeYourFridge.API.ExternalModels
     public class Nutrition
     {
         public ICollection<Nutrient> nutrients { get; set; } /**/
-        public ICollection<Ingredient> ingredients { get; set; }
+        //public ICollection<Ingredient> ingredients { get; set; }
         public Caloricbreakdown caloricBreakdown { get; set; }
-        public Weightperserving weightPerServing { get; set; }
+        //public Weightperserving weightPerServing { get; set; }
     }
 
     public class Caloricbreakdown
@@ -65,17 +65,17 @@ namespace FreeYourFridge.API.ExternalModels
 
     public class Extendedingredient
     {
-        public int id { get; set; }
-        public string aisle { get; set; }
-        public string image { get; set; }
-        public string consistency { get; set; }
-        public string name { get; set; }
-        public string original { get; set; }
-        public string originalString { get; set; }
-        public string originalName { get; set; }
-        public float amount { get; set; }
-        public string unit { get; set; }
-        public Measures measures { get; set; }
+        public int? id { get; set; }
+        public string? aisle { get; set; }
+        public string? image { get; set; }
+        public string? consistency { get; set; }
+        public string? name { get; set; }
+        public string? original { get; set; }
+        public string? originalString { get; set; }
+        public string? originalName { get; set; }
+        public float? amount { get; set; }
+        public string? unit { get; set; }
+        public Measures? measures { get; set; }
     }
 
     public class Measures

@@ -1,8 +1,9 @@
 export class DailyMealSimpleDto
  {
-  title:string
+  id: number;
   image: string;
-  spoonacularId: number;
+  title:string;
+  timeOfLastMeal:number;
   grams: number;
   // userRemarks:string;
 }

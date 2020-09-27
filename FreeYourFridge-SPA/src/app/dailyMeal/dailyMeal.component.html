@@ -1,11 +1,11 @@
 <div class="container mt-5">
-  <div class="row" [(ngModel)]="dailyMeal"  *ngIf="dailyMealsToday|async as dailyMealsToday else loading">
+  <div class="row" >
     <div *ngFor="let meal of dailyMealsToday" class="col-lg-3 col-md-6 col-sm-12">
       <app-daily-meal-card [dailyMeal]="meal"></app-daily-meal-card>
     </div>
   </div>
 </div>
-<ng-template #loading>
+<!-- <ng-template #loading>
   <div  class="btn progress-bar progress-bar-striped progress-bar-animatedr"
   style=" color: aliceblue;">Loading ....</div>
-</ng-template>
+</ng-template> -->

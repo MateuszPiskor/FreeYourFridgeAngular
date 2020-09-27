@@ -25,8 +25,8 @@ export class DailyMealCardComponent implements OnInit {
   viewDetails()
   {
     this.data.storage = this.dailyMeal;
-    "['dailymeals/',dailymeal.id]"
-    this._router.navigate(['/dailymeals/',this.dailyMeal.spoonacularId]); //wtf??
+    "['dailyMeal/',dailymeal.id]"
+    this._router.navigate(['/dailyMeal/',this.dailyMeal.id]); //wtf??
   }
 
 }

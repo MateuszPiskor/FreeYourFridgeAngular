@@ -2,18 +2,58 @@ import { DailyMealSimpleDto} from './dailyMealSimpleDto';
 import { Nutritions} from './recipeNutritions';
 import { Instruction} from './instruction';
 import{UsedIngredients} from './usedIngredients';
-import { Instructions, Steps } from './steps';
+import { Instruction2, Step } from './steps';
 
-export class DailyMealDetailsDto extends DailyMealSimpleDto
+export class DailyMealDetailsDto
 {
-  calories: number;
-  carbs: number;
-  fat: number;
-  protein: number;
+  title:string
+  image: string;
+  id: number;
+  grams: number;
   readyInMinute: number;
   userRemarks:string;
   timeOfLastMeal:number;
-  nutritions:Array<Nutritions>;
-  instructions:Array<Instructions>;
+  nutrition:INutrition;
+  // nutritions:Array<Nutritions>;
+  instructions:Array<Instruction2>;
   ingredients:Array<UsedIngredients>;
+}
+
+export interface INutrition
+{
+  caloricbreakdown:ICaloribreakdown;
+  nutrients:Array<INutrient>;
+}
+
+export interface ICaloribreakdown
+{
+  percentProtein:number;
+  percentFat:number;
+  percentCarbs:number;
+}
+
+export interface INutrient
+{
+  title:string;
+  amount:number;
+  unit: string;
+  percentOfDailyNeeds:number;
+}
+
+
+export interface DailyMealFlat
+{
+  title:string
+  image: string;
+  id: number;
+  grams: number;
+  readyInMinute: number;
+  userRemarks:string;
+  timeOfLastMeal:number;
+  nutrients:Array<INutrient>;
+  caloricbreakdown:ICaloribreakdown;
+  steps:Array<Step>
+
+  // instructions:Array<Instructions>;
+  // ingredients:Array<UsedIngredients>;
 }

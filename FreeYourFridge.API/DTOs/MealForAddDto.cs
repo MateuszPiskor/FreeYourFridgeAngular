@@ -1,4 +1,7 @@
-﻿namespace FreeYourFridge.API.DTOs
+﻿using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+
+namespace FreeYourFridge.API.DTOs
 {
     public class MealForAddDto
     {

@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-      <div class="card">
+      <div class="card" >
         <img class="card-img-top img-thumbnail" src="{{ dailyMealDetails?.image }}"
           alt="{{ dailyMealDetails?.title }}" />
         <div class="card-body">
@@ -9,34 +9,36 @@
             <strong>Ready in: {{ dailyMealDetails?.title }}</strong>
           </div>
           <div class="mb-4">
-            <strong>Ready in: {{ dailyMealDetails?.readyInMinutes }}</strong>
+            <strong>Ready in: {{ dailyMealDetails?.readyInMinute }} min</strong>
           </div>
-          <div class="mb-4">
+          <!-- <div class="mb-4">
             <strong>Score: {{ recipeToDetail?.spoonacularScore }}</strong>
-          </div>
+          </div> -->
           <div>
-            <strong>Calories: {{ dailyMealDetails?.calories }} kcal </strong>
+            <strong>Calories: {{ dailyMealDetails?.nutrition.nutrients[0].amount }} kcal </strong>
           </div>
           <div class="mb-4">
-            <div>Carbs: {{ dailyMealDetails?.carbs }}</div>
-            <div>Fat: {{ dailyMealDetails?.fat }}</div>
-            <div>Protein: {{ dailyMealDetails?.protein }}</div>
+            <div>Carbs: {{ dailyMealDetails?.nutrition.nutrients[3].amount }} g</div>
+            <div>Fat: {{ dailyMealDetails?.nutrition.nutrients[1].amount }} g</div>
+            <div>Protein: {{ dailyMealDetails?.nutrition.nutrients[8].amount }} g</div>
+            <div>Grams: {{ dailyMealDetails?.grams }} g</div>
+
           </div>
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
           <form #f="ngForm" (ngSubmit)="updateDailyMeal(f.value)" novalidate>
-            <!-- <div *ngIf="editMode"> -->
+            <div *ngIf="editMode">
             <input name="spoonacularId" type="hidden" ngModel="{{ dailyMealDetails?.id }}" />
 
             <input name="title" type="hidden" ngModel="{{ dailyMealDetails.title }}" />
             <input name="title" type="hidden" ngModel="{{ dailyMealDetails.image }}" />
-            <!-- end of by @afe-->
+            end of by @afe
             <div class="input-group">
-              <input class="form-control" name="grams" required type="text" ngModel />
+              <input class="form-control" name="grams" required type="text" />
               <button class="btn btn-secondary" type="submit">Add</button>
             </div>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-sm-8">
@@ -45,20 +47,24 @@
           <tab heading="Instruction">
             <div class="card noHover">
               <ul class="list-group-item">
-                <li class="list-group-item noHover" *ngFor="let instruciton of dailyMealDetails.instructions[0]">
-                  {{ instruciton.step }}
+                <li class="list-group-item noHover" *ngFor="let step of stepsToShow">
+                  {{ step.step }}
                 </li>
               </ul>
             </div>
           </tab>
-          <tab heading="Ingredients">
+          <tab heading="User Comments">
             <!-- <div class="card noHover"> -->
             <div class="card">
               <div *ngIf="dailyMealDetails != undefined">
                 <ul class="list-group-item">
                   <h4 class="header">
-                    <span>Missed Ingredients</span>
+                    <span>User Comments</span>
                   </h4>
+                  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+                  <!-- <div>{{ dailyMealDetails?.userRemarks }} </div> -->
+                  <textarea id="notes" name="notes" class="form-control" rows="7"
+                  [(ngModel)]="dailyMealDetails.userRemarks"></textarea>
                 <!--  <div *ngFor="
                       let missedIngredient of dailyMealDetails?.missedIngredients
                     ">
@@ -91,8 +97,10 @@
 
                     </form> -->-->
                   <!-- </div> -->
+                  <button class="btn btn-primary">Save your comments</button>
+                </form>
                 </ul>
-                <ul class="list-group-item">
+                <!-- <ul class="list-group-item">
                   <h4 class="header">
                     <span>In your frige</span>
                   </h4>
@@ -104,7 +112,7 @@
                       Info
                     </button>
                   </li>
-                </ul>
+                </ul> -->
               </div>
             </div>
           </tab>
