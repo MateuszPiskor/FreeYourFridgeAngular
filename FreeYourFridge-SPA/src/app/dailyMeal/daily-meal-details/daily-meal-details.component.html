@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-      <div class="card" >
+      <div class="card">
         <img class="card-img-top img-thumbnail" src="{{ dailyMealDetails?.image }}"
           alt="{{ dailyMealDetails?.title }}" />
         <div class="card-body">
@@ -18,11 +18,14 @@
             <strong>Calories: {{ dailyMealDetails?.nutrition.nutrients[0].amount }} kcal </strong>
           </div>
           <div class="mb-4">
-            <div>Carbs: {{ dailyMealDetails?.nutrition.nutrients[3].amount }} g</div>
-            <div>Fat: {{ dailyMealDetails?.nutrition.nutrients[1].amount }} g</div>
-            <div>Protein: {{ dailyMealDetails?.nutrition.nutrients[8].amount }} g</div>
+            <div>Carbs: {{ dailyMealDetails?.nutrition.nutrients[3].amount }}
+              {{ dailyMealDetails?.nutrition.nutrients[3].unit }}</div>
+            <div>Fat: {{ dailyMealDetails?.nutrition.nutrients[1].amount }}
+              {{ dailyMealDetails?.nutrition.nutrients[1].unit }}</div>
+            <div>Protein: {{ dailyMealDetails?.nutrition.nutrients[8].amount }}
+              {{ dailyMealDetails?.nutrition.nutrients[8].unit }}</div>
             <div>Grams: {{ dailyMealDetails?.grams }} g</div>
-
+            <div>Ingested Calories: {{ getCalculatedCalories()|number }} </div>
           </div>
         </div>
         <!-- <div class="card-footer">
@@ -48,7 +51,7 @@
             <div class="card noHover">
               <ul class="list-group-item">
                 <li class="list-group-item noHover" *ngFor="let step of stepsToShow">
-                  {{ step.step }}
+                  {{ step?.step || "No detailed intructions for the recipe" }}
                 </li>
               </ul>
             </div>
@@ -62,10 +65,10 @@
                     <span>User Comments</span>
                   </h4>
                   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-                  <!-- <div>{{ dailyMealDetails?.userRemarks }} </div> -->
-                  <textarea id="notes" name="notes" class="form-control" rows="7"
-                  [(ngModel)]="dailyMealDetails.userRemarks"></textarea>
-                <!--  <div *ngFor="
+                    <!-- <div>{{ dailyMealDetails?.userRemarks }} </div> -->
+                    <textarea id="notes" name="notes" class="form-control" rows="7"
+                      [(ngModel)]="dailyMealDetails.userRemarks"></textarea>
+                    <!--  <div *ngFor="
                       let missedIngredient of dailyMealDetails?.missedIngredients
                     ">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -96,9 +99,9 @@
 
 
                     </form> -->-->
-                  <!-- </div> -->
-                  <button class="btn btn-primary">Save your comments</button>
-                </form>
+                    <!-- </div> -->
+                    <button class="btn btn-primary">Save your comments</button>
+                  </form>
                 </ul>
                 <!-- <ul class="list-group-item">
                   <h4 class="header">

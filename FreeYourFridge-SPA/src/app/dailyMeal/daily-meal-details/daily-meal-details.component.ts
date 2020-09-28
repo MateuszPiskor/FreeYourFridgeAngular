@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Data } from '../../data';
 import { DealMealService } from 'src/app/_services/dealMeal.service';
+import { CalculateService } from 'src/app/_services/calculate.service';
 import { AlertifyjsService } from 'src/app/_services/alertifyjs.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DailyMealDetailsDto,DailyMealFlat } from 'src/app/_models/dailyMealDetailsDto';
@@ -18,6 +19,7 @@ export class DailyMealDetailsComponent implements OnInit {
 
   constructor(
     private dailyMealService: DealMealService,
+    private calcService:CalculateService,
     private data: Data,
     private alertify: AlertifyjsService,
     private route: ActivatedRoute,
@@ -49,9 +51,14 @@ export class DailyMealDetailsComponent implements OnInit {
       title:this.dailyMealDetails.title,
       image:this.dailyMealDetails.image,
       grams:this.dailyMealDetails.grams,
-      userRemarks:form.value
+      userRemarks:form.value.notes
     }).subscribe(
       response=>this.alertify.success("The daily meal has been updated"),
       error=>{this.alertify.error(error)});
+  }
+
+  getCalculatedCalories()
+  {
+    return this.calcService.calcCalcPerWeight(this.dailyMealDetails);
   }
 }

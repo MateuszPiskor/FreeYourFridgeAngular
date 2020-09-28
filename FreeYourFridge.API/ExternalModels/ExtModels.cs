@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace FreeYourFridge.API.ExternalModels
 {
@@ -32,7 +34,15 @@ namespace FreeYourFridge.API.ExternalModels
         public ICollection<Nutrient> nutrients { get; set; } /**/
         //public ICollection<Ingredient> ingredients { get; set; }
         public Caloricbreakdown caloricBreakdown { get; set; }
-        //public Weightperserving weightPerServing { get; set; }
+        public Weightperserving weightPerServing { get; set; }
+        public ICollection<Properties> properties { get; set; }
+    }
+
+    public class Properties
+    {
+        public string title { get; set; }
+        public float amount { get; set; }
+        public string unit { get; set; }
     }
 
     public class Caloricbreakdown

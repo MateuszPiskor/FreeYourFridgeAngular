@@ -30,6 +30,22 @@ namespace FreeYourFridge.API.Models
         public ICollection<AcceptNutrient> nutrients { get; set; } /**/
         public ICollection<AcceptIngredient> ingredients { get; set; }
         public AcceptCaloricbreakdown caloricBreakdown { get; set; }
+        public ICollection<AcceptProperties> properties { get; set; }
+        public AcceptWeightperserving weightPerServing { get; set; }
+
+    }
+
+    public class AcceptWeightperserving
+    {
+        public int amount { get; set; }
+        public string unit { get; set; }
+    }
+
+    public class AcceptProperties
+    {
+        public string title { get; set; }
+        public float amount { get; set; }
+        public string unit { get; set; }
     }
 
     public class AcceptCaloricbreakdown

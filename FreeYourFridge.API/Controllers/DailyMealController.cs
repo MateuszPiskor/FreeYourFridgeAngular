@@ -75,6 +75,7 @@ namespace FreeYourFridge.API.Controllers
                 await CheckTimeInEntityTable();
             }
 
+            CheckTimeInEntityTable();
             var dMealToAdd = _mapper.Map<Models.DailyMeal>(dailyMealToAddDto);
             dMealToAdd.TimeOfLastMeal = DateTime.Now;
             await _repository.AddMeal(dMealToAdd);
@@ -94,23 +95,21 @@ namespace FreeYourFridge.API.Controllers
             
             var dMeal = await _repository.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (dMeal == null) return BadRequest();
-            if (dMeal.TimeOfLastMeal.TimeOfDay > DateTime.Now.TimeOfDay) await _repository.ClearTable();
 
             dMeal.Grams = dailyMealToAddDto.Grams;
             dMeal.Title = dailyMealToAddDto.Title;
             dMeal.UserRemarks = dailyMealToAddDto.UserRemarks;
-            dMeal.TimeOfLastMeal = DateTime.Now;
 
             await _repository.UpdateMeal(dMeal);
             return NoContent();
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> ClearDailyMeals()
-        {
-            await _repository.ClearTable();
-            return NoContent();
-        }
+        //[HttpDelete]
+        //public async Task<ActionResult> ClearDailyMeals()
+        //{
+        //    await _repository.ClearTable();
+        //    return NoContent();
+        //}
 
         private async Task CheckTimeInEntityTable()
         {
@@ -124,12 +123,8 @@ namespace FreeYourFridge.API.Controllers
                 {
                     await _repository.ClearTable();
                 }
-                //if (lastMeal.TimeOfLastMeal.TimeOfDay > DateTime.Now.TimeOfDay)
-                //{
-                //    await _repository.ClearTable();
-                //}
             }
-            if (lastMeal.TimeOfLastMeal.TimeOfDay > DateTime.Now.TimeOfDay)
+            if ((DateTime.Now.DayOfYear - lastMeal.TimeOfLastMeal.DayOfYear) >= 1)
             {
                 await _repository.ClearTable();
             }

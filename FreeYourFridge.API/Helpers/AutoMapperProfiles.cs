@@ -42,28 +42,15 @@ namespace FreeYourFridge.API.Helpers
                 //.ForMember(d=>d.Nutritions,o=>o.MapFrom(src=>src.nutrition));
 
             CreateMap<ExternalModels.Nutrient, Models.AcceptNutrient>();
+            CreateMap<ExternalModels.Properties, Models.AcceptProperties>();
+            CreateMap<ExternalModels.Weightperserving, Models.AcceptWeightperserving>();
             CreateMap<ExternalModels.Caloricbreakdown, Models.AcceptCaloricbreakdown>();
             CreateMap<ExternalModels.Nutrition, Models.AcceptNutrition>()
                 .ForMember(d=>d.nutrients,o=>o.MapFrom(src=>src.nutrients))
-                .ForMember(d=>d.caloricBreakdown,o=>o.MapFrom(src=>src.caloricBreakdown));
+                .ForMember(d=>d.caloricBreakdown,o=>o.MapFrom(src=>src.caloricBreakdown))
+                .ForMember(d => d.weightPerServing, o => o.MapFrom(src => src.weightPerServing))
+                .ForMember(d => d.properties, o => o.MapFrom(src => src.properties));
 
-            //CreateMap<ExternalModels.Nutrition, DailyMealDetailedDto>();
-            //.ForMember(d => d.Nutritions, o => o.MapFrom(src => src.nutrients));
-
-
-
-            //CreateMap<ExternalModels.Nutrition, DTOs.DailyMealDetailedDto>()
-            //    .ForMember(dest => dest.Nutritions, 
-            //        opt => opt.MapFrom(src => src.nutrients));
-            //CreateMap<ExternalModels.Extendedingredient, DTOs.ExternalUsedIngredientDto>()
-            //    .ForMember(dest => dest.amount,
-            //        opt => opt.MapFrom(src => src.amount))
-            //    .ForMember(dest => dest.name,
-            //        opt => opt.MapFrom(src => src.name))
-            //    .ForMember(dest => dest.original,
-            //        opt => opt.MapFrom(src => src.original))
-            //    .ForMember(dest => dest.unit,
-            //        opt => opt.MapFrom(src => src.unit));
 
         }
     }

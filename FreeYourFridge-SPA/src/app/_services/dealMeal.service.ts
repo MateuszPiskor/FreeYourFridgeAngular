@@ -62,11 +62,13 @@ export class DealMealService {
 
   updateDailyMeal(dailyMealToSend:DailyMealToSend):Observable<void>
   {
-    return this.http.put<void>(this.basedUrl2+`${dailyMealToSend.id}`,dailyMealToSend,httpOptions);
+    return this.http.put<void>(this.basedUrl2,dailyMealToSend,httpOptions);
   }
 
   deleteDailyMeal(dMealId:number):Observable<void>
   {
     return this.http.delete<void>(this.basedUrl2+`${dMealId}`);
   }
+
+  
 }

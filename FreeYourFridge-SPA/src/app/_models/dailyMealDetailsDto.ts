@@ -14,7 +14,6 @@ export class DailyMealDetailsDto
   userRemarks:string;
   timeOfLastMeal:number;
   nutrition:INutrition;
-  // nutritions:Array<Nutritions>;
   instructions:Array<Instruction2>;
   ingredients:Array<UsedIngredients>;
 }
@@ -23,6 +22,8 @@ export interface INutrition
 {
   caloricbreakdown:ICaloribreakdown;
   nutrients:Array<INutrient>;
+  weightPerServing:IWeightPerServing;
+  properties:Array<IProperties>;
 }
 
 export interface ICaloribreakdown
@@ -40,6 +41,18 @@ export interface INutrient
   percentOfDailyNeeds:number;
 }
 
+export interface IWeightPerServing
+{
+  amount:number;
+  unit:string
+}
+
+export interface IProperties
+{
+  title:string;
+  amount:number;
+  unit:string;
+}
 
 export interface DailyMealFlat
 {
