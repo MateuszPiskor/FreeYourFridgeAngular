@@ -4,7 +4,14 @@
         <div class="rowUser"><img src="../assets/image/user.jpg"></div>
     </div>
     <div class="column">
-      <div class="none">{{fridge && (fridge?.ListIgredients[0].name | json)}} </div>
+      <div class="none" *ngIf="fridge">{{fridge.id}}
+        <div class="row">
+          <ul class="list-group">
+          <li  *ngFor="let ingredient of fridge.Igredients" class="list-group-item" >
+              {{ ingredient.name }}
+            </li>
+          </ul>
+        </div>
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -17,7 +24,7 @@
           </tr>
         </thead>
             <tbody>
-              <tr *ngFor="let ingredient of fridge.ListIgredients; let i = index">
+              <tr *ngFor="let ingredient of fridge.Igredients; let i = index">
                 <td>{{ingredient.name}}</td>
                 <td>{{i}}</td>
                 <td>ok</td>

@@ -37,13 +37,14 @@ import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeInstructionComponent } from './recipes/recipe-instruction/recipe-instruction.component';
 import { Data } from './data';
+import { IngredientsComponent } from './ingredients/ingredients.component';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavComponent,
     HomeComponent,
@@ -59,8 +60,9 @@ export function tokenGetter(){
     DailyMealComponent,
     RecipeDetailComponent,
     RecipeInstructionComponent,
-    MemberEditComponent
-  ],
+    MemberEditComponent,
+      IngredientsComponent
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -69,7 +71,6 @@ export function tokenGetter(){
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
