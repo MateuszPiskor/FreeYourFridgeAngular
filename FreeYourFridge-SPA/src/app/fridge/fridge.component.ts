@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import {Fridge} from 'src/app/_models/fridge';
 import {FridgeService} from '../_services/fridge.service';
 import { AuthService } from '../_services/auth.service';
-import { IngredientDto } from '../_models/ingredientDto';
 
 @Component({
   selector: 'app-fridge',
@@ -18,6 +17,7 @@ export class FridgeComponent implements OnInit {
   ngOnInit() {
   this.route.data.subscribe(data =>{
     this.fridge = data['fridge'];
+    console.log(this.fridge);
   });
   }
 

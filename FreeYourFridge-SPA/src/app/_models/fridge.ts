@@ -1,10 +1,12 @@
 import { IngredientDto } from './ingredientDto';
 import {Deserializable} from './deserializable';
+import { User } from './user';
 
 export interface Fridge {
   id: number;
   userId: number;
-  Igredients?: IngredientDto[];
+  listIgredients: IngredientDto[];
+  user: User;
 
   //deserialize(input: any): this {
   //  Object.assign(this, input);

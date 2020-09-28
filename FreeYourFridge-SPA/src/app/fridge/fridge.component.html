@@ -4,14 +4,7 @@
         <div class="rowUser"><img src="../assets/image/user.jpg"></div>
     </div>
     <div class="column">
-      <div class="none" *ngIf="fridge">{{fridge.id}}
-        <div class="row">
-          <ul class="list-group">
-          <li  *ngFor="let ingredient of fridge.Igredients" class="list-group-item" >
-              {{ ingredient.name }}
-            </li>
-          </ul>
-        </div>
+      <div class="none" *ngIf="fridge">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -24,11 +17,11 @@
           </tr>
         </thead>
             <tbody>
-              <tr *ngFor="let ingredient of fridge.Igredients; let i = index">
+              <tr *ngFor="let ingredient of fridge.listIgredients; let i = index">
+                <td>{{i+1}}</td>
                 <td>{{ingredient.name}}</td>
-                <td>{{i}}</td>
-                <td>ok</td>
-                <td>ok</td>
+                <td>{{ingredient.amount}}</td>
+                <td>{{ingredient.unit}}</td>
                 <td><button type="button" class="btn btn-success">Update</button></td>
                 <td><button type="button" class="btn btn-danger">Delete</button></td>
             </tr>
