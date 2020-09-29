@@ -6,7 +6,7 @@ namespace FreeYourFridge.API.Models
     public class Ingredient
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public int SpoonacularId { get; set; }
         public double Amount { get; set; }
         public string Unit { get; set; }

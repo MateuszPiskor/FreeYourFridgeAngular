@@ -50,12 +50,20 @@ namespace FreeYourFridge.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async void DeleteItemFromFridge(int id)
+        [HttpDelete("{ingredientId}")]
+        public async void DeleteItemFromFridge(int ingredientId)
         {
-            var item = await _repo.GetIngredient(id);
+            var item = await _repo.GetIngredient(ingredientId);
             _repo.Delete(item);
             await _repo.SaveAll();
+        }
+        [HttpPost("ingredientId")]
+        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody] Ingredient ingredientToUpdate)
+        {
+            var ingredientUpdate = await _repo.GetIngredient(ingredientId);
+            var newIngredient = _mapper.Map(ingredientToUpdate, ingredientUpdate);
+            _repo.UpdateIngredient(newIgredient, ingredientId);
+            return NoContent();
         }
 
     }

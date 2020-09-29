@@ -20,8 +20,11 @@ constructor(private http: HttpClient) { }
 getUserFridge(userid): Observable<Fridge>{
   return this.http.get<Fridge>(this.baseUrl + 'fridge/GetFridgeByUserId/' + userid);
 }
-deleteIngredientFromFridge(ingredeintId): Observable<IngredientDto>{
-  return this.http.delete<IngredientDto>(this.baseUrl + 'fridge/' + ingredeintId);
+deleteIngredientFromFridge(ingredientId): Observable<IngredientDto>{
+  return this.http.delete<IngredientDto>(this.baseUrl + 'fridge/' + ingredientId);
+}
+updateIngredient(id: number, ingredient: IngredientDto):Observable<IngredientDto>{
+  return this.http.post<IngredientDto>(this.baseUrl + 'fridge/' + id, ingredient);
 }
 
 }

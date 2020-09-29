@@ -2,6 +2,7 @@
   <div class="userContent">
     <div class=column>
         <div class="rowUser"><img src="../assets/image/user.jpg"></div>
+        <button type="button" class="btn btn-success ml-3 mt-4">Add new Ingredient</button>
     </div>
     <div class="column">
       <div class="none" *ngIf="fridge">
@@ -22,8 +23,8 @@
                 <td>{{ingredient.name}}</td>
                 <td>{{ingredient.amount}}</td>
                 <td>{{ingredient.unit}}</td>
-                <td><button type="button" class="btn btn-success">Update</button></td>
-                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                <td><button type="button" class="btn btn-warning">Update</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="deleteIngredient(ingredient.id)">Delete</button></td>
             </tr>
             </tbody>
       </table>
