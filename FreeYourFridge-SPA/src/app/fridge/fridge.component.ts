@@ -12,6 +12,7 @@ import { AlertifyjsService } from '../_services/alertifyjs.service';
 })
 export class FridgeComponent implements OnInit {
   public fridge: Fridge;
+  state = true;
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyjsService, private fridgeService: FridgeService, private authService: AuthService, private router: Router) { }
 
@@ -28,6 +29,16 @@ export class FridgeComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
-
+  update(){
+    this.state = false;
+  }
+  enableEditMethod(id, amount) {
+    var convertAmount = Number(amount);
+    this.fridgeService.updateIngredient(id, convertAmount).subscribe(next => {
+      this.ngOnInit();
+      this.alertify.success('Ingredient update succesfully');
+      }, error => {
+        this.alertify.error(error);
+      });
+  }
 }

@@ -23,8 +23,8 @@ getUserFridge(userid): Observable<Fridge>{
 deleteIngredientFromFridge(ingredientId): Observable<IngredientDto>{
   return this.http.delete<IngredientDto>(this.baseUrl + 'fridge/' + ingredientId);
 }
-updateIngredient(id: number, ingredient: IngredientDto):Observable<IngredientDto>{
-  return this.http.post<IngredientDto>(this.baseUrl + 'fridge/' + id, ingredient);
+updateIngredient(id: number, amountIngredient: number):Observable<IngredientDto>{
+  return this.http.post<IngredientDto>(this.baseUrl + 'fridge/' + id, amountIngredient);
 }
 
 }

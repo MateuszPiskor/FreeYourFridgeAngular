@@ -57,12 +57,10 @@ namespace FreeYourFridge.API.Controllers
             _repo.Delete(item);
             await _repo.SaveAll();
         }
-        [HttpPost("ingredientId")]
-        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody] Ingredient ingredientToUpdate)
+        [HttpPost("{ingredientId}")]
+        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody]double amount)
         {
-            var ingredientUpdate = await _repo.GetIngredient(ingredientId);
-            var newIngredient = _mapper.Map(ingredientToUpdate, ingredientUpdate);
-            _repo.UpdateIngredient(newIgredient, ingredientId);
+            _repo.UpdateIngredient(ingredientId, amount);
             return NoContent();
         }
 

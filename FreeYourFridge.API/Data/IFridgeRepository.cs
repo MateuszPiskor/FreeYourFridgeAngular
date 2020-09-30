@@ -11,6 +11,6 @@ namespace FreeYourFridge.API.Data
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
         Task<Ingredient> GetIngredient(int id);
-        void UpdateIngredient(Ingredient ingredientToUpdate, int id);
+        void UpdateIngredient(int id, double amount);
     }
 }
