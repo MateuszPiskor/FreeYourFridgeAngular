@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FreeYourFridge.API.Models
 {
+    public enum ActivityLevel
+    {
+        Low,Medium,High
+    }
     public class UserDetails
     {
         public int Id{get;set;}

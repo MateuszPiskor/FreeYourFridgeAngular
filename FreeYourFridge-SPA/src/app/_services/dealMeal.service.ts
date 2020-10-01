@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MealDto} from '../_models/mealDto';
 import { DailyMealSimpleDto } from '../_models/dailyMealSimpleDto';
-import { DailyMealDetailsDto, DailyMealFlat } from "../_models/dailyMealDetailsDto";
+import { DailyMealDetailsDto, DailyMealFlat, DmFlat } from "../_models/dailyMealDetailsDto";
 import { Observable } from 'rxjs';
 import { map, tap} from 'rxjs/operators'
 import { DailyMealToSend } from '../_models/dailyMealToSendDto';
@@ -70,5 +70,20 @@ export class DealMealService {
     return this.http.delete<void>(this.basedUrl2+`${dMealId}`);
   }
 
-  
+  // getFlatMeal(dailyMealDetails:DailyMealDetailsDto):DmFlat
+  // {
+  //   return
+  //   {
+  //     id: dailyMealDetails.id;
+  //     title: dailyMealDetails.title;
+  //     image: dailyMealDetails.image;
+  //     grams: dailyMealDetails.grams;
+  //     readyInMinute: dailyMealDetails.readyInMinute;
+  //     userRemarks: dailyMealDetails.userRemarks;
+  //     timeOfLastMeal: dailyMealDetails.timeOfLastMeal;
+  //     nutrients: dailyMealDetails.nutrition.nutrients;
+  //     caloricbreakdown: dailyMealDetails.nutrition.caloricbreakdown;
+  //     steps: dailyMealDetails.instructions[0].steps;
+  //   };
+  // }
 }

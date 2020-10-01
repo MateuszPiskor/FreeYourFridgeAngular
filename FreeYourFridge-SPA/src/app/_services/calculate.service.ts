@@ -5,13 +5,14 @@ import { DailyMealDetailsDto } from '../_models/dailyMealDetailsDto';
   providedIn: 'root'
 })
 export class CalculateService {
-  dailyMealDeails:DailyMealDetailsDto;
+  // dailyMealDetails:DailyMealDetailsDto;
+  grams:number;
+
+
   constructor() { }
-
-  calcCalcPerWeight(dailyMealDeails:DailyMealDetailsDto):number
+  calcCalcPerWeight(dm:DailyMealDetailsDto):number
   {
-    return (dailyMealDeails.nutrition.nutrients[0].amount*dailyMealDeails.grams)
-    /dailyMealDeails.nutrition.weightPerServing.amount;
+    return ((dm.nutrition.nutrients[0].amount*dm.grams)
+    /dm.nutrition.weightPerServing.amount);
   }
-
 }

@@ -22,5 +22,4 @@ constructor(private http: HttpClient) { }
   updateUser(id, user){
     return this.http.post(this.baseUrl + 'user/' + id, user);
   }
-
 }

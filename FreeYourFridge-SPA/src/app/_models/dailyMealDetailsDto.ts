@@ -66,7 +66,20 @@ export interface DailyMealFlat
   nutrients:Array<INutrient>;
   caloricbreakdown:ICaloribreakdown;
   steps:Array<Step>
-
-  // instructions:Array<Instructions>;
-  // ingredients:Array<UsedIngredients>;
 }
+
+export class DmFlat implements DailyMealFlat
+{
+  title: string;
+  image: string;
+  id: number;
+  grams: number;
+  readyInMinute: number;
+  userRemarks: string;
+  timeOfLastMeal: number;
+  nutrients: INutrient[];
+  caloricbreakdown: ICaloribreakdown;
+  steps: Step[];
+
+}
+

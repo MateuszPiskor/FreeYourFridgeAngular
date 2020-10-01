@@ -24,6 +24,7 @@ namespace FreeYourFridge.API.Models
         public int Carbs { get; set; }
         public int Fat { get; set; }
         public int Protein { get; set; }
-        
+        public int CreatedBy { get; set; }
+
     }
 }

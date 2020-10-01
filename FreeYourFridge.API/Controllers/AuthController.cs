@@ -43,13 +43,15 @@ namespace FreeYourFridge.API.Controllers
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForListDto>(createdUser);
             var newUserDetail = new UserDetails(){
-                UserId = createdUser.Id
+                UserId = createdUser.Id,
             };
             _user.Add(newUserDetail);
             await _user.SaveAll();
 
             return CreatedAtRoute("GetUser", new { Controller = "User", id = createdUser.Id }, userToReturn);
         }
+
+        
 
         [HttpPost("login")]
         [Consumes("application/json")]

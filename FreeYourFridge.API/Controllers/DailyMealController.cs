@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
@@ -10,11 +11,13 @@ using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Filters;
 using FreeYourFridge.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FreeYourFridge.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/dailymeal")]
     public class DailyMealController:ControllerBase
@@ -32,7 +35,10 @@ namespace FreeYourFridge.API.Controllers
         public async Task<IActionResult> GetDailyMeals()
         {
             var meals= await _repository.GetDailyMealsAsync();
-            return Ok(_mapper.Map<List<DailyMealBasicDto>>(meals));
+            var mealsFiltered = meals.Where(dm =>
+                dm.CreatedBy == int.Parse(User.FindFirst(claim => 
+                    claim.Type == ClaimTypes.NameIdentifier).Value));
+            return Ok(_mapper.Map<List<DailyMealBasicDto>>(mealsFiltered));
         }
 
         [HttpGet]
@@ -77,7 +83,9 @@ namespace FreeYourFridge.API.Controllers
 
             CheckTimeInEntityTable();
             var dMealToAdd = _mapper.Map<Models.DailyMeal>(dailyMealToAddDto);
+            var userId = User.FindFirst(claim=>claim.Type == ClaimTypes.NameIdentifier).Value;
             dMealToAdd.TimeOfLastMeal = DateTime.Now;
+            dMealToAdd.CreatedBy = int.Parse(userId);
             await _repository.AddMeal(dMealToAdd);
             return CreatedAtRoute("GetDailyMeal", new { dMealToAdd.Id }, null);
 

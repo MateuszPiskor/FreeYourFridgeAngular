@@ -79,12 +79,7 @@ namespace FreeYourFridge.API.Data
             _context.DailyMeals.RemoveRange(dmealsToRemove);
             await _context.SaveChangesAsync();
         }
-
-        public void RunClearTable()
-        {
-
-        }
-
+        
         /// <summary>
         /// Pulls single meal from Api.Spoonacular
         /// </summary>
