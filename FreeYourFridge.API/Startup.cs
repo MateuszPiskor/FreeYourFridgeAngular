@@ -42,6 +42,7 @@ namespace FreeYourFridge.API
             services.AddScoped<RestClient>();
             services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
             services.AddCors(

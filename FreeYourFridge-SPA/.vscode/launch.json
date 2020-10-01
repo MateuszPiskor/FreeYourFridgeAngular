@@ -1,40 +1,34 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "compounds": [
-    {
-      "name": "Core and FF",
-      "configurations": [
-        "firefox",
-        "NETCore"
-      ]
-    }
-  ],
-  "configurations": [
-    {
-      "name": "firefox",
-      "type": "firefox",
-      "request": "launch",
-      "reAttach": true,
-      "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
-      "name": "NETCore",
-      "type":"pwa-node",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "${workspaceFolder}/FreeYourFridge.API/bin/Debug/netcoreapp3.1/FreeYourFridge.API.dll",
-      "args": [],
-      "stopOnEntry": false,
-      "internalConsoleOptions": "openOnFirstSessionStart",
-      "console": "internalConsole",
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+          "type": "chrome",
+          "request": "launch",
+          "name": "Launch Chrome against localhost",
+          "url": "http://localhost:4200",
+          "webRoot": "${workspaceFolder}"
+      },
+      {
+          "type": "chrome",
+          "request": "attach",
+          "name": "Attach to Chrome",
+          "port": 9222,
+          "webRoot": "${workspaceFolder}"
       }
-    }
-  ],
+<<<<<<< HEAD
+  ]
+    
+=======
+    ]
+>>>>>>> Merge/feature-user-with-feature-recpices
 }
-
