@@ -11,5 +11,11 @@ export interface User {
     fats: number;
     protein: number;
     description: string;
+    activityLevel:ActivityLevel
+}
+
+export enum ActivityLevel
+{
+  Low, Medium, High
 }
 

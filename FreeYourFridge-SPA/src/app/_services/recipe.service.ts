@@ -14,7 +14,6 @@ const httpOptions = {
     'Authorization': 'Bearer ' + localStorage.getItem('token'),
     'headers': 'headers',
     'responseType': 'text'
-
   })
 };
 

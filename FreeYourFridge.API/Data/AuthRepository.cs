@@ -17,6 +17,7 @@ namespace FreeYourFridge.API.Data
         {
             _context = context;
         }
+        [HttpPost]
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
@@ -43,6 +44,7 @@ namespace FreeYourFridge.API.Data
             return false;
         }
 
+        [HttpPost]
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -65,6 +67,7 @@ namespace FreeYourFridge.API.Data
             }
         }
 
+        [NonAction]
         public async Task<bool> UserExists(string username)
         {
             if (await _context.Users.AnyAsync(x => x.Username == username))

@@ -40,6 +40,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingContentComponent } from './rating-content/rating-content.component';
 import { FavouredListComponent } from './favoured/favoured-list/favoured-list.component';
 import { FavouredCardComponent } from './favoured/favoured-card/favoured-card.component';
+import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-card.component';
+import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -65,7 +67,10 @@ export function tokenGetter() {
     RaitingComponent,
     RatingContentComponent,
     FavouredListComponent,
-    FavouredCardComponent
+    FavouredCardComponent,
+    MemberEditComponent,
+    DailyMealCardComponent,
+    DailyMealDetailsComponent
   ],
   imports: [
     BrowserModule,

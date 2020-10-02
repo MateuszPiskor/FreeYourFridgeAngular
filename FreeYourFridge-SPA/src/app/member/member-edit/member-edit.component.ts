@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { User } from 'src/app/_models/user';
+import { ActivityLevel, User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyjsService } from 'src/app/_services/alertifyjs.service';
 import { NgForm } from '@angular/forms';
@@ -28,13 +28,14 @@ export class MemberEditComponent implements OnInit {
       this.user = data['user'];
     });
   }
+
   updateUser() {
       this.userService.updateUser(this.authService.decodedToken.nameid , this.user).subscribe(next => {
       this.alertify.success('Profile update succesfully');
       this.editForm.reset(this.user);
     }, error => {
       this.alertify.error(error);
-    }); 
+    });
   }
 
 }

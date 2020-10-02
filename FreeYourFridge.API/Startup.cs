@@ -1,9 +1,14 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using AutoMapper;
 using FreeYourFridge.API.Data;
+using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.Helpers;
+using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -15,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using RestSharp;
 
 namespace FreeYourFridge.API
@@ -37,8 +43,17 @@ namespace FreeYourFridge.API
             services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
-            services.AddCors();
+            services.AddCors(
+            //    options =>
+            //{
+            //    options.AddPolicy("SPA", builder => builder
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod()
+            //        .WithOrigins("http://localhost:4200")); 
+            //}
+                );
             services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -46,6 +61,8 @@ namespace FreeYourFridge.API
             services.AddScoped<IMealRepository, MealRepository>();
             services.AddScoped<IFavouredRepository, FavouredRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
+            services.AddScoped<IDailyMealRepository, DailyMealRepository>();
+            services.AddScoped<DCICalculator>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -58,6 +75,17 @@ namespace FreeYourFridge.API
                         ValidateAudience = false
                     };
                 });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("FreeFridgeSpec", new OpenApiInfo()
+                { 
+                        Title = "FreeYourFridgeAPI", 
+                        Version = "v1" 
+                });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,10 +112,18 @@ namespace FreeYourFridge.API
                 });
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/FreeFridgeSpec/swagger.json", "FreeYourFridgeAPI");
+                c.RoutePrefix = "";
+            });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvc();
+
+            
         }
     }
 }

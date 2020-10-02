@@ -23,12 +23,18 @@
           </div>
         </div>
         <div class="card-footer">
-          <form #f="ngForm" (ngSubmit)="addMeal(f.value)" novalidate>
+          <form #f="ngForm" (ngSubmit)="addMeal(f.value)" (ngSubmit)="addDailyMeal(f.value)" novalidate>
             <!-- <div *ngIf="editMode"> -->
+            <!-- <input name="spoonacularId" type="hidden" ngModel="{{ recipeToList.id }}" />
+            <input name="title" type="hidden" ngModel="{{ recipeToDetail.title }}" />
+            <input name="title" type="hidden" ngModel="{{ recipeToDetail.image }}" /> -->
+            <!-- end of by @afe-->
             <input name="spoonacularId" type="hidden" ngModel="{{ recipeToList.id }}" />
             <div class="input-group">
-              <input class="form-control" name="grams" reguired type="text" ngModel />
-              <button class="btn btn-secondary" type="submit">Add</button>
+              <input class="form-control" name="grams" required type="number" [(ngModel)]="grams"/>
+              <button class="btn btn-secondary" type="submit">Add as Daily Meal</button>
+              <!-- <input class="form-control" name="grams" reguired type="text" ngModel />
+              <button class="btn btn-secondary" type="submit">Add</button> -->
             </div>
           </form>
         </div>

@@ -20,15 +20,17 @@ namespace FreeYourFridge.API.Controllers
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        private readonly IUserRepository _user;
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper, IUserRepository user)
         {
             _repo = repo;
             _config = config;
             _mapper = mapper;
-
+            _user = user;
         }
 
         [HttpPost("register")]
+        [Consumes("application/json")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             //validate request
@@ -40,9 +42,18 @@ namespace FreeYourFridge.API.Controllers
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForListDto>(createdUser);
-            return CreatedAtRoute("GetUser", new {Controller= "User", id = createdUser.Id}, userToReturn);
+            var newUserDetail = new UserDetails(){
+                UserId = createdUser.Id
+            };
+            _user.Add(newUserDetail);
+            await _user.SaveAll();
+
+            return CreatedAtRoute("GetUser", new { Controller = "User", id = createdUser.Id }, userToReturn);
         }
+
         [HttpPost("login")]
+        [Consumes("application/json")]
+        
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);

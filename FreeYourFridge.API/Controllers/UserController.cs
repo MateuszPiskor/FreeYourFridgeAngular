@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +17,13 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IUserRepository _repo;
         private readonly IMapper _mapper;
+        private readonly DCICalculator _calc;
 
-        public UserController(IUserRepository repo, IMapper mapper)
+        public UserController(IUserRepository repo, IMapper mapper, DCICalculator calc)
         {
             _repo = repo;
             _mapper = mapper;
+            _calc = calc;
         }
 
         [HttpGet]
@@ -39,13 +42,16 @@ namespace FreeYourFridge.API.Controllers
             _mapper.Map(userDetail, model);
             return Ok(model);
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUserDetails(int id, UserForUpdateDto userforUpdateDto)
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UpdateUserDetails(int id, [FromBody]UserForUpdateDto userforUpdateDto)
         {
             if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) 
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUserDetail(id);
+            var dailyCI = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
+            userforUpdateDto.DailyDemand = dailyCI;
             _mapper.Map(userforUpdateDto, userFromRepo);
 
             if(await _repo.SaveAll())
@@ -53,6 +59,5 @@ namespace FreeYourFridge.API.Controllers
                 
             throw new Exception($"Updating user with {id} failed on save");  
         }
-        
     }
 }

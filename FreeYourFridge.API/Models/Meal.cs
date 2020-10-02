@@ -10,7 +10,9 @@ namespace FreeYourFridge.API.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+        public string Title { get; set; }
         public int SpoonacularId { get; set; }
         public int Grams { get; set; }
+               
     }
 }
