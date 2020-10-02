@@ -1,7 +1,7 @@
 using System;
 using AutoMapper;
 using FreeYourFridge.API.DTOs;
-using FreeYourFridge.API.DTOs.ToDoItemDto;
+using FreeYourFridge.API.DTOs.ShoppingListItemsDto;
 using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Helpers
@@ -20,8 +20,8 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<Missedingredient, MissedingredientDto>();
             CreateMap<Usedingredient, UsedingredientDto>();
             CreateMap<Nutrition, NutriotionForDetailDto>();
-            CreateMap<ToDoItemToAddDto, ToDoItem>();
-            CreateMap<ToDoItem, ToDoItemToListDto>().ForMember(
+            CreateMap<ShoppingListItemToAddDto, ShoppingListItem>();
+            CreateMap<ShoppingListItem, ShoppingListItemDto>().ForMember(
                         dest => dest.SpoonacularId,
                         opt => opt.MapFrom(src => src.SpoonacularId));
             CreateMap<FavouredDto, Favoured>().ForMember(dest => dest.CreateTime,

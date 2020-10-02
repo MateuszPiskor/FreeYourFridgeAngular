@@ -14,12 +14,12 @@ namespace FreeYourFridge.API.Data
         private DataContext _context;
         private readonly string _apiKey;
 
-        public FavouredRepository(DataContext context, ApiKeyReader apiKeyReader): base(context)
+        public FavouredRepository(DataContext context, ApiKeyReader apiKeyReader) : base(context)
         {
-             _context = context;
-            _apiKey = apiKeyReader.getKey(); 
-
+            _context = context;
+            _apiKey = apiKeyReader.getKey();
         }
+
         public async Task<Favoured> AddFavoured(Favoured favoured)
         {
             await _context.Favoureds.AddAsync(favoured);
@@ -35,7 +35,7 @@ namespace FreeYourFridge.API.Data
 
         public async Task<string> GetRecipesByIds(string idsString)
         {
-            RestClient client= new RestClient($"{_baseUrl}informationBulk?{_apiKey}&ids={idsString}");
+            RestClient client = new RestClient($"{_baseUrl}informationBulk?{_apiKey}&ids={idsString}");
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)
@@ -45,10 +45,11 @@ namespace FreeYourFridge.API.Data
             return null;
         }
 
-        public void Delete(int id)
+        public void Delete(int id, int userId)
         {
-            var elements = _context.Favoureds.ToList();
-            var itemToRemove = elements.FirstOrDefault(x => x.SpoonacularId == id);
+            var favoureds = _context.Favoureds.ToList();
+
+            var itemToRemove = favoureds.FirstOrDefault(x => x.SpoonacularId == id && x.CreatedBy == userId);
 
             if (itemToRemove != null)
             {
@@ -57,9 +58,9 @@ namespace FreeYourFridge.API.Data
             }
         }
 
-        public async Task UpdateFavaoured(int id, int score)
+        public async Task UpdateFavaoured(int id, int score, int userId)
         {
-            var updateFavoured = await _context.Favoureds.FirstOrDefaultAsync(x => x.SpoonacularId == id);
+            var updateFavoured = await _context.Favoureds.FirstOrDefaultAsync(x => x.SpoonacularId == id && x.CreatedBy == userId);
             updateFavoured.Score = score;
             _context.Favoureds.Update(updateFavoured);
             await _context.SaveChangesAsync();

@@ -9,7 +9,7 @@ namespace FreeYourFridge.API.Data
         Task<Favoured> AddFavoured(Favoured favoured);
         Task<IEnumerable<Favoured>> GetFavoureds();
         Task<string> GetRecipesByIds(string idsString);
-        void Delete(int id);
-        Task UpdateFavaoured(int id, int score);
+        void Delete(int id,int userId);
+        Task UpdateFavaoured(int id, int score, int userId);
     }
 }

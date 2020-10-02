@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FreeYourFridge.API.Models
+namespace FreeYourFridge.API.DTOs.ShoppingListItemsDto
 {
-    public class ToDoItem
+    public class ShoppingListItemToAddDto
     {
         public long Id { get; set; }
         public int SpoonacularId { get; set; }

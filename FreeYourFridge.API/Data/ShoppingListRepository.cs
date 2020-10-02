@@ -16,25 +16,25 @@ namespace FreeYourFridge.API.Data
             _context = context;
         }
 
-        public async Task<ToDoItem> AddIngredientAsync(ToDoItem toDoItem)
+        public async Task<ShoppingListItem> AddIngredientAsync(ShoppingListItem shoppingListItem)
         {
-            await _context.ToDoItems.AddAsync(toDoItem);
+            await _context.ShoppingListItems.AddAsync(shoppingListItem);
             await _context.SaveChangesAsync();
 
-            return toDoItem;
+            return shoppingListItem;
         }
         
-        public IEnumerable<ToDoItem> GetToDoItems()
+        public IEnumerable<ShoppingListItem> GetShoppingListItems()
         {
-            return  _context.ToDoItems.ToList();
+            return  _context.ShoppingListItems.ToList();
         }
-        public void DeleteToDoItem(int id)
+        public void DeleteShoppingListItem(int id,int userId)
         {
-            var elements = _context.ToDoItems.ToList();
-            var itemToRemove = elements.FirstOrDefault(x => x.SpoonacularId == id);
+            var elements = _context.ShoppingListItems.ToList();
+            var itemToRemove = elements.FirstOrDefault(x => x.SpoonacularId == id && x.CreatedBy == userId);
             
             if (itemToRemove != null) {
-                var element = _context.ToDoItems.Remove(itemToRemove);
+                var element = _context.ShoppingListItems.Remove(itemToRemove);
                 _context.SaveChanges();
             }
         }

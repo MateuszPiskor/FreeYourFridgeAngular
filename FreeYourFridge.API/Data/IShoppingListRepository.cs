@@ -6,8 +6,8 @@ namespace FreeYourFridge.API.Data
 {
     public interface IShoppingListRepository: IGenericRepository
     {
-        Task<ToDoItem> AddIngredientAsync(ToDoItem toDoItem);
-        IEnumerable<ToDoItem> GetToDoItems();
-        void DeleteToDoItem(int id);
+        Task<ShoppingListItem> AddIngredientAsync(ShoppingListItem shoppingListItem);
+        IEnumerable<ShoppingListItem> GetShoppingListItems();
+        void DeleteShoppingListItem(int id, int userId);
     }
 }

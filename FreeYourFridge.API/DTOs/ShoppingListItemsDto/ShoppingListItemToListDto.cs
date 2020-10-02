@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FreeYourFridge.API.DTOs
 {
-    public class ToDoItemToListDto
+    public class ShoppingListItemDto
     {
         public double Amount { get; set; }
         public string Unit { get; set; }

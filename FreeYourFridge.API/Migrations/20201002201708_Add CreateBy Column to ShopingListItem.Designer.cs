@@ -3,14 +3,16 @@ using System;
 using FreeYourFridge.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201002201708_Add CreateBy Column to ShopingListItem")]
+    partial class AddCreateByColumntoShopingListItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,7 +86,7 @@ namespace FreeYourFridge.API.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("FreeYourFridge.API.Models.ShoppingListItem", b =>
+            modelBuilder.Entity("FreeYourFridge.API.Models.ToDoItem", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +95,7 @@ namespace FreeYourFridge.API.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int>("CreateBy")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsOnShoppingList")
@@ -110,7 +112,7 @@ namespace FreeYourFridge.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShoppingListItems");
+                    b.ToTable("ToDoItems");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.User", b =>
