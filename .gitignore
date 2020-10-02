@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs
+/.vscode
 FreeYourFridge.API/FreeYourFridge.db
 /FreeYourFridge.API/SpoonacularApiKey.txt
 /FreeYourFridge.API/Refactoring.txt

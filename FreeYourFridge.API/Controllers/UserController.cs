@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -49,6 +50,10 @@ namespace FreeYourFridge.API.Controllers
                 return Unauthorized();
 
             var userFromRepo = await _repo.GetUserDetail(id);
+            if (userFromRepo==null)
+            {
+                return NoContent();
+            }
             var dailyCI = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
             userforUpdateDto.DailyDemand = dailyCI;
             _mapper.Map(userforUpdateDto, userFromRepo);
