@@ -36,4 +36,3 @@ export const appRoutes: Routes = [
     },
     {path: '**', redirectTo: '', pathMatch: 'full'},
     ];
-

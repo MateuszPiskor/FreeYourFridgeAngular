@@ -43,6 +43,7 @@ namespace FreeYourFridge.API.Controllers
             _mapper.Map(userDetail, model);
             return Ok(model);
         }
+
         [HttpPost("{id}")]
         public async Task<IActionResult> UpdateUserDetails(int id, [FromBody]UserForUpdateDto userforUpdateDto)
         {
