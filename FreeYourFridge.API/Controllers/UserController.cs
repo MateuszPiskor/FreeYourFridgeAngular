@@ -54,6 +54,9 @@ namespace FreeYourFridge.API.Controllers
             {
                 return NoContent();
             }
+
+            var user = await _repo.GetUser(id);
+            userFromRepo.User = user;
             var dailyCI = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
             userforUpdateDto.DailyDemand = dailyCI;
             _mapper.Map(userforUpdateDto, userFromRepo);

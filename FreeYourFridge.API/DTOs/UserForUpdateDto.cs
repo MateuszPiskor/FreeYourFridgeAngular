@@ -10,6 +10,6 @@ namespace FreeYourFridge.API.DTOs
         public int Carbohydrates {get; set;}
         public int Fats{get;set;}
         public int Protein{get;set;}
-        public ActivityLevel Level { get; set; }
+        public ActivityLevel ActivityLevel { get; set; }
     }
 }

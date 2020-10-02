@@ -19,11 +19,13 @@
                 <textarea name="fats" rows="1" class="form-control" [(ngModel)]="user.fats"></textarea>
                 <div class="rowUser">protein :</div>
                 <textarea name="protein" rows="1" class="form-control" [(ngModel)]="user.protein"></textarea>
+                <div class="rowUser">Description :</div>
+            <textarea name="description" rows="1" class="form-control" [(ngModel)]="user.description"></textarea>
                 <div class="rowUser">Level of activity:</div>
-                <select name="activityLevel" rows="1" class="form-control" [(ngModel)]="user.activityLevel">
-                    <option [value]=0>Low</option>
-                    <option [value]=1>Medium</option>
-                    <option [value]=2>High</option>
+                <select name="activity" rows="1" class="form-control" [(ngModel)]="activity">
+                    <option [value]="ActivityLevel.Low">Low</option>
+                    <option [value]="ActivityLevel.Medium">Medium</option>
+                    <option [value]="ActivityLevel.High">High</option>
                 </select>
             </form>
         </div>
