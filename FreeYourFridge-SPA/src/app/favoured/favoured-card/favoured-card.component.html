@@ -11,7 +11,7 @@
           <small class="text-muted">Create Time{{ favoured.createTime }}</small>
         </p>
         <div class="btn-group center no p-0 btn-block parent-background">
-          <button class="btn btn-success">Info</button>
+          <button class="btn btn-success" (click)="viewDetail(favoured.spoonacularId)">Info</button>
           <button class="btn btn-danger" (click)="delete(favoured)">
             Remove
           </button>
