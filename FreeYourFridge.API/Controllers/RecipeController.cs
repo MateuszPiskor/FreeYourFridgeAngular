@@ -41,7 +41,7 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRecipePreparationTimeAndScore(int id)
+        public async Task<IActionResult> GetTimeAndScore(int id)
         {
             string content = await _repo.GetRespone(id, "information");
             if (content == null)

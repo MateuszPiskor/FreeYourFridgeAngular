@@ -48,7 +48,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   loadRecipe() {
-    this.recipeService.getRecipe(+this.route.snapshot.params['id']).subscribe(
+    this.recipeService.GetTimeAndScore(+this.route.snapshot.params['id']).subscribe(
       (recipeToDetail: RecipeToDetails) => {
         this.recipeToDetail = recipeToDetail;
       },

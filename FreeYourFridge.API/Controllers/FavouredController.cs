@@ -47,6 +47,24 @@ namespace FreeYourFridge.API.Controllers
             IEnumerable<Favoured> favoureds = await _repo.GetFavoureds();
             return Ok(favoureds);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFavoured(int id)
+        {
+            if (id != 0)
+            {
+                _repo.Delete(id);
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditFavoured(int id,[FromBody] int score)
+        {
+            _repo.UpdateFavaoured(id, score);
+            return NoContent();
+        }
        
     }
 }

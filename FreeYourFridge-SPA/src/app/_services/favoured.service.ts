@@ -23,4 +23,13 @@ export class FavouredService {
   getFavoureds(): Observable<FavouredDto[]> {
     return this.http.get<FavouredDto[]>(this.basedUrl, this.httpOptions);
   }
+
+  remove(favoured: FavouredDto) {
+    return this.http.delete(this.basedUrl + '/' + favoured.spoonacularId);
+  }
+
+  editScore(favouredId: number, favouredScore: number){
+    return this.http.put(this.basedUrl + '/' + favouredId, favouredScore);
+  }
+
 }

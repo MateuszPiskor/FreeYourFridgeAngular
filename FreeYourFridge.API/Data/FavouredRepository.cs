@@ -44,5 +44,25 @@ namespace FreeYourFridge.API.Data
             }
             return null;
         }
+
+        public void Delete(int id)
+        {
+            var elements = _context.Favoureds.ToList();
+            var itemToRemove = elements.FirstOrDefault(x => x.SpoonacularId == id);
+
+            if (itemToRemove != null)
+            {
+                _context.Favoureds.Remove(itemToRemove);
+                _context.SaveChanges();
+            }
+        }
+
+        public async Task UpdateFavaoured(int id, int score)
+        {
+            var updateFavoured = await _context.Favoureds.FirstOrDefaultAsync(x => x.SpoonacularId == id);
+            updateFavoured.Score = score;
+            _context.Favoureds.Update(updateFavoured);
+            await _context.SaveChangesAsync();
+        }
     }
 }

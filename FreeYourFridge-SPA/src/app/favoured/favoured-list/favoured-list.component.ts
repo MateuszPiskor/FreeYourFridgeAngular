@@ -28,4 +28,16 @@ export class FavouredListComponent implements OnInit {
     );
   }
 
+  removeItem(favoured: FavouredDto){
+    this.favoureds = this.favoureds.filter(item => item !== favoured);
+    this.favouredService.remove(favoured).subscribe(
+      () => {
+        this.alertify.success('Removed from shoplist');
+      },
+      (error) => {
+        this.alertify.error('Some problem occur');
+      }
+    );
+  }
+
 }
