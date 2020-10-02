@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreeYourFridge.API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class restoreDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,10 @@ namespace FreeYourFridge.API.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Score = table.Column<int>(nullable: false),
-                    SpoonacularId = table.Column<int>(nullable: false)
+                    SpoonacularId = table.Column<int>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    CreateTime = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

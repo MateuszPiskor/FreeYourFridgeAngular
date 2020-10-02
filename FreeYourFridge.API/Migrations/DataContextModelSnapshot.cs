@@ -22,7 +22,7 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreateTime")
+                    b.Property<string>("CreateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Image")

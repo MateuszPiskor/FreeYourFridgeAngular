@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200926105431_Fix last migration and now correct update CreateTime, and Title columns")]
-    partial class FixlastmigrationandnowcorrectupdateCreateTimeandTitlecolumns
+    [Migration("20201002112412_restoreDB")]
+    partial class restoreDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,10 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreateTime")
+                    b.Property<string>("CreateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Score")
