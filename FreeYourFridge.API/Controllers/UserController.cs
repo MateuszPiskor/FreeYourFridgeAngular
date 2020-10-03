@@ -65,12 +65,9 @@ namespace FreeYourFridge.API.Controllers
             userforUpdateDto.DailyDemand = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
             _mapper.Map(userforUpdateDto, userFromRepo);
 
-            if (!(await _repo.SaveAll()))
-            {
-                throw new Exception($"Updating user with {id} failed on save");
-
-            }
-            return NoContent();
+            return !await _repo.SaveAll()
+                ? throw new Exception($"Updating user with {id} failed on save")
+                : NoContent();
         }
     }
 }
