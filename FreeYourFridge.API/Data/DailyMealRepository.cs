@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper.Configuration;
 using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.ExternalModels;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using RestSharp;
-using RestSharp.Serialization.Json;
 
 namespace FreeYourFridge.API.Data
 {
@@ -25,7 +17,7 @@ namespace FreeYourFridge.API.Data
         private const string UrlToSpoon = "https://api.spoonacular.com/recipes/";
         private const string QueryContent = "information?includeNutrition=true&";
         private readonly ApiKeyReader _apiKeyReader;
-        
+
 
         public DailyMealRepository(DataContext context,
             ApiKeyReader apiKeyReader)
@@ -57,7 +49,7 @@ namespace FreeYourFridge.API.Data
             if (dailyMeal == null)
             {
                 throw new ArgumentNullException(nameof(dailyMeal));
-            } 
+            }
             _context.DailyMeals.Add(dailyMeal);
             await _context.SaveChangesAsync();
         }
@@ -72,14 +64,14 @@ namespace FreeYourFridge.API.Data
         /// Removes all elements from the entity "DailyMeals"
         /// </summary>
         /// <returns>void</returns>
-        
+
         public async Task ClearTable()
         {
             var dmealsToRemove = await _context.DailyMeals.ToListAsync();
             _context.DailyMeals.RemoveRange(dmealsToRemove);
             await _context.SaveChangesAsync();
         }
-        
+
         /// <summary>
         /// Pulls single meal from Api.Spoonacular
         /// </summary>
@@ -98,7 +90,7 @@ namespace FreeYourFridge.API.Data
                 return null;
             }
             return JsonConvert.DeserializeObject<IncomingRecipe>(response.Content);
-            
+
         }
     }
 }
