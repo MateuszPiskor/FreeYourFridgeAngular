@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FreeYourFridge.API.Filters
 {
-    public class DailMealFilterAttribute:ResultFilterAttribute
+    public class DailMealFilterAttribute : ResultFilterAttribute
     {
         public override async Task OnResultExecutionAsync(ResultExecutingContext context,
             ResultExecutionDelegate next)
@@ -21,7 +18,7 @@ namespace FreeYourFridge.API.Filters
                 return;
             }
 
-            var (dmeal, iRecipe) = ((Models.DailyMeal, ExternalModels.IncomingRecipe)) result.Value;
+            var (dmeal, iRecipe) = ((Models.DailyMeal, ExternalModels.IncomingRecipe))result.Value;
             var map = context.HttpContext.RequestServices.GetRequiredService<IMapper>();
             var mMeal = map.Map<DTOs.DailyMealDetailedDto>(dmeal);
             result.Value = map.Map(iRecipe, mMeal);
