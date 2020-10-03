@@ -9,13 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-<<<<<<< HEAD:FreeYourFridge.API/Migrations/20200924111645_initialCommit.Designer.cs
-    [Migration("20200924111645_initialCommit")]
-    partial class initialCommit
-=======
-    [Migration("20201001181352_CreatedByDailyMeail")]
-    partial class CreatedByDailyMeail
->>>>>>> origin/dev:FreeYourFridge.API/Migrations/20201001181352_CreatedByDailyMeail.Designer.cs
+    [Migration("20201003113145_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,50 +18,6 @@ namespace FreeYourFridge.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8");
 
-<<<<<<< HEAD:FreeYourFridge.API/Migrations/20200924111645_initialCommit.Designer.cs
-            modelBuilder.Entity("FreeYourFridge.API.Models.Fridge", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Fridges");
-                });
-
-            modelBuilder.Entity("FreeYourFridge.API.Models.Ingredient", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int?>("FridgeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SpoonacularId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FridgeId");
-
-                    b.ToTable("Ingredients");
-=======
             modelBuilder.Entity("FreeYourFridge.API.Models.DailyMeal", b =>
                 {
                     b.Property<Guid>("LocalId")
@@ -109,7 +60,63 @@ namespace FreeYourFridge.API.Migrations
                     b.HasKey("LocalId");
 
                     b.ToTable("DailyMeals");
->>>>>>> origin/dev:FreeYourFridge.API/Migrations/20201001181352_CreatedByDailyMeail.Designer.cs
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.Fridge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Fridges");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.Ingredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("REAL");
+
+                    b.Property<int?>("FridgeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SpoonacularId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FridgeId");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.ListOfIngredients", b =>
+                {
+                    b.Property<string>("originalName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("originalName");
+
+                    b.ToTable("ListOfIngredients");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
@@ -130,28 +137,6 @@ namespace FreeYourFridge.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Meals");
-                });
-
-            modelBuilder.Entity("FreeYourFridge.API.Models.Photo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UrlOfPhoto")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.ToDoItem", b =>
@@ -246,7 +231,6 @@ namespace FreeYourFridge.API.Migrations
                     b.ToTable("UsersDetails");
                 });
 
-<<<<<<< HEAD:FreeYourFridge.API/Migrations/20200924111645_initialCommit.Designer.cs
             modelBuilder.Entity("FreeYourFridge.API.Models.Fridge", b =>
                 {
                     b.HasOne("FreeYourFridge.API.Models.User", "user")
@@ -261,13 +245,6 @@ namespace FreeYourFridge.API.Migrations
                     b.HasOne("FreeYourFridge.API.Models.Fridge", "Fridge")
                         .WithMany("ListIgredients")
                         .HasForeignKey("FridgeId");
-=======
-            modelBuilder.Entity("FreeYourFridge.API.Models.Photo", b =>
-                {
-                    b.HasOne("FreeYourFridge.API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
->>>>>>> origin/dev:FreeYourFridge.API/Migrations/20201001181352_CreatedByDailyMeail.Designer.cs
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.UserDetails", b =>
