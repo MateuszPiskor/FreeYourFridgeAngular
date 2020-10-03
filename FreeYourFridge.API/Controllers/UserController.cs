@@ -49,7 +49,6 @@ namespace FreeYourFridge.API.Controllers
         {
             if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) 
                 return Unauthorized();
-
             var userFromRepo = await _repo.GetUserDetail(id);
             if (userFromRepo==null)
             {

@@ -22,6 +22,7 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<Usedingredient, UsedingredientDto>();
             CreateMap<Nutrition, NutriotionForDetailDto>();
             CreateMap<ToDoItemToAddDto, ToDoItem>();
+            CreateMap<Fridge, FridgeDTO>();
             CreateMap<ToDoItem, ToDoItemToListDto>().ForMember(
                         dest => dest.SpoonacularId,
                         opt => opt.MapFrom(src => src.SpoonacularId));
