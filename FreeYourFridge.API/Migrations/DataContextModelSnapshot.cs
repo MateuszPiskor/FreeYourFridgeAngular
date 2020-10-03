@@ -60,6 +60,35 @@ namespace FreeYourFridge.API.Migrations
                     b.ToTable("DailyMeals");
                 });
 
+            modelBuilder.Entity("FreeYourFridge.API.Models.Favoured", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SpoonacularId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Favoureds");
+                });
+
             modelBuilder.Entity("FreeYourFridge.API.Models.Fridge", b =>
                 {
                     b.Property<int>("Id")
