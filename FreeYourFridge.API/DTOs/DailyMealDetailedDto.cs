@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.DTOs
 {
-    public class DailyMealDetailedDto:DailyMealBasicDto
+    public class DailyMealDetailedDto : DailyMealBasicDto
     {
         public int ReadyInMinute { get; set; }
         //public ICollection<Nutrient> Nutritions { get; set; }
