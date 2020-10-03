@@ -26,6 +26,15 @@ namespace FreeYourFridge.API.Data
                 context.SaveChanges();
             }
         }
+        public static void SeedIngredients(DataContext context)
+        {
+            if (!context.ListOfIngredients.Any())
+            {
+                var ingredientsData = System.IO.File.ReadAllText("Data/listOfIngredients.json");
+                var ingredients = JsonConvert.DeserializeObject<List<ListOfIngredients>>(ingredientsData); 
+                context.SaveChanges();
+            }
+        }
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using( var hmac = new System.Security.Cryptography.HMACSHA512())

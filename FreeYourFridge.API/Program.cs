@@ -18,6 +18,7 @@ namespace FreeYourFridge.API
                 try{
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
+                    Seed.SeedIngredients(context);
                     Seed.SeedUsers(context);
                 }
                 catch(Exception ex){
