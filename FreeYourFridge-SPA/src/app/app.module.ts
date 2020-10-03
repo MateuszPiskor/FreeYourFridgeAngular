@@ -7,6 +7,7 @@ import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
+import { FridgeService } from './_services/fridge.service';
 import { RecipeService } from './_services/recipe.service';
 import { DealMealService } from './_services/dealMeal.service';
 import { ShoppingListService } from './_services/shoppingList.service';
@@ -30,6 +31,7 @@ import { UserService } from './_services/user.service';
 import { FavouredService } from './_services/favoured.service';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import {FridgeResolver} from './_resolvers/fridge.resolver';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
@@ -40,6 +42,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingContentComponent } from './rating-content/rating-content.component';
 import { FavouredListComponent } from './favoured/favoured-list/favoured-list.component';
 import { FavouredCardComponent } from './favoured/favoured-card/favoured-card.component';
+import { AddIngredientComponent } from './addIngredient/addIngredient.component';
+import {IngredientResolver} from './_resolvers/ingredient.resolver';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-card.component';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 
@@ -69,6 +78,7 @@ export function tokenGetter() {
     FavouredListComponent,
     FavouredCardComponent,
     MemberEditComponent,
+    AddIngredientComponent,
     DailyMealCardComponent,
     DailyMealDetailsComponent
   ],
@@ -76,11 +86,14 @@ export function tokenGetter() {
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
     ReactiveFormsModule,
+    ButtonsModule,
+    DropDownsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -90,6 +103,8 @@ export function tokenGetter() {
       },
     }),
     NgbModule,
+    ButtonsModule,
+    InputsModule
   ],
   providers: [
     ErrorInterceptorProvider,
@@ -98,8 +113,11 @@ export function tokenGetter() {
     AuthGuard,
     UserService,
     RecipeService,
+    FridgeService,
     DealMealService,
     MemberEditResolver,
+    FridgeResolver,
+    IngredientResolver,
     Data,
     ShoppingListService,
     PreventUnsavedChanges,

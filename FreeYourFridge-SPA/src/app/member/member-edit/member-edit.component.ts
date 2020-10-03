@@ -14,6 +14,8 @@ import { AuthService } from '../../_services/auth.service';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  activity:ActivityLevel;
+  ActivityLevel = ActivityLevel;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any){
     if(this.editForm.dirty){
@@ -30,9 +32,12 @@ export class MemberEditComponent implements OnInit {
   }
 
   updateUser() {
+    this.user.activityLevel = this.activity;
+    console.log(this.user.activityLevel);
       this.userService.updateUser(this.authService.decodedToken.nameid , this.user).subscribe(next => {
       this.alertify.success('Profile update succesfully');
       this.editForm.reset(this.user);
+      console.log(this.user.activityLevel);
     }, error => {
       this.alertify.error(error);
     });

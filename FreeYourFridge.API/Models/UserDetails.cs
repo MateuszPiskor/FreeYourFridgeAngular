@@ -16,7 +16,8 @@ namespace FreeYourFridge.API.Models
         public int Protein{get;set;}
         public string Description{get;set;}
         public User User{get;set;}
-        
+        public ActivityLevel Level { get; set; }
+
         [ForeignKey("User")]
         public int UserId{get;set;}
 

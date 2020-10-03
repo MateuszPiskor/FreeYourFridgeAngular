@@ -26,6 +26,11 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<ShoppingListItem, ShoppingListItemDto>().ForMember(
                         dest => dest.SpoonacularId,
                         opt => opt.MapFrom(src => src.SpoonacularId));
+            CreateMap<ToDoItemToAddDto, ToDoItem>();
+            CreateMap<Fridge, FridgeDTO>();
+            CreateMap<ToDoItem, ToDoItemToListDto>().ForMember(
+                        dest => dest.SpoonacularId,
+                        opt => opt.MapFrom(src => src.SpoonacularId));
             CreateMap<DailyMeal, DailyMealBasicDto>();
 
             CreateMap<DailyMealToAddDto, DailyMeal>()
@@ -55,7 +60,7 @@ namespace FreeYourFridge.API.Helpers
 
             CreateMap<FavouredDto, Favoured>().ForMember(dest => dest.CreateTime,
                  opt => opt.MapFrom(src => DateTime.Now.ToShortDateString()));
-            CreateMap<FavouredForRemoveDto, Favoured>();
+              CreateMap<FavouredForRemoveDto, Favoured>();
         }
     }
 }

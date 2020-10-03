@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace FreeYourFridge.API
@@ -44,22 +45,17 @@ namespace FreeYourFridge.API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
-            services.AddCors(
-            //    options =>
-            //{
-            //    options.AddPolicy("SPA", builder => builder
-            //        .AllowAnyHeader()
-            //        .AllowAnyMethod()
-            //        .WithOrigins("http://localhost:4200")); 
-            //}
-                );
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddCors();
             services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IFridgeRepository, FridgeRepository>();
             services.AddScoped<IMealRepository, MealRepository>();
             services.AddScoped<IFavouredRepository, FavouredRepository>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
             services.AddScoped<IDailyMealRepository, DailyMealRepository>();
             services.AddScoped<DCICalculator>();

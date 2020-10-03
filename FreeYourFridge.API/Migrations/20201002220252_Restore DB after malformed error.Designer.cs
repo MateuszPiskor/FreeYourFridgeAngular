@@ -9,8 +9,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
+<<<<<<< HEAD:FreeYourFridge.API/Migrations/20201002220252_Restore DB after malformed error.Designer.cs
     [Migration("20201002220252_Restore DB after malformed error")]
     partial class RestoreDBaftermalformederror
+=======
+    [Migration("20201003120316_Initial")]
+    partial class Initial
+>>>>>>> dev:FreeYourFridge.API/Migrations/20201003120316_Initial.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,12 +67,17 @@ namespace FreeYourFridge.API.Migrations
                     b.ToTable("DailyMeals");
                 });
 
+<<<<<<< HEAD:FreeYourFridge.API/Migrations/20201002220252_Restore DB after malformed error.Designer.cs
             modelBuilder.Entity("FreeYourFridge.API.Models.Favoured", b =>
+=======
+            modelBuilder.Entity("FreeYourFridge.API.Models.Fridge", b =>
+>>>>>>> dev:FreeYourFridge.API/Migrations/20201003120316_Initial.Designer.cs
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
+<<<<<<< HEAD:FreeYourFridge.API/Migrations/20201002220252_Restore DB after malformed error.Designer.cs
                     b.Property<string>("CreateTime")
                         .HasColumnType("TEXT");
 
@@ -78,16 +88,42 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Score")
+=======
+                    b.Property<int>("UserId")
+>>>>>>> dev:FreeYourFridge.API/Migrations/20201003120316_Initial.Designer.cs
                         .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Fridges");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.Ingredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("REAL");
+
+                    b.Property<int?>("FridgeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("SpoonacularId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Unit")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
+<<<<<<< HEAD:FreeYourFridge.API/Migrations/20201002220252_Restore DB after malformed error.Designer.cs
                     b.ToTable("Favoureds");
                 });
 
@@ -106,6 +142,41 @@ namespace FreeYourFridge.API.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
+=======
+                    b.HasIndex("FridgeId");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.ListOfIngredients", b =>
+                {
+                    b.Property<string>("originalName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("originalName");
+
+                    b.ToTable("ListOfIngredients");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Grams")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SpoonacularId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+>>>>>>> dev:FreeYourFridge.API/Migrations/20201003120316_Initial.Designer.cs
                     b.HasKey("Id");
 
                     b.ToTable("Meals");
@@ -193,6 +264,9 @@ namespace FreeYourFridge.API.Migrations
                     b.Property<int>("Fats")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Level")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Protein")
                         .HasColumnType("INTEGER");
 
@@ -206,6 +280,25 @@ namespace FreeYourFridge.API.Migrations
                     b.ToTable("UsersDetails");
                 });
 
+<<<<<<< HEAD:FreeYourFridge.API/Migrations/20201002220252_Restore DB after malformed error.Designer.cs
+=======
+            modelBuilder.Entity("FreeYourFridge.API.Models.Fridge", b =>
+                {
+                    b.HasOne("FreeYourFridge.API.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.Ingredient", b =>
+                {
+                    b.HasOne("FreeYourFridge.API.Models.Fridge", "Fridge")
+                        .WithMany("ListIgredients")
+                        .HasForeignKey("FridgeId");
+                });
+
+>>>>>>> dev:FreeYourFridge.API/Migrations/20201003120316_Initial.Designer.cs
             modelBuilder.Entity("FreeYourFridge.API.Models.UserDetails", b =>
                 {
                     b.HasOne("FreeYourFridge.API.Models.User", "User")
