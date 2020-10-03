@@ -11,6 +11,7 @@ namespace FreeYourFridge.API.Data
         public DbSet<ToDoItem> ToDoItems { get; set; }
         public DbSet<Fridge> Fridges { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<ListOfIngredients> ListOfIngredients { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

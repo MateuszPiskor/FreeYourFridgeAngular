@@ -4,6 +4,7 @@ import {Fridge} from 'src/app/_models/fridge';
 import {FridgeService} from '../_services/fridge.service';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyjsService } from '../_services/alertifyjs.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-fridge',
@@ -23,7 +24,7 @@ export class FridgeComponent implements OnInit {
   }
   deleteIngredient(id: number) {
     this.fridgeService.deleteIngredientFromFridge(id).subscribe(next => {
-    this.ngOnInit();
+    window.location.reload();
     this.alertify.success('Ingredient delete succesfully');
     }, error => {
       this.alertify.error(error);
@@ -35,10 +36,16 @@ export class FridgeComponent implements OnInit {
   enableEditMethod(id, amount) {
     var convertAmount = Number(amount);
     this.fridgeService.updateIngredient(id, convertAmount).subscribe(next => {
-      this.ngOnInit();
+      window.location.reload();
       this.alertify.success('Ingredient update succesfully');
       }, error => {
         this.alertify.error(error);
       });
+  }
+  addComponent(){
+    this.router.navigateByUrl('addIngredient');
+  }
+  addIngredient(){
+    console.log();
   }
 }

@@ -43,5 +43,6 @@ namespace FreeYourFridge.API.Data
             updateIngredient.Amount = amount;
             _context.SaveChanges();
         }
+        
     }
 }

@@ -1,4 +1,3 @@
-import {Deserializable} from './deserializable';
 
 export interface IngredientDto  {
   id: number;
@@ -8,9 +7,5 @@ export interface IngredientDto  {
   unit: string;
   fridgeId: number;
 
-  //deserialize(input: any) {
-  //  Object.assign(this, input);
-  //  return this;
- //}
 
 }
