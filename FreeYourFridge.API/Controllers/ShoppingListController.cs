@@ -1,15 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
-using FreeYourFridge.API.DTOs.ToDoItemDto;
+using FreeYourFridge.API.DTOs.ShoppingListItemsDto;
 using FreeYourFridge.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeYourFridge.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
+    [ApiController]
     public class ShoppingListController : ControllerBase
     {
         private readonly IShoppingListRepository _repo;
@@ -22,34 +27,42 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToDoItem([FromBody] ToDoItemToAddDto toDoItemToAddDto)
+        public async Task<IActionResult> AddShoppingListItem([FromBody] ShoppingListItemToAddDto shoppingLitItemToAddDto)
         {
-            if (toDoItemToAddDto != null)
+            if (shoppingLitItemToAddDto != null)
             {
-                ToDoItem toDoItem = _mapper.Map<ToDoItem>(toDoItemToAddDto);
-                toDoItem.IsOnShoppingList = true;
+                ShoppingListItem shoppingListItem = _mapper.Map<ShoppingListItem>(shoppingLitItemToAddDto);
+                shoppingListItem.IsOnShoppingList = true;
+                var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+                shoppingListItem.CreatedBy = int.Parse(userId);
+                _repo.Add<ShoppingListItem>(shoppingListItem);
+                _repo.SaveAll();
 
-                await _repo.AddIngredientAsync(toDoItem);
-                
-                return StatusCode(201, toDoItem);
+                return StatusCode(201);
             }
             Response.StatusCode = 400;
             return Content("Naughty");
         }
 
         [HttpGet]
-        public IEnumerable<ToDoItemToListDto> GetToDoItems()
+        public IEnumerable<ShoppingListItemDto> GetShoopingListItems()
         {
-            IEnumerable<ToDoItem> toDoItem = _repo.GetToDoItems();
-            IEnumerable<ToDoItemToListDto> toDoItemToList = _mapper.Map<IEnumerable<ToDoItemToListDto>>(toDoItem);
-            return toDoItemToList;
+            IEnumerable<ShoppingListItem> ShoppingListItems = _repo.GetShoppingListItems();
+
+            var favouredsFiltered = ShoppingListItems.Where(t =>
+               t.CreatedBy == int.Parse(User.FindFirst(claim =>
+                   claim.Type == ClaimTypes.NameIdentifier).Value));
+            IEnumerable<ShoppingListItemDto> ShoppingListItemToList = _mapper.Map<IEnumerable<ShoppingListItemDto>>(favouredsFiltered);
+            return ShoppingListItemToList;
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteToDoItem(int id)
+        public async Task<IActionResult> DeleteShoppingListItem(int id)
         {
-            if(id != 0){
-                _repo.DeleteToDoItem(id);
+            if (id != 0)
+            {
+                var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+                _repo.DeleteShoppingListItem(id, userId);
                 return Ok();
             }
             return NotFound();

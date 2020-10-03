@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using FreeYourFridge.API.DTOs;
-using FreeYourFridge.API.DTOs.ToDoItemDto;
+using FreeYourFridge.API.DTOs.ShoppingListItemsDto;
 using FreeYourFridge.API.Models;
 
 namespace FreeYourFridge.API.Helpers
@@ -16,11 +17,15 @@ namespace FreeYourFridge.API.Helpers
             CreateMap<UserForUpdateDto ,UserDetails>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserForListDto>();
-            CreateMap<RecipeToList, RecipesToListDto>();
+            CreateMap<RecipeToList, Recipe>();
             CreateMap<RecipeToDetail, RecipeToDetailDto>();
             CreateMap<Missedingredient, MissedingredientDto>();
             CreateMap<Usedingredient, UsedingredientDto>();
             CreateMap<Nutrition, NutriotionForDetailDto>();
+            CreateMap<ShoppingListItemToAddDto, ShoppingListItem>();
+            CreateMap<ShoppingListItem, ShoppingListItemDto>().ForMember(
+                        dest => dest.SpoonacularId,
+                        opt => opt.MapFrom(src => src.SpoonacularId));
             CreateMap<ToDoItemToAddDto, ToDoItem>();
             CreateMap<Fridge, FridgeDTO>();
             CreateMap<ToDoItem, ToDoItemToListDto>().ForMember(
@@ -53,6 +58,9 @@ namespace FreeYourFridge.API.Helpers
                 .ForMember(d => d.properties, o => o.MapFrom(src => src.properties));
 
 
+            CreateMap<FavouredDto, Favoured>().ForMember(dest => dest.CreateTime,
+                 opt => opt.MapFrom(src => DateTime.Now.ToShortDateString()));
+              CreateMap<FavouredForRemoveDto, Favoured>();
         }
     }
 }

@@ -3,7 +3,6 @@ import { RecipeToDetails } from '../../_models/recipeToDetails';
 import { Nutritions } from '../../_models/recipeNutritions';
 import { Instruction } from '../../_models/instruction';
 import { MealDto } from '../../_models/mealDto';
-import { IngredientDto } from '../../_models/ingredientDto';
 import { RecipeIngredients } from '../../_models/ingredient';
 import { RecipeService } from '../../_services/recipe.service';
 import { AlertifyjsService } from '../../_services/alertifyjs.service';
@@ -52,7 +51,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   loadRecipe() {
-    this.recipeService.getRecipe(+this.route.snapshot.params['id']).subscribe(
+    this.recipeService.GetTimeAndScore(+this.route.snapshot.params['id']).subscribe(
       (recipeToDetail: RecipeToDetails) => {
         this.recipeToDetail = recipeToDetail;
       },

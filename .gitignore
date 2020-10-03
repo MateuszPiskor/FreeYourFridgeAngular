@@ -18,7 +18,12 @@ FreeYourFridge.API/FreeYourFridge.db
 FreeYourFridge-SPA/.tajne.txt
 FreeYourFridge-SPA/.tajne.md
 FreeYourFridge.API/Refactoring.md
-<<<<<<< HEAD
 /.DS_Store
-=======
->>>>>>> Merge/feature-user-with-feature-recpices
+FreeYourFridge.API/.vs/FreeYourFridge.API/v16/.suo
+/FreeYourFridge-SPA/.vs
+/FreeYourFridge.API/.vscode
+/FreeYourFridge.API/.DS_Store
+/FreeYourFridge.API/FreeYourFridge.API.xml
+/LocalAPI/bin/Debug/netcoreapp3.1
+/LocalAPI/obj/Release/netcoreapp3.1/LocalAPI.csprojAssemblyReference.cache
+/LocalAPI/obj/Debug/netcoreapp3.1/LocalAPI.MvcApplicationPartsAssemblyInfo.cs

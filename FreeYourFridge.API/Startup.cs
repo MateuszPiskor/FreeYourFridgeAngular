@@ -54,10 +54,12 @@ namespace FreeYourFridge.API
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IFridgeRepository, FridgeRepository>();
             services.AddScoped<IMealRepository, MealRepository>();
+            services.AddScoped<IFavouredRepository, FavouredRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
             services.AddScoped<IDailyMealRepository, DailyMealRepository>();
             services.AddScoped<DCICalculator>();
+            services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

@@ -32,12 +32,8 @@ constructor(private http: HttpClient) {}
     return this.http.get<RecipeToList[]>(this.baseUrl + 'recipe', httpOptions);
   }
 
-  getRecipe(id): Observable<RecipeToDetails> {
+  GetTimeAndScore(id): Observable<RecipeToDetails> {
     return this.http.get<RecipeToDetails>(this.baseUrl + 'recipe/' + id, httpOptions);
-  }
-
-  getWidget(id): Observable<string> {
-    return this.http.get<string>(this.baseUrl + 'widget/' + id, httpOptions);
   }
 
   getInstruction(id): Observable<Instruction[]>{
@@ -47,4 +43,5 @@ constructor(private http: HttpClient) {}
   getIngredients(id): Observable<RecipeIngredients>{
     return this.http.get<RecipeIngredients>(this.baseUrl + 'recipe/' + id + '/ingredients', httpOptions);
   }
+
 }
