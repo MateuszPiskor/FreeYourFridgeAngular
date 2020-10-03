@@ -25,7 +25,7 @@ namespace FreeYourFridge.API.Services
             localDD = (int)(88.362 + (13.397 * (double)user.User.Weight) +
                 (4.799 * (double)user.User.Height) - (5.667 * user.User.Age));
 
-            switch (userDto.Level)
+            switch (userDto.ActivityLevel)
             {
                 case ActivityLevel.Medium: localDD = (int) (localDD * 1.76);
                     break;
