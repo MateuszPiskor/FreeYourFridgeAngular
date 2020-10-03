@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-myProfile',
   templateUrl: './myProfile.component.html',
