@@ -122,6 +122,7 @@ namespace FreeYourFridge.API.Migrations
                     Fats = table.Column<int>(nullable: false),
                     Protein = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    Level = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
