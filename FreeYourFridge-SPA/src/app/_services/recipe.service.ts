@@ -14,7 +14,6 @@ const httpOptions = {
     'Authorization': 'Bearer ' + localStorage.getItem('token'),
     'headers': 'headers',
     'responseType': 'text'
-
   })
 };
 
@@ -48,6 +47,4 @@ constructor(private http: HttpClient) {}
   getIngredients(id): Observable<RecipeIngredients>{
     return this.http.get<RecipeIngredients>(this.baseUrl + 'recipe/' + id + '/ingredients', httpOptions);
   }
-
-
 }

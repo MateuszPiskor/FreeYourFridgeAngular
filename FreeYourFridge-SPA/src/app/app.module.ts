@@ -46,6 +46,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 
+import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-card.component';
+import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -69,8 +71,10 @@ export function tokenGetter(){
     RecipeDetailComponent,
     RecipeInstructionComponent,
     MemberEditComponent,
-      AddIngredientComponent
-   ],
+    AddIngredientComponent,
+    DailyMealCardComponent,
+    DailyMealDetailsComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

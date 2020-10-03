@@ -8,7 +8,7 @@ export class MealDto
   spoonacularId: number;
   Grams: number;
   // title: string;
-  // photoUrl: string;
+  // image: string;
   // instructions: string;
   // summary: string;
   // readyInMinutes: number;

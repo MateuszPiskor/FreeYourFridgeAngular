@@ -18,8 +18,11 @@
             <textarea name="fats" rows="1" class="form-control" [(ngModel)]="user.fats"></textarea>
             <div class="rowUser">protein :</div>
             <textarea name="protein" rows="1" class="form-control" [(ngModel)]="user.protein"></textarea>
-            <div class="rowUser">Description :</div>
-            <textarea name="description" rows="1" class="form-control" [(ngModel)]="user.description"></textarea>
+            <div class="rowUser">Level of activity:</div>
+            <select name="activityLevel" rows="1" class="form-control" [(ngModel)]="user.activityLevel"></select>
+            <option [value]=0>Low</option>
+            <option [value]=1>Medium</option>
+            <option [value]=2>High</option>
         </form>
     </div>
     </div>
@@ -33,6 +36,7 @@
             <div class="rowUser">Height : {{user.height}}</div>
         </div>
         <div class=column>
+            <div class="rowUser">Description : {{user.description}}</div>
             <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-succes btn-block mt-4">SAVE CHANGES</button>
         </div>
     </div>

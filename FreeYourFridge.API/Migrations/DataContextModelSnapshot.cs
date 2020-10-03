@@ -71,6 +71,48 @@ namespace FreeYourFridge.API.Migrations
                     b.HasKey("originalName");
 
                     b.ToTable("ListOfIngredients");
+            modelBuilder.Entity("FreeYourFridge.API.Models.DailyMeal", b =>
+                {
+                    b.Property<Guid>("LocalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Carbs")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Fat")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Grams")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Protein")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("TimeOfLastMeal")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserRemarks")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LocalId");
+
+                    b.ToTable("DailyMeals");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Meal", b =>
@@ -85,9 +127,34 @@ namespace FreeYourFridge.API.Migrations
                     b.Property<int>("SpoonacularId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Meals");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrlOfPhoto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.ToDoItem", b =>

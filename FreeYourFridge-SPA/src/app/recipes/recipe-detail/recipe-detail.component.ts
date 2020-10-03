@@ -14,6 +14,7 @@ import { RecipeToList } from 'src/app/_models/recipeToList';
 import { Router } from '@angular/router';
 import { ShoppingListService } from 'src/app/_services/shoppingList.service';
 import { ToDoItem } from 'src/app/_models/toDoItem';
+import { DailyMealToSend } from '../../_models/dailyMealToSendDto'
 
 @Component({
   selector: 'app-recipe-detail',
@@ -30,6 +31,8 @@ export class RecipeDetailComponent implements OnInit {
   model: any = {};
   mealDto: MealDto;
   text = 'Shop';
+  grams:number;
+  userRemarks:string;
 
   constructor(
     private recipeService: RecipeService,
@@ -94,16 +97,16 @@ export class RecipeDetailComponent implements OnInit {
     const mealDto = new MealDto();
     mealDto.Grams = +meal.grams;
     mealDto.spoonacularId = +meal.spoonacularId;
-    this.dealMeal.addMeal(mealDto).subscribe(
-      () => {
-        this.alertify.success('Meal added');
-      },
-      (error) => {
-        this.alertify.error('Some problem occur');
-        this.model.username = '';
-        this.model.password = '';
-      }
-    );
+    // this.dealMeal.addMeal(mealDto).subscribe(
+    //   () => {
+    //     this.alertify.success('Meal added');
+    //   },
+    //   (error) => {
+    //     this.alertify.error('Some problem occur');
+    //     this.model.username = '';
+    //     this.model.password = '';
+    //   }
+    // );
     this.routeDirection.navigate(['/dailyMeal']);
   }
 
@@ -148,5 +151,28 @@ export class RecipeDetailComponent implements OnInit {
     isRed
       ? this.addIngredientToShoppingList(ingredient)
       : this.removeIngredientFromShoppingList(ingredient);
+  }
+
+//by @afe
+  addDailyMeal(grams){
+    this.dealMeal.addDailyMeal(
+      {
+        grams:this.grams,
+        id:this.recipeToDetail.id,
+        title: this.recipeToList.title,
+        image:this.recipeToList.image,
+        userRemarks:""
+      }).subscribe(
+      value => {
+        this.alertify.success('DailyMeal added');
+        console.log(value);
+      },
+      (error) => {
+        this.alertify.error('Some problem occurs');
+        this.model.username = '';
+        this.model.password = '';
+      },
+    );
+    this.routeDirection.navigate(['/dailymeal']);
   }
 }

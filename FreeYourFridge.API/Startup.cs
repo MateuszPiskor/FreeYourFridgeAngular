@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Text;
 using AutoMapper;
 using FreeYourFridge.API.Data;
+using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.Helpers;
+using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -54,6 +56,8 @@ namespace FreeYourFridge.API
             services.AddScoped<IMealRepository, MealRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
+            services.AddScoped<IDailyMealRepository, DailyMealRepository>();
+            services.AddScoped<DCICalculator>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -106,6 +110,7 @@ namespace FreeYourFridge.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/FreeFridgeSpec/swagger.json", "FreeYourFridgeAPI");
+                c.RoutePrefix = "";
             });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
