@@ -2,7 +2,9 @@
 
 namespace FreeYourFridge.API.ExternalModels
 {
-
+    /// <summary>
+    /// Set of classes receiving responses from Sponnacular
+    /// </summary>
     public class IncomingRecipe
     {
         public bool vegetarian { get; set; }

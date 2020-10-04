@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FreeYourFridge.API.Filters
 {
+    /// <summary>
+    /// Converts DailyMeail from DB with IncomingRecipe from Spoonacular into one object: DailyMealDetailedDto sent to Front
+    /// </summary>
     public class DailMealFilterAttribute : ResultFilterAttribute
     {
         public override async Task OnResultExecutionAsync(ResultExecutingContext context,

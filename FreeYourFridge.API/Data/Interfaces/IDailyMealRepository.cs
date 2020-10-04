@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FreeYourFridge.API.ExternalModels;
 using FreeYourFridge.API.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace FreeYourFridge.API.Data.Interfaces
 {

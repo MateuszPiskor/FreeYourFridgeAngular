@@ -26,6 +26,11 @@ namespace FreeYourFridge.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets list of curreitn daily meals
+        /// </summary>
+        /// <returns></returns>
+
         [HttpGet]
         public async Task<IActionResult> GetDailyMeals()
         {
@@ -36,6 +41,11 @@ namespace FreeYourFridge.API.Controllers
             return Ok(_mapper.Map<List<DailyMealBasicDto>>(mealsFiltered));
         }
 
+        /// <summary>
+        ///  Gets daily meal stored in database
+        /// </summary>
+        /// <param name="id">spoonacular id of the recipe </param>
+        /// <returns>DailyMealBasicDto</returns>
         [HttpGet]
         [Route("{id}", Name = "GetDailyMeal")]
         public async Task<IActionResult> GetSingleDailyMeal(int id)
@@ -46,6 +56,12 @@ namespace FreeYourFridge.API.Controllers
                 : Ok(_mapper.Map<DailyMealBasicDto>(dMeal));
         }
 
+
+        /// <summary>
+        ///  Returns details of daily meal  
+        /// </summary>
+        /// <param name="id"> spoonacular id of the recipe </param>
+        /// <returns>DailyMealDetailsDto</returns>
         [HttpGet("{id}/details")]
         [DailMealFilter]
         public async Task<IActionResult> GetSingleDailyMealDetails(int id)
@@ -66,7 +82,7 @@ namespace FreeYourFridge.API.Controllers
         /// <param name="dailyMealToAddDto"></param>
         /// <returns></returns>
         [HttpPost]
-        //[Consumes("application/json")]
+        [Consumes("application/json")]
 
         public async Task<IActionResult> AddDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
@@ -119,6 +135,10 @@ namespace FreeYourFridge.API.Controllers
         //    return NoContent();
         //}
 
+        /// <summary>
+        /// Clears table during adding the first daily meal  
+        /// </summary>
+        /// <returns>void</returns>
         private async Task CheckTimeInEntityTable()
         {
             var meals = await _repository.GetDailyMealsAsync();
