@@ -7,6 +7,7 @@ using AutoMapper;
 using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Filters;
+using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -80,7 +81,7 @@ namespace FreeYourFridge.API.Controllers
         /// add DailyMeal; called only once after addDailyMeal from recipe-detail-component.ts (Angular)
         /// </summary>
         /// <param name="dailyMealToAddDto"></param>
-        /// <returns></returns>
+        /// <returns>BadRequest or 302 if record exists or calls GetSingleDailyMeal </returns>
         [HttpPost]
         [Consumes("application/json")]
 
@@ -90,19 +91,16 @@ namespace FreeYourFridge.API.Controllers
             var record = await _repository.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (record != null)
             {
-                if (record.Id == dailyMealToAddDto.Id)
-                {
-                    return StatusCode(302);
-                }
-                await CheckTimeInEntityTable();
+                return StatusCode(302);
             }
 
-            CheckTimeInEntityTable();
+            await CheckTimeInEntityTable();
             var dMealToAdd = _mapper.Map<Models.DailyMeal>(dailyMealToAddDto);
             var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
             dMealToAdd.TimeOfLastMeal = DateTime.Now;
             dMealToAdd.CreatedBy = int.Parse(userId);
-            await _repository.AddMeal(dMealToAdd);
+            _repository.AddMeal(dMealToAdd);
+            await _repository.SaveChangesAsync();
             return CreatedAtRoute("GetDailyMeal", new { dMealToAdd.Id }, null);
 
         }
@@ -125,18 +123,13 @@ namespace FreeYourFridge.API.Controllers
             dMeal.UserRemarks = dailyMealToAddDto.UserRemarks;
 
             await _repository.UpdateMeal(dMeal);
+            await _repository.SaveChangesAsync();
             return NoContent();
         }
 
-        //[HttpDelete]
-        //public async Task<ActionResult> ClearDailyMeals()
-        //{
-        //    await _repository.ClearTable();
-        //    return NoContent();
-        //}
 
         /// <summary>
-        /// Clears table during adding the first daily meal  
+        /// Clears table when added the first dailymeal a day
         /// </summary>
         /// <returns>void</returns>
         private async Task CheckTimeInEntityTable()
@@ -144,11 +137,27 @@ namespace FreeYourFridge.API.Controllers
             var meals = await _repository.GetDailyMealsAsync();
             var lastMeal = meals
                 .OrderBy(m => m.TimeOfLastMeal)
-                .FirstOrDefault();
-            if (lastMeal == null)
+                .LastOrDefault();
+            if (lastMeal != null)
+            {
                 if (DateTime.Now.DayOfYear - lastMeal.TimeOfLastMeal.DayOfYear >= 1)
+                {
+                    await ArchiveDailyMeals(meals);
                     await _repository.ClearTable();
-            if (DateTime.Now.DayOfYear - lastMeal.TimeOfLastMeal.DayOfYear >= 1) await _repository.ClearTable();
+                    await _repository.SaveChangesAsync();
+                }
+            }
+        }
+
+        private async Task ArchiveDailyMeals(IEnumerable<DailyMeal> dailyMeals)
+        {
+            foreach (var dailyMeal in dailyMeals)
+            {
+                var dmealToArchive = _mapper.Map<DailyMealToArchive>(dailyMeal);
+                dmealToArchive.DateTimeAddDeailyMeal = DateTime.Now;
+                _repository.AddDailyMealsToArchive(dmealToArchive);
+            }
+            await _repository.SaveChangesAsync();
         }
     }
 }
