@@ -1,8 +1,7 @@
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text;
 using AutoMapper;
 using FreeYourFridge.API.Data;
@@ -44,7 +43,7 @@ namespace FreeYourFridge.API
             services.AddScoped<IMakePartialUrl, UrlMaker>();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMvc(setupAction=>{setupAction.ReturnHttpNotAcceptable = true;}).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(setupAction => { setupAction.ReturnHttpNotAcceptable = true; }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddCors();
@@ -75,9 +74,33 @@ namespace FreeYourFridge.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("FreeFridgeSpec", new OpenApiInfo()
-                { 
-                        Title = "FreeYourFridgeAPI", 
-                        Version = "v1" 
+                {
+                    Title = "FreeYourFridgeAPI",
+                    Version = "v1"
+                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer",
+                    Name = "Authorization"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "Bearer",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
                 });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
@@ -119,7 +142,7 @@ namespace FreeYourFridge.API
             app.UseAuthorization();
             app.UseMvc();
 
-            
+
         }
     }
 }
