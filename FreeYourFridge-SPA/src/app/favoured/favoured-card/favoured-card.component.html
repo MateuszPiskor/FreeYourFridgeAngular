@@ -29,11 +29,12 @@
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ favoured.title }}</h5>
-        <form #f="ngForm" (ngSubmit)="editScore(f.value)" novalidate>
-          <input name="spoonacularId" type="hidden" ngModel="{{ favoured.spoonacularId }}" />
+        <form [formGroup]="editForm" (ngSubmit)="editScore()">
           <div class="input-group">
-            <input class="form-control" name="score" reguired type="text" ngModel />
-            <button class="btn btn-secondary" type="submit">Edit</button>
+            <input class="form-control" type="number" formControlName="score"
+              [ngClass]="{'is-invalid':editForm.get('score').errors&&editForm.get('score').touched}" />
+            <div class="invalid-feedback">Type number: (1-10)</div>
+            <button class="btn btn-secondary" type="submit" [disabled]="!editForm.valid">Edit</button>
           </div>
         </form>
         <p class="card-text">

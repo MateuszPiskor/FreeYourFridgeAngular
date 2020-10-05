@@ -2,6 +2,9 @@
 
 namespace FreeYourFridge.API.Models
 {
+    /// <summary>
+    /// set of classess taking over deserialized objects from ExternalModels
+    /// </summary>
     public class AcceptRecipe
     {
         public bool vegetarian { get; set; }

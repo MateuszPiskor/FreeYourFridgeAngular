@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using Microsoft.EntityFrameworkCore;
 

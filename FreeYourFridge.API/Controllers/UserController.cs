@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Models;
 using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,26 +45,29 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> UpdateUserDetails(int id, [FromBody]UserForUpdateDto userforUpdateDto)
+        public async Task<IActionResult> UpdateUserDetails(int id, [FromBody] UserForUpdateDto userforUpdateDto)
         {
-            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) 
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            var userFromRepo = await _repo.GetUserDetail(id);
-            if (userFromRepo==null)
+            var userFromRepo = await _repo.GetUserDetail(id) ?? new UserDetails
             {
-                return NoContent();
-            }
+                DailyDemand = 0,
+                Carbohydrates = 0,
+                Fats = 0,
+                Protein = 0,
+                Description = "",
+                User = new User(),
+                Level = ActivityLevel.Low,
+                UserId = id
+            };
 
-            var user = await _repo.GetUser(id);
-            userFromRepo.User = user;
-            var dailyCI = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
-            userforUpdateDto.DailyDemand = dailyCI;
+            userFromRepo.User = await _repo.GetUser(id);
+            userforUpdateDto.DailyDemand = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
             _mapper.Map(userforUpdateDto, userFromRepo);
 
-            if(await _repo.SaveAll())
-                return NoContent();
-                
-            throw new Exception($"Updating user with {id} failed on save");  
+            return !await _repo.SaveAll()
+                ? throw new Exception($"Updating user with {id} failed on save")
+                : NoContent();
         }
     }
 }

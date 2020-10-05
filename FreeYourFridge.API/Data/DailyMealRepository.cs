@@ -30,35 +30,33 @@ namespace FreeYourFridge.API.Data
         /// Gets a list of DailyMeals from localDB
         /// </summary>
         /// <returns>a list of DailyMeals</returns>
-        public async Task<IEnumerable<DailyMeal>> GetDailyMealsAsync() => await _context.DailyMeals.ToListAsync();
+        public async Task<IEnumerable<DailyMeal>> GetDailyMealsAsync()
+            => await _context.DailyMeals.ToListAsync();
 
         /// <summary>
         /// Gets one DailyMeal from localDB
         /// </summary>
         /// <param name="id"></param>
         /// <returns>single DailyMeal</returns>
-        public async Task<DailyMeal> GetDailyMealAsync(int id) => await _context.DailyMeals.FirstOrDefaultAsync(m => m.Id == id);
+        public async Task<DailyMeal> GetDailyMealAsync(int id)
+            => await _context.DailyMeals.FirstOrDefaultAsync(m => m.Id == id);
 
         /// <summary>
         /// Add meal to localDB
         /// </summary>
         /// <param name="dailyMeal"></param>
         /// <returns>void</returns>
-        public async Task AddMeal(DailyMeal dailyMeal)
+        public void AddMeal(DailyMeal dailyMeal)
         {
             if (dailyMeal == null)
             {
                 throw new ArgumentNullException(nameof(dailyMeal));
             }
             _context.DailyMeals.Add(dailyMeal);
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateMeal(DailyMeal meal)
-        {
-            _context.DailyMeals.Update(meal);
-            await _context.SaveChangesAsync();
-        }
+            => _context.DailyMeals.Update(meal);
 
         /// <summary>
         /// Removes all elements from the entity "DailyMeals"
@@ -69,7 +67,6 @@ namespace FreeYourFridge.API.Data
         {
             var dmealsToRemove = await _context.DailyMeals.ToListAsync();
             _context.DailyMeals.RemoveRange(dmealsToRemove);
-            await _context.SaveChangesAsync();
         }
 
         /// <summary>
@@ -92,5 +89,11 @@ namespace FreeYourFridge.API.Data
             return JsonConvert.DeserializeObject<IncomingRecipe>(response.Content);
 
         }
+
+        public void AddDailyMealsToArchive(DailyMealToArchive dMealToArchive)
+            => _context.ArchivedDailyMeals.Add(dMealToArchive);
+
+        public async Task<bool> SaveChangesAsync()
+            => await _context.SaveChangesAsync() > 0;
     }
 }

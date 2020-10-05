@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FavouredService } from 'src/app/_services/favoured.service';
 import { AlertifyjsService } from 'src/app/_services/alertifyjs.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-favoured-card',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class FavouredCardComponent implements OnInit {
   listMode: boolean = true;
+  editForm: FormGroup;
+
   @Input()
   favoured: FavouredDto;
 
@@ -25,7 +28,11 @@ export class FavouredCardComponent implements OnInit {
     private _router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.editForm = new FormGroup({
+      score: new FormControl(this.favoured.score, [Validators.required, Validators.min(1), Validators.max(10)])
+    });
+  }
 
   delete(favoured) {
     this.passFavoured.emit(favoured);
@@ -35,9 +42,10 @@ export class FavouredCardComponent implements OnInit {
     this.listMode = false;
   }
 
-  editScore(model) {
-    this.favouredService
-      .editScore(+model.spoonacularId, +model.score)
+  editScore() {
+    if (this.editForm.valid){
+       this.favouredService
+      .editScore(+this.favoured.spoonacularId, this.editForm.controls['score'].value)
       .subscribe(
         () => {
           this.uploaded.emit('complete');
@@ -48,6 +56,21 @@ export class FavouredCardComponent implements OnInit {
           this.alertifyjs.error('Some problem occurs');
         }
       );
+      this.editForm.controls['score'].value
+    }
+    // this.favouredService
+    //   .editScore(+model.spoonacularId, +model.score)
+    //   .subscribe(
+    //     () => {
+    //       this.uploaded.emit('complete');
+    //       this.listMode = true;
+    //       this.alertifyjs.success('Score edited');
+    //     },
+    //     (error) => {
+    //       this.alertifyjs.error('Some problem occurs');
+    //     }
+    //   );
+    // console.log(this.editForm.value);
   }
 
   viewDetail(id) {
