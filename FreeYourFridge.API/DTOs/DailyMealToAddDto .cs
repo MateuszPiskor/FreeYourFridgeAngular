@@ -9,7 +9,9 @@ namespace FreeYourFridge.API.DTOs
         public string Title { get; set; }
         public string Image { get; set; }
         public int Grams { get; set; }
+        public int Calories { get; set; }
+#nullable enable
         public string? UserRemarks { get; set; }
-
+#nullable disable
     }
 }

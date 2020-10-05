@@ -101,6 +101,8 @@ namespace FreeYourFridge.API.Controllers
             var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
             dMealToAdd.TimeOfLastMeal = DateTime.Now;
             dMealToAdd.CreatedBy = int.Parse(userId);
+            dMealToAdd.CaloriesPerPortion =
+                await _calc.CalculaCaloriesPerPortion(dMealToAdd.Id, dMealToAdd.Grams);
             _repoUser.AddMeal(dMealToAdd);
             await _repoUser.SaveChangesAsync();
             await _calc.AdjustDailyDemand(int.Parse(userId));
@@ -125,7 +127,7 @@ namespace FreeYourFridge.API.Controllers
             dMeal.Title = dailyMealToAddDto.Title;
             dMeal.UserRemarks = dailyMealToAddDto.UserRemarks;
 
-            await _repoUser.UpdateMeal(dMeal);
+            _repoUser.UpdateMeal(dMeal);
             await _repoUser.SaveChangesAsync();
             return NoContent();
         }

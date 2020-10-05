@@ -49,11 +49,19 @@ namespace FreeYourFridge.API.Services
             return localDD;
         }
 
+        public async Task<int> CalculaCaloriesPerPortion(int mealId, int grams)
+        {
+            var incomingMeal = await _repoDailyMeal.GetExternalDailyMeal(mealId);
+            int fullportion = incomingMeal.nutrition.weightPerServing.amount;
+            var totalcalories = incomingMeal.nutrition.nutrients.ToList()[0].amount;
+            return Convert.ToInt32((totalcalories * grams) / fullportion);
+        }
+
         public async Task AdjustDailyDemand(int userId)
         {
             var caloriesFromCurrentDM = await _repoDailyMeal.GetDailyMealsAsync();
             var userDetails = await _repoUser.GetUserDetail(userId) ?? throw new ArgumentNullException(nameof(userId));
-            var adjustedDD = userDetails.DailyDemand - caloriesFromCurrentDM.Select(dm => dm.Calories).Sum();
+            var adjustedDD = userDetails.DailyDemand - caloriesFromCurrentDM.ToList().Select(dm => dm.CaloriesPerPortion).Sum();
             userDetails.DailyDemandToRealize = adjustedDD;
             await _repoUser.SaveAll();
         }

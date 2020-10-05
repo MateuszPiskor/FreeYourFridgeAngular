@@ -14,7 +14,6 @@ namespace FreeYourFridge.API.Tests
     {
         private readonly Mock<IDailyMealRepository> repository = new Mock<IDailyMealRepository>();
         private readonly Mock<IMapper> mapper = new Mock<IMapper>();
-        private readonly DailyMealController _sut;
         private readonly DCICalculator _calc;
         private DailyMealController controller
         {
