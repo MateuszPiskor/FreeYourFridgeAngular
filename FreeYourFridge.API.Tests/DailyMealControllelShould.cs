@@ -3,6 +3,7 @@ using AutoMapper;
 using FreeYourFridge.API.Controllers;
 using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -14,9 +15,10 @@ namespace FreeYourFridge.API.Tests
         private readonly Mock<IDailyMealRepository> repository = new Mock<IDailyMealRepository>();
         private readonly Mock<IMapper> mapper = new Mock<IMapper>();
         private readonly DailyMealController _sut;
+        private readonly DCICalculator _calc;
         private DailyMealController controller
         {
-            get => new DailyMealController(repository.Object, mapper.Object);
+            get => new DailyMealController(repository.Object, mapper.Object, _calc);
         }
 
 

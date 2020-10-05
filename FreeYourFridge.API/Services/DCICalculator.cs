@@ -1,4 +1,8 @@
-﻿using FreeYourFridge.API.Data;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using FreeYourFridge.API.Data;
+using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 
@@ -6,11 +10,13 @@ namespace FreeYourFridge.API.Services
 {
     public class DCICalculator
     {
-        private IUserRepository _repository;
+        private readonly IUserRepository _repoUser;
+        private readonly IDailyMealRepository _repoDailyMeal;
 
-        public DCICalculator(IUserRepository repository)
+        public DCICalculator(IUserRepository repository, IDailyMealRepository repoDailyMeal)
         {
-            _repository = repository;
+            _repoUser = repository;
+            _repoDailyMeal = repoDailyMeal;
         }
 
         /// <summary>
@@ -39,7 +45,17 @@ namespace FreeYourFridge.API.Services
                     break;
             }
 
+            localDD = Convert.ToInt32(localDD * 0.95);
             return localDD;
+        }
+
+        public async Task AdjustDailyDemand(int userId)
+        {
+            var caloriesFromCurrentDM = await _repoDailyMeal.GetDailyMealsAsync();
+            var userDetails = await _repoUser.GetUserDetail(userId) ?? throw new ArgumentNullException(nameof(userId));
+            var adjustedDD = userDetails.DailyDemand - caloriesFromCurrentDM.Select(dm => dm.Calories).Sum();
+            userDetails.DailyDemandToRealize = adjustedDD;
+            await _repoUser.SaveAll();
         }
     }
 }
