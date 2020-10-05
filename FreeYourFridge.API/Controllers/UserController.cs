@@ -49,22 +49,31 @@ namespace FreeYourFridge.API.Controllers
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            var userFromRepo = await _repo.GetUserDetail(id) ?? new UserDetails
+            var userFromRepo = await _repo.GetUserDetail(id);
+
+            if (userFromRepo != null)
             {
-                DailyDemand = 0,
-                Carbohydrates = 0,
-                Fats = 0,
-                Protein = 0,
-                Description = "",
-                User = new User(),
-                Level = ActivityLevel.Low,
-                UserId = id
-            };
-
-            userFromRepo.User = await _repo.GetUser(id);
-            userforUpdateDto.DailyDemand = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
-            _mapper.Map(userforUpdateDto, userFromRepo);
-
+                userFromRepo.User = await _repo.GetUser(id);
+                userforUpdateDto.DailyDemand = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
+                _mapper.Map(userforUpdateDto, userFromRepo);
+            }
+            else
+            {
+                userFromRepo = new UserDetails
+                {
+                    DailyDemand = 0,
+                    Carbohydrates = 0,
+                    Fats = 0,
+                    Protein = 0,
+                    Description = "",
+                    User = await _repo.GetUser(id),
+                    Level = ActivityLevel.Low,
+                    UserId = id
+                };
+                userforUpdateDto.DailyDemand = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);
+                _mapper.Map(userforUpdateDto, userFromRepo);
+                _repo.Add(userFromRepo);
+            }
             return !await _repo.SaveAll()
                 ? throw new Exception($"Updating user with {id} failed on save")
                 : NoContent();

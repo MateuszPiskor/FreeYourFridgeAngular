@@ -84,14 +84,13 @@ namespace FreeYourFridge.API.Controllers
         /// <returns>BadRequest or 302 if record exists or calls GetSingleDailyMeal </returns>
         [HttpPost]
         [Consumes("application/json")]
-
         public async Task<IActionResult> AddDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest(dailyMealToAddDto);
             var record = await _repository.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (record != null)
             {
-                return StatusCode(302);
+                return StatusCode(409);
             }
 
             await CheckTimeInEntityTable();
@@ -113,7 +112,7 @@ namespace FreeYourFridge.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest();
 
             var dMeal = await _repository.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (dMeal == null) return BadRequest();

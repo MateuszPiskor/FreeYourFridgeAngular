@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FreeYourFridge.API.DTOs
 {
+    [BindRequired]
     public class DailyMealToAddDto
     {
         public int Id { get; set; }
