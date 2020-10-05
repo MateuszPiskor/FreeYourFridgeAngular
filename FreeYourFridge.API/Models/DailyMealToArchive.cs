@@ -16,7 +16,9 @@ namespace FreeYourFridge.API.Models
         public DateTime TimeOfLastMeal { get; set; }
         public int Id { get; set; }
         public int Grams { get; set; }
+#nullable enable
         public string? UserRemarks { get; set; }
+#nullable disable
         public int Calories { get; set; }
         public int Carbs { get; set; }
         public int Fat { get; set; }

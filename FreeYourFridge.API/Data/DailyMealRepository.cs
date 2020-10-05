@@ -55,7 +55,7 @@ namespace FreeYourFridge.API.Data
             _context.DailyMeals.Add(dailyMeal);
         }
 
-        public async Task UpdateMeal(DailyMeal meal)
+        public void UpdateMeal(DailyMeal meal)
             => _context.DailyMeals.Update(meal);
 
         /// <summary>

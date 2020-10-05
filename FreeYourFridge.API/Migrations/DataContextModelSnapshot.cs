@@ -22,7 +22,7 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Calories")
+                    b.Property<int>("CaloriesPerPortion")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Carbs")
@@ -290,6 +290,9 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("DailyDemand")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DailyDemandToRealize")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")

@@ -1,0 +1,65 @@
+[
+  {
+    "Username": "Keller",
+    "Email": "kellersawyer@talkola.com",
+    "Gender": "male",
+    "Age": 76,
+    "Password": "password",
+    "Weight": 63,
+    "Height": 166
+  },
+  {
+    "Username": "Mitchell",
+    "Email": "mitchellsawyer@talkola.com",
+    "Gender": "male",
+    "Age": 56,
+    "Password": "password",
+    "Weight": 93,
+    "Height": 186
+  },
+  {
+    "Username": "Isabel",
+    "Email": "isabelsawyer@talkola.com",
+    "Gender": "female",
+    "Age": 92,
+    "Password": "password",
+    "Weight": 70,
+    "Height": 160
+  },
+  {
+    "Username": "Lott",
+    "Email": "lottsawyer@talkola.com",
+    "Gender": "male",
+    "Age": 78,
+    "Password": "password",
+    "Weight": 64,
+    "Height": 162
+  },
+  {
+    "Username": "Raquel",
+    "Email": "raquelsawyer@talkola.com",
+    "Gender": "female",
+    "Age": 71,
+    "Password": "password",
+    "Weight": 137,
+    "Height": 180
+  },
+  {
+    "Username": "Conley",
+    "Email": "conleysawyer@talkola.com",
+    "Gender": "male",
+    "Age": 90,
+    "Password": "password",
+    "Weight": 127,
+    "Height": 168
+  },
+  {
+    "Username": "Amber",
+    "Email": "ambersawyer@talkola.com",
+    "Gender": "female",
+    "Age": 52,
+    "Password": "password",
+    "Weight": 88,
+    "Height": 184
+  }
+]
