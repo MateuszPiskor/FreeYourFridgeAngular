@@ -10,6 +10,7 @@ import { AuthService } from '../_services/auth.service';
 import { FridgeService } from '../_services/fridge.service';
 import { IngredientToApi} from '../_models/ingredientToApi';
 import { ListOfIngredients } from '../_models/listOfIngredients';
+import { selectedIndices } from '@progress/kendo-angular-dropdowns/dist/es2015/util';
 
 @Component({
   selector: 'app-addIngredient',
@@ -19,8 +20,8 @@ import { ListOfIngredients } from '../_models/listOfIngredients';
 export class AddIngredientComponent implements OnInit {
   public listOfIngredients: ListOfIngredients;
   public ingredientFromApi: IngredientFromApi;
-  public ingredient: IngredientFromApi;
-  SelIngredientName: string = "";
+  public ingredientId: number;
+  public SelIngredientName = 0;
   units: Units[] = [];
   public ingredientToApi: IngredientToApi = {
     id: 0,
@@ -32,10 +33,10 @@ export class AddIngredientComponent implements OnInit {
 
    }
   FillUnits(){
-    this.ingredient = this.ingredientFromApi[this.SelIngredientName];
-    console.log(this.ingredient.originalName);
-    this.fridgeService.getUnitsFromApi(this.ingredient.id).subscribe(data => {
-      this.ingredientFromApi = data['ingredientUnits'];
+    this.ingredientId = Number(this.SelIngredientName);
+    this.fridgeService.getUnitsFromApi(this.ingredientId).subscribe(data => {
+    this.ingredientFromApi = data;
+    this.units = this.ingredientFromApi.possibleUnits;
     });
   }
 
@@ -46,8 +47,10 @@ export class AddIngredientComponent implements OnInit {
   }
 
   addIngredient(){
-
+    this.ingredientToApi.id = this.SelIngredientName;
+    this.ingredientToApi.originalName = this.ingredientFromApi.originalName;
     this.fridgeService.addNewIngredient(this.authService.decodedToken.nameid, this.ingredientToApi);
+    window.location.reload();
   }
 
 }

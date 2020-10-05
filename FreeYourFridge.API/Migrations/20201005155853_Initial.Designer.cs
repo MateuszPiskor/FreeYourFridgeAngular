@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201004083244_Initial")]
+    [Migration("20201005155853_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Calories")
+                    b.Property<int>("CaloriesPerPortion")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Carbs")
@@ -60,6 +60,56 @@ namespace FreeYourFridge.API.Migrations
                     b.HasKey("LocalId");
 
                     b.ToTable("DailyMeals");
+                });
+
+            modelBuilder.Entity("FreeYourFridge.API.Models.DailyMealToArchive", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Carbs")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateTimeAddDeailyMeal")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Fat")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Grams")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("LocalId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Protein")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("TimeOfLastMeal")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserRemarks")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Guid");
+
+                    b.ToTable("ArchivedDailyMeals");
                 });
 
             modelBuilder.Entity("FreeYourFridge.API.Models.Favoured", b =>
@@ -242,6 +292,9 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("DailyDemand")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DailyDemandToRealize")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")

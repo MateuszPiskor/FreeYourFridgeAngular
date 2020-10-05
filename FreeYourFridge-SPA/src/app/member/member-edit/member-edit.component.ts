@@ -34,7 +34,7 @@ export class MemberEditComponent implements OnInit {
   updateUser() {
     this.user.activityLevel = this.activity;
     console.log(this.user.activityLevel);
-      this.userService.updateUser(this.authService.decodedToken.nameid , this.user).subscribe(next => {
+    this.userService.updateUser(this.authService.decodedToken.nameid , this.user).subscribe(next => {
       this.alertify.success('Profile update succesfully');
       this.editForm.reset(this.user);
       console.log(this.user.activityLevel);
