@@ -5,3 +5,4 @@ export interface IngredientToApi {
   amount: number;
   unit: string;
 }
+
