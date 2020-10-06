@@ -39,12 +39,8 @@ namespace FreeYourFridge.API.Controllers
         [HttpPost("addIngredient/{id}")]
         public async Task<ActionResult> AddItemToFridge(int id, [FromBody]Ingredient newIgredient)
         {
-            var fridge = await _repo.GetFridge(id);
-            var newIngredientsToAdd = _mapper.Map<Ingredient>(newIgredient);
-            newIngredientsToAdd.FridgeId = fridge.Id;
-            newIngredientsToAdd.Fridge = fridge;
-            _repo.Add(newIngredientsToAdd);
-            await _repo.SaveAll();
+            Fridge fridge = await _repo.GetFridge(id);
+            _ingredientRepo.Add(newIgredient, fridge);
             return Ok();
         }
 

@@ -48,8 +48,12 @@ export class AddIngredientComponent implements OnInit {
 
   addIngredient(){
     this.ingredientToApi.id = this.SelIngredientName;
-    this.ingredientToApi.originalName = this.ingredientFromApi.originalName;
-    this.fridgeService.addNewIngredient(this.authService.decodedToken.nameid, this.ingredientToApi);
+    this.ingredientToApi.Name = this.ingredientFromApi.originalName;
+    this.fridgeService.addNewIngredient(this.authService.decodedToken.nameid, this.ingredientToApi).subscribe(next => {
+      this.alertify.success('Ingredient add succesfully');
+    }, error => {
+      this.alertify.error(error);
+    });
     window.location.reload();
   }
 
