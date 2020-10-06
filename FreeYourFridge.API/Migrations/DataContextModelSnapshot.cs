@@ -185,13 +185,14 @@ namespace FreeYourFridge.API.Migrations
 
             modelBuilder.Entity("FreeYourFridge.API.Models.ListOfIngredients", b =>
                 {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("originalName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("id")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("originalName");
+                    b.HasKey("id");
 
                     b.ToTable("ListOfIngredients");
                 });

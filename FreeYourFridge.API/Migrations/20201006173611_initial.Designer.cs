@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201005145949_Init")]
-    partial class Init
+    [Migration("20201006173611_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -187,13 +187,14 @@ namespace FreeYourFridge.API.Migrations
 
             modelBuilder.Entity("FreeYourFridge.API.Models.ListOfIngredients", b =>
                 {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("originalName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("id")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("originalName");
+                    b.HasKey("id");
 
                     b.ToTable("ListOfIngredients");
                 });
