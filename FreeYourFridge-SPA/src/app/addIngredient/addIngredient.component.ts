@@ -19,13 +19,14 @@ import { selectedIndices } from '@progress/kendo-angular-dropdowns/dist/es2015/u
 })
 export class AddIngredientComponent implements OnInit {
   public listOfIngredients: ListOfIngredients;
+  public sortlistOfIngredients: ListOfIngredients;
   public ingredientFromApi: IngredientFromApi;
   public ingredientId: number;
   public SelIngredientName = 0;
   units: Units[] = [];
   public ingredientToApi: IngredientToApi = {
     id: 0,
-    originalName: '',
+    Name: '',
     amount: 0,
     unit: 'g'
   };
@@ -43,6 +44,9 @@ export class AddIngredientComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data =>{
       this.listOfIngredients = data['ingredient'];
+      this.listOfIngredients.sort(function(a,b){
+        return a.originalName.localeCompare(b.originalName);
+      });
     });
   }
 

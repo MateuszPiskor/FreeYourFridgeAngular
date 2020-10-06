@@ -30,8 +30,12 @@ namespace FreeYourFridge.API.Data
         {
             if (!context.ListOfIngredients.Any())
             {
-                var ingredientsData = System.IO.File.ReadAllText("Data/listOfIngredients.json");
+                var ingredientsData = System.IO.File.ReadAllText("Data/ingredient.json");
                 var ingredients = JsonConvert.DeserializeObject<List<ListOfIngredients>>(ingredientsData); 
+                foreach (var ingredient in ingredients)
+                {
+                    context.ListOfIngredients.Add(ingredient);
+                }
                 context.SaveChanges();
             }
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreeYourFridge.API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,12 +74,13 @@ namespace FreeYourFridge.API.Migrations
                 name: "ListOfIngredients",
                 columns: table => new
                 {
-                    originalName = table.Column<string>(nullable: false),
                     id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    originalName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ListOfIngredients", x => x.originalName);
+                    table.PrimaryKey("PK_ListOfIngredients", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
