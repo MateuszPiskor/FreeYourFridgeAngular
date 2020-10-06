@@ -20,6 +20,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FridgeComponent } from './fridge/fridge.component';
 import { MyProfileComponent } from './member/myProfile/myProfile.component';
 import { ShoppingListComponent } from './shoppingList/shoppingList.component';
@@ -51,6 +52,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-card.component';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
+import { FavouredListResolver } from './_resolvers/favoured-list.resolver';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -102,6 +105,7 @@ export function tokenGetter() {
         disallowedRoutes: ['localhost:5000/api/auth'],
       },
     }),
+    PaginationModule.forRoot(),
     NgbModule,
     ButtonsModule,
     InputsModule
@@ -123,6 +127,7 @@ export function tokenGetter() {
     PreventUnsavedChanges,
     ReactiveFormsModule,
     FavouredService,
+    FavouredListResolver
   ],
   bootstrap: [AppComponent],
   entryComponents: [RatingContentComponent],

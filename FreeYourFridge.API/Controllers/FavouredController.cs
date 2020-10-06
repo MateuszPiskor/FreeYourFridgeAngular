@@ -8,6 +8,7 @@ using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using FreeYourFridge.API.Helpers;
 
 namespace FreeYourFridge.API.Controllers
 {
@@ -39,15 +40,28 @@ namespace FreeYourFridge.API.Controllers
             }
             return BadRequest();
         }
+        
+        //[HttpGet]
+        //public async Task<IActionResult> GetFavoureds()
+        //{
+        //    IEnumerable<Favoured> favoureds = await _repo.GetFavoureds();
+        //    var favouredsFiltered = favoureds.Where(f =>
+        //        f.CreatedBy == int.Parse(User.FindFirst(claim =>
+        //           claim.Type == ClaimTypes.NameIdentifier).Value));
+        //    return Ok(favouredsFiltered);
+        //}
 
         [HttpGet]
-        public async Task<IActionResult> GetFavoureds()
+        public async Task<IActionResult> GetFavoureds([FromQuery] UserParams userParams)
         {
-            IEnumerable<Favoured> favoureds = await _repo.GetFavoureds();
-            var favouredsFiltered = favoureds.Where(f =>
-                f.CreatedBy == int.Parse(User.FindFirst(claim =>
-                   claim.Type == ClaimTypes.NameIdentifier).Value));
-            return Ok(favouredsFiltered);
+            PagedList<Favoured> favoureds = await _repo.GetFavoureds(userParams);
+
+            //var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(favoureds);
+
+            Response.AddPagination(favoureds.CurrentPage, favoureds.PageSize, favoureds.TotalCount, favoureds.TotalPages);
+
+
+            return Ok(favoureds);
         }
 
         [HttpDelete("{id}")]

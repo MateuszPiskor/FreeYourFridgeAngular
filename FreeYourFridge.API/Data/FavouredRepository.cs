@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -28,12 +28,18 @@ namespace FreeYourFridge.API.Data
             return favoured;
         }
 
-        public async Task<IEnumerable<Favoured>> GetFavoureds()
-        {
-            return await _context.Favoureds.ToListAsync();
-        }
+        //public async Task<IEnumerable<Favoured>> GetFavoureds()
+        //{
+        //    return await _context.Favoureds.ToListAsync();
+        //}
 
-        public async Task<string> GetRecipesByIds(string idsString)
+       public async Task<PagedList<Favoured>> GetFavoureds(UserParams userParams)
+        {
+            var favoureds = _context.Favoureds;
+
+            return await PagedList<Favoured>.CreateListAsync(favoureds, userParams.PageNumber, userParams.PageSize);
+        }
+            public async Task<string> GetRecipesByIds(string idsString)
         {
             RestClient client = new RestClient($"{_baseUrl}informationBulk?{_apiKey}&ids={idsString}");
             RestRequest request = new RestRequest(Method.GET);

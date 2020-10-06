@@ -58,19 +58,6 @@ export class FavouredCardComponent implements OnInit {
       );
       this.editForm.controls['score'].value
     }
-    // this.favouredService
-    //   .editScore(+model.spoonacularId, +model.score)
-    //   .subscribe(
-    //     () => {
-    //       this.uploaded.emit('complete');
-    //       this.listMode = true;
-    //       this.alertifyjs.success('Score edited');
-    //     },
-    //     (error) => {
-    //       this.alertifyjs.error('Some problem occurs');
-    //     }
-    //   );
-    // console.log(this.editForm.value);
   }
 
   viewDetail(id) {
