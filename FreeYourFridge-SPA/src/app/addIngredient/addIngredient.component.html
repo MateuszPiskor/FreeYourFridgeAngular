@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-md-12">
                   <select name="originalName" [(ngModel)]="SelIngredientName" (change)="FillUnits();" class="form-control">
-                    <option [value]="SelIngredientName">Select Ingredient</option>
+                    <option>Select Ingredient</option>
                     <option *ngFor="let ingredientName of listOfIngredients" [value]="ingredientName['id']">{{ingredientName['originalName']}}</option>
                 </select>
             </div>
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-md-12">
                   <select name="unit" [(ngModel)]="ingredientToApi.unit" class="form-control">
-                    <option [value]="ingredientToApi.unit">Select unit</option>
+                    <option>Select unit</option>
                     <option *ngFor="let unit of units" [value]="unit">{{unit}}</option>
                 </select>
             </div>
