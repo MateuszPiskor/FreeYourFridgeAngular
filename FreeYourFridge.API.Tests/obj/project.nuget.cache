@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V/ihvzgWnk/RUxDD8bVJHEVvuoMVAMzFG64Yx10lYeYSaWTKTWZJr6AKk+DCizxtvQ1gnVknAMm9f1rlLJTibQ==",
+  "dgSpecHash": "g3ohZB1NByO2GXx0rT7EY1RSnKeZuU5oqZmPFFgaKyO5nTx0LiCiOU6bxd3YxQy0t+tk60bPpOuiWYDeAfcRpg==",
   "success": true,
-  "projectFilePath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAngular\\FreeYourFridge.API.Tests\\FreeYourFridge.API.Tests.csproj",
+  "projectFilePath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API.Tests\\FreeYourFridge.API.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.1\\automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
