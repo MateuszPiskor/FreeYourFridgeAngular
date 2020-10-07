@@ -153,3 +153,15 @@ F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcorea
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.AssemblyInfoInputs.cache
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.AssemblyInfo.cs
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.csproj.CopyComplete
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\testhost.exe
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.deps.json
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.runtimeconfig.json
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.runtimeconfig.dev.json
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.pdb
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\Castle.Core.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\Moq.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.csproj.CoreCompileInputs.cache
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.pdb
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.genruntimeconfig.cache
