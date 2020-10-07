@@ -74,5 +74,10 @@ namespace FreeYourFridge.API.Data
             }
             return false;
         }
+
+        public async Task<Favoured> GetFavoured(int id, int userId)
+        {
+            return await _context.Favoureds.FirstOrDefaultAsync(f => f.SpoonacularId == id && f.CreatedBy == userId);
+        }
     }
 }
