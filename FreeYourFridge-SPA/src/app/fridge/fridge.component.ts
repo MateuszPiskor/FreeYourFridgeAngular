@@ -45,7 +45,4 @@ export class FridgeComponent implements OnInit {
   addComponent(){
     this.router.navigateByUrl('addIngredient');
   }
-  addIngredient(){
-    console.log();
-  }
 }

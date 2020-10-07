@@ -18,6 +18,12 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.SpoonacularApiKey.txt
+*.FreeYourFridge.db
+*.response.json
+
+# User-specific catalogues
+./Migrations
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

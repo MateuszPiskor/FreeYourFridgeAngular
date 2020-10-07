@@ -11,7 +11,8 @@ export interface User {
     fats: number;
     protein: number;
     description: string;
-    activityLevel:ActivityLevel
+    activityLevel:ActivityLevel;
+    dailyDemandToRealize:number;
 }
 
 export enum ActivityLevel

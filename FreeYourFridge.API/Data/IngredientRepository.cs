@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -51,6 +52,23 @@ namespace FreeYourFridge.API.Data
     {
         var ListOfIngredients = _context.ListOfIngredients.ToList();
         return ListOfIngredients;
+    }
+    public async void Add(Ingredient newIngredient, Fridge fridge)
+    {
+        var newIngredientToAdd = new Ingredient(){
+            SpoonacularId = newIngredient.Id,
+            Amount = newIngredient.Amount,
+            Name = newIngredient.Name,
+            Fridge = fridge,
+            FridgeId =fridge.Id,
+            Unit = newIngredient.Unit
+        };
+        _context.Add( newIngredientToAdd);
+        await this.SaveAll();
+    }
+    public async Task<bool> SaveAll()
+    {
+        return await _context.SaveChangesAsync() > 0;
     }
 
     }
