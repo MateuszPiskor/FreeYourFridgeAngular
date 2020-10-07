@@ -28,16 +28,12 @@ namespace FreeYourFridge.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFavaoured([FromBody] FavouredForCreationDto favaouredForCreationDto)
         {
-            if (favaouredForCreationDto != null)
-            {
                 Favoured favoured = _mapper.Map<Favoured>(favaouredForCreationDto);
                 var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
                 favoured.CreatedBy = int.Parse(userId);
                 _repo.Add<Favoured>(favoured);
                 var saveResult = _repo.SaveAll();
                 return StatusCode(201);
-            }
-            return BadRequest();
         }
 
         [HttpGet]
