@@ -434,3 +434,8 @@ F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.T
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\obj\Debug\netcoreapp3.1\FreeYourFridge.API.Tests.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\obj\Debug\netcoreapp3.1\FreeYourFridge.API.Tests.pdb
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\obj\Debug\netcoreapp3.1\FreeYourFridge.API.Tests.genruntimeconfig.cache
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\EntityFrameworkCore3Mock.Moq.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\EntityFrameworkCore3Mock.Shared.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\MockQueryable.Core.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\MockQueryable.EntityFrameworkCore.dll
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\MockQueryable.Moq.dll
