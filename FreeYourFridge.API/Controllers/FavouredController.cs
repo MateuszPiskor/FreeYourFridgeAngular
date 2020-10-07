@@ -26,11 +26,11 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFavaoured([FromBody] FavouredDto favaouredDto)
+        public async Task<IActionResult> AddFavaoured([FromBody] FavouredForCreationDto favaouredForCreationDto)
         {
-            if (favaouredDto != null)
+            if (favaouredForCreationDto != null)
             {
-                Favoured favoured = _mapper.Map<Favoured>(favaouredDto);
+                Favoured favoured = _mapper.Map<Favoured>(favaouredForCreationDto);
                 var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
                 favoured.CreatedBy = int.Parse(userId);
                 _repo.Add<Favoured>(favoured);
