@@ -82,19 +82,5 @@ namespace FreeYourFridge.API.Tests
         }
 
 
-        //public async Task Can_GetSingle()
-        //{
-        //    var mockSet = new Mock<DbSet<DailyMeal>>();
-        //    mockSet = MockDbProvider<DailyMeal>.ProvideMockDb(data, mockSet);
-
-        //    var mockCtx = new Mock<DataContext>(options);
-        //    mockCtx.SetupGet(ctx => ctx.DailyMeals).Returns(mockSet.Object);
-
-        //    var repository = new DailyMealRepository(mockCtx.Object);
-        //    var dmeal = await repository.GetDailyMealAsync(2) as DailyMeal;
-
-        //    Assert.Equal("title2", dmeal.Title);
-
-        //}
     }
 }

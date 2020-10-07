@@ -15,14 +15,6 @@ namespace FreeYourFridge.API.Tests.TestAsyncProvider
             CancellationToken cancellationToken = new CancellationToken()
             ) => new AsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
 
-        //public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = new CancellationToken())
-        //{
-        //    return Task.FromResult(Execute<TResult>(expression));
-        //    //throw new NotImplementedException();
-        //}
-
-        //public TResult Execute<TResult>(Expression expression)
-        //        => _inner.Execute<TResult>(expression);
     }
 
     public class AsyncEnumerator<T> : IAsyncEnumerator<T>
