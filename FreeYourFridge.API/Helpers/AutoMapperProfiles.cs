@@ -56,8 +56,10 @@ namespace FreeYourFridge.API.Helpers
 
 
             CreateMap<FavouredDto, Favoured>().ForMember(dest => dest.CreateTime,
-                 opt => opt.MapFrom(src => DateTime.Now.ToShortDateString()));
-            CreateMap<FavouredForRemoveDto, Favoured>();
+                 opt => opt.MapFrom(src => DateTime.Now));
+
+            CreateMap<Favoured, FavouredDto>().ForMember(dest => dest.CreateTime,
+                 opt => opt.MapFrom(src => src.CreateTime.ToShortDateString()));
 
             CreateMap<DailyMeal, DailyMealToArchive>();
         }

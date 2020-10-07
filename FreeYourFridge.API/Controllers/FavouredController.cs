@@ -47,24 +47,30 @@ namespace FreeYourFridge.API.Controllers
             var favouredsFiltered = favoureds.Where(f =>
                 f.CreatedBy == int.Parse(User.FindFirst(claim =>
                    claim.Type == ClaimTypes.NameIdentifier).Value));
-            return Ok(favouredsFiltered);
+
+            return Ok(_mapper.Map<IEnumerable<FavouredDto>>(favouredsFiltered));
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFavoured(int id)
         {
-            if (id != 0)
+            if (!await _repo.FavouredExist(id))
             {
-                var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
-                _repo.Delete(id, userId);
-                return Ok();
+                return NotFound();
             }
-            return NotFound();
+            ;
+            var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            _repo.DeleteFavoured(id, userId);
+            return NoContent();
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> EditFavoured(int id, [FromBody] int score)
         {
+            if (!await _repo.FavouredExist(id))
+            {
+                return NotFound();
+            }
             var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
             _repo.UpdateFavaoured(id, score, userId);
             return NoContent();
