@@ -34,7 +34,6 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.8",
           "Microsoft.IdentityModel.Tokens": "6.7.1",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.10.9",
-          "MockQueryable.Moq": "3.1.3",
           "RestSharp": "106.11.7",
           "Swashbuckle.AspNetCore": "5.6.3",
           "System.IdentityModel.Tokens.Jwt": "6.7.1",
@@ -839,47 +838,6 @@
           "Microsoft.NETCore.Platforms": "1.1.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
-        }
-      },
-      "MockQueryable.Core/3.1.3": {
-        "runtime": {
-          "lib/netstandard2.0/MockQueryable.Core.dll": {
-            "assemblyVersion": "3.1.3.0",
-            "fileVersion": "3.1.3.0"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/MockQueryable.Core.dll": {}
-        }
-      },
-      "MockQueryable.EntityFrameworkCore/3.1.3": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "3.1.8",
-          "MockQueryable.Core": "3.1.3"
-        },
-        "runtime": {
-          "lib/netstandard2.0/MockQueryable.EntityFrameworkCore.dll": {
-            "assemblyVersion": "3.1.3.0",
-            "fileVersion": "3.1.3.0"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/MockQueryable.EntityFrameworkCore.dll": {}
-        }
-      },
-      "MockQueryable.Moq/3.1.3": {
-        "dependencies": {
-          "MockQueryable.EntityFrameworkCore": "3.1.3",
-          "Moq": "4.13.1"
-        },
-        "runtime": {
-          "lib/netstandard2.0/MockQueryable.Moq.dll": {
-            "assemblyVersion": "3.1.3.0",
-            "fileVersion": "3.1.3.0"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/MockQueryable.Moq.dll": {}
         }
       },
       "Moq/4.13.1": {
@@ -3787,27 +3745,6 @@
       "sha512": "sha512-9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "path": "microsoft.win32.primitives/4.3.0",
       "hashPath": "microsoft.win32.primitives.4.3.0.nupkg.sha512"
-    },
-    "MockQueryable.Core/3.1.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-77umsr96u6nT/a+1G0U+jToVTl/jaMddBv+W4X8yu8/pj6HGBdc8j/aCkXCmiJuob6mM10gptGq/x5GO/eIXFg==",
-      "path": "mockqueryable.core/3.1.3",
-      "hashPath": "mockqueryable.core.3.1.3.nupkg.sha512"
-    },
-    "MockQueryable.EntityFrameworkCore/3.1.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3KNpNttlxMtFQVdk82lrefxKiZ5lKNVVuDQdqnJZDTMZ1LlalDAnuP2kkXswCb7eAy5a/UEZgo4D9iVPVhLPfQ==",
-      "path": "mockqueryable.entityframeworkcore/3.1.3",
-      "hashPath": "mockqueryable.entityframeworkcore.3.1.3.nupkg.sha512"
-    },
-    "MockQueryable.Moq/3.1.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-7E+EIAJ0N20DBmwW6a8456HRaqetj5kI571ZJyGA7kxZx8d7DYsXD+fQ+Fr7YePgFpXkg80ZLqGlCDedff82nA==",
-      "path": "mockqueryable.moq/3.1.3",
-      "hashPath": "mockqueryable.moq.3.1.3.nupkg.sha512"
     },
     "Moq/4.13.1": {
       "type": "package",

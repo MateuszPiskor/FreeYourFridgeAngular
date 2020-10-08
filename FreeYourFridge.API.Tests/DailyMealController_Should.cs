@@ -18,7 +18,7 @@ namespace FreeYourFridge.API.Tests
 {
     public class DailyMealController_Should
     {
-        private readonly DCICalculator _calc;
+        private DCICalculator _calc;
         private DbContextOptions<DataContext> options = new DbContextOptionsBuilder<DataContext>().Options;
 
         [Fact]
@@ -34,21 +34,26 @@ namespace FreeYourFridge.API.Tests
             Assert.Equal((int)System.Net.HttpStatusCode.BadRequest, result.StatusCode);
         }
 
+
         [Fact]
         public async Task Should_ReturnAllDailyMeals()
         {
+            var mapper = new Mock<IMapper>();
+
             var mockSet = new Mock<DbSet<DailyMeal>>();
             mockSet = MockDbProvider<DailyMeal>.ProvideMockDb(DataProvider.DataDailyMeal, mockSet);
+
             var mockCtx = new Mock<DataContext>(options);
             mockCtx.SetupGet(ctx => ctx.DailyMeals).Returns(mockSet.Object);
+
             var repository = new Mock<DailyMealRepository>(mockCtx.Object);
-            var mapper = new Mock<IMapper>();
+
+
             var controller = new DailyMealController(repository.Object, mapper.Object, _calc);
+            //controller.User.AddIdentity(MockDbProvider<DailyMeal>.identity);
 
             Thread.CurrentPrincipal = new ClaimsPrincipal(MockDbProvider<DailyMeal>.identity);
-
             var result = await controller.GetDailyMeals() as ObjectResult;
-
             Assert.NotNull(result.Value);
         }
 

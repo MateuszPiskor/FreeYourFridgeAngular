@@ -769,9 +769,6 @@ F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcore
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CrossPlatEngine.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.Utilities.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.Common.dll
-F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\MockQueryable.Core.dll
-F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\MockQueryable.EntityFrameworkCore.dll
-F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\MockQueryable.Moq.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\Moq.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridge.API.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

@@ -14,23 +14,21 @@ namespace FreeYourFridge.API.Tests.TestAsyncProvider
         public IAsyncEnumerator<T> GetAsyncEnumerator(
             CancellationToken cancellationToken = new CancellationToken()
             ) => new AsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
-
     }
 
     public class AsyncEnumerator<T> : IAsyncEnumerator<T>
     {
         private readonly IEnumerator<T> _enumerator;
+        public T Current
+        {
+            get => _enumerator.Current;
+        }
 
         public AsyncEnumerator(IEnumerator<T> enumerator) =>
             _enumerator = enumerator ?? throw new ArgumentNullException();
 
         public async ValueTask<bool> MoveNextAsync() =>
             await Task.FromResult(_enumerator.MoveNext());
-
-        public T Current
-        {
-            get => _enumerator.Current;
-        }
 
         public async ValueTask DisposeAsync()
             => await Task.FromResult(_enumerator.MoveNext());
