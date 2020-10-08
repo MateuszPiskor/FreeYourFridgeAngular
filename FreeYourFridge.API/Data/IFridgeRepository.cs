@@ -12,5 +12,6 @@ namespace FreeYourFridge.API.Data
         Task<bool> SaveAll();
         Task<Ingredient> GetIngredient(int id);
         void UpdateIngredient(int id, double amount);
+        IEnumerable<Ingredient> GetIngredients(int userId);
     }
 }

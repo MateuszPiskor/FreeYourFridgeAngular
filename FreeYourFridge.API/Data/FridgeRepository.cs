@@ -58,5 +58,10 @@ namespace FreeYourFridge.API.Data
             _context.SaveChanges();
         }
         
+        public IEnumerable<Ingredient> GetIngredients(int userId)
+        {
+            var allIgredients = _context.Ingredients.Where(i => i.FridgeId == userId).ToList();
+            return allIgredients;
+        }
     }
 }

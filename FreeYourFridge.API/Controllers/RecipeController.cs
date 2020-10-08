@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
@@ -17,18 +18,22 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IRecipeRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IFridgeRepository _repoFridge;
 
-        public RecipeController(IRecipeRepository repo, IMapper mapper)
+        public RecipeController(IRecipeRepository repo, IMapper mapper, IFridgeRepository repoFridge)
         {
             _repo = repo;
             _mapper = mapper;
+            _repoFridge = repoFridge;
         }
 
         [HttpGet("")]
         [HttpGet("number={amount}")]
         public async Task<IActionResult> GetRecipes(int amount = 12)
         {
-            List<Ingredient> ingredients = GetIngredientsFromFridgeTest();
+             int userId= int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            IEnumerable<Ingredient> ingredients = _repoFridge.GetIngredients(userId);
+            //List<Ingredient> ingredients = GetIngredientsFromFridgeTest();
 
             string content = await _repo.GetRespone(ingredients, amount);
             if (content == null)
