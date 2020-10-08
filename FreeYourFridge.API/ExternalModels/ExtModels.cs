@@ -72,6 +72,7 @@ namespace FreeYourFridge.API.ExternalModels
 
     public class Extendedingredient
     {
+#nullable enable
         public int? id { get; set; }
         public string? aisle { get; set; }
         public string? image { get; set; }
@@ -83,6 +84,7 @@ namespace FreeYourFridge.API.ExternalModels
         public float? amount { get; set; }
         public string? unit { get; set; }
         public Measures? measures { get; set; }
+#nullable disable
     }
 
     public class Measures

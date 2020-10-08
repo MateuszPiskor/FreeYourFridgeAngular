@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201008081824_Restore db")]
+    [Migration("20201008093512_Restore db")]
     partial class Restoredb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Calories")
+                    b.Property<int>("CaloriesPerPortion")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Carbs")
@@ -187,13 +187,14 @@ namespace FreeYourFridge.API.Migrations
 
             modelBuilder.Entity("FreeYourFridge.API.Models.ListOfIngredients", b =>
                 {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("originalName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("id")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("originalName");
+                    b.HasKey("id");
 
                     b.ToTable("ListOfIngredients");
                 });
@@ -292,6 +293,9 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("DailyDemand")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DailyDemandToRealize")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")

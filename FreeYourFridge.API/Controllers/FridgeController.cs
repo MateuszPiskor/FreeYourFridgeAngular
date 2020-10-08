@@ -14,9 +14,8 @@ namespace FreeYourFridge.API.Controllers
     public class FridgeController : ControllerBase
     {
         private readonly IFridgeRepository _repo;
-        private readonly IIngredientRepository _ingridientRepo;
+        private readonly IIngredientRepository _ingredientRepo;
         private DataContext _data {get;set;}
-        public Ingredient newIgredient{get;set;}
         private readonly IMapper _mapper;
 
         public FridgeController(IFridgeRepository repo, DataContext data, IMapper mapper, IIngredientRepository ingridientRepo)
@@ -24,8 +23,7 @@ namespace FreeYourFridge.API.Controllers
             _repo = repo;
             _mapper = mapper;
             _data = data;
-            newIgredient = new Ingredient();
-            _ingridientRepo = ingridientRepo;
+            _ingredientRepo = ingridientRepo;
         }
         [HttpGet("GetFridgeByUserId/{id}")]
         public async Task<IActionResult> GetFridgeByUserId(int id)
@@ -37,18 +35,12 @@ namespace FreeYourFridge.API.Controllers
             fridge.ListIgredients = allIgredients;
             return Ok(fridge);
         }
-        [HttpPost("AddItemToFridge/{userId}")]
-        public async Task<ActionResult<Ingredient>> AddItemToFridge(int userId, [FromBody]Ingredient newIgredients)
+        
+        [HttpPost("addIngredient/{id}")]
+        public async Task<ActionResult> AddItemToFridge(int id, [FromBody]Ingredient newIgredient)
         {
-            var fridge = await _repo.GetFridge(userId);
-            newIgredient.FridgeId = fridge.Id;
-            newIgredient.Fridge = fridge;
-            newIgredient.Amount = newIgredients.Amount;
-            newIgredient.Name = newIgredients.Name;
-            newIgredient.Unit = newIgredients.Unit;
-            newIgredient.SpoonacularId = 25;
-            _repo.Add(newIgredients);
-            await _repo.SaveAll();
+            Fridge fridge = await _repo.GetFridge(id);
+            _ingredientRepo.Add(newIgredient, fridge);
             return Ok();
         }
 
@@ -69,7 +61,7 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet("GetIngridients")]
         public async Task<IActionResult> GetIngridients()
         {
-            var ListOfIngredients = await _ingridientRepo.GetAllIngredients();
+            var ListOfIngredients = await _ingredientRepo.GetAllIngredients();
             if (ListOfIngredients == null)
                 return NotFound();
                 
@@ -78,7 +70,7 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet("GetUnits/{id}")]
         public async Task<IActionResult> GetIngridientUnits(int id)
         {
-            var ingredientUnits = await _ingridientRepo.GetIngredientsFromAPI(id);
+            var ingredientUnits = await _ingredientRepo.GetIngredientsFromAPI(id);
             if (ingredientUnits == null)
                 return NotFound();
                 

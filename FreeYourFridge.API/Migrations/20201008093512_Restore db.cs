@@ -42,7 +42,7 @@ namespace FreeYourFridge.API.Migrations
                     Id = table.Column<int>(nullable: false),
                     Grams = table.Column<int>(nullable: false),
                     UserRemarks = table.Column<string>(nullable: true),
-                    Calories = table.Column<int>(nullable: false),
+                    CaloriesPerPortion = table.Column<int>(nullable: false),
                     Carbs = table.Column<int>(nullable: false),
                     Fat = table.Column<int>(nullable: false),
                     Protein = table.Column<int>(nullable: false),
@@ -74,12 +74,13 @@ namespace FreeYourFridge.API.Migrations
                 name: "ListOfIngredients",
                 columns: table => new
                 {
-                    originalName = table.Column<string>(nullable: false),
                     id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    originalName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ListOfIngredients", x => x.originalName);
+                    table.PrimaryKey("PK_ListOfIngredients", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,6 +161,7 @@ namespace FreeYourFridge.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DailyDemand = table.Column<int>(nullable: false),
+                    DailyDemandToRealize = table.Column<int>(nullable: false),
                     Carbohydrates = table.Column<int>(nullable: false),
                     Fats = table.Column<int>(nullable: false),
                     Protein = table.Column<int>(nullable: false),

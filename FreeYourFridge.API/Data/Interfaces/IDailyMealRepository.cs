@@ -10,7 +10,7 @@ namespace FreeYourFridge.API.Data.Interfaces
         Task<IEnumerable<DailyMeal>> GetDailyMealsAsync();
         Task<DailyMeal> GetDailyMealAsync(int id);
         void AddMeal(DailyMeal meal);
-        Task UpdateMeal(DailyMeal meal);
+        void UpdateMeal(DailyMeal meal);
         Task ClearTable();
         Task<IncomingRecipe> GetExternalDailyMeal(int id);
         void AddDailyMealsToArchive(DailyMealToArchive dMealToArchive);

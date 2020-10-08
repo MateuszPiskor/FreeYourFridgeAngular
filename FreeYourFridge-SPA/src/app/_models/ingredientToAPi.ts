@@ -1,7 +1,8 @@
 
 export interface IngredientToApi {
   id: number;
-  originalName: string;
+  Name: string;
   amount: number;
   unit: string;
 }
+

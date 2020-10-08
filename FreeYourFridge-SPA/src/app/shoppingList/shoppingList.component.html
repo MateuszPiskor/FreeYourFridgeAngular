@@ -2,8 +2,9 @@
 <ul class="list-group-item">
   <h1 class="mb-3 mt-3">Shopping List</h1>
   <li class="list-group-item d-flex justify-content-between" *ngFor="let toDoItem of toDoItems">{{toDoItem.amount+" "+toDoItem.unit+" "+toDoItem.name}}
-  <button class="btn btn-danger" (click)="deleteTask(toDoItem.spoonacularId)">
-    Remove
-  </button>
+  <div class="buttons">
+    <button class="btn btn-success mr-2" (click)="buyTask(toDoItem)">Add to fridge</button>
+    <button class="btn btn-danger" (click)="deleteTask(toDoItem.spoonacularId)">Remove</button>
+  </div>
 </li>
 </ul>

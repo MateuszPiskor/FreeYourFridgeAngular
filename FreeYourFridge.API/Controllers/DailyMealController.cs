@@ -8,6 +8,7 @@ using FreeYourFridge.API.Data.Interfaces;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Filters;
 using FreeYourFridge.API.Models;
+using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,13 +19,15 @@ namespace FreeYourFridge.API.Controllers
     [Route("api/dailymeal")]
     public class DailyMealController : ControllerBase
     {
-        private readonly IDailyMealRepository _repository;
+        private readonly IDailyMealRepository _repoUser;
         private readonly IMapper _mapper;
+        private readonly DCICalculator _calc;
 
-        public DailyMealController(IDailyMealRepository repository, IMapper mapper)
+        public DailyMealController(IDailyMealRepository repository, IMapper mapper, DCICalculator calc)
         {
-            _repository = repository;
+            _repoUser = repository;
             _mapper = mapper;
+            _calc = calc;
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace FreeYourFridge.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDailyMeals()
         {
-            var meals = await _repository.GetDailyMealsAsync();
+            var meals = await _repoUser.GetDailyMealsAsync();
             var mealsFiltered = meals.Where(dm =>
                 dm.CreatedBy == int.Parse(User.FindFirst(claim =>
                     claim.Type == ClaimTypes.NameIdentifier).Value));
@@ -51,7 +54,7 @@ namespace FreeYourFridge.API.Controllers
         [Route("{id}", Name = "GetDailyMeal")]
         public async Task<IActionResult> GetSingleDailyMeal(int id)
         {
-            var dMeal = await _repository.GetDailyMealAsync(id);
+            var dMeal = await _repoUser.GetDailyMealAsync(id);
             return dMeal == null
                 ? throw new ArgumentNullException(nameof(dMeal))
                 : Ok(_mapper.Map<DailyMealBasicDto>(dMeal));
@@ -67,10 +70,10 @@ namespace FreeYourFridge.API.Controllers
         [DailMealFilter]
         public async Task<IActionResult> GetSingleDailyMealDetails(int id)
         {
-            var dMealLocal = await _repository.GetDailyMealAsync(id);
+            var dMealLocal = await _repoUser.GetDailyMealAsync(id);
             if (dMealLocal != null)
             {
-                var incomMeal = await _repository.GetExternalDailyMeal(id);
+                var incomMeal = await _repoUser.GetExternalDailyMeal(id);
                 (Models.DailyMeal dMeal, ExternalModels.IncomingRecipe iRecipe) = (dMealLocal, incomMeal);
                 return Ok((dMealLocal, incomMeal));
             }
@@ -87,11 +90,11 @@ namespace FreeYourFridge.API.Controllers
 
         public async Task<IActionResult> AddDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            var record = await _repository.GetDailyMealAsync(dailyMealToAddDto.Id);
+            if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest(dailyMealToAddDto);
+            var record = await _repoUser.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (record != null)
             {
-                return StatusCode(302);
+                return StatusCode(409);
             }
 
             await CheckTimeInEntityTable();
@@ -99,8 +102,11 @@ namespace FreeYourFridge.API.Controllers
             var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
             dMealToAdd.TimeOfLastMeal = DateTime.Now;
             dMealToAdd.CreatedBy = int.Parse(userId);
-            _repository.AddMeal(dMealToAdd);
-            await _repository.SaveChangesAsync();
+            dMealToAdd.CaloriesPerPortion =
+                await _calc.CalculaCaloriesPerPortion(dMealToAdd.Id, dMealToAdd.Grams);
+            _repoUser.AddMeal(dMealToAdd);
+            await _repoUser.SaveChangesAsync();
+            await _calc.AdjustDailyDemand(int.Parse(userId));
             return CreatedAtRoute("GetDailyMeal", new { dMealToAdd.Id }, null);
 
         }
@@ -113,17 +119,17 @@ namespace FreeYourFridge.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest();
 
-            var dMeal = await _repository.GetDailyMealAsync(dailyMealToAddDto.Id);
+            var dMeal = await _repoUser.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (dMeal == null) return BadRequest();
 
             dMeal.Grams = dailyMealToAddDto.Grams;
             dMeal.Title = dailyMealToAddDto.Title;
             dMeal.UserRemarks = dailyMealToAddDto.UserRemarks;
 
-            await _repository.UpdateMeal(dMeal);
-            await _repository.SaveChangesAsync();
+            _repoUser.UpdateMeal(dMeal);
+            await _repoUser.SaveChangesAsync();
             return NoContent();
         }
 
@@ -134,7 +140,7 @@ namespace FreeYourFridge.API.Controllers
         /// <returns>void</returns>
         private async Task CheckTimeInEntityTable()
         {
-            var meals = await _repository.GetDailyMealsAsync();
+            var meals = await _repoUser.GetDailyMealsAsync();
             var lastMeal = meals
                 .OrderBy(m => m.TimeOfLastMeal)
                 .LastOrDefault();
@@ -143,8 +149,8 @@ namespace FreeYourFridge.API.Controllers
                 if (DateTime.Now.DayOfYear - lastMeal.TimeOfLastMeal.DayOfYear >= 1)
                 {
                     await ArchiveDailyMeals(meals);
-                    await _repository.ClearTable();
-                    await _repository.SaveChangesAsync();
+                    await _repoUser.ClearTable();
+                    await _repoUser.SaveChangesAsync();
                 }
             }
         }
@@ -155,9 +161,9 @@ namespace FreeYourFridge.API.Controllers
             {
                 var dmealToArchive = _mapper.Map<DailyMealToArchive>(dailyMeal);
                 dmealToArchive.DateTimeAddDeailyMeal = DateTime.Now;
-                _repository.AddDailyMealsToArchive(dmealToArchive);
+                _repoUser.AddDailyMealsToArchive(dmealToArchive);
             }
-            await _repository.SaveChangesAsync();
+            await _repoUser.SaveChangesAsync();
         }
     }
 }
