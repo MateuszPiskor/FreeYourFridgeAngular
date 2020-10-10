@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace FreeYourFridgeAPI.Tests
+namespace FreeYourFridge.API.Tests
 {
     public class DailyMealRepository_Should
     {
@@ -80,7 +80,6 @@ namespace FreeYourFridgeAPI.Tests
             Assert.Equal("title2", dailyMeals.ToList()[1].Title);
             Assert.Equal("title3", dailyMeals.ToList()[2].Title);
         }
-
 
 
     }

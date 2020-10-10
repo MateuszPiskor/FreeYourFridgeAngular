@@ -36,10 +36,6 @@ export class DealMealService {
 
   constructor(private http: HttpClient) {}
 
-  // addMeal(model: any) {
-  //   return this.http.post(this.basedUrl, model);
-  // }
-
   addDailyMeal(dailyMealToSend:DailyMealToSend) {
     return this.http.post<DailyMealToSend>(this.basedUrl2, dailyMealToSend, httpOptions);
   }
@@ -69,21 +65,4 @@ export class DealMealService {
   {
     return this.http.delete<void>(this.basedUrl2+`${dMealId}`);
   }
-
-  // getFlatMeal(dailyMealDetails:DailyMealDetailsDto):DmFlat
-  // {
-  //   return
-  //   {
-  //     id: dailyMealDetails.id;
-  //     title: dailyMealDetails.title;
-  //     image: dailyMealDetails.image;
-  //     grams: dailyMealDetails.grams;
-  //     readyInMinute: dailyMealDetails.readyInMinute;
-  //     userRemarks: dailyMealDetails.userRemarks;
-  //     timeOfLastMeal: dailyMealDetails.timeOfLastMeal;
-  //     nutrients: dailyMealDetails.nutrition.nutrients;
-  //     caloricbreakdown: dailyMealDetails.nutrition.caloricbreakdown;
-  //     steps: dailyMealDetails.instructions[0].steps;
-  //   };
-  // }
 }
