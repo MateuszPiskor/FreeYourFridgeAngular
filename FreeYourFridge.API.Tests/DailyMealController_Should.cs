@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Controllers;
@@ -9,6 +8,7 @@ using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using FreeYourFridge.API.Services;
 using FreeYourFridge.API.Tests.TestAsyncProvider;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -50,11 +50,14 @@ namespace FreeYourFridge.API.Tests
 
 
             var controller = new DailyMealController(repository.Object, mapper.Object, _calc);
-            //controller.User.AddIdentity(MockDbProvider<DailyMeal>.identity);
-
-            Thread.CurrentPrincipal = new ClaimsPrincipal(MockDbProvider<DailyMeal>.identity);
+            controller.ControllerContext = new ControllerContext();
+            controller.ControllerContext.HttpContext = new DefaultHttpContext
+            {
+                User = new ClaimsPrincipal(MockDbProvider<DailyMeal>.identity)
+            };
+            //Thread.CurrentPrincipal = new ClaimsPrincipal(MockDbProvider<DailyMeal>.identity);
             var result = await controller.GetDailyMeals() as ObjectResult;
-            Assert.NotNull(result.Value);
+            Assert.NotNull(result);
         }
 
 
