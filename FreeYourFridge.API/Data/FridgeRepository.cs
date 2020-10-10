@@ -9,14 +9,28 @@ namespace FreeYourFridge.API.Data
     public class FridgeRepository : IFridgeRepository
     {
         private readonly DataContext _context;
-        public FridgeRepository(DataContext context)
+        private readonly IUserRepository _userRepo;
+        public FridgeRepository(DataContext context,  IUserRepository userRepo)
         {
             _context = context;
+            _userRepo = userRepo;
         }
 
         public async Task<Fridge> GetFridge(int id)
         {
+            var userForNewFridge = await _userRepo.GetUser(id);
             var fridge = await _context.Fridges.FirstOrDefaultAsync(fridge => fridge.user.Id == id);
+            if (fridge == null)
+            {
+                var newFridge = new Fridge(){
+                    UserId = id,
+                    user = userForNewFridge
+                };
+                this.Add(newFridge);
+                await this.SaveAll();
+                return newFridge;
+            }
+
             return fridge;
         }
         public async Task<Ingredient> GetIngredient(int id)

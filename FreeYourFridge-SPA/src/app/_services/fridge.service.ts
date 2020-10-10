@@ -42,10 +42,10 @@ getIngredientFromApi():Observable<ListOfIngredientsDto>{
   return this.http.get<ListOfIngredientsDto>(this.baseUrl + 'fridge/GetIngridients', httpOptions);
 }
 getUnitsFromApi(id: number):Observable<IngredientFromApi>{
-  return this.http.get<IngredientFromApi>(this.baseUrl + 'fridge/GetUnits' + id, httpOptions);
+  return this.http.get<IngredientFromApi>(this.baseUrl + 'fridge/GetUnits/' + id, httpOptions);
 }
-addNewIngredient(id: number, newIngredient: IngredientToApi): Observable<IngredientToApi>{
-  return this.http.post<IngredientToApi>(this.baseUrl + 'fridge/AddNewIngredient ' + id, newIngredient);
+addNewIngredient(id, newIngredient): Observable<IngredientToApi>{
+  return this.http.post<IngredientToApi>(this.baseUrl + 'fridge/addIngredient/' + id, newIngredient);
 }
 
 }

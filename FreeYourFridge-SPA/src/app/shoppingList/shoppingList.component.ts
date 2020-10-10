@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AlertifyjsService } from '../_services/alertifyjs.service';
 import { ShoppingListService } from '../_services/shoppingList.service';
 import { ToDoItem } from '../_models/toDoItem';
+import { FridgeService } from '../_services/fridge.service';
+import { IngredientToApi } from '../_models/ingredientToApi';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-shoppingList',
@@ -10,9 +13,18 @@ import { ToDoItem } from '../_models/toDoItem';
 })
 export class ShoppingListComponent implements OnInit {
   toDoItems: ToDoItem[];
+  public toDoItem: ToDoItem;
+  public ingredientToApi: IngredientToApi = {
+    id: 0,
+    Name: '',
+    amount: 0,
+    unit: 'g'
+  };
   constructor(
     private shoppingList: ShoppingListService,
-    private alertify: AlertifyjsService
+    private alertify: AlertifyjsService,
+    private fridgeService: FridgeService,
+    private authService: AuthService
   ) {}
   ngOnInit() {
     this.getAllToDoItems();
@@ -41,4 +53,16 @@ export class ShoppingListComponent implements OnInit {
       }
     );
   }
+  buyTask(toDoItem){
+      this.ingredientToApi.id = toDoItem['spoonacularId'];
+      this.ingredientToApi.Name = toDoItem['name'];
+      this.ingredientToApi.amount = toDoItem['amount'];
+      this.ingredientToApi.unit = toDoItem['unit'];
+      this.fridgeService.addNewIngredient(this.authService.decodedToken.nameid, this.ingredientToApi).subscribe(next => {
+        this.alertify.success('Ingredient add succesfully');
+      }, error => {
+        this.alertify.error(error);
+      });
+      this.deleteTask(toDoItem['spoonacularId']);
+    }
 }

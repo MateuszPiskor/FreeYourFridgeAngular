@@ -23,6 +23,11 @@ namespace FreeYourFridge.API.Data
             _context = context;
         }
 
+        public DailyMealRepository(DataContext context)
+        {
+            _context = context;
+        }
+
         public DailyMealRepository(DataContext context,
             ApiKeyReader apiKeyReader)
         {
