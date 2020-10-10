@@ -18,10 +18,6 @@ namespace FreeYourFridge.API.Data
         private const string QueryContent = "information?includeNutrition=true&";
         private readonly ApiKeyReader _apiKeyReader;
 
-        public DailyMealRepository(DataContext context)
-        {
-            _context = context;
-        }
 
         public DailyMealRepository(DataContext context)
         {
