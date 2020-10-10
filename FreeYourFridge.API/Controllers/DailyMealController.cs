@@ -16,7 +16,7 @@ namespace FreeYourFridge.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/dailymeal")]
+    [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
     public class DailyMealController : ControllerBase
@@ -47,6 +47,7 @@ namespace FreeYourFridge.API.Controllers
 
             return Ok(_mapper.Map<List<DailyMealBasicDto>>(mealsFiltered));
         }
+
 
         /// <summary>
         ///  Gets daily meal stored in database
@@ -83,6 +84,7 @@ namespace FreeYourFridge.API.Controllers
             return NotFound();
         }
 
+
         /// <summary>
         /// add DailyMeal; called only once after addDailyMeal from recipe-detail-component.ts (Angular)
         /// </summary>
@@ -106,6 +108,7 @@ namespace FreeYourFridge.API.Controllers
             await _calc.AdjustDailyDemand(userId);
             return CreatedAtRoute("GetDailyMeal", new { dMealToAdd.Id }, null);
         }
+
 
         /// <summary>
         /// Updates daily Meal - called by Angular from dailyMeadDetails.component.ts
