@@ -4,21 +4,20 @@ import { AlertifyjsService } from '../_services/alertifyjs.service';
 import { ActivatedRoute } from '@angular/router';
 import { DealMealService } from '../_services/dealMeal.service';
 
-
 @Component({
   selector: 'app-dailyMeal',
   templateUrl: './dailyMeal.component.html',
-  styleUrls: ['./dailyMeal.component.scss']
+  styleUrls: ['./dailyMeal.component.scss'],
 })
-
 export class DailyMealComponent implements OnInit {
-  dailyMealsToday:Array<DailyMealSimpleDto>;
-  dailyMeal:DailyMealSimpleDto
+  dailyMealsToday: Array<DailyMealSimpleDto>;
+  dailyMeal: DailyMealSimpleDto;
 
   constructor(
-    private mealService:DealMealService,
+    private mealService: DealMealService,
     private alertify: AlertifyjsService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.LoadTodayMeals();
@@ -26,11 +25,10 @@ export class DailyMealComponent implements OnInit {
 
   /**
    * Loads list of daily meals eaten per a day
-  */
-  private LoadTodayMeals()
-  {
+   */
+  private LoadTodayMeals() {
     this.mealService.getDailyMeals().subscribe(
-      response => {
+      (response) => {
         this.dailyMealsToday = response;
         console.log(this.dailyMealsToday[0]);
       },
@@ -40,15 +38,13 @@ export class DailyMealComponent implements OnInit {
     );
   }
 
-
-  showDailyMeal(id:number)
-  {
+  showDailyMeal(id: number) {
     this.mealService.getDailyMeal(id).subscribe(
-      response => {
+      (response) => {
         this.dailyMeal = response;
       },
       (error) => {
-        this.alertify.error(error);
+          this.alertify.error(error);
       }
     );
   }

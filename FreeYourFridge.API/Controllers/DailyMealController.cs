@@ -10,13 +10,14 @@ using FreeYourFridge.API.Filters;
 using FreeYourFridge.API.Models;
 using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeYourFridge.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/dailymeal")]
     [Produces("application/json")]
     [Consumes("application/json")]
     public class DailyMealController : ControllerBase
@@ -37,6 +38,8 @@ namespace FreeYourFridge.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetDailyMeals()
         {
             var meals = await _repoUser.GetDailyMealsAsync();
@@ -56,6 +59,7 @@ namespace FreeYourFridge.API.Controllers
         /// <returns>DailyMealBasicDto</returns>
         [HttpGet]
         [Route("{id}", Name = "GetDailyMeal")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetSingleDailyMeal(int id)
         {
             var dMeal = await _repoUser.GetDailyMealAsync(id);
@@ -72,6 +76,8 @@ namespace FreeYourFridge.API.Controllers
         /// <returns>DailyMealDetailsDto</returns>
         [HttpGet("{id}/details")]
         [DailMealFilter]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSingleDailyMealDetails(int id)
         {
             var dMealLocal = await _repoUser.GetDailyMealAsync(id);
@@ -91,7 +97,9 @@ namespace FreeYourFridge.API.Controllers
         /// <param name="dailyMealToAddDto"></param>
         /// <returns>BadRequest or 302 if record exists or calls GetSingleDailyMeal </returns>
         [HttpPost]
-        //[Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> AddDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
             if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest(dailyMealToAddDto);
@@ -116,6 +124,8 @@ namespace FreeYourFridge.API.Controllers
         /// <param name="dailyMealToAddDto"></param>
         /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
             if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest();
