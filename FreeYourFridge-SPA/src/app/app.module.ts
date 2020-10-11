@@ -10,6 +10,7 @@ import { AuthService } from './_services/auth.service';
 import { FridgeService } from './_services/fridge.service';
 import { RecipeService } from './_services/recipe.service';
 import { DealMealService } from './_services/dealMeal.service';
+import { JoiningService } from './_services/joining.service';
 import { ShoppingListService } from './_services/shoppingList.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -51,6 +52,7 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-card.component';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
+import { FilterBarComponent } from './filter-bar/filter-bar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -80,8 +82,10 @@ export function tokenGetter() {
     MemberEditComponent,
     AddIngredientComponent,
     DailyMealCardComponent,
-    DailyMealDetailsComponent
-  ],
+    DailyMealDetailsComponent,
+    FilterBarComponent
+
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -123,6 +127,7 @@ export function tokenGetter() {
     PreventUnsavedChanges,
     ReactiveFormsModule,
     FavouredService,
+    JoiningService
   ],
   bootstrap: [AppComponent],
   entryComponents: [RatingContentComponent],

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RecipeToDetails } from '../_models/recipeToDetails';
 import { Instruction } from '../_models/instruction';
@@ -10,17 +10,22 @@ import { RecipeIngredients } from '../_models/ingredient';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({
+  headers: new HttpHeaders(
+    {
     'Authorization': 'Bearer ' + localStorage.getItem('token'),
     'headers': 'headers',
     'responseType': 'text'
-  })
+  },
+  ),
+  params: new HttpParams()
 };
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+
+
   baseUrl = environment.apiUrl;
 
   getNutrition(id): Observable<Nutritions> {
@@ -28,8 +33,14 @@ export class RecipeService {
   }
 
 constructor(private http: HttpClient) {}
-  getRecipes(): Observable<RecipeToList[]>{
-    return this.http.get<RecipeToList[]>(this.baseUrl + 'recipe', httpOptions);
+  getRecipes(filters?): Observable<RecipeToList[]>{
+    let params = new HttpParams();
+    if (filters != null) {
+      params = params.append('dietType', filters.dietType);
+      params = params.append('cuisineType', filters.cuisineType);
+      params = params.append('mealType', filters.mealType);
+    }
+    return this.http.get<RecipeToList[]>(this.baseUrl + 'recipe/', {params});
   }
 
   GetTimeAndScore(id): Observable<RecipeToDetails> {

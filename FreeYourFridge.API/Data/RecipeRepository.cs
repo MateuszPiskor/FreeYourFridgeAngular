@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
 using RestSharp;
@@ -23,6 +23,21 @@ namespace FreeYourFridge.API.Data
         {
             string igredientUrl = _makePartialUrl.UrlIngredientMaker(ingredients);
             RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients={igredientUrl}" + "&number=" + numberOfRecipes);
+            RestRequest request = new RestRequest(Method.GET);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (response.IsSuccessful)
+            {
+                return response.Content;
+            }
+            return null;
+        }
+
+        public async Task<string> GetResponeWhenPassParams(IEnumerable<Ingredient> ingredients, int numberOfRecipes, UserParams userParams)
+        {
+            string igredientUrl = _makePartialUrl.UrlIngredientMaker(ingredients);
+            string parameters = userParams.ToString();
+            RestClient client = new RestClient();
+            client.BaseUrl = new Uri($"{_baseUrl}complexSearch?{_apiKey}&includeIngredients={igredientUrl}&fillIngredients=true&number={numberOfRecipes}{parameters}");
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)

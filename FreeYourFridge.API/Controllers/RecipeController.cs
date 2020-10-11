@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
+using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,18 +30,31 @@ namespace FreeYourFridge.API.Controllers
 
         [HttpGet("")]
         [HttpGet("number={amount}")]
-        public async Task<IActionResult> GetRecipes(int amount = 12)
+        public async Task<IActionResult> GetRecipes([FromQuery] UserParams userParams, int amount = 12)
         {
-             int userId= int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
-            IEnumerable<Ingredient> ingredients = _repoFridge.GetIngredients(userId);
-            //List<Ingredient> ingredients = GetIngredientsFromFridgeTest();
 
-            string content = await _repo.GetRespone(ingredients, amount);
+            int userId= int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            IEnumerable<Ingredient> ingredients = _repoFridge.GetIngredients(userId);
+            string content = null;
+
+            if (userParams.DietType != null || userParams.CuisineType != null)
+            {
+               content = await _repo.GetResponeWhenPassParams(ingredients, amount, userParams);
+                Root recipesToReturn = JsonConvert.DeserializeObject<Root>(content);
+                return Ok(recipesToReturn.Results);
+            }
+
+            else
+            {
+                content = await _repo.GetRespone(ingredients, amount);
+            }
+            
             if (content == null)
             {
                 return NotFound();
             }
 
+            
             IEnumerable<RecipeToList> recipes = JsonConvert.DeserializeObject<IEnumerable<RecipeToList>>(content);
             return Ok(recipes);
         }
@@ -83,26 +97,6 @@ namespace FreeYourFridge.API.Controllers
             Instruction instruction = JsonConvert.DeserializeObject<IEnumerable<Instruction>>(content).First();
 
             return Ok(instruction.steps);
-        }
-
-
-        private static List<Ingredient> GetIngredientsFromFridgeTest()
-        {
-            return new List<Ingredient>()
-            {
-                new Ingredient()
-                {
-                    Name="apple"
-                },
-                new Ingredient()
-                {
-                    Name="orange"
-                },
-                new Ingredient()
-                {
-                    Name="milk"
-                }
-            };
         }
     }
 }
