@@ -60,5 +60,8 @@ export class AddIngredientComponent implements OnInit {
     });
     window.location.reload();
   }
+  cancel(){
+    this.router.navigateByUrl('fridge');
+  }
 
 }

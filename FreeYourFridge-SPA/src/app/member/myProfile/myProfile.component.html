@@ -1,29 +1,72 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="container">
-    <div class="userContent">
-    <div class=column>
-        <div class="rowUser"><img src="../assets/image/user.jpg"></div>
-    </div>
-    <div class="column">
-        <div class="rowUser">DCI: {{user.dailyDemand}} kcal</div>
-        <div class="rowUser">DCI to realize: {{user.dailyDemandToRealize}} kcal</div>
-        <div class="rowUser">carbohydrates : {{user.carbohydrates}} g</div>
-        <div class="rowUser">fats : {{user.fats}} g</div>
-        <div class="rowUser">protein : {{user.protein}} g</div>
-    </div>
-    </div>
-    <div class="userContent">
-        <div class=column>
-            <div class="rowUser">Username : {{user.username}}</div>
-            <div class="rowUser">Email : {{user.email}}</div>
-            <div class="rowUser">Gender : {{user.gender}}</div>
-            <div class="rowUser">Age : {{user.age}}</div>
-            <div class="rowUser">Weight : {{user.weight}}</div>
-            <div class="rowUser">Height : {{user.height}}</div>
-        </div>
-        <div class=column>
-            <div class="rowUser">Description :
-                {{user.description}}</div>
-        </div>
-    </div>
+  <div class="card user-card-full">
+      <div class="row m-l-0 m-r-0">
+          <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                  <div class="picture m-b-25"> <img class="img-responsive" src="../assets/image/user.jpg"> </div>
+                  <h6 class="userName">{{user.username}}</h6>
+                  <p>{{user.description}}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+              </div>
+          </div>
+          <div class="col-sm-8">
+              <div class="card-block">
+                  <h6 class="m-b-20 p-b-5 b-b-default f-w-700">Information</h6>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Age</p>
+                      <h6 class="text-muted f-w-400">{{user.age}}</h6>
+                    </div>
+                      <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Email</p>
+                          <h6 class="text-muted f-w-400">{{user.email}}</h6>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Weight</p>
+                      <h6 class="text-muted f-w-400">{{user.weight}}</h6>
+                  </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Gender</p>
+                      <h6 class="text-muted f-w-400">{{user.gender}}</h6>
+                  </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Height</p>
+                        <h6 class="text-muted f-w-400">{{user.height}}</h6>
+                    </div>
+                </div>
+                  <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-700">User Details</h6>
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Carbs</p>
+                          <h6 class="text-muted f-w-400">{{user.carbohydrates}} g</h6>
+                      </div>
+                      <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">DCI</p>
+                          <h6 class="text-muted f-w-400">{{user.dailyDemand}} kcal</h6>
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Fats</p>
+                        <h6 class="text-muted f-w-400">{{user.fats}} g</h6>
+                      </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">DCI to realize</p>
+                      <h6 class="text-muted f-w-400">{{user.dailyDemandToRealize}} kcal</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Protein</p>
+                    <h6 class="text-muted f-w-400">{{user.protein}} g</h6>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Activity Level</p>
+                  <h6 class="text-muted f-w-400">{{user.activityLevel}}</h6>
+              </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
 

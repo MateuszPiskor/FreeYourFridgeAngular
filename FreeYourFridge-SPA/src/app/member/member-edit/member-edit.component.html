@@ -1,48 +1,88 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="container">
-    <div *ngIf="editForm.dirty" class="alert">
+  <div *ngIf="editForm.dirty" class="alert">
         <div class="alert-info">
             <p>You have made changes. Any unsaved changes will be lost</p>
         </div>
     </div>
-    <div class="userContent">
-        <div class=column>
-            <div class="rowUser"><img src="../assets/image/user.jpg"></div>
-        </div>
-        <div class="column">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-                <div class="rowUser">kcal :</div>
-                <textarea name="dailyDemand" rows="1" class="form-control" [(ngModel)]="user.dailyDemand"></textarea>
-                <div class="rowUser">carbohydrates :</div>
-                <textarea name="carbohydrates" rows="1" class="form-control"
-                    [(ngModel)]="user.carbohydrates"></textarea>
-                <div class="rowUser">fats :</div>
-                <textarea name="fats" rows="1" class="form-control" [(ngModel)]="user.fats"></textarea>
-                <div class="rowUser">protein :</div>
-                <textarea name="protein" rows="1" class="form-control" [(ngModel)]="user.protein"></textarea>
-                <div class="rowUser">Description :</div>
-            <textarea name="description" rows="1" class="form-control" [(ngModel)]="user.description"></textarea>
-                <div class="rowUser">Level of activity:</div>
-                <select name="activity" rows="1" class="form-control" [(ngModel)]="activity">
+  <div class="card user-card-full">
+      <div class="row m-l-0 m-r-0">
+          <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                  <div class="picture m-b-25"> <img class="img-responsive" src="../assets/image/user.jpg"> </div>
+                  <h6 class="userName">{{user.username}}</h6>
+              </div>
+          </div>
+          <div class="col-sm-8">
+              <div class="card-block">
+                  <h6 class="m-b-20 p-b-5 b-b-default f-w-700">Information</h6>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Age</p>
+                      <h6 class="text-muted f-w-400">{{user.age}}</h6>
+                    </div>
+                      <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Email</p>
+                          <h6 class="text-muted f-w-400">{{user.email}}</h6>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Weight</p>
+                      <h6 class="text-muted f-w-400">{{user.weight}}</h6>
+                  </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Gender</p>
+                      <h6 class="text-muted f-w-400">{{user.gender}}</h6>
+                  </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Height</p>
+                        <h6 class="text-muted f-w-400">{{user.height}}</h6>
+                    </div>
+                </div>
+                  <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-700">User Details</h6>
+                  <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Carbs</p>
+                          <textarea name="carbohydrates" rows="1" class="form-control"[(ngModel)]="user.carbohydrates"></textarea>
+                      </div>
+                      <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">DCI</p>
+                          <textarea name="dailyDemand" rows="1" class="form-control" [(ngModel)]="user.dailyDemand"></textarea>
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Fats</p>
+                        <textarea name="fats" rows="1" class="form-control" [(ngModel)]="user.fats"></textarea>
+                      </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">DCI to realize</p>
+                      <h6 class="text-muted f-w-400">{{user.dailyDemandToRealize}} kcal</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Protein</p>
+                    <textarea name="protein" rows="1" class="form-control" [(ngModel)]="user.protein"></textarea>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Activity Level</p>
+                  <select name="activity" rows="1" class="form-control" [(ngModel)]="activity">
                     <option [value]="ActivityLevel.Low">Low</option>
                     <option [value]="ActivityLevel.Medium">Medium</option>
                     <option [value]="ActivityLevel.High">High</option>
                 </select>
-            </form>
-        </div>
-    </div>
-    <div class="userContent">
-        <div class=column>
-            <div class="rowUser">Username : {{user.username}}</div>
-            <div class="rowUser">Email : {{user.email}}</div>
-            <div class="rowUser">Gender : {{user.gender}}</div>
-            <div class="rowUser">Age : {{user.age}}</div>
-            <div class="rowUser">Weight : {{user.weight}}</div>
-            <div class="rowUser">Height : {{user.height}}</div>
-        </div>
-        <div class=column>
-            <div class="rowUser">Description : {{user.description}}</div>
-            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-succes btn-block mt-4">SAVE
-                CHANGES</button>
-        </div>
-    </div>
+              </div>
+                  </div>
+                  <div class=column>
+                    <p class="m-b-10 f-w-600">Description</p>
+                    <textarea name="protein" rows="1" class="form-control" [(ngModel)]="user.description"></textarea>
+                    <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-succes btn-block mt-4">SAVE
+                        CHANGES</button>
+                </div>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
+
