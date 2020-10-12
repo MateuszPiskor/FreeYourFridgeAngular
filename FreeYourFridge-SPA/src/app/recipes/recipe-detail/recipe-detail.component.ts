@@ -167,9 +167,16 @@ export class RecipeDetailComponent implements OnInit {
         console.log(value);
       },
       (error) => {
+        if (error.status == 409)
+        {
+          this.alertify.warning("You've already had that Meal today. We care about your diverse diet!");
+        }
+        else
+        {
         this.alertify.error('Some problem occurs');
         this.model.username = '';
         this.model.password = '';
+        }
       },
     );
     this.routeDirection.navigate(['/dailymeal']);

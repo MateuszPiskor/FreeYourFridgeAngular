@@ -39,12 +39,11 @@ namespace FreeYourFridge.API.Tests
         public async Task Should_ReturnAllDailyMeals()
         {
             var mapper = new Mock<IMapper>();
-
             var mockSet = new Mock<DbSet<DailyMeal>>();
             mockSet = MockDbProvider<DailyMeal>.ProvideMockDb(DataProvider.DataDailyMeal, mockSet);
-
             var mockCtx = new Mock<DataContext>(options);
             mockCtx.SetupGet(ctx => ctx.DailyMeals).Returns(mockSet.Object);
+
 
             var repository = new Mock<DailyMealRepository>(mockCtx.Object);
 
@@ -55,7 +54,8 @@ namespace FreeYourFridge.API.Tests
             {
                 User = new ClaimsPrincipal(MockDbProvider<DailyMeal>.identity)
             };
-            //Thread.CurrentPrincipal = new ClaimsPrincipal(MockDbProvider<DailyMeal>.identity);
+
+
             var result = await controller.GetDailyMeals() as ObjectResult;
             Assert.NotNull(result);
         }
