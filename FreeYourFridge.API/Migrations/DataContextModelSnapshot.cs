@@ -287,6 +287,9 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ActivityLevel")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Carbohydrates")
                         .HasColumnType("INTEGER");
 
@@ -300,9 +303,6 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Fats")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Level")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Protein")
