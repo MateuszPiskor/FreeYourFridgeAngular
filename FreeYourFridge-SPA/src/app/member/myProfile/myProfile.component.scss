@@ -1,24 +1,165 @@
-
 .container{
-  background: #1f1e1ed9;
-  height: 100;
+  justify-self: center;
   width: 80%;
   margin-top: 5%;
-}
-
-.userContent{
-  margin-top: 20px;
+  justify-content: center;
   text-align: center;
-  padding: 10px;
-  width: 90%;
-  display: flex;
-}
-.userContent .column{
-  flex: 50%;
   padding: 20px;
 }
+.userName{
+  font-size: 50px;
+  padding: 15px;
+}
 
-.container .userContent .rowUser{
-  font-size: 22px;
-  text-align: justify;
+.card {
+  width: 100%;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 20px 0 rgba(255, 255, 255, 0.08);
+  border: none;
+}
+.picture{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+.img-responsive {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.m-r-0 {
+  margin-right: 0px;
+}
+
+.m-l-0 {
+  margin-left: 0px;
+}
+
+
+.bg-c-lite-green {
+  background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+  background: linear-gradient(to right, #eec45a, #f29263);
+}
+
+.user-profile {
+  padding: 20px 0;
+}
+
+.m-b-25 {
+  margin-bottom: 25px;
+}
+
+.img-radius {
+  border-radius: 5px;
+}
+
+
+.card .card-block p {
+  line-height: 25px;
+
+}
+
+p {
+      font-size: 25px;
+  }
+
+
+.card-block {
+  padding: 1.25rem;
+}
+
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+.f-w-700{
+  font-size: 40px;
+  font-weight: 300;
+}
+.f-w-600 {
+  font-size: 25px;
+  font-weight: 200;
+  color: #eec45a;
+}
+.f-w-400{
+  font-size: 20px;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+@media only screen and (max-width: 1000px){
+  .userName{
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 800px){
+  .userName{
+    font-size: 30px;
+    padding: 15px;
+  }
+  p {
+    font-size: 20px;
+  }
+  .f-w-700{
+    font-size: 30px;
+    font-weight: 200;
+  }
+  .f-w-600 {
+    font-size: 20px;
+    font-weight: 200;
+    color: #eec45a;
+  }
+  .f-w-400{
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 600px){
+  .userName{
+    font-size: 26px;
+  }
+}
+@media only screen and (max-width: 480px){
+  .userName{
+    font-size: 30px;
+  }
+  .f-w-700{
+    font-size: 25px;
+  }
 }
