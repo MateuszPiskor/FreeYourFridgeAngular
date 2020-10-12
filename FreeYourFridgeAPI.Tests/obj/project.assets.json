@@ -8866,11 +8866,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj",
+      "projectUniqueName": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj",
       "projectName": "FreeYourFridgeAPI.Tests",
-      "projectPath": "f:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj",
+      "projectPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "f:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\obj\\",
+      "outputPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8886,8 +8886,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "f:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj": {
-              "projectPath": "f:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj"
+            "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj": {
+              "projectPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj"
             }
           }
         }

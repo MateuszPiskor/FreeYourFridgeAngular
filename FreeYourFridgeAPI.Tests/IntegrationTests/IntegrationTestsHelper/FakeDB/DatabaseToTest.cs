@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 
 namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
@@ -55,6 +56,76 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                     Protein = 42,
                     CreatedBy = 1
                 },
+            };
+        }
+
+        internal static List<DailyMealToAddDto> GetDailyMealToAddToTest()
+        {
+            return new List<DailyMealToAddDto>
+            {
+                new DailyMealToAddDto
+                {
+                    Title = "The first test DM",
+                    Image = "url1",
+                    Id = 1,
+                    Grams = 10,
+                    UserRemarks = "User remarks 1",
+                    Calories = 10,
+                }
+            };
+        }
+
+        internal static List<FridgeDTO> GetFridgeDtoToTest()
+        {
+            return new List<FridgeDTO>
+            {
+                new FridgeDTO
+                {
+                    Id = 1,
+                    UserId = 1
+                },
+                new FridgeDTO
+                {
+                    Id = 2,
+                    UserId = 1
+                }
+            };
+        }
+
+        internal static List<IngredientDto> GetIngredientDtoToTest()
+        {
+            return new List<IngredientDto>
+            {
+                new IngredientDto
+                {
+                    //Id = 1,
+                    //SpoonacularId = 1,
+                    //Amount = 120,
+                    //Unit = "g",
+                    //Name = "ingredient1",
+                    //FridgeId = 1,
+                    //Fridge = db.Fridges.Where(f => f.Id == 1) as Fridge
+                },
+                new IngredientDto
+                {
+                    //Id = 2,
+                    //SpoonacularId = 2,
+                    //Amount = 820,
+                    //Unit = "g",
+                    //Name = "ingredient2",
+                    //FridgeId = 1,
+                    //Fridge = db.Fridges.Where(f => f.Id == 1) as Fridge
+                },
+                new IngredientDto
+                {
+                    //Id = 3,
+                    //SpoonacularId = 3,
+                    //Amount = 520,
+                    //Unit = "g",
+                    //Name = "ingredient3",
+                    //FridgeId = 2,
+                    //Fridge = db.Fridges.Where(f => f.Id == 2) as Fridge
+                }
             };
         }
     }

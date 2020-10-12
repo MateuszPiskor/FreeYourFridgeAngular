@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
+using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using FreeYourFridgeAPI.Tests.IntegrationTestsHelper;
 using FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB;
@@ -17,13 +18,13 @@ using Xunit;
 
 namespace FreeYourFridge.API.Tests.Controllers
 {
-    public class IT_DailyMealControllerShould : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class IT_DailyMealControllerTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _httpClient;
         private CustomWebApplicationFactory<Startup> _factory;
         private string uri = "http://localhost/api/dailymeal/";
 
-        public IT_DailyMealControllerShould(CustomWebApplicationFactory<Startup> factory)
+        public IT_DailyMealControllerTests(CustomWebApplicationFactory<Startup> factory)
         {
             factory.ClientOptions.BaseAddress = new Uri(uri);
             _httpClient = factory.CreateClient();
@@ -124,12 +125,14 @@ namespace FreeYourFridge.API.Tests.Controllers
 
             Assert.NotNull(response);
             Assert.Equal(dmToBeAssessed.Title, response.Title);
+            Assert.Equal(dmToBeAssessed.Grams, response.Grams);
+            Assert.Equal(dmToBeAssessed.Id, response.Id);
         }
 
         [Fact]
         public async Task AddDailyMeal_IfDailyMealInDatabase_ReturnsConflict()
         {
-            var dailyMealToPass = DatabaseToTest.GetDailyMealsToTest().Last();
+            var dailyMealToPass = DatabaseToTest.GetDailyMealToAddToTest().First();
             var content = JsonContent.Create(dailyMealToPass);
 
             var client = _factory.WithWebHostBuilder(builder =>
@@ -149,42 +152,101 @@ namespace FreeYourFridge.API.Tests.Controllers
             Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
         }
 
-        //[Fact]
-        //public async Task AddDailyMeal_IfValidDailyMeal_ReturnCreatedResult()
-        //{
-        //    var content = JsonContent.Create(ReturnNewDailyMealToPass());
+        [Fact]
+        public async Task AddDailyMeal_IfValidDailyMeal_ReturnsCreatedResult()
+        {
+            var content = JsonContent.Create(ReturnValidDailyMealToAddDtoToPass());
 
-        //    var client = _factory.WithWebHostBuilder(builder =>
-        //    {
-        //        builder.ConfigureTestServices(services =>
-        //        {
-        //            services.AddAuthentication("test")
-        //                .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-        //                    options => options.NameIdentifier = "1");
-        //        });
-        //    }).CreateClient();
+            var client = _factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddAuthentication("test")
+                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
+                            options => options.NameIdentifier = "1");
+                });
+            }).CreateClient();
 
-        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
 
-        //    var response = await client.PostAsync("", content);
+            var response = await client.PostAsync("", content);
 
-        //    Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-        //}
-
-
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        }
 
 
-        private DailyMeal ReturnNewDailyMealToPass()
+        [Fact]
+        public async Task UpdateDailyMeal_IfUpdatedNotExistInDb_ReturnsBadRequest()
+        {
+            var model = ReturnValidDailyMealToAddDtoToPass();
+            model.Id = 11;
+
+            var content = JsonContent.Create(model);
+            var client = _factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddAuthentication("test")
+                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
+                            options => options.NameIdentifier = "1");
+                });
+            }).CreateClient();
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
+
+            var response = await client.PutAsync("", content);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+
+        [Fact]
+        public async Task UpdateDailyMeal_IfValidModel_ReturnsNoContent()
+        {
+            var model = ReturnValidDailyMealToAddDtoToPass();
+            model.Id = 1;
+
+            var content = JsonContent.Create(model);
+            var client = _factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddAuthentication("test")
+                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
+                            options => options.NameIdentifier = "1");
+                });
+            }).CreateClient();
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
+
+            var response = await client.PutAsync("", content);
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+        }
+
+
+        private DailyMealToAddDto ReturnValidDailyMealToAddDtoToPass()
+        {
+            return new DailyMealToAddDto
+            {
+                Id = 5,
+                Title = "Title to update",
+                Image = "url_new",
+                Grams = 14,
+                UserRemarks = "User remarks new",
+                Calories = 14,
+            };
+        }
+
+        private DailyMeal ReturnInvalidDailyMealToPass()
         {
             return new DailyMeal
             {
                 LocalId = Guid.NewGuid(),
-                Title = "The new test DM",
-                Image = "url_new",
+                Title = null,
+                Image = "url_new to update",
                 TimeOfLastMeal = DateTime.Now,
                 Id = 4,
                 Grams = 14,
-                UserRemarks = "User remarks new",
+                UserRemarks = "User remarks to update",
                 CaloriesPerPortion = 14,
                 Carbs = 24,
                 Fat = 34,

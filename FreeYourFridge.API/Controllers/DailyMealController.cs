@@ -95,7 +95,7 @@ namespace FreeYourFridge.API.Controllers
         /// add DailyMeal; called only once after addDailyMeal from recipe-detail-component.ts (Angular)
         /// </summary>
         /// <param name="dailyMealToAddDto"></param>
-        /// <returns>BadRequest or 302 if record exists or calls GetSingleDailyMeal </returns>
+        /// <returns>BadRequest or 409 if record exists or calls GetSingleDailyMeal </returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

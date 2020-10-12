@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.Models;
 
@@ -20,6 +21,20 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                 Age = 18,
                 Weight = 70,
                 Height = 170
+            });
+
+            db.UsersDetails.Add(new UserDetails
+            {
+                Id = 1,
+                DailyDemand = 1900,
+                DailyDemandToRealize = 1900,
+                Carbohydrates = 21,
+                Fats = 21,
+                Protein = 21,
+                Description = "",
+                User = db.Users.Where(u => u.Id == 1) as User,
+                Level = ActivityLevel.Medium,
+                UserId = 1
             });
 
             db.DailyMeals.AddRange(new DailyMeal
@@ -67,6 +82,78 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                     Protein = 42,
                     CreatedBy = 1
                 });
+
+            db.Favoureds.AddRange(
+            new Favoured
+            {
+                Id = "1",
+                Score = 74,
+                SpoonacularId = 55,
+                Image = "imageUrl",
+                Title = "title",
+                CreateTime = "2020-07-01",
+                CreatedBy = 1
+            },
+            new Favoured
+            {
+                Id = "2",
+                Score = 34,
+                SpoonacularId = 65,
+                Image = "imageUrl2",
+                Title = "title2",
+                CreateTime = "2020-07-02",
+                CreatedBy = 1
+            }
+                );
+
+            db.Fridges.AddRange(
+                new Fridge
+                {
+                    Id = 1,
+                    UserId = 1,
+                    user = db.Users.Where(u => u.Id == 1) as User,
+                    ListIgredients = db.Ingredients.Where(i => i.FridgeId == 1).ToList()
+                },
+                new Fridge
+                {
+                    Id = 2,
+                    UserId = 1,
+                    user = db.Users.Where(u => u.Id == 1) as User,
+                    ListIgredients = db.Ingredients.Where(i => i.FridgeId == 2).ToList()
+                });
+
+            db.Ingredients.AddRange(
+                new Ingredient
+                {
+                    Id = 1,
+                    SpoonacularId = 1,
+                    Amount = 120,
+                    Unit = "g",
+                    Name = "ingredient1",
+                    FridgeId = 1,
+                    Fridge = db.Fridges.Where(f => f.Id == 1) as Fridge
+                },
+                new Ingredient
+                {
+                    Id = 2,
+                    SpoonacularId = 2,
+                    Amount = 820,
+                    Unit = "g",
+                    Name = "ingredient2",
+                    FridgeId = 1,
+                    Fridge = db.Fridges.Where(f => f.Id == 1) as Fridge
+                },
+                new Ingredient
+                {
+                    Id = 3,
+                    SpoonacularId = 3,
+                    Amount = 520,
+                    Unit = "g",
+                    Name = "ingredient3",
+                    FridgeId = 2,
+                    Fridge = db.Fridges.Where(f => f.Id == 2) as Fridge
+                });
+
             db.SaveChanges();
         }
     }
