@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeYourFridge.API.Data;
-using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,7 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IFridgeRepository _repo;
         private readonly IIngredientRepository _ingredientRepo;
-        private DataContext _data {get;set;}
+        private DataContext _data { get; set; }
         private readonly IMapper _mapper;
 
         public FridgeController(IFridgeRepository repo, DataContext data, IMapper mapper, IIngredientRepository ingridientRepo)
@@ -35,9 +34,9 @@ namespace FreeYourFridge.API.Controllers
             fridge.ListIgredients = allIgredients;
             return Ok(fridge);
         }
-        
+
         [HttpPost("addIngredient/{id}")]
-        public async Task<ActionResult> AddItemToFridge(int id, [FromBody]Ingredient newIgredient)
+        public async Task<ActionResult> AddItemToFridge(int id, [FromBody] Ingredient newIgredient)
         {
             Fridge fridge = await _repo.GetFridge(id);
             _ingredientRepo.Add(newIgredient, fridge);
@@ -51,8 +50,9 @@ namespace FreeYourFridge.API.Controllers
             _repo.Delete(item);
             await _repo.SaveAll();
         }
+
         [HttpPost("{ingredientId}")]
-        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody]double amount)
+        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody] double amount)
         {
             _repo.UpdateIngredient(ingredientId, amount);
             return NoContent();
@@ -64,7 +64,7 @@ namespace FreeYourFridge.API.Controllers
             var ListOfIngredients = await _ingredientRepo.GetAllIngredients();
             if (ListOfIngredients == null)
                 return NotFound();
-                
+
             return Ok(ListOfIngredients);
         }
         [HttpGet("GetUnits/{id}")]
@@ -73,7 +73,7 @@ namespace FreeYourFridge.API.Controllers
             var ingredientUnits = await _ingredientRepo.GetIngredientsFromAPI(id);
             if (ingredientUnits == null)
                 return NotFound();
-                
+
             return Ok(ingredientUnits);
         }
 
