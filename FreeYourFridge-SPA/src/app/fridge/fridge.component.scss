@@ -7,20 +7,41 @@
   align-items: center;
 }
 .userContent{
+  display: block;
   margin-top: 20px;
   text-align: center;
   padding: 10px;
-  width: 90%;
+  width: 100%;
   display: flex;
 }
 .userContent .column{
+  display: block;
   flex: 50%;
-  padding: 20px;
-  text-align: justify;
+  padding: 10px;
+  text-align: center;
 }
 
 .container .userContent .rowUser{
   font-size: 20px;
   text-align: justify;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.picture{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.btn{
+  width: 60%;
+}
+.btn-danger{
+  width: 100%;
+}
+.custom{
+  width: 100%;
 }
 

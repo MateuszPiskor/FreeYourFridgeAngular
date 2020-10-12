@@ -1,9 +1,9 @@
 <div class="container">
   <div class="userContent">
     <div class=column>
-        <div class="rowUser"><img src="../assets/image/user.jpg"></div>
+        <div class="rowUser"><img class="picture" src="../assets/image/user.jpg"></div>
         <button type="button" class="btn btn-success ml-3 mt-4" (click)='addComponent()'>Add new Ingredient</button>
-        <button type="button" class="btn btn-warning ml-4 mt-4"(click)='update()'>Update</button>
+        <button type="button" class="btn btn-warning ml-3 mt-4"(click)='update()'>Update</button>
     </div>
     <div class="column">
       <div class="none" *ngIf="fridge">
@@ -48,7 +48,7 @@
                     </form>
                   </td>
                   <td>{{ingredient.unit}}</td>
-                  <td><a class="btn btn-warning" (click)="enableEditMethod(ingredient.id, ingredient.amount)">Save</a>
+                  <td><a class="btn btn-warning custom" (click)="enableEditMethod(ingredient.id, ingredient.amount)">Save</a>
                   </td>
               </tr>
               </tbody>
@@ -56,3 +56,4 @@
     </div>
     </div>
 </div>
+
