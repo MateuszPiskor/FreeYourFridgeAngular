@@ -15,8 +15,12 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   user: User;
   registerForm: FormGroup;
-  constructor(private authService: AuthService, private _location: Location, private router : Router,
-    private alertify: AlertifyjsService, private route: Router, private fb: FormBuilder) { }
+  constructor(
+    private authService: AuthService,
+    private _location: Location,
+    private router : Router,
+    private alertify: AlertifyjsService,
+    private route: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createRegisterForm();
@@ -54,8 +58,7 @@ export class RegisterComponent implements OnInit {
   }
 
   cancel(){
-    this.cancelRegister.emit(false);
-    console.log('canclled');
+    this.router.navigateByUrl('');
   }
 
 }
