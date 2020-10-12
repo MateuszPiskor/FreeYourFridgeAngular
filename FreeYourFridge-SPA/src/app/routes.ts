@@ -16,10 +16,12 @@ import { FavouredListComponent } from './favoured/favoured-list/favoured-list.co
 import {AddIngredientComponent} from './addIngredient/addIngredient.component';
 import {IngredientResolver} from './_resolvers/ingredient.resolver';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
+import { RegisterComponent } from './register/register.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'contact', component: ContactComponent},
+    {path: 'register', component: RegisterComponent},
     {
         path: '',
         runGuardsAndResolvers: 'always',
