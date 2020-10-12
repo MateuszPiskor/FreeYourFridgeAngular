@@ -1,12 +1,15 @@
 .table{
   font-size: 25px;
   font-weight: 100;
+  width: 100%;
+  display: table;
+  margin: 0;
 }
 .column{
   margin-top: 10px;
 }
 .btn{
-  width: 60%;
+  width: 100%;
   font-size: 20px;
 }
 .btn-danger{
@@ -39,12 +42,16 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 80%;
 }
 .img-responsive {
   display: block;
-  height: auto;
-  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.img{
+  text-align: center;
 }
 
 .m-r-0 {
@@ -76,6 +83,7 @@
 
 .card .card-block p {
   line-height: 25px;
+  text-align: center;
 
 }
 
@@ -83,9 +91,18 @@ p {
       font-size: 25px;
   }
 
-
+.col-lg-8{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 .card-block {
-  padding: 1.25rem;
+  padding: 3rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 
@@ -141,9 +158,13 @@ p {
 .m-t-40 {
   margin-top: 20px;
 }
+
 @media only screen and (max-width: 1000px){
   .userName{
     font-size: 30px;
+  }
+  .img-responsive {
+    width: 70%;
   }
 }
 @media only screen and (max-width: 800px){
@@ -166,10 +187,40 @@ p {
   .f-w-400{
     font-size: 18px;
   }
+  tr{
+    font-size: 18px;
+  }
+}
+@media only screen and  (max-width:666px) {
+  table {
+      display:block;
+      margin:0;
+      margin-top:15px;
+      width:100%;
+      display: block;
+  }
+  thead, tbody {
+      width:100%;
+      display:table;
+  }
+
+  th, td.row2 {
+      padding:0;
+      display:table-cell;
+  }
+  .img-responsive {
+    width: 70%;
+  }
 }
 @media only screen and (max-width: 600px){
   .userName{
     font-size: 26px;
+  }
+  .btn{
+    font-size: 15px;
+  }
+  .container{
+    width: 120%;
   }
 }
 @media only screen and (max-width: 480px){
@@ -179,5 +230,16 @@ p {
   .f-w-700{
     font-size: 25px;
   }
-}
+  .btn{
+    font-size: 15px;
+    width: 100%;
+    margin:0;
+  }
+  .container{
+    width: 140%;
+  }
+  tr{
+    font-size: 14px;
+  }
 
+}
