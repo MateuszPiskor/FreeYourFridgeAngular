@@ -10,6 +10,7 @@ namespace FreeYourFridge.API.Helpers
             string partUrlPath = "";
             foreach (var ingredient in ingredients)
             {
+                ingredient.Name = ingredient.Name.Replace(" ", "%");
                 partUrlPath += ",+" + ingredient.Name;
             }
             return partUrlPath.Substring(2);

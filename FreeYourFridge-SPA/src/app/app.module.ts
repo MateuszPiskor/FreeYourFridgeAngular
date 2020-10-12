@@ -10,6 +10,7 @@ import { AuthService } from './_services/auth.service';
 import { FridgeService } from './_services/fridge.service';
 import { RecipeService } from './_services/recipe.service';
 import { DealMealService } from './_services/dealMeal.service';
+import { JoiningService } from './_services/joining.service';
 import { ShoppingListService } from './_services/shoppingList.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -54,6 +55,7 @@ import { DailyMealCardComponent } from './dailyMeal/daily-meal-card/daily-meal-c
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 import { FavouredListResolver } from './_resolvers/favoured-list.resolver';
 
+import { FilterBarComponent } from './filter-bar/filter-bar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -83,8 +85,10 @@ export function tokenGetter() {
     MemberEditComponent,
     AddIngredientComponent,
     DailyMealCardComponent,
-    DailyMealDetailsComponent
-  ],
+    DailyMealDetailsComponent,
+    FilterBarComponent
+
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -127,7 +131,8 @@ export function tokenGetter() {
     PreventUnsavedChanges,
     ReactiveFormsModule,
     FavouredService,
-    FavouredListResolver
+    FavouredListResolver,
+    JoiningService
   ],
   bootstrap: [AppComponent],
   entryComponents: [RatingContentComponent],

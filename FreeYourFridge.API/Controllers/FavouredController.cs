@@ -13,7 +13,7 @@ using FreeYourFridge.API.Helpers;
 namespace FreeYourFridge.API.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/favoured")]
     [ApiController]
     public class FavouredController : Controller
     {
@@ -26,21 +26,21 @@ namespace FreeYourFridge.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddFavaoured([FromBody] FavouredDto favaouredDto)
-        {
-            if (favaouredDto != null)
-            {
-                Favoured favoured = _mapper.Map<Favoured>(favaouredDto);
-                var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
-                favoured.CreatedBy = int.Parse(userId);
-                _repo.Add<Favoured>(favoured);
-                var saveResult = _repo.SaveAll();
-                return StatusCode(201);
-            }
-            return BadRequest();
-        }
-        
+        //[HttpPost]
+        //public async Task<IActionResult> AddFavaoured([FromBody] FavouredDto favaouredDto)
+        //{
+        //    if (favaouredDto != null)
+        //    {
+        //        Favoured favoured = _mapper.Map<Favoured>(favaouredDto);
+        //        var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+        //        favoured.CreatedBy = int.Parse(userId);
+        //        _repo.Add<Favoured>(favoured);
+        //        var saveResult = _repo.SaveAll();
+        //        return StatusCode(201);
+        //    }
+        //    return BadRequest();
+        //}
+
         //[HttpGet]
         //public async Task<IActionResult> GetFavoureds()
         //{
@@ -64,24 +64,44 @@ namespace FreeYourFridge.API.Controllers
             return Ok(favoureds);
         }
 
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFavoured(int id)
         {
-            if (id != 0)
+            if (!await _repo.FavouredExist(id))
             {
-                var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
-                _repo.Delete(id, userId);
-                return Ok();
+                return NotFound();
             }
-            return NotFound();
+            ;
+            var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            _repo.DeleteFavoured(id, userId);
+            return NoContent();
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> EditFavoured(int id, [FromBody] int score)
         {
+            if (!await _repo.FavouredExist(id))
+            {
+                return NotFound();
+            }
             var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
             _repo.UpdateFavaoured(id, score, userId);
             return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFavaoured([FromBody] FavouredForCreationDto favaouredForCreationDto)
+        {
+            Favoured favoured = _mapper.Map<Favoured>(favaouredForCreationDto);
+            var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+            favoured.CreatedBy = int.Parse(userId);
+            _repo.Add<Favoured>(favoured);
+            var saveResult = _repo.SaveAll();
+
+            var favouredToReturn = _mapper.Map<FavouredDto>(favoured);
+
+            return CreatedAtRoute("GetFavoured", new { id = favouredToReturn.SpoonacularId }, favouredToReturn);
         }
     }
 }

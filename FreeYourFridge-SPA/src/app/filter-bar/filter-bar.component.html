@@ -1,0 +1,32 @@
+<form class="form-inline mt-4" #form="ngForm" (ngSubmit)="loadRecipes()" >
+  <div class="form-group px-2">
+    <select class="form-control ml-1" style="width: 130px" id="cuisine" [(ngModel)]="cuisineType" name="cuisine" >
+      <option [ngValue]="undefined" hidden>Cuisine</option>
+      <option *ngFor="let cuisine of cuisines" [value]="cuisine">
+        {{ cuisine }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group px-2">
+    <select class="form-control ml-1" style="width: 130px" id="diet" [(ngModel)]="dietType" name="diet">
+      <option [ngValue]="undefined" hidden>Diet</option>
+      <option *ngFor="let diet of diets" [value]="diet">
+        {{diet}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group px-2">
+    <select class="form-control ml-1" style="width: 130px" id="meal" [(ngModel)]="mealType"  name="mealType">
+      <option [ngValue]="undefined" hidden>Meal</option>
+      <option *ngFor="let meal of meals" [value]="meal">
+        {{meal}}
+      </option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary" style="margin-left: 10px">
+    Zastosuj filtr
+  </button>
+  <button type="button" class="btn btn-info" (click)="clearOptions()" style="margin-left: 10px">
+    Zresetuj filtr
+  </button>
+</form>

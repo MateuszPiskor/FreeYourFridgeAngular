@@ -10,7 +10,7 @@ namespace FreeYourFridge.API.Models
         public int SpoonacularId { get; set; }
         public string Image { get; set; }
         public string Title { get; set; }
-        public string CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
         public int CreatedBy { get; set; }
     }
 }

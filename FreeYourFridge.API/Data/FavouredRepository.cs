@@ -39,19 +39,20 @@ namespace FreeYourFridge.API.Data
 
             return await PagedList<Favoured>.CreateListAsync(favoureds, userParams.PageNumber, userParams.PageSize);
         }
-            public async Task<string> GetRecipesByIds(string idsString)
-        {
-            RestClient client = new RestClient($"{_baseUrl}informationBulk?{_apiKey}&ids={idsString}");
-            RestRequest request = new RestRequest(Method.GET);
-            IRestResponse response = await client.ExecuteAsync(request);
-            if (response.IsSuccessful)
-            {
-                return response.Content;
-            }
-            return null;
-        }
 
-        public void Delete(int id, int userId)
+        //public async Task<string> GetRecipesByIds(string idsString)
+        //{
+        //    RestClient client = new RestClient($"{_baseUrl}informationBulk?{_apiKey}&ids={idsString}");
+        //    RestRequest request = new RestRequest(Method.GET);
+        //    IRestResponse response = await client.ExecuteAsync(request);
+        //    if (response.IsSuccessful)
+        //    {
+        //        return response.Content;
+        //    }
+        //    return null;
+        //}
+
+        public void DeleteFavoured(int id, int userId)
         {
             var favoureds = _context.Favoureds.ToList();
 
@@ -71,5 +72,20 @@ namespace FreeYourFridge.API.Data
             _context.Favoureds.Update(updateFavoured);
             await _context.SaveChangesAsync();
         }
+
+        public async  Task<bool> FavouredExist(int id)
+        {
+            if(await _context.Favoureds.AnyAsync(x => x.SpoonacularId == id))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<Favoured> GetFavoured(int id, int userId)
+        {
+            return await _context.Favoureds.FirstOrDefaultAsync(f => f.SpoonacularId == id && f.CreatedBy == userId);
+        }
+
     }
 }

@@ -12,8 +12,10 @@ namespace FreeYourFridge.API.Data
         //Task<IEnumerable<Favoured>> GetFavoureds();
         Task<PagedList<Favoured>> GetFavoureds(UserParams userParams);
 
-        Task<string> GetRecipesByIds(string idsString);
-        void Delete(int id,int userId);
+        //Task<string> GetRecipesByIds(string idsString);
+        void DeleteFavoured(int id,int userId);
         Task UpdateFavaoured(int id, int score, int userId);
+        Task<bool> FavouredExist(int id);
+        Task<Favoured> GetFavoured(int id, int userId);
     }
 }
