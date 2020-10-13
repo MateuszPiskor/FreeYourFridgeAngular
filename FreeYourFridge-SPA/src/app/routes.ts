@@ -18,7 +18,6 @@ import {IngredientResolver} from './_resolvers/ingredient.resolver';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 import { RegisterComponent } from './register/register.component';
 import { FavouredListResolver } from './_resolvers/favoured-list.resolver';
-import { RegisterComponent } from './register/register.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
