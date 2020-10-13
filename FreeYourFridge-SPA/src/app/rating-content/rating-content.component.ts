@@ -13,7 +13,7 @@ export class RatingContentComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {
-    console.log(this.rating.score);
+    //console.log(this.rating.score);
   }
 
   passBack(ratingvote) {

@@ -884,3 +884,9 @@ F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcorea
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.dll
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.pdb
 F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.genruntimeconfig.cache
+C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.csprojAssemblyReference.cache
+C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.AssemblyInfoInputs.cache
+C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.AssemblyInfo.cs
+C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.csproj.CoreCompileInputs.cache
+C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.dll
+C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.pdb

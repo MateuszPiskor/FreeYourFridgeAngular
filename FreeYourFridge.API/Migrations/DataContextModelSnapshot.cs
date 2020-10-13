@@ -116,7 +116,7 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CreateTime")
+                    b.Property<DateTime>("CreateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CreatedBy")

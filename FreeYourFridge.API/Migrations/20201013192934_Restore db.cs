@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreeYourFridge.API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Restoredb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,7 @@ namespace FreeYourFridge.API.Migrations
                     SpoonacularId = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
-                    CreateTime = table.Column<string>(nullable: true),
+                    CreateTime = table.Column<DateTime>(nullable: false),
                     CreatedBy = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -108,7 +108,8 @@ namespace FreeYourFridge.API.Migrations
                     Unit = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     IsOnShoppingList = table.Column<bool>(nullable: false),
-                    CreatedBy = table.Column<int>(nullable: false)
+                    CreatedBy = table.Column<int>(nullable: false),
+                    Image = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
