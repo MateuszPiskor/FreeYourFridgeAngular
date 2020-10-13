@@ -35,8 +35,8 @@ getUserFridge(userid): Observable<Fridge>{
 deleteIngredientFromFridge(ingredientId): Observable<IngredientDto>{
   return this.http.delete<IngredientDto>(this.baseUrl + 'fridge/' + ingredientId);
 }
-updateIngredient(id: number, amountIngredient: number):Observable<IngredientDto>{
-  return this.http.post<IngredientDto>(this.baseUrl + 'fridge/' + id, amountIngredient);
+updateIngredient(id: number, updateIngredient):Observable<IngredientDto>{
+  return this.http.post<IngredientDto>(this.baseUrl + 'fridge/' + id, updateIngredient);
 }
 getIngredientFromApi():Observable<ListOfIngredientsDto>{
   return this.http.get<ListOfIngredientsDto>(this.baseUrl + 'fridge/GetIngridients', httpOptions);

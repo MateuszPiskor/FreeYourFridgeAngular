@@ -54,9 +54,9 @@ namespace FreeYourFridge.API.Controllers
         }
 
         [HttpPost("{ingredientId}")]
-        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody] double amount)
+        public async Task<IActionResult> UpdateIngredient(int ingredientId, [FromBody] Ingredient updateIngredient)
         {
-            _repo.UpdateIngredient(ingredientId, amount);
+            _repo.UpdateIngredient(ingredientId, updateIngredient);
             return NoContent();
         }
 

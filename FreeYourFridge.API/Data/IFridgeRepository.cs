@@ -11,7 +11,6 @@ namespace FreeYourFridge.API.Data
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
         Task<Ingredient> GetIngredient(int id);
-        void UpdateIngredient(int id, double amount);
-        IEnumerable<Ingredient> GetIngredients(int userId);
+        void UpdateIngredient(int id, Ingredient updateIngredient);
     }
 }
