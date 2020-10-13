@@ -1,0 +1,51 @@
+.container{
+  justify-self: center;
+  width: 80%;
+  margin-top: 5%;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+}
+h1{
+  font-size: 30px;
+}
+.row{
+text-align: center;
+width: 100%;
+justify-content: end;
+}
+.item{
+  margin-right: 30px;
+}
+.buttons{
+  justify-content: end;
+}
+.btn{
+  font-size: 25px;
+}
+@media only screen and(max-width: 1000px){
+  .btn{
+    font-size: 20px;
+  }
+}
+@media only screen and(max-width: 1000px){
+  .btn{
+    font-size: 18px;
+  }
+  .ul{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .row{
+    display: flex;
+    flex-wrap: wrap;
+    margin:0 4px 4px 0;
+    list-style: none;
+  }
+  .container{
+    font-size: 20px;
+    width: 120%;
+  }
+}
+

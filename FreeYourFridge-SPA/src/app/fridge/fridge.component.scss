@@ -4,7 +4,11 @@
   width: 100%;
   display: table;
   margin: 0;
+  color: #b1acac;
 }
+
+
+
 .column{
   margin-top: 10px;
 }
@@ -166,6 +170,12 @@ p {
   .img-responsive {
     width: 70%;
   }
+  .td{
+    font-size: 18px;
+  }
+  .container{
+    width: 120%;
+  }
 }
 @media only screen and (max-width: 800px){
   .userName{
@@ -188,7 +198,7 @@ p {
     font-size: 18px;
   }
   tr{
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @media only screen and  (max-width:666px) {
@@ -211,6 +221,9 @@ p {
   .img-responsive {
     width: 70%;
   }
+  .tr{
+    font-size: 16px;
+  }
 }
 @media only screen and (max-width: 600px){
   .userName{
@@ -222,6 +235,7 @@ p {
   .container{
     width: 120%;
   }
+
 }
 @media only screen and (max-width: 480px){
   .userName{

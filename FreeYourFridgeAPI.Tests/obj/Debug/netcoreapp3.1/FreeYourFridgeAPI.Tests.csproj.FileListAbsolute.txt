@@ -8,8 +8,6 @@
 /Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
 /Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/xunit.runner.reporters.netcoreapp10.dll
 /Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/xunit.runner.utility.netcoreapp10.dll
-/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/FreeYourFridge.API.Views.dll
-/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/FreeYourFridge.API.Views.pdb
 /Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/FreeYourFridgeAPI.Tests.deps.json
 /Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/FreeYourFridgeAPI.Tests.runtimeconfig.json
 /Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/bin/Debug/netcoreapp3.1/FreeYourFridgeAPI.Tests.runtimeconfig.dev.json
