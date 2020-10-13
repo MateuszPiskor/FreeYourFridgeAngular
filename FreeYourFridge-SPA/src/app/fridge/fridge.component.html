@@ -1,58 +1,72 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="container">
-  <div class="userContent">
-    <div class=column>
-        <div class="rowUser"><img src="../assets/image/user.jpg"></div>
-        <button type="button" class="btn btn-success ml-3 mt-4" (click)='addComponent()'>Add new Ingredient</button>
-        <button type="button" class="btn btn-warning ml-4 mt-4"(click)='update()'>Update</button>
-    </div>
-    <div class="column">
-      <div class="none" *ngIf="fridge">
-      <table class="table" *ngIf="state">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Name</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Unit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-            <tbody>
-              <tr *ngFor="let ingredient of fridge.listIgredients; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{ingredient.name}}</td>
-                <td>{{ingredient.amount}}</td>
-                <td>{{ingredient.unit}}</td>
-                <td><button type="button" class="btn btn-danger" (click)="deleteIngredient(ingredient.id)">Delete</button></td>
-            </tr>
-            </tbody>
-        </table>
-        <table class="table" *ngIf="!state">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Unit</th>
-              <th scope="col">Update</th>
-            </tr>
-          </thead>
-              <tbody>
-                <tr *ngFor="let ingredient of fridge.listIgredients; let i = index">
-                  <td>{{i+1}}</td>
-                  <td>{{ingredient.name}}</td>
-                  <td>
-                    <form #editForm="ngForm">
-                    <div class="rowUser">amount :</div>
-                    <textarea name="dailyDemand" rows="1" class="form-control" [(ngModel)]="ingredient.amount"></textarea>
-                    </form>
-                  </td>
-                  <td>{{ingredient.unit}}</td>
-                  <td><a class="btn btn-warning" (click)="enableEditMethod(ingredient.id, ingredient.amount)">Save</a>
-                  </td>
-              </tr>
-              </tbody>
-          </table>
-    </div>
-    </div>
+  <div class="card user-card-full">
+      <div class="row m-l-0 m-r-0">
+          <div class="col-lg-3 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                  <div class="picture m-b-25"> <img class="img-responsive" src="../assets/image/user.jpg"> </div>
+                  <button type="button" class="btn btn-success mt-4" (click)='addComponent()'>Add new Ingredient</button>
+                  <button type="button" class="btn btn-secondary mt-4"(click)='update()'>Update</button>
+              </div>
+          </div>
+          <div class="col-lg-8">
+              <div class="card-block">
+                  <h6 class="m-b-20 p-b-5 b-b-default f-w-700">Your Fridge</h6>
+                  <div class="column">
+                    <div class="none" *ngIf="fridge">
+                    <table class="table" *ngIf="state">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Delete</th>
+                        </tr>
+                      </thead>
+                          <tbody>
+                            <tr *ngFor="let ingredient of fridge.listIgredients; let i = index">
+                              <td>{{i+1}}</td>
+                              <td><img src="{{ingredient.image}}" alt="{{ingredient.image}}"></td>
+                              <td>{{ingredient.name}}</td>
+                              <td>{{ingredient.amount}}</td>
+                              <td>{{ingredient.unit}}</td>
+                              <td><button type="button" class="btn btn-danger" (click)="deleteIngredient(ingredient.id)">Delete</button></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                      <table class="table" *ngIf="!state">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Update</th>
+                          </tr>
+                        </thead>
+                            <tbody>
+                              <tr *ngFor="let ingredient of fridge.listIgredients; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{ingredient.name}}</td>
+                                <td>
+                                  <form #editForm="ngForm">
+                                  <div class="rowUser">amount :</div>
+                                  <textarea name="dailyDemand" rows="1" class="form-control" [(ngModel)]="ingredient.amount"></textarea>
+                                  </form>
+                                </td>
+                                <td>{{ingredient.unit}}</td>
+                                <td><a class="btn btn-warning custom" (click)="enableEditMethod(ingredient.id, ingredient.amount)">Save</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
+

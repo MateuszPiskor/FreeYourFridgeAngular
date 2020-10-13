@@ -18,12 +18,14 @@ namespace FreeYourFridge.API.Controllers
     public class ShoppingListController : ControllerBase
     {
         private readonly IShoppingListRepository _repo;
+        private readonly IIngredientRepository _ingredientRepo;
         private readonly IMapper _mapper;
 
-        public ShoppingListController(IShoppingListRepository repo, IMapper mapper)
+        public ShoppingListController(IShoppingListRepository repo, IMapper mapper, IIngredientRepository ingredientRepo)
         {
             _repo = repo;
             _mapper = mapper;
+            _ingredientRepo = ingredientRepo;
         }
 
         [HttpPost]
@@ -31,10 +33,13 @@ namespace FreeYourFridge.API.Controllers
         {
             if (shoppingLitItemToAddDto != null)
             {
+                IngredientDto newIngredientDto = await _ingredientRepo.GetIngredientsFromAPI(shoppingLitItemToAddDto.SpoonacularId);
+                string image = newIngredientDto.image;
                 ShoppingListItem shoppingListItem = _mapper.Map<ShoppingListItem>(shoppingLitItemToAddDto);
                 shoppingListItem.IsOnShoppingList = true;
                 var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
                 shoppingListItem.CreatedBy = int.Parse(userId);
+                shoppingListItem.Image = image;
                 _repo.Add<ShoppingListItem>(shoppingListItem);
                 _repo.SaveAll();
 

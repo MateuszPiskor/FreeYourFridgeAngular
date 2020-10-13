@@ -28,6 +28,7 @@ export class ShoppingListComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.getAllToDoItems();
+    console.log(this.toDoItems);
   }
 
   getAllToDoItems() {

@@ -28,7 +28,7 @@ namespace FreeYourFridge.API.ExternalModels
 
     public class Nutrition
     {
-        public ICollection<Nutrient> nutrients { get; set; } /**/
+        public ICollection<Nutrient> nutrients { get; set; }
         //public ICollection<Ingredient> ingredients { get; set; }
         public Caloricbreakdown caloricBreakdown { get; set; }
         public Weightperserving weightPerServing { get; set; }
@@ -102,7 +102,6 @@ namespace FreeYourFridge.API.ExternalModels
 
     public class Analyzedinstruction
     {
-        //public string name { get; set; }
         public Step[] steps { get; set; }
     }
 
@@ -110,20 +109,5 @@ namespace FreeYourFridge.API.ExternalModels
     {
         public int number { get; set; }
         public string step { get; set; }
-        public Ingredient1[] ingredients { get; set; }
-        public Equipment[] equipment { get; set; }
-    }
-
-    public class Ingredient1
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string localizedName { get; set; }
-        public string image { get; set; }
-    }
-
-    public class Equipment
-    {
-
     }
 }

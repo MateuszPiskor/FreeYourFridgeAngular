@@ -10,6 +10,7 @@ using FreeYourFridge.API.Filters;
 using FreeYourFridge.API.Models;
 using FreeYourFridge.API.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeYourFridge.API.Controllers
@@ -17,6 +18,8 @@ namespace FreeYourFridge.API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/dailymeal")]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class DailyMealController : ControllerBase
     {
         private readonly IDailyMealRepository _repoUser;
@@ -31,19 +34,23 @@ namespace FreeYourFridge.API.Controllers
         }
 
         /// <summary>
-        /// Gets list of curreitn daily meals
+        /// Gets list of current daily meals
         /// </summary>
         /// <returns></returns>
-
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetDailyMeals()
         {
             var meals = await _repoUser.GetDailyMealsAsync();
+
             var mealsFiltered = meals.Where(dm =>
                 dm.CreatedBy == int.Parse(User.FindFirst(claim =>
                     claim.Type == ClaimTypes.NameIdentifier).Value));
+
             return Ok(_mapper.Map<List<DailyMealBasicDto>>(mealsFiltered));
         }
+
 
         /// <summary>
         ///  Gets daily meal stored in database
@@ -52,6 +59,7 @@ namespace FreeYourFridge.API.Controllers
         /// <returns>DailyMealBasicDto</returns>
         [HttpGet]
         [Route("{id}", Name = "GetDailyMeal")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetSingleDailyMeal(int id)
         {
             var dMeal = await _repoUser.GetDailyMealAsync(id);
@@ -68,6 +76,8 @@ namespace FreeYourFridge.API.Controllers
         /// <returns>DailyMealDetailsDto</returns>
         [HttpGet("{id}/details")]
         [DailMealFilter]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSingleDailyMealDetails(int id)
         {
             var dMealLocal = await _repoUser.GetDailyMealAsync(id);
@@ -80,36 +90,33 @@ namespace FreeYourFridge.API.Controllers
             return NotFound();
         }
 
+
         /// <summary>
         /// add DailyMeal; called only once after addDailyMeal from recipe-detail-component.ts (Angular)
         /// </summary>
         /// <param name="dailyMealToAddDto"></param>
-        /// <returns>BadRequest or 302 if record exists or calls GetSingleDailyMeal </returns>
+        /// <returns>BadRequest or 409 if record exists or calls GetSingleDailyMeal </returns>
         [HttpPost]
-        [Consumes("application/json")]
-
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> AddDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
             if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest(dailyMealToAddDto);
             var record = await _repoUser.GetDailyMealAsync(dailyMealToAddDto.Id);
-            if (record != null)
-            {
-                return StatusCode(409);
-            }
+            if (record != null) return StatusCode(409);
 
+            var userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            if (!(await _calc.CheckIfFilledDCI(userId))) return BadRequest();
             await CheckTimeInEntityTable();
-            var dMealToAdd = _mapper.Map<Models.DailyMeal>(dailyMealToAddDto);
-            var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
-            dMealToAdd.TimeOfLastMeal = DateTime.Now;
-            dMealToAdd.CreatedBy = int.Parse(userId);
-            dMealToAdd.CaloriesPerPortion =
-                await _calc.CalculaCaloriesPerPortion(dMealToAdd.Id, dMealToAdd.Grams);
-            _repoUser.AddMeal(dMealToAdd);
-            await _repoUser.SaveChangesAsync();
-            await _calc.AdjustDailyDemand(int.Parse(userId));
-            return CreatedAtRoute("GetDailyMeal", new { dMealToAdd.Id }, null);
 
+            var dMealToAdd = _mapper.Map<Models.DailyMeal>(dailyMealToAddDto);
+            await AddDailyMealWithUserId(dMealToAdd, userId);
+
+            await _calc.AdjustDailyDemand(userId);
+            return CreatedAtRoute("GetDailyMeal", new { dMealToAdd.Id }, null);
         }
+
 
         /// <summary>
         /// Updates daily Meal - called by Angular from dailyMeadDetails.component.ts
@@ -117,22 +124,19 @@ namespace FreeYourFridge.API.Controllers
         /// <param name="dailyMealToAddDto"></param>
         /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateDailyMeal([FromBody] DailyMealToAddDto dailyMealToAddDto)
         {
             if (!ModelState.IsValid || dailyMealToAddDto == null) return BadRequest();
-
             var dMeal = await _repoUser.GetDailyMealAsync(dailyMealToAddDto.Id);
             if (dMeal == null) return BadRequest();
-
-            dMeal.Grams = dailyMealToAddDto.Grams;
-            dMeal.Title = dailyMealToAddDto.Title;
-            dMeal.UserRemarks = dailyMealToAddDto.UserRemarks;
-
-            _repoUser.UpdateMeal(dMeal);
-            await _repoUser.SaveChangesAsync();
+            await UpdateGramsTitleRemarksInDailyMeal(dailyMealToAddDto, dMeal);
             return NoContent();
         }
 
+
+        #region private
 
         /// <summary>
         /// Clears table when added the first dailymeal a day
@@ -154,7 +158,6 @@ namespace FreeYourFridge.API.Controllers
                 }
             }
         }
-
         private async Task ArchiveDailyMeals(IEnumerable<DailyMeal> dailyMeals)
         {
             foreach (var dailyMeal in dailyMeals)
@@ -165,6 +168,24 @@ namespace FreeYourFridge.API.Controllers
             }
             await _repoUser.SaveChangesAsync();
         }
+        private async Task AddDailyMealWithUserId(DailyMeal dMealToAdd, int userId)
+        {
+            dMealToAdd.TimeOfLastMeal = DateTime.Now;
+            dMealToAdd.CreatedBy = userId;
+            dMealToAdd.CaloriesPerPortion =
+                await _calc.CalculaCaloriesPerPortion(dMealToAdd.Id, dMealToAdd.Grams);
+            _repoUser.AddMeal(dMealToAdd);
+            await _repoUser.SaveChangesAsync();
+        }
+        private async Task UpdateGramsTitleRemarksInDailyMeal(DailyMealToAddDto dailyMealToAddDto, DailyMeal dMeal)
+        {
+            dMeal.Grams = dailyMealToAddDto.Grams;
+            dMeal.Title = dailyMealToAddDto.Title;
+            dMeal.UserRemarks = dailyMealToAddDto.UserRemarks;
+            _repoUser.UpdateMeal(dMeal);
+            await _repoUser.SaveChangesAsync();
+        }
+        #endregion
     }
 }
 

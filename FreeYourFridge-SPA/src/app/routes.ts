@@ -17,10 +17,12 @@ import {AddIngredientComponent} from './addIngredient/addIngredient.component';
 import {IngredientResolver} from './_resolvers/ingredient.resolver';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 import { FavouredListResolver } from './_resolvers/favoured-list.resolver';
+import { RegisterComponent } from './register/register.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'contact', component: ContactComponent},
+    {path: 'register', component: RegisterComponent},
     {
         path: '',
         runGuardsAndResolvers: 'always',

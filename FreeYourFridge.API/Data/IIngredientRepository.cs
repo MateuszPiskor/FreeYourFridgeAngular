@@ -9,7 +9,7 @@ namespace FreeYourFridge.API.Data
     {
         Task<IngredientDto> GetIngredientsFromAPI(int id);
         Task<List<ListOfIngredients>> GetAllIngredients();
-        void Add(Ingredient newIngredient, Fridge fridge);
+        void Add(Ingredient newIngredient, Fridge fridge, string image);
         Task<bool> SaveAll();
     }
 }

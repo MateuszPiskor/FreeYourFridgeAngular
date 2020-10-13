@@ -1,0 +1,66 @@
+.container{
+  justify-self: center;
+  width: 80%;
+  margin-top: 5%;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+  padding: 15px;
+  min-height: 500px;
+}
+
+.shopTable{
+  padding: 20px;
+}
+.table{
+  font-size: 25px;
+  font-weight: 100;
+  width: 100%;
+  display: table;
+  margin: 0;
+  color: #b1acac;
+  padding-bottom: 30px;
+}
+.row{
+text-align: center;
+width: 100%;
+justify-content: end;
+}
+.item{
+  margin-right: 30px;
+}
+.buttons{
+  justify-content: end;
+}
+.btn{
+  font-size: 25px;
+}
+@media only screen and(max-width: 1250px){
+  .btn{
+    font-size: 18px;
+  }
+  .table{
+    font-size: 18px;
+  }
+  .container{
+    font-size: 20px;
+    width: 130%;
+  }
+  .shopTable{
+    width: 140%;
+  }
+}
+
+@media only screen and(max-width: 600px){
+  .btn{
+    font-size: 18px;
+  }
+  .table{
+    font-size: 20px;
+  }
+  .container{
+    font-size: 20px;
+  }
+}
+

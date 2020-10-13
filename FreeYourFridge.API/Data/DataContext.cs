@@ -10,11 +10,11 @@ namespace FreeYourFridge.API.Data
         public DbSet<Meal> Meals { get; set; }
         public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
         public DbSet<Favoured> Favoureds { get; set; }
-        public DbSet<DailyMeal> DailyMeals { get; set; }
+        public virtual DbSet<DailyMeal> DailyMeals { get; set; }
         public DbSet<Fridge> Fridges { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<ListOfIngredients> ListOfIngredients { get; set; }
-        public DbSet<DailyMealToArchive> ArchivedDailyMeals { get; set; }
+        public virtual DbSet<DailyMealToArchive> ArchivedDailyMeals { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

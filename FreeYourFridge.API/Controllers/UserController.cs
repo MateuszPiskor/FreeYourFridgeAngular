@@ -67,7 +67,7 @@ namespace FreeYourFridge.API.Controllers
                     Protein = 0,
                     Description = "",
                     User = await _repo.GetUser(id),
-                    Level = ActivityLevel.Low,
+                    ActivityLevel = ActivityLevel.Low,
                     UserId = id
                 };
                 userforUpdateDto.DailyDemand = _calc.CalculateDailyDemand(userforUpdateDto, userFromRepo);

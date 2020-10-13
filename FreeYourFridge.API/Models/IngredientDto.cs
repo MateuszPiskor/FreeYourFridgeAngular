@@ -7,6 +7,7 @@ namespace FreeYourFridge.API.Models
         public int id {get;set;}
         public string originalName{get;set;}
         public List<string> possibleUnits{get;set;}
+        public string image{get;set;}
         
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FreeYourFridge.API.Models
 {
+    [Serializable]
     public class DailyMeal
     {
         [Key]

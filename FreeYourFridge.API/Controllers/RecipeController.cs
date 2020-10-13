@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 
 namespace FreeYourFridge.API.Controllers
 {
+
     [Authorize]
     [Route("api/[controller]")]
     public class RecipeController : ControllerBase

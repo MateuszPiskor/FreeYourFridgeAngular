@@ -6,6 +6,5 @@ export interface IngredientDto  {
   name: string;
   unit: string;
   fridgeId: number;
-
-
+  image: string;
 }

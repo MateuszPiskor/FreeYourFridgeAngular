@@ -3,7 +3,7 @@
     <div class=column *ngIf="listOfIngredients">
       <div class="rowHeader">Add New Ingredient</div>
         <form class="formClass" #editForm="ngForm" id="editForm" (ngSubmit)="addIngredient()">
-          <div class="rowUser">Name Ingredient :</div>
+          <div class="rowUser">Name Ingredient</div>
           <div class="row">
             <div class="col-md-12">
                   <select name="originalName" [(ngModel)]="SelIngredientName" (change)="FillUnits();" class="form-control">
@@ -12,9 +12,9 @@
                 </select>
             </div>
           </div>
-          <div class="rowUser">Amount :</div>
+          <div class="rowUser">Amount</div>
           <textarea name="amount" rows="1" class="form-control" [(ngModel)]="ingredientToApi.amount"></textarea>
-          <div class="rowUser">Unit :</div>
+          <div class="rowUser">Unit</div>
           <div class="row">
             <div class="col-md-12">
                   <select name="unit" [(ngModel)]="ingredientToApi.unit" class="form-control">
@@ -24,7 +24,8 @@
             </div>
           </div>
           <div class=column>
-            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-succes btn-block mt-4">SAVE CHANGES</button>
+            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-succes btn-block mt-4 mb-4">SAVE CHANGES</button>
+            <button class="btn btn-warning mb-4" type="button" (click)="cancel()">Cancel</button>
         </div>
       </form>
     </div>

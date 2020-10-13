@@ -9,11 +9,11 @@ namespace FreeYourFridge.API.Data
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         public UserRepository(DataContext context, IMapper mapper)
         {
             _context = context;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
         public void Add<T>(T entity) where T : class
         {

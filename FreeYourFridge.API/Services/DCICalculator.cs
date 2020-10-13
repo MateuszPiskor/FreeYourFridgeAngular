@@ -27,6 +27,15 @@ namespace FreeYourFridge.API.Services
         /// <returns>Daily Calories Intake (int) </returns>
         public int CalculateDailyDemand(UserForUpdateDto userDto, UserDetails user)
         {
+            if (userDto == null)
+            {
+                throw new ArgumentNullException(nameof(userDto));
+            }
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
             int localDD = (user.User.Gender == "Female") ? (int)(447.593 + (9.247 * (double)user.User.Weight) +
                 (3.098 * (double)user.User.Height) - (4.330 * user.User.Age)) :
             localDD = (int)(88.362 + (13.397 * (double)user.User.Weight) +
@@ -64,6 +73,12 @@ namespace FreeYourFridge.API.Services
             var adjustedDD = userDetails.DailyDemand - caloriesFromCurrentDM.ToList().Select(dm => dm.CaloriesPerPortion).Sum();
             userDetails.DailyDemandToRealize = adjustedDD;
             await _repoUser.SaveAll();
+        }
+
+        public async Task<bool> CheckIfFilledDCI(int userId)
+        {
+            var userDetails = await _repoUser.GetUserDetail(userId) ?? throw new ArgumentNullException(nameof(userId));
+            return userDetails.DailyDemand != 0;
         }
     }
 }
