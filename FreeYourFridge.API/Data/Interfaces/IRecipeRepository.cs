@@ -11,7 +11,5 @@ namespace FreeYourFridge.API.Data
 
         Task<string> GetRespone(int id, string kindOfInformation);
         Task<string> GetResponeWhenPassParams(IEnumerable<Ingredient> ingredients, int numberOfRecipes, UserParamsForFilterRecipes userParams);
-
-        //Task<string> GetResponse(string kindOfInformation, string[] optional=null);
     }
 }

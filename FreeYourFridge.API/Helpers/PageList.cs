@@ -8,10 +8,10 @@ namespace FreeYourFridge.API.Helpers
 {
     public class PagedList<T> : List<T>
     {
-        public int CurrentPage { get; set; }        // numer wybranej strony
-        public int PageSize { get; set; }           // rozmiar strony czyli ile elementóÚw na stronie
-        public int TotalCount { get; set; }         // całkowita liczba elementów
-        public int TotalPages { get; set; }         // łączna liczba stron
+        public int CurrentPage { get; set; }        
+        public int PageSize { get; set; }           
+        public int TotalCount { get; set; }         
+        public int TotalPages { get; set; }        
 
         public PagedList(List<T> items, int totalCount, int pageNumber, int pageSize)
         {

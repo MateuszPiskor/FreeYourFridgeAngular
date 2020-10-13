@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
 using Microsoft.EntityFrameworkCore;
-using RestSharp;
 
 namespace FreeYourFridge.API.Data
 {
@@ -28,29 +26,12 @@ namespace FreeYourFridge.API.Data
             return favoured;
         }
 
-        //public async Task<IEnumerable<Favoured>> GetFavoureds()
-        //{
-        //    return await _context.Favoureds.ToListAsync();
-        //}
-
-       public async Task<PagedList<Favoured>> GetFavoureds(UserParams userParams)
+        public async Task<PagedList<Favoured>> GetFavoureds(UserParams userParams)
         {
             var favoureds = _context.Favoureds;
 
             return await PagedList<Favoured>.CreateListAsync(favoureds, userParams.PageNumber, userParams.PageSize);
         }
-
-        //public async Task<string> GetRecipesByIds(string idsString)
-        //{
-        //    RestClient client = new RestClient($"{_baseUrl}informationBulk?{_apiKey}&ids={idsString}");
-        //    RestRequest request = new RestRequest(Method.GET);
-        //    IRestResponse response = await client.ExecuteAsync(request);
-        //    if (response.IsSuccessful)
-        //    {
-        //        return response.Content;
-        //    }
-        //    return null;
-        //}
 
         public void DeleteFavoured(int id, int userId)
         {
@@ -73,9 +54,9 @@ namespace FreeYourFridge.API.Data
             await _context.SaveChangesAsync();
         }
 
-        public async  Task<bool> FavouredExist(int id)
+        public async Task<bool> FavouredExist(int id)
         {
-            if(await _context.Favoureds.AnyAsync(x => x.SpoonacularId == id))
+            if (await _context.Favoureds.AnyAsync(x => x.SpoonacularId == id))
             {
                 return true;
             }
@@ -86,6 +67,5 @@ namespace FreeYourFridge.API.Data
         {
             return await _context.Favoureds.FirstOrDefaultAsync(f => f.SpoonacularId == id && f.CreatedBy == userId);
         }
-
     }
 }
