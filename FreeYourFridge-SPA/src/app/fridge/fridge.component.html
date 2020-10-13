@@ -52,12 +52,18 @@
                                 <td>{{ingredient.name}}</td>
                                 <td>
                                   <form #editForm="ngForm">
-                                  <div class="rowUser">amount :</div>
-                                  <textarea name="dailyDemand" rows="1" class="form-control" [(ngModel)]="ingredient.amount"></textarea>
+                                  <textarea name="amount" rows="1" class="form-control" [(ngModel)]="ingredient.amount"></textarea>
                                   </form>
                                 </td>
-                                <td>{{ingredient.unit}}</td>
-                                <td><a class="btn btn-warning custom" (click)="enableEditMethod(ingredient.id, ingredient.amount)">Save</a>
+                                <td>
+                                  <form #editForm="ngForm">
+                                    <select name="unit" [(ngModel)]="ingredient.unit" (click)="FillUnits(ingredient.spoonacularId);" class="form-control">
+                                      <option>{{ingredient.unit}}</option>
+                                      <option *ngFor="let unit of units" [value]="unit">{{unit}}</option>
+                                  </select>
+                                </form>
+                                </td>
+                                <td><a class="btn btn-warning custom" (click)="enableEditMethod(ingredient.id, ingredient.amount, ingredient.unit)">Save</a>
                                 </td>
                             </tr>
                             </tbody>
