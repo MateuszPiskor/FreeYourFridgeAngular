@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201008093512_Restore db")]
+    [Migration("20201013183543_Restore db")]
     partial class Restoredb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
