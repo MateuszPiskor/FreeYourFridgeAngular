@@ -75,9 +75,9 @@ export class FilterBarComponent implements OnInit {
   }
 
   clearOptions(){
-  //this.cuisineType = 'Cuisine';
-  // this.dietType = 'Diet';
-  // this.mealType= 'Meal';
-   this.loadRecipes();
+  this.cuisineType = 'undefined';
+  this.dietType = 'undefined';
+  this.mealType = 'undefined';
+  this.loadRecipes();
   }
 }
