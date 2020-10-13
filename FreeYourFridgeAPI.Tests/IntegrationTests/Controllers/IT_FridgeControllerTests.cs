@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FreeYourFridge.API;
 using FreeYourFridge.API.Models;
 using FreeYourFridgeAPI.Tests.IntegrationTestsHelper;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
@@ -26,12 +23,12 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
             _factory = factory;
         }
 
-        [Fact]
-        public async Task GetFridgeByUserId_ForbiddenForUnauthenticated()
-        {
-            var response = await _httpClient.GetAsync("GetFridgeByUserId/1");
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        }
+        //[Fact]
+        //public async Task GetFridgeByUserId_ForbiddenForUnauthenticated()
+        //{
+        //    var response = await _httpClient.GetAsync("GetFridgeByUserId/1");
+        //    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        //}
 
 
         [Fact]
@@ -39,19 +36,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
         {
             var content = JsonContent.Create(ReturnValidIngredientToPass());
 
-            var client = _factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-                            options => options.NameIdentifier = "1");
-                });
-            }).CreateClient();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
-
-            var response = await client.PostAsync("addIngredient/1", content);
+            var response = await _httpClient.PostAsync("addIngredient/1", content);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -59,17 +44,8 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
         [Fact]
         public async Task GetIngredients_ReturnsSuccessStatusCode()
         {
-            var client = _factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-                            options => options.NameIdentifier = "1");
-                });
-            }).CreateClient();
 
-            var response = await client.GetAsync("GetIngridients");
+            var response = await _httpClient.GetAsync("GetIngridients");
             response.EnsureSuccessStatusCode();
         }
 

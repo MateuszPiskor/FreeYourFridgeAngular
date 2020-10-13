@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FreeYourFridge.API;
 using FreeYourFridgeAPI.Tests.IntegrationTestsHelper;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
@@ -24,29 +21,18 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
             _factory = factory;
         }
 
-        [Fact]
-        public async Task Get_ForbiddenForUnauthenticatedUser()
-        {
-            var response = await _httpClient.GetAsync("");
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        }
+        //[Fact]
+        //public async Task Get_ForbiddenForUnauthenticatedUser()
+        //{
+        //    var response = await _httpClient.GetAsync("");
+        //    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        //}
 
         [Fact]
         public async Task GetFavoureds_ReturnSuccessStatusCode()
         {
-            var client = _factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-                            options => options.NameIdentifier = "1");
-                });
-            }).CreateClient();
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
-
-            var response = await client.GetAsync("");
+            var response = await _httpClient.GetAsync("");
             response.EnsureSuccessStatusCode();
         }
 
@@ -54,19 +40,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
         public async Task DeleteFavoured_IfValid_ReturnsOK()
         {
 
-            var client = _factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-                            options => options.NameIdentifier = "1");
-                });
-            }).CreateClient();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("test");
-
-            var response = await client.DeleteAsync("1");
+            var response = await _httpClient.DeleteAsync("1");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 

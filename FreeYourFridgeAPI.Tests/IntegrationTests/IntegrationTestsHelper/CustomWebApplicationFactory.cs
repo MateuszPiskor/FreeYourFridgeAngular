@@ -34,6 +34,10 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper
                             options.UseInMemoryDatabase("InMemDbTesting", _dbRoot);
                         });
 
+                services.AddAuthentication("test")
+                    .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
+                        options => options.NameIdentifier = "1");
+
                 var serviceProvider = services.BuildServiceProvider();
                 using (var scope = serviceProvider.CreateScope())
                 {
