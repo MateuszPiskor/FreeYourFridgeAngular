@@ -14,14 +14,14 @@
       </tr>
     </thead>
         <tbody>
-          <tr *ngFor="let ingredient of toDoItems; let i = index">
+          <tr *ngFor="let toDoItems of toDoItems; let i = index">
             <td>{{i+1}}</td>
-            <td><img src="{{ingredient.image}}" alt="{{ingredient.image}}"></td>
-            <td>{{ingredient.name}}</td>
-            <td>{{ingredient.amount}}</td>
-            <td>{{ingredient.unit}}</td>
-            <td><button class="btn btn-success mr-2" (click)="buyTask(toDoItem)">Add to fridge</button></td>
-            <td><button class="btn btn-danger" (click)="deleteTask(toDoItem.spoonacularId)">Remove</button></td>
+            <td><img src="{{toDoItems.image}}" alt="{{toDoItems.image}}"></td>
+            <td>{{toDoItems.name}}</td>
+            <td>{{toDoItems.amount}}</td>
+            <td>{{toDoItems.unit}}</td>
+            <td><button class="btn btn-success mr-2" (click)="buyTask(toDoItems)">Add to fridge</button></td>
+            <td><button class="btn btn-danger" (click)="deleteTask(toDoItems.spoonacularId)">Remove</button></td>
         </tr>
         </tbody>
     </table>
