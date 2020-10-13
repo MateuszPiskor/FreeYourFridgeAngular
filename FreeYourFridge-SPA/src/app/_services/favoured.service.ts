@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FavouredToList } from '../_models/Favoured/favouredToList';
-import { RecipeToDetails } from '../_models/recipeToDetails';
 import { FavouredDto } from '../_models/Favoured/favouredDto';
 import { PaginationResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';

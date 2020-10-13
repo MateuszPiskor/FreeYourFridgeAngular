@@ -1,12 +1,22 @@
 <div class="col-sm-12">
   <div *ngFor="let favoured of favoureds">
-    <app-favoured-card [favoured]='favoured' (passFavoured)="removeItem($event)" (uploaded)="loadFavoured()"></app-favoured-card>
+    <app-favoured-card
+      [favoured]="favoured"
+      (passFavoured)="removeItem($event)"
+      (uploaded)="loadFavoured()"
+    >
+    </app-favoured-card>
   </div>
-  <pagination [boundaryLinks]="true"
-                  [totalItems]="pagination.totalItems"
-                  [itemsPerPage]="pagination.itemsPerPage"
-                  [(ngModel)]="pagination.currentPage"
-                  (pageChanged)="pageChanged($event)"
-                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-    </pagination>
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalCount"
+    [itemsPerPage]="pagination.pageSize"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
 </div>

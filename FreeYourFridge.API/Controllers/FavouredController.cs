@@ -9,6 +9,7 @@ using FreeYourFridge.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FreeYourFridge.API.Helpers;
+using Newtonsoft.Json;
 
 namespace FreeYourFridge.API.Controllers
 {
@@ -26,44 +27,23 @@ namespace FreeYourFridge.API.Controllers
             _mapper = mapper;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddFavaoured([FromBody] FavouredDto favaouredDto)
-        //{
-        //    if (favaouredDto != null)
-        //    {
-        //        Favoured favoured = _mapper.Map<Favoured>(favaouredDto);
-        //        var userId = User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
-        //        favoured.CreatedBy = int.Parse(userId);
-        //        _repo.Add<Favoured>(favoured);
-        //        var saveResult = _repo.SaveAll();
-        //        return StatusCode(201);
-        //    }
-        //    return BadRequest();
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetFavoureds()
-        //{
-        //    IEnumerable<Favoured> favoureds = await _repo.GetFavoureds();
-        //    var favouredsFiltered = favoureds.Where(f =>
-        //        f.CreatedBy == int.Parse(User.FindFirst(claim =>
-        //           claim.Type == ClaimTypes.NameIdentifier).Value));
-        //    return Ok(favouredsFiltered);
-        //}
-
         [HttpGet]
         public async Task<IActionResult> GetFavoureds([FromQuery] UserParams userParams)
         {
             PagedList<Favoured> favoureds = await _repo.GetFavoureds(userParams);
 
-            //var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(favoureds);
+            var paginationMetadata = new
+            {
+                totalCount = favoureds.TotalCount,
+                pageSize = favoureds.PageSize,
+                currentPage = favoureds.CurrentPage,
+                totalPages = favoureds.TotalPages
+            };
 
-            Response.AddPagination(favoureds.CurrentPage, favoureds.PageSize, favoureds.TotalCount, favoureds.TotalPages);
-
-
+            HttpContext.Response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationMetadata));
+            HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
             return Ok(favoureds);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFavoured(int id)
