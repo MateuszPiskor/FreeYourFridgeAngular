@@ -22,7 +22,7 @@ namespace FreeYourFridge.API.Data
         public async Task<string> GetRespone(IEnumerable<Ingredient> ingredients, int numberOfRecipes)
         {
             string igredientUrl = _makePartialUrl.UrlIngredientMaker(ingredients);
-            RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients={igredientUrl}" + "&number=" + numberOfRecipes);
+            RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients={igredientUrl}" + "&number=" + numberOfRecipes+ "&limitLicense=true");
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)
