@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/FreeYourFridgeAPI.Tests.csproj": {}
+    "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj": {}
   },
   "projects": {
-    "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridge.API/FreeYourFridge.API.csproj": {
+    "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridge.API/FreeYourFridge.API.csproj",
+        "projectUniqueName": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj",
         "projectName": "FreeYourFridge.API",
-        "projectPath": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridge.API/FreeYourFridge.API.csproj",
-        "packagesPath": "/Users/nataliafilipek/.nuget/packages/",
-        "outputPath": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridge.API/obj/",
+        "projectPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "/Users/nataliafilipek/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -114,36 +113,35 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/FreeYourFridgeAPI.Tests.csproj": {
+    "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/FreeYourFridgeAPI.Tests.csproj",
+        "projectUniqueName": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj",
         "projectName": "FreeYourFridgeAPI.Tests",
-        "projectPath": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/FreeYourFridgeAPI.Tests.csproj",
-        "packagesPath": "/Users/nataliafilipek/.nuget/packages/",
-        "outputPath": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridgeAPI.Tests/obj/",
+        "projectPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\FreeYourFridgeAPI.Tests.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridgeAPI.Tests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "/Users/nataliafilipek/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridge.API/FreeYourFridge.API.csproj": {
-                "projectPath": "/Users/nataliafilipek/Desktop/proj/FreeYourFridgeAngular/FreeYourFridge.API/FreeYourFridge.API.csproj"
+              "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj": {
+                "projectPath": "F:\\ASP\\Projects\\FreeYourFridgeAngular\\FreeYourFridge.API\\FreeYourFridge.API.csproj"
               }
             }
           }
@@ -213,11 +211,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

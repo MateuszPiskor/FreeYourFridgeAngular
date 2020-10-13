@@ -33,7 +33,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                 Protein = 21,
                 Description = "",
                 User = db.Users.Where(u => u.Id == 1) as User,
-                Level = ActivityLevel.Medium,
+                ActivityLevel = ActivityLevel.Medium,
                 UserId = 1
             });
 

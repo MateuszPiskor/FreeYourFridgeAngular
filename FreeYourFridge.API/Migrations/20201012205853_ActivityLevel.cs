@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreeYourFridge.API.Migrations
 {
-    public partial class initial : Migration
+    public partial class ActivityLevel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -166,7 +166,7 @@ namespace FreeYourFridge.API.Migrations
                     Fats = table.Column<int>(nullable: false),
                     Protein = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Level = table.Column<int>(nullable: false),
+                    ActivityLevel = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

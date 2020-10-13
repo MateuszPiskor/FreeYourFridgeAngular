@@ -43,8 +43,9 @@ namespace FreeYourFridge.API.Controllers
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForListDto>(createdUser);
 
-            var newUserDetails = new UserDetails(){
-                
+            var newUserDetails = new UserDetails()
+            {
+
                 DailyDemand = 0,
                 Carbohydrates = 0,
                 Fats = 0,
@@ -52,7 +53,7 @@ namespace FreeYourFridge.API.Controllers
                 Description = "",
                 User = createdUser,
                 UserId = createdUser.Id,
-                Level = 0
+                ActivityLevel = 0
             };
             _user.Add(newUserDetails);
             await _user.SaveAll();
@@ -61,11 +62,11 @@ namespace FreeYourFridge.API.Controllers
 
         [HttpPost("login")]
         [Consumes("application/json")]
-        
+
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
-            if(userFromRepo ==null)
+            if (userFromRepo == null)
             {
                 return Unauthorized();
             }
@@ -85,7 +86,8 @@ namespace FreeYourFridge.API.Controllers
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Ok(new{
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }

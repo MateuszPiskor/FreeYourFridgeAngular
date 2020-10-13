@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeYourFridge.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201006173611_initial")]
-    partial class initial
+    [Migration("20201012205853_ActivityLevel")]
+    partial class ActivityLevel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -289,6 +289,9 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ActivityLevel")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Carbohydrates")
                         .HasColumnType("INTEGER");
 
@@ -302,9 +305,6 @@ namespace FreeYourFridge.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Fats")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Level")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Protein")
