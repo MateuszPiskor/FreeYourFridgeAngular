@@ -10,6 +10,7 @@ namespace FreeYourFridge.API.Data
         void Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
+        IEnumerable<Ingredient> GetIngredients(int userId);
         Task<Ingredient> GetIngredient(int id);
         void UpdateIngredient(int id, Ingredient updateIngredient);
     }
