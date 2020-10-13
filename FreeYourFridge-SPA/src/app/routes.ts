@@ -29,7 +29,6 @@ export const appRoutes: Routes = [
             {path: 'myProfile', component: MyProfileComponent, resolve: {user: MemberEditResolver}},
             // tslint:disable-next-line: max-line-length
             {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            // {path: 'fridge', component: FridgeComponent},
             {path: 'favoured', component: FavouredListComponent, resolve:{favoureds: FavouredListResolver}},
             {path: 'fridge', component: FridgeComponent, resolve: {fridge: FridgeResolver}},
             {path: 'addIngredient', component: AddIngredientComponent, resolve: {ingredient: IngredientResolver}},
