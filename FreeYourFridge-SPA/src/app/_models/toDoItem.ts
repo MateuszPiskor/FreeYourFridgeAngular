@@ -5,4 +5,5 @@ export class ToDoItem {
   unit: string;
   done: boolean;
   isOnShoppingList: boolean;
+  image: string;
 }

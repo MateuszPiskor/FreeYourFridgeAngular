@@ -14,5 +14,6 @@ namespace FreeYourFridge.API.Models
         public string Name { get; set; }
         public bool IsOnShoppingList { get; set; }
         public int CreatedBy { get; set; }
+        public string Image {get;set;}
     }
 }

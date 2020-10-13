@@ -6,9 +6,21 @@
   text-align: center;
   padding: 20px;
   font-size: 25px;
+  padding: 15px;
+  min-height: 500px;
 }
-h1{
-  font-size: 30px;
+
+.shopTable{
+  padding: 20px;
+}
+.table{
+  font-size: 25px;
+  font-weight: 100;
+  width: 100%;
+  display: table;
+  margin: 0;
+  color: #b1acac;
+  padding-bottom: 30px;
 }
 .row{
 text-align: center;
@@ -24,32 +36,31 @@ justify-content: end;
 .btn{
   font-size: 25px;
 }
-
-@media only screen and(max-width: 1000px){
+@media only screen and(max-width: 1250px){
   .btn{
     font-size: 18px;
   }
-  .ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0;
-    list-style: none;
-  }
-  .li{
-    width: 25%;
-    display: inline-block;
-    text-align: center;
-  }
-  .row{
-    display: flex;
-    flex-wrap: wrap;
-    margin:0 4px 4px 0;
-    list-style: none;
+  .table{
+    font-size: 18px;
   }
   .container{
     font-size: 20px;
-    width: 120%;
+    width: 130%;
+  }
+  .shopTable{
+    width: 140%;
+  }
+}
+
+@media only screen and(max-width: 600px){
+  .btn{
+    font-size: 18px;
+  }
+  .table{
+    font-size: 20px;
+  }
+  .container{
+    font-size: 20px;
   }
 }
 
