@@ -16,6 +16,7 @@ import { FavouredListComponent } from './favoured/favoured-list/favoured-list.co
 import {AddIngredientComponent} from './addIngredient/addIngredient.component';
 import {IngredientResolver} from './_resolvers/ingredient.resolver';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
+import { RegisterComponent } from './register/register.component';
 import { FavouredListResolver } from './_resolvers/favoured-list.resolver';
 import { RegisterComponent } from './register/register.component';
 
