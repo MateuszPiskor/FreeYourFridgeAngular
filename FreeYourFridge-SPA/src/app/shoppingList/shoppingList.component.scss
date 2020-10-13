@@ -24,11 +24,7 @@ justify-content: end;
 .btn{
   font-size: 25px;
 }
-@media only screen and(max-width: 1000px){
-  .btn{
-    font-size: 20px;
-  }
-}
+
 @media only screen and(max-width: 1000px){
   .btn{
     font-size: 18px;
@@ -36,6 +32,14 @@ justify-content: end;
   .ul{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+  }
+  .li{
+    width: 25%;
+    display: inline-block;
+    text-align: center;
   }
   .row{
     display: flex;

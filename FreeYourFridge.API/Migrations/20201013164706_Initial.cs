@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreeYourFridge.API.Migrations
 {
-    public partial class ActivityLevel : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -190,6 +190,7 @@ namespace FreeYourFridge.API.Migrations
                     Amount = table.Column<double>(nullable: false),
                     Unit = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
                     FridgeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

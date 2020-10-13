@@ -31,6 +31,7 @@ namespace FreeYourFridge.API.Data
                 
                 var idFromApi = content["id"].Value<int>();
                 var originalNameFromApi =  content["originalName"].Value<string>();
+                var imageFromApi = content["image"].Value<string>();
                 var listPossibleUnitsFromApi = new List<string>();
                 foreach(var unit in content["possibleUnits"])
                 {
@@ -42,7 +43,8 @@ namespace FreeYourFridge.API.Data
                 {
                     id = idFromApi,
                     originalName = originalNameFromApi,
-                    possibleUnits = listPossibleUnitsFromApi
+                    possibleUnits = listPossibleUnitsFromApi,
+                    image = "https://spoonacular.com/cdn/ingredients_100x100/"+imageFromApi
                 };
             }
 
@@ -53,7 +55,7 @@ namespace FreeYourFridge.API.Data
         var ListOfIngredients = _context.ListOfIngredients.ToList();
         return ListOfIngredients;
     }
-    public async void Add(Ingredient newIngredient, Fridge fridge)
+    public async void Add(Ingredient newIngredient, Fridge fridge, string image)
     {
         var newIngredientToAdd = new Ingredient(){
             SpoonacularId = newIngredient.Id,
@@ -61,7 +63,8 @@ namespace FreeYourFridge.API.Data
             Name = newIngredient.Name,
             Fridge = fridge,
             FridgeId =fridge.Id,
-            Unit = newIngredient.Unit
+            Unit = newIngredient.Unit,
+            Image = image
         };
         _context.Add( newIngredientToAdd);
         await this.SaveAll();

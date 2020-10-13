@@ -11,6 +11,7 @@ namespace FreeYourFridge.API.Models
         public double Amount { get; set; }
         public string Unit { get; set; }
         public string Name { get; set; }
+        public string Image{get;set;}
         public Nullable<int> FridgeId{get;set;}
         public virtual Fridge Fridge{get;set;}
     }

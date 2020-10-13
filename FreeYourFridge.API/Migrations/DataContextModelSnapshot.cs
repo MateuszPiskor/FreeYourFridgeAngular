@@ -167,6 +167,9 @@ namespace FreeYourFridge.API.Migrations
                     b.Property<int?>("FridgeId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 

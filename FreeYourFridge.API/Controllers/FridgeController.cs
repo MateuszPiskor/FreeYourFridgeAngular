@@ -39,7 +39,9 @@ namespace FreeYourFridge.API.Controllers
         public async Task<ActionResult> AddItemToFridge(int id, [FromBody] Ingredient newIgredient)
         {
             Fridge fridge = await _repo.GetFridge(id);
-            _ingredientRepo.Add(newIgredient, fridge);
+            IngredientDto newIngredientDto = await _ingredientRepo.GetIngredientsFromAPI(newIgredient.Id);
+            string image = newIngredientDto.image;
+            _ingredientRepo.Add(newIgredient, fridge, image);
             return Ok();
         }
 
