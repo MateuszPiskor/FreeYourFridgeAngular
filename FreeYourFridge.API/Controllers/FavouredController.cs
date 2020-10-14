@@ -40,9 +40,11 @@ namespace FreeYourFridge.API.Controllers
                 totalPages = favoureds.TotalPages
             };
 
+            IEnumerable<FavouredDto> favouredsDto = _mapper.Map<IEnumerable<FavouredDto>>(favoureds);
+
             HttpContext.Response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationMetadata));
             HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
-            return Ok(favoureds);
+            return Ok(favouredsDto);
         }
 
         [HttpDelete("{id}")]
