@@ -92,6 +92,7 @@ namespace FreeYourFridge.API.Tests.Controllers
         [Fact]
         public async Task GetSingleDailyMeal_GetExpectedDailyMeal()
         {
+
             var dmToBeAssessed = DatabaseToTest.GetDailyMealsToTest().First();
 
             var response = await _httpClient.GetFromJsonAsync<ExpectedDailyMealBasicDto>($"{uri}{dmToBeAssessed.Id}");
@@ -100,6 +101,7 @@ namespace FreeYourFridge.API.Tests.Controllers
             Assert.Equal(dmToBeAssessed.Title, response.Title);
             Assert.Equal(dmToBeAssessed.Grams, response.Grams);
             Assert.Equal(dmToBeAssessed.Id, response.Id);
+
         }
 
         [Fact]

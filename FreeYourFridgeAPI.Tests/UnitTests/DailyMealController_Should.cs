@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -38,7 +39,10 @@ namespace FreeYourFridge.API.Tests
         [Fact]
         public async Task Should_ReturnAllDailyMeals()
         {
-            var mapper = new Mock<IMapper>();
+            IMapper mapper = new Mapper(
+                new MapperConfiguration(
+                    cfg => cfg.CreateMap<DailyMeal, DailyMealBasicDto>()));
+
             var mockSet = new Mock<DbSet<DailyMeal>>();
             mockSet = MockDbProvider<DailyMeal>.ProvideMockDb(DataProvider.DataDailyMeal, mockSet);
             var mockCtx = new Mock<DataContext>(options);
@@ -48,7 +52,7 @@ namespace FreeYourFridge.API.Tests
             var repository = new Mock<DailyMealRepository>(mockCtx.Object);
 
 
-            var controller = new DailyMealController(repository.Object, mapper.Object, _calc);
+            var controller = new DailyMealController(repository.Object, mapper, _calc);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext
             {
@@ -57,7 +61,9 @@ namespace FreeYourFridge.API.Tests
 
 
             var result = await controller.GetDailyMeals() as ObjectResult;
+            var value = result.Value as List<DailyMealBasicDto>;
             Assert.NotNull(result);
+            Assert.Equal(2, value.Count);
         }
 
 

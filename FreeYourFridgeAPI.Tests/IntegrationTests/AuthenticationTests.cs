@@ -24,6 +24,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests
         [InlineData("/recipe")]
         [InlineData("/shoppinglist")]
         [InlineData("/user")]
+        //[Fact]
         public async Task Get_ForbiddenForUnauthenticatedUser(string uri)
         {
             var httpClient = _factory.CreateClient();

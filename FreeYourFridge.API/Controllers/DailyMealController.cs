@@ -47,7 +47,6 @@ namespace FreeYourFridge.API.Controllers
             var mealsFiltered = meals.Where(dm =>
                 dm.CreatedBy == int.Parse(User.FindFirst(claim =>
                     claim.Type == ClaimTypes.NameIdentifier).Value));
-
             return Ok(_mapper.Map<List<DailyMealBasicDto>>(mealsFiltered));
         }
 

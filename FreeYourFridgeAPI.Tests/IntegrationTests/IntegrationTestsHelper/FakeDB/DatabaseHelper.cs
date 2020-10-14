@@ -5,9 +5,15 @@ using FreeYourFridge.API.Models;
 
 namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
 {
-    public static class DatabaseHelper
+    public class DatabaseHelper //: IDisposable
     {
-        internal static void InitialiseDbForTests(DataContext db)
+        internal static DatabaseHelper GetDefaultDb()
+        {
+            var db = new DatabaseHelper();
+            return db;
+        }
+
+        internal void InitialiseDbForTests(DataContext db)
         {
             db.Users.Add(new User
             {
@@ -156,5 +162,10 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
 
             db.SaveChanges();
         }
+
+        //internal void Dispose()
+        //{
+
+        //}
     }
 }
