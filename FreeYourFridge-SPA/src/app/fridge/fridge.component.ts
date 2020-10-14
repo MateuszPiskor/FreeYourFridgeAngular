@@ -26,6 +26,7 @@ export class FridgeComponent implements OnInit {
     this.ingredientFromApi = data;
     this.units = this.ingredientFromApi.possibleUnits;
     });
+    console.log(this.units);
   }
 
   ngOnInit() {
