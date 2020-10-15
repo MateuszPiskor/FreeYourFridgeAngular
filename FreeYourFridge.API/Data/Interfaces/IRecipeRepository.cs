@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
 
@@ -7,9 +8,12 @@ namespace FreeYourFridge.API.Data
 {
     public interface IRecipeRepository
     {
-        Task<string> GetRespone(IEnumerable<Ingredient> ingredients, int numberOfResipes);
+        Task<IEnumerable<RecipeToList>> GetRecipes(IEnumerable<Ingredient> ingredients, UserParamsForFilterRecipes userParams);
 
         Task<string> GetRespone(int id, string kindOfInformation);
-        Task<string> GetResponeWhenPassParams(IEnumerable<Ingredient> ingredients, int numberOfRecipes, UserParamsForFilterRecipes userParams);
+        Task<IEnumerable<RecipeToList>> GetResponeWhenPassParams(IEnumerable<Ingredient> ingredients, UserParamsForFilterRecipes userParams);
+        Task<RecipeToDetail> GetRecipeTimeAndScore(int id);
+        Task<Nutrition> GetNutritionById(int id);
+        Task<IEnumerable<Instructionstep>> GetInstructionSteps(int id);
     }
 }

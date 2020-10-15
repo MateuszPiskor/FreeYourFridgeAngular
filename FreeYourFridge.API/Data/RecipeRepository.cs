@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Helpers;
 using FreeYourFridge.API.Models;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace FreeYourFridge.API.Data
@@ -19,30 +22,31 @@ namespace FreeYourFridge.API.Data
             _makePartialUrl = makePartialUrl;
         }
 
-        public async Task<string> GetRespone(IEnumerable<Ingredient> ingredients, int numberOfRecipes)
-        {
+        public async Task<IEnumerable<RecipeToList>> GetRecipes(IEnumerable<Ingredient> ingredients, UserParamsForFilterRecipes userParams)
+          {
             string igredientUrl = _makePartialUrl.UrlIngredientMaker(ingredients);
-            RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients={igredientUrl}" + "&number=" + numberOfRecipes+ "&limitLicense=true");
+            RestClient client = new RestClient($"{_baseUrl}findByIngredients?{_apiKey}&ingredients={igredientUrl}" +"&number=" +userParams.Number + "&limitLicense=true");
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)
             {
-                return response.Content;
+                return JsonConvert.DeserializeObject<IEnumerable<RecipeToList>>(response.Content);
             }
             return null;
         }
 
-        public async Task<string> GetResponeWhenPassParams(IEnumerable<Ingredient> ingredients, int numberOfRecipes, UserParamsForFilterRecipes userParams)
+        public async Task<IEnumerable<RecipeToList>> GetResponeWhenPassParams(IEnumerable<Ingredient> ingredients, UserParamsForFilterRecipes userParams)
         {
             string igredientUrl = _makePartialUrl.UrlIngredientMaker(ingredients);
             string parameters = userParams.ToString();
             RestClient client = new RestClient();
-            client.BaseUrl = new Uri($"{_baseUrl}complexSearch?{_apiKey}&includeIngredients={igredientUrl}&fillIngredients=true&number={numberOfRecipes}{parameters}");
+            client.BaseUrl = new Uri($"{_baseUrl}complexSearch?{_apiKey}&includeIngredients={igredientUrl}&fillIngredients=true&number={userParams.Number}{parameters}");
             RestRequest request = new RestRequest(Method.GET);
             IRestResponse response = await client.ExecuteAsync(request);
             if (response.IsSuccessful)
             {
-                return response.Content;
+                Root root = JsonConvert.DeserializeObject<Root>(response.Content);
+                return root.Results;
             }
             return null;
         }
@@ -59,30 +63,36 @@ namespace FreeYourFridge.API.Data
             return null;
         }
 
-        //To use letter - not delete
-        //public async Task<string> GetResponse(string kindOfinformation, string[] optional = null)
-        //{
-        //    string path = optional == null ? $"{_baseUrl}/{kindOfinformation}/?{_apiKey}" : $"{_baseUrl}/{kindOfinformation}/?{_apiKey}+{genertatePartialUrl(optional)}";
+        public async Task<RecipeToDetail> GetRecipeTimeAndScore(int id)
+        {
+            string response = await GetRespone(id, "information");
+            if (response != null)
+            {
+                return JsonConvert.DeserializeObject<RecipeToDetail>(response);
+            }
+            return null;
+        }
 
-        //    RestClient client = new RestClient(path);
-        //    RestRequest request = new RestRequest(Method.GET);
-        //    IRestResponse response = await client.ExecuteAsync(request);
-        //    if (response.IsSuccessful)
-        //    {
-        //        return response.Content;
-        //    }
-        //    return null;
-        //}
+        public async Task<Nutrition> GetNutritionById(int id)
+        {
+            var response = await GetRespone(id, "nutritionWidget.json");
+            if(response != null)
+            {
+                return JsonConvert.DeserializeObject<Nutrition>(response);
+            }
+            return null;
+        }
 
-        //private static string genertatePartialUrl(string[] optional)
-        //{
-        //    string path = "";
-        //    foreach (var parametr in optional)
-        //    {
-        //        path += "&" + parametr;
-        //    }
+        public async Task<IEnumerable<Instructionstep>> GetInstructionSteps(int id)
+        {
+           var response = await GetRespone(id, "analyzedInstructions");
 
-        //    return path;
-        //}
+            if (response != null)
+            {
+                return JsonConvert.DeserializeObject<IEnumerable<Instruction>>(response).First().steps;
+            }
+            return null;
+        }
+
     }
 }

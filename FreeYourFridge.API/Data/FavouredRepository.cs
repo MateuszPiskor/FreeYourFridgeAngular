@@ -28,7 +28,7 @@ namespace FreeYourFridge.API.Data
 
         public async Task<PagedList<Favoured>> GetFavoureds(UserParams userParams)
         {
-            var favoureds = _context.Favoureds;
+            DbSet<Favoured> favoureds = _context.Favoureds;
 
             return await PagedList<Favoured>.CreateListAsync(favoureds, userParams.PageNumber, userParams.PageSize);
         }

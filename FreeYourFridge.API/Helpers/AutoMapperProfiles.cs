@@ -62,6 +62,7 @@ namespace FreeYourFridge.API.Helpers
                  opt => opt.MapFrom(src => src.CreateTime.ToShortDateString()));
 
             CreateMap<DailyMeal, DailyMealToArchive>();
+            CreateMap<Instructionstep, StepDto>();
         }
     }
 }

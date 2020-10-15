@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 
 namespace FreeYourFridge.API.Controllers
 {
-
     [Authorize]
     [Route("api/[controller]")]
     public class RecipeController : ControllerBase
@@ -31,73 +30,56 @@ namespace FreeYourFridge.API.Controllers
 
         [HttpGet("")]
         [HttpGet("number={amount}")]
-        public async Task<IActionResult> GetRecipes([FromQuery] UserParamsForFilterRecipes userParams, int amount = 12)
+        public async Task<IActionResult> GetRecipes([FromQuery] UserParamsForFilterRecipes userParams)
         {
-
-            int userId= int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            int userId = int.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
             IEnumerable<Ingredient> ingredients = _repoFridge.GetIngredients(userId);
-            string content = null;
+            IEnumerable<RecipeToList> recipes = new List<RecipeToList>();
 
-            if (userParams.DietType != null || userParams.CuisineType != null)
+            if (userParams.DietType != null || userParams.CuisineType != null )
             {
-               content = await _repo.GetResponeWhenPassParams(ingredients, amount, userParams);
-                Root recipesToReturn = JsonConvert.DeserializeObject<Root>(content);
-                return Ok(recipesToReturn.Results);
+                recipes = await _repo.GetResponeWhenPassParams(ingredients, userParams);
             }
-
             else
             {
-                content = await _repo.GetRespone(ingredients, amount);
-            }
-            
-            if (content == null)
-            {
-                return NotFound();
+                recipes = await _repo.GetRecipes(ingredients, userParams);
             }
 
-            
-            IEnumerable<RecipeToList> recipes = JsonConvert.DeserializeObject<IEnumerable<RecipeToList>>(content);
             return Ok(recipes);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTimeAndScore(int id)
         {
-            string content = await _repo.GetRespone(id, "information");
-            if (content == null)
-                return NotFound();
-            RecipeToDetail recipeDetail = JsonConvert.DeserializeObject<RecipeToDetail>(content);
-
-            RecipeToDetailDto recipesForDetailedDto = _mapper.Map<RecipeToDetailDto>(recipeDetail);
-            return Ok(recipesForDetailedDto);
+            RecipeToDetail recipeToDetail = await _repo.GetRecipeTimeAndScore(id);
+            if(recipeToDetail != null)
+            {
+                return Ok(_mapper.Map<RecipeToDetailDto>(recipeToDetail));
+            }
+            return NotFound();
         }
 
         [HttpGet("{id}/nutritions")]
         public async Task<IActionResult> GetNutritionsById(int id)
         {
-            string content = await _repo.GetRespone(id, "nutritionWidget.json");
-
-            if (content == null)
-                return NotFound();
-
-            Nutrition nutrition = JsonConvert.DeserializeObject<Nutrition>(content);
-
-            NutriotionForDetailDto recipesForDetailedDto = _mapper.Map<NutriotionForDetailDto>(nutrition);
-
-            return Ok(recipesForDetailedDto);
+            Nutrition nutrition = await _repo.GetNutritionById(id);
+            if(nutrition != null)
+            {
+                return Ok(_mapper.Map<NutriotionForDetailDto>(nutrition));
+            }
+            return NotFound();
         }
 
         [HttpGet("{id}/instruction")]
-        public async Task<IActionResult> GetInstructionStepsById(int id)
+        public async Task<IActionResult> GetInstructionSteps(int id)
         {
-            string content = await _repo.GetRespone(id, "analyzedInstructions");
-
-            if (content == null)
-                return NotFound();
-
-            Instruction instruction = JsonConvert.DeserializeObject<IEnumerable<Instruction>>(content).First();
-
-            return Ok(instruction.steps);
+            IEnumerable<Instructionstep> steps = await _repo.GetInstructionSteps(id);
+            if(steps != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<StepDto>>(steps));
+            }
+            return NotFound();
+            
         }
     }
 }

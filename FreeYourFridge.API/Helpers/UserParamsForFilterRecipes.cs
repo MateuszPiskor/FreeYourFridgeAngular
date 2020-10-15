@@ -10,6 +10,7 @@ namespace FreeYourFridge.API.Helpers
         public string DietType { get; set; }
         public string CuisineType { get; set; }
         public string MealType { get; set; }
+        public string Number { get; set; }
         public override string ToString()
         {
            string userParams= "";
@@ -25,6 +26,7 @@ namespace FreeYourFridge.API.Helpers
             {
                 userParams += "&type=" + this.MealType;
             }
+            userParams += "&number=" + this.Number;
             return userParams;
         }
     }
