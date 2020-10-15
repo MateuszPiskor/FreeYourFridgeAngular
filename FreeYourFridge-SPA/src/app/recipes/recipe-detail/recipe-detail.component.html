@@ -47,7 +47,7 @@
             <div class="card noHover">
               <ul class="list-group-item">
                 <li class="list-group-item noHover" *ngFor="let instruciton of instructions">
-                  {{ instruciton.number + ". " + instruciton.step }}
+                  {{ instruciton?.number + ". " + instruciton?.step}}
                 </li>
               </ul>
             </div>

@@ -13,6 +13,8 @@ import { JoiningService } from 'src/app/_services/joining.service';
 export class RecipeListComponent implements OnInit {
   recipesToList: RecipeToList[];
   params: any;
+  //letter change to user value
+  numberOfRecipes = 12;
 
   constructor(
     private recipeService: RecipeService,
@@ -34,7 +36,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadRecipes(params?) {
-    this.recipeService.getRecipes(params).subscribe(
+    this.recipeService.getRecipes(this.numberOfRecipes, params).subscribe(
       (recipesToList: RecipeToList[]) => {
         this.recipesToList = recipesToList;
       },

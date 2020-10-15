@@ -33,13 +33,14 @@ export class RecipeService {
   }
 
 constructor(private http: HttpClient) {}
-  getRecipes(filters?): Observable<RecipeToList[]>{
+  getRecipes(numerOfRecipes, filters?): Observable<RecipeToList[]>{
     let params = new HttpParams();
     if (filters != null) {
       params = params.append('dietType', filters.dietType);
       params = params.append('cuisineType', filters.cuisineType);
       params = params.append('mealType', filters.mealType);
     }
+    params = params.append('number', numerOfRecipes);
     return this.http.get<RecipeToList[]>(this.baseUrl + 'recipe/', {params});
   }
 
