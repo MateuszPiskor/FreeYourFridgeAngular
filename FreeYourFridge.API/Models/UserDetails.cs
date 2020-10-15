@@ -11,9 +11,26 @@ namespace FreeYourFridge.API.Models
         public int Id { get; set; }
         public int DailyDemand { get; set; }
         public int DailyDemandToRealize { get; set; }
-        public int Carbohydrates { get; set; }
-        public int Fats { get; set; }
-        public int Protein { get; set; }
+        private int carbohydrates;
+        public int Carbohydrates
+        {
+            get => carbohydrates;
+            set => carbohydrates = (int)(DailyDemand * 0.5);
+        }
+
+        private int fats;
+        public int Fats
+        {
+            get => fats;
+            set => fats = (int)(DailyDemand * 0.25);
+        }
+
+        private int protein;
+        public int Protein
+        {
+            get => protein;
+            set => protein = (int)(DailyDemand * 0.25);
+        }
         public string Description { get; set; }
         public User User { get; set; }
         public ActivityLevel ActivityLevel { get; set; }

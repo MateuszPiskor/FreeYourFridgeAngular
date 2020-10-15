@@ -890,3 +890,4 @@ C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\Fr
 C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.csproj.CoreCompileInputs.cache
 C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.dll
 C:\Users\gryty\OneDrive\Pulpit\programing\codecool\codecool\Advance\ProjectXX\FreeYourFridgeAPI.Tests\obj\Debug\netcoreapp3.1\FreeYourFridgeAPI.Tests.pdb
+F:\ASP\Projects\FreeYourFridgeAngular\FreeYourFridgeAPI.Tests\bin\Debug\netcoreapp3.1\Data\UserDetailsSeedData.json

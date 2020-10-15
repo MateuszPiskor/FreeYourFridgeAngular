@@ -91,7 +91,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                 SpoonacularId = 55,
                 Image = "imageUrl",
                 Title = "title",
-                CreateTime = "2020-07-01",
+                CreateTime = new DateTime(2020, 07, 01),
                 CreatedBy = 1
             },
             new Favoured
@@ -101,7 +101,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                 SpoonacularId = 65,
                 Image = "imageUrl2",
                 Title = "title2",
-                CreateTime = "2020-07-02",
+                CreateTime = new DateTime(2020, 07, 02),
                 CreatedBy = 1
             }
                 );
