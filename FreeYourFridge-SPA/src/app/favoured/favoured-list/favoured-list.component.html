@@ -1,22 +1,19 @@
 <div class="col-sm-12">
+  <div class="col">
+    <div class="btn-group mt-3">
+      <div class="btn btn-info mr-2">Sort By</div>
+      <button btnRadio="time" (click)="loadFavoured('time')" type="button" name="orderBy"
+        class="btn btn-primary">CreateTime</button>
+      <button btnRadio="score" (click)="loadFavoured('score')" type="button" name="orderBy"
+        class="btn btn-secondary">Score</button>
+    </div>
+  </div>
   <div *ngFor="let favoured of favoureds">
-    <app-favoured-card
-      [favoured]="favoured"
-      (passFavoured)="removeItem($event)"
-      (uploaded)="loadFavoured()"
-    >
+    <app-favoured-card [favoured]="favoured" (passFavoured)="removeItem($event)" (uploaded)="loadFavoured()">
     </app-favoured-card>
   </div>
-  <pagination
-    [boundaryLinks]="true"
-    [totalItems]="pagination.totalCount"
-    [itemsPerPage]="pagination.pageSize"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"
-    firstText="&laquo;"
-    lastText="&raquo;"
-  >
+  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+    [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;">
   </pagination>
 </div>

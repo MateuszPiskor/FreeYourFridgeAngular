@@ -34,7 +34,7 @@ namespace FreeYourFridge.API.Data
             {
                 switch (userParams.BestScore)
                 {
-                    case "sort":
+                    case "score":
                         {
                             favoureds = _context.Favoureds.OrderBy(x => x.Score);
                             break;
