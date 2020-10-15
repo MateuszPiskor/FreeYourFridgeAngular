@@ -22,7 +22,7 @@ export class FavouredService {
 
   getFavoureds(
     page?,
-    itemsPerPage?, sortedOption?
+    itemsPerPage?, sortedOption?,order?
   ): Observable<PaginationResult<FavouredDto[]>> {
     const paginationResult: PaginationResult<
       FavouredDto[]
@@ -32,6 +32,7 @@ export class FavouredService {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
+    params = params.append('order', order );
     params = params.append('bestScore', sortedOption );
 
     return this.http

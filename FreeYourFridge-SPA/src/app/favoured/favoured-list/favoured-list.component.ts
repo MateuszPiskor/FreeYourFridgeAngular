@@ -14,6 +14,7 @@ import { Pagination, PaginationResult } from 'src/app/_models/pagination';
 export class FavouredListComponent implements OnInit {
   favoureds: FavouredDto[];
   pagination: Pagination;
+  order = 'ascending';
 
   constructor(
     private favouredService: FavouredService,
@@ -32,9 +33,14 @@ export class FavouredListComponent implements OnInit {
     this.loadFavoured();
   }
 
-  loadFavoured(orderBy?,) {
+  loadFavoured(orderBy?) {
+    if (this.order === 'ascending'){
+      this.order = 'descending';
+    }else{
+      this.order = 'ascending';
+    }
     this.favouredService
-      .getFavoureds(this.pagination.currentPage, this.pagination.pageSize, orderBy)
+      .getFavoureds(this.pagination.currentPage, this.pagination.pageSize, orderBy, this.order)
       .subscribe(
         (res: PaginationResult<FavouredDto[]>) => {
           this.favoureds = res.result;
