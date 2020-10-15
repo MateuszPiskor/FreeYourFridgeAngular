@@ -1,50 +1,52 @@
-<div *ngIf="listMode" class="card mb-3 mt-3" style="max-width: 540px">
-  <div class="row no-gutters ml-2">
-    <div class="col-md-4 my-auto">
-      <img src="{{ favoured.image }}" class="card-img" alt="{{ favoured.title }}" />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ favoured.title }}</h5>
-        <p class="card-text">Score: {{ favoured.score }}</p>
-        <p class="card-text">
-          <small class="text-muted">Create Time{{ favoured.createTime }}</small>
-        </p>
-        <div class="btn-group center no p-0 btn-block parent-background">
-          <button class="btn btn-success" (click)="viewDetail(favoured.spoonacularId)">Info</button>
-          <button class="btn btn-danger" (click)="delete(favoured)">
-            Remove
-          </button>
-          <button class="btn btn-info" (click)="enableUpdate()">Update</button>
+<div class="main">
+  <div *ngIf="listMode" class="card mb-3 mt-3" style="max-width: 540px">
+    <div class="row no-gutters ml-2">
+      <div class="col-md-4 my-auto">
+        <img src="{{ favoured.image }}" class="card-img" alt="{{ favoured.title }}" />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ favoured.title }}</h5>
+          <p class="card-text">Score: {{ favoured.score }}</p>
+          <p class="card-text">
+            <small class="text-muted">Create Time{{ favoured.createTime }}</small>
+          </p>
+          <div class="btn-group center no p-0 btn-block parent-background">
+            <button class="btn btn-success" (click)="viewDetail(favoured.spoonacularId)">Info</button>
+            <button class="btn btn-danger" (click)="delete(favoured)">
+              Remove
+            </button>
+            <button class="btn btn-warning" (click)="enableUpdate()">Update</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="!listMode" class="card mb-3 mt-3" style="max-width: 540px">
-  <div class="row no-gutters ml-2">
-    <div class="col-md-4 my-auto">
-      <img src="{{ favoured.image }}" class="card-img" alt="{{ favoured.title }}" />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ favoured.title }}</h5>
-        <form [formGroup]="editForm" (ngSubmit)="editScore()">
-          <div class="input-group">
-            <input class="form-control" type="number" formControlName="score"
-              [ngClass]="{'is-invalid':editForm.get('score').errors&&editForm.get('score').touched}" />
-            <div class="invalid-feedback">Type number: (1-10)</div>
-            <button class="btn btn-secondary" type="submit" [disabled]="!editForm.valid">Edit</button>
+  <div *ngIf="!listMode" class="card mb-3 mt-3" style="max-width: 540px">
+    <div class="row no-gutters ml-2">
+      <div class="col-md-4 my-auto">
+        <img src="{{ favoured.image }}" class="card-img" alt="{{ favoured.title }}" />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ favoured.title }}</h5>
+          <form [formGroup]="editForm" (ngSubmit)="editScore()">
+            <div class="input-group">
+              <input class="form-control" type="number" formControlName="score"
+                [ngClass]="{'is-invalid':editForm.get('score').errors&&editForm.get('score').touched}" />
+              <div class="invalid-feedback">Type number: (1-10)</div>
+              <button class="btn btn-secondary" type="submit" [disabled]="!editForm.valid">Edit</button>
+            </div>
+          </form>
+          <p class="card-text">
+            <small class="text-muted">Create Time{{ favoured.createTime }}</small>
+          </p>
+          <div class="btn-group center no p-0 btn-block parent-background">
+            <button class="btn btn-success" (click)="viewDetail(favoured.spoonacularId)">Info</button>
+            <button class="btn btn-danger" (click)="delete(favoured)">
+              Remove
+            </button>
           </div>
-        </form>
-        <p class="card-text">
-          <small class="text-muted">Create Time{{ favoured.createTime }}</small>
-        </p>
-        <div class="btn-group center no p-0 btn-block parent-background">
-          <button class="btn btn-success" (click)="viewDetail(favoured.spoonacularId)">Info</button>
-          <button class="btn btn-danger" (click)="delete(favoured)">
-            Remove
-          </button>
         </div>
       </div>
     </div>

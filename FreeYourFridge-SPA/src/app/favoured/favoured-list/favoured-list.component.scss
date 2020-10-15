@@ -1,0 +1,19 @@
+.container{
+  margin-left: 25%;
+  width: 60%;
+  padding: 10px;
+  justify-content: center;
+}
+.col-sm-12{
+  margin: auto;
+  width: 140%;
+  padding: 10px;
+}
+@media only screen and(max-width: 700px){
+  .container{
+    margin-left: 10%;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+  }
+}
