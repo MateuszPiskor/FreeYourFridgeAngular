@@ -28,7 +28,25 @@ namespace FreeYourFridge.API.Data
 
         public async Task<PagedList<Favoured>> GetFavoureds(UserParams userParams)
         {
-            DbSet<Favoured> favoureds = _context.Favoureds;
+
+            var favoureds = _context.Favoureds.OrderBy(x => x.CreateTime);
+            if (!string.IsNullOrEmpty(userParams.BestScore))
+            {
+                switch (userParams.BestScore)
+                {
+                    case "sort":
+                        {
+                            favoureds = _context.Favoureds.OrderBy(x => x.Score);
+                            break;
+                        }
+                    default:
+                        {
+                            _context.Favoureds.OrderBy(x => x.CreateTime);
+                            break;
+                        }
+                }
+                //IOrderedQueryable<Favoured> favoureds = _context.Favoureds.OrderBy(x => x.Score);
+            }
 
             return await PagedList<Favoured>.CreateListAsync(favoureds, userParams.PageNumber, userParams.PageSize);
         }

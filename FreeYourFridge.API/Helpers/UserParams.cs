@@ -10,6 +10,7 @@ namespace FreeYourFridge.API.Helpers
         public const int MaxPageSize = 48;
         public int PageNumber { get; set; } = 1;
         private int pageSize = 24;
+        public string BestScore { get; set; }
         public int PageSize
         {
             get { return pageSize; }
