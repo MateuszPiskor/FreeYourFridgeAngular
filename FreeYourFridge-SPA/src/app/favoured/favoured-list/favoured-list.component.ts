@@ -4,7 +4,7 @@ import { FavouredService } from 'src/app/_services/favoured.service';
 import { FavouredDto } from 'src/app/_models/Favoured/favouredDto';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginationResult } from 'src/app/_models/pagination';
-import { FilterBarParams } from 'src/app/_models/filterBarParams';
+
 
 @Component({
   selector: 'app-favoured-list',
@@ -14,7 +14,6 @@ import { FilterBarParams } from 'src/app/_models/filterBarParams';
 export class FavouredListComponent implements OnInit {
   favoureds: FavouredDto[];
   pagination: Pagination;
-  filterBarParms: FilterBarParams;
 
   constructor(
     private favouredService: FavouredService,
@@ -33,7 +32,7 @@ export class FavouredListComponent implements OnInit {
     this.loadFavoured();
   }
 
-  loadFavoured(orderBy?) {
+  loadFavoured(orderBy?,) {
     this.favouredService
       .getFavoureds(this.pagination.currentPage, this.pagination.pageSize, orderBy)
       .subscribe(

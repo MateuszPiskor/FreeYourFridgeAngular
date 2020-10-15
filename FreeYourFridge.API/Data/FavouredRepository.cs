@@ -36,12 +36,12 @@ namespace FreeYourFridge.API.Data
                 {
                     case "score":
                         {
-                            favoureds = _context.Favoureds.OrderBy(x => x.Score);
+                            favoureds = userParams.Order == "ascending" ?  _context.Favoureds.OrderBy(x => x.Score): _context.Favoureds.OrderByDescending(x => x.Score);
                             break;
                         }
                     default:
                         {
-                            _context.Favoureds.OrderBy(x => x.CreateTime);
+                            favoureds = userParams.Order == "descending" ?_context.Favoureds.OrderBy(x => x.CreateTime): _context.Favoureds.OrderByDescending(x => x.CreateTime);
                             break;
                         }
                 }
