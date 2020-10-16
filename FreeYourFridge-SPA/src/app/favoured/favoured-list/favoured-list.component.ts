@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertifyjsService } from 'src/app/_services/alertifyjs.service';
 import { FavouredService } from 'src/app/_services/favoured.service';
 import { FavouredDto } from 'src/app/_models/Favoured/favouredDto';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginationResult } from 'src/app/_models/pagination';
+
 
 
 @Component({
@@ -15,6 +16,8 @@ export class FavouredListComponent implements OnInit {
   favoureds: FavouredDto[];
   pagination: Pagination;
   order = 'ascending';
+  @ViewChild('down1') down1;
+  @ViewChild('down2') down2;
 
   constructor(
     private favouredService: FavouredService,
@@ -35,6 +38,7 @@ export class FavouredListComponent implements OnInit {
 
   loadFavoured(orderBy?) {
     if (this.order === 'ascending'){
+      console.log(this.down1.nativeElement);
       this.order = 'descending';
     }else{
       this.order = 'ascending';

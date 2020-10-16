@@ -3,9 +3,9 @@
     <div class="btn-group mt-3">
       <div class="btn btn-info mr-2" style="pointer-events: none;">Sort By</div>
       <button btnRadio="time" (click)="loadFavoured('time')" type="button" name="orderBy"
-        class="btn btn-primary">CreateTime</button>
+        class="btn btn-primary">CreateTime<i #down class="fa fa-arrow-down ml-1"></i></button>
       <button btnRadio="score" (click)="loadFavoured('score')" type="button" name="orderBy"
-        class="btn btn-secondary">Score</button>
+        class="btn btn-secondary">Score<i #down2 class="fa fa-arrow-down ml-1"></i></button>
     </div>
   </div>
   <div *ngFor="let favoured of favoureds">
