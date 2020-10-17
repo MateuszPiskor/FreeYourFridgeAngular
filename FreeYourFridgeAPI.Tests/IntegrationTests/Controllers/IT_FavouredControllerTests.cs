@@ -21,12 +21,6 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
             _factory = factory;
         }
 
-        //[Fact]
-        //public async Task Get_ForbiddenForUnauthenticatedUser()
-        //{
-        //    var response = await _httpClient.GetAsync("");
-        //    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        //}
 
         [Fact]
         public async Task GetFavoureds_ReturnSuccessStatusCode()
@@ -40,8 +34,8 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
         public async Task DeleteFavoured_IfValid_ReturnsOK()
         {
 
-            var response = await _httpClient.DeleteAsync("1");
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var response = await _httpClient.DeleteAsync("11168");
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
 

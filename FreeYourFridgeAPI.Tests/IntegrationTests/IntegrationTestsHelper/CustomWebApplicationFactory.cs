@@ -19,7 +19,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper
 
         public CustomWebApplicationFactory()
         {
-            TestingDatabase = DatabaseHelper.GetDefaultDb();
+            TestingDatabase = new DatabaseHelper().GetDefaultDb();
         }
 
 

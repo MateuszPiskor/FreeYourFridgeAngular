@@ -5,9 +5,9 @@ using FreeYourFridge.API.Models;
 
 namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
 {
-    public class DatabaseHelper //: IDisposable
+    public class DatabaseHelper
     {
-        internal static DatabaseHelper GetDefaultDb()
+        internal DatabaseHelper GetDefaultDb()
         {
             var db = new DatabaseHelper();
             return db;
@@ -94,7 +94,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
             {
                 Id = "1",
                 Score = 74,
-                SpoonacularId = 55,
+                SpoonacularId = 11168,
                 Image = "imageUrl",
                 Title = "title",
                 CreateTime = new DateTime(2020, 07, 01),
@@ -104,11 +104,11 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
             {
                 Id = "2",
                 Score = 34,
-                SpoonacularId = 65,
+                SpoonacularId = 1077,
                 Image = "imageUrl2",
                 Title = "title2",
                 CreateTime = new DateTime(2020, 07, 02),
-                CreatedBy = 1
+                CreatedBy = 2
             }
                 );
 
@@ -123,8 +123,8 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                 new Fridge
                 {
                     Id = 2,
-                    UserId = 1,
-                    user = db.Users.Where(u => u.Id == 1) as User,
+                    UserId = 2,
+                    user = db.Users.Where(u => u.Id == 2) as User,
                     ListIgredients = db.Ingredients.Where(i => i.FridgeId == 2).ToList()
                 });
 
@@ -132,27 +132,27 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
                 new Ingredient
                 {
                     Id = 1,
-                    SpoonacularId = 1,
+                    SpoonacularId = 11168,
                     Amount = 120,
                     Unit = "g",
-                    Name = "ingredient1",
+                    Name = "corn",
                     FridgeId = 1,
                     Fridge = db.Fridges.Where(f => f.Id == 1) as Fridge
                 },
                 new Ingredient
                 {
                     Id = 2,
-                    SpoonacularId = 2,
+                    SpoonacularId = 11169,
                     Amount = 820,
                     Unit = "g",
                     Name = "ingredient2",
-                    FridgeId = 1,
+                    FridgeId = 2,
                     Fridge = db.Fridges.Where(f => f.Id == 1) as Fridge
                 },
                 new Ingredient
                 {
                     Id = 3,
-                    SpoonacularId = 3,
+                    SpoonacularId = 11170,
                     Amount = 520,
                     Unit = "g",
                     Name = "ingredient3",
@@ -162,10 +162,5 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper.FakeDB
 
             db.SaveChanges();
         }
-
-        //internal void Dispose()
-        //{
-
-        //}
     }
 }
