@@ -15,8 +15,12 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper
     public class CustomWebApplicationFactory<T> : WebApplicationFactory<T> where T : class
     {
         private readonly InMemoryDatabaseRoot _dbRoot = new InMemoryDatabaseRoot();
+        public DatabaseHelper TestingDatabase { get; }
 
-        public CustomWebApplicationFactory() { }
+        public CustomWebApplicationFactory()
+        {
+            TestingDatabase = DatabaseHelper.GetDefaultDb();
+        }
 
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -31,8 +35,13 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper
 
                 services.AddDbContext<DataContext>(options =>
                         {
+                            //options.UseInMemoryDatabase(Guid.NewGuid().ToString(), _dbRoot);
                             options.UseInMemoryDatabase("InMemDbTesting", _dbRoot);
-                        });
+                        }, ServiceLifetime.Transient);
+
+                services.AddAuthentication("test")
+                    .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
+                        options => options.NameIdentifier = "1");
 
                 var serviceProvider = services.BuildServiceProvider();
                 using (var scope = serviceProvider.CreateScope())
@@ -44,7 +53,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTestsHelper
 
                     try
                     {
-                        DatabaseHelper.InitialiseDbForTests(db);
+                        new DatabaseHelper().InitialiseDbForTests(db);
                     }
                     catch (Exception e)
                     {
