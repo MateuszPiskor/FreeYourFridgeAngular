@@ -23,20 +23,13 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
             _factory = factory;
         }
 
-        //[Fact]
-        //public async Task GetFridgeByUserId_ForbiddenForUnauthenticated()
-        //{
-        //    var response = await _httpClient.GetAsync("GetFridgeByUserId/1");
-        //    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        //}
-
 
         [Fact]
         public async Task AddItemToFridge_IfValidDailyMeal_ReturnsOK()
         {
             var content = JsonContent.Create(ReturnValidIngredientToPass());
 
-            var response = await _httpClient.PostAsync("addIngredient/1", content);
+            var response = await _httpClient.PostAsync("addIngredient/11168", content);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -54,7 +47,7 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
         {
             return new Ingredient
             {
-                Id = 4,
+                Id = 11168,
                 SpoonacularId = 11,
                 Amount = 300,
                 Unit = "g",
