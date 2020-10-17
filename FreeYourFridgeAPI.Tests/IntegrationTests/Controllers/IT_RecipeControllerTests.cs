@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using FreeYourFridge.API;
 using FreeYourFridgeAPI.Tests.IntegrationTests.IntegrationTestsHelper.TestModels;
 using FreeYourFridgeAPI.Tests.IntegrationTestsHelper;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
@@ -28,34 +26,14 @@ namespace FreeYourFridgeAPI.Tests.IntegrationTests.Controllers
         [Fact]
         public async Task GetRecipes_ReturnsSuccessStatusCode()
         {
-            var client = _factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-                            options => options.NameIdentifier = "1");
-                });
-            }).CreateClient();
-
-            var response = await client.GetAsync("");
+            var response = await _httpClient.GetAsync("");
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
         public async Task GetRecipes_ReturnsExactNumberOfRecipes()
         {
-            var client = _factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<TestAuthenticationSchemeOptions, TestAuthenticationHandler>("test",
-                            options => options.NameIdentifier = "1");
-                });
-            }).CreateClient();
-
-            var response = await client.GetFromJsonAsync<List<ExpectedRecipeToList>>("number=3");
+            var response = await _httpClient.GetFromJsonAsync<List<ExpectedRecipeToList>>("number=3");
             Assert.Equal(3, response.Count);
         }
 
