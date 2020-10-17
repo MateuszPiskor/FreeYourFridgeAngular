@@ -8,7 +8,6 @@
 }
 
 
-
 .column{
   margin-top: 10px;
 }
@@ -163,6 +162,17 @@ p {
   margin-top: 20px;
 }
 
+@media only screen and (max-width: 1200px){
+
+  .td{
+    font-size: 18px;
+  }
+  .card{
+    width: 120%;
+  }
+
+}
+
 @media only screen and (max-width: 1000px){
   .userName{
     font-size: 30px;
@@ -170,12 +180,25 @@ p {
   .img-responsive {
     width: 70%;
   }
-  .td{
-    font-size: 18px;
+  .card{
+    width: 110%;
   }
-  .container{
-    width: 120%;
+
+}
+@media only screen and (max-width: 990px){
+  .userName{
+    font-size: 30px;
   }
+  .img-responsive {
+    width: 60%;
+  }
+  .card{
+    width: 100%;
+  }
+  tr{
+    font-size: 15px;
+  }
+
 }
 @media only screen and (max-width: 800px){
   .userName{
@@ -198,10 +221,13 @@ p {
     font-size: 18px;
   }
   tr{
-    font-size: 16px;
+    font-size: 15px;
+  }
+  .card{
+    width: 130%;
   }
 }
-@media only screen and  (max-width:666px) {
+@media only screen and  (max-width:690px) {
   table {
       display:block;
       margin:0;
@@ -222,7 +248,10 @@ p {
     width: 70%;
   }
   .tr{
-    font-size: 16px;
+    font-size: 15px;
+  }
+  .card{
+    width: 120%;
   }
 }
 @media only screen and (max-width: 600px){
@@ -234,6 +263,12 @@ p {
   }
   .container{
     width: 120%;
+  }
+  .card{
+    width: 120%;
+  }
+  .img-responsive {
+    width: 60%;
   }
 
 }
@@ -254,6 +289,9 @@ p {
   }
   tr{
     font-size: 14px;
+  }
+  .img-responsive {
+    width: 60%;
   }
 
 }

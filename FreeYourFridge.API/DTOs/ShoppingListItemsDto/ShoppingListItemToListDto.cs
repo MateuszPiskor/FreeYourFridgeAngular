@@ -11,5 +11,6 @@ namespace FreeYourFridge.API.DTOs
         public string Unit { get; set; }
         public string Name { get; set; }
         public int SpoonacularId { get; set; }
+        public string Image{get;set;}
     }
 }

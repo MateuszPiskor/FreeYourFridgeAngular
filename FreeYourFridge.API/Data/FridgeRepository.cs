@@ -51,12 +51,18 @@ namespace FreeYourFridge.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async void UpdateIngredient(int id, double amount)
+        public async void UpdateIngredient(int id, Ingredient updateIngredient)
         {
-            var updateIngredient = await _context.Ingredients.FirstOrDefaultAsync(iD => iD.Id == id);
-            updateIngredient.Amount = amount;
+            var ingredientToUpdate = await _context.Ingredients.FirstOrDefaultAsync(iD => iD.Id == id);
+            ingredientToUpdate.Amount = updateIngredient.Amount;
+            ingredientToUpdate.Unit = updateIngredient.Unit;
             _context.SaveChanges();
         }
         
+        public IEnumerable<Ingredient> GetIngredients(int userId)
+        {
+            var allIgredients = _context.Ingredients.Where(i => i.FridgeId == userId).ToList();
+            return allIgredients;
+        }
     }
 }

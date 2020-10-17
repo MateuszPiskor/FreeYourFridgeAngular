@@ -17,6 +17,7 @@ import {AddIngredientComponent} from './addIngredient/addIngredient.component';
 import {IngredientResolver} from './_resolvers/ingredient.resolver';
 import { DailyMealDetailsComponent } from './dailyMeal/daily-meal-details/daily-meal-details.component';
 import { RegisterComponent } from './register/register.component';
+import { FavouredListResolver } from './_resolvers/favoured-list.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -30,7 +31,7 @@ export const appRoutes: Routes = [
             {path: 'myProfile', component: MyProfileComponent, resolve: {user: MemberEditResolver}},
             // tslint:disable-next-line: max-line-length
             {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            {path: 'favoured', component: FavouredListComponent},
+            {path: 'favoured', component: FavouredListComponent, resolve:{favoureds: FavouredListResolver}},
             {path: 'fridge', component: FridgeComponent, resolve: {fridge: FridgeResolver}},
             {path: 'addIngredient', component: AddIngredientComponent, resolve: {ingredient: IngredientResolver}},
             {path: 'recipes', component: RecipeListComponent},

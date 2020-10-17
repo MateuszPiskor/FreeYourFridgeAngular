@@ -1,0 +1,21 @@
+.main{
+  margin: auto;
+  padding: 10px;
+  justify-content: center;
+  width: 50%;
+  margin-left: 30%;;
+}
+
+@media only screen and(max-width: 700px){
+  .main{
+    width: 100%;
+    margin:0;
+  }
+  .row{
+    width: 100%;
+  }
+  .btn{
+    justify-content: center;
+    margin-left: 0;
+  }
+}

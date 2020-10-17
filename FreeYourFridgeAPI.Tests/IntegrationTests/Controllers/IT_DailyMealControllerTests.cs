@@ -29,32 +29,6 @@ namespace FreeYourFridge.API.Tests.Controllers
             _factory = factory;
         }
 
-        //[Fact]
-        //public async Task Get_ForbiddenForUnauthenticatedUser()
-        //{
-        //    var client = _factory.WithWebHostBuilder(builder =>
-        //    {
-        //        builder.ConfigureTestServices(services =>
-        //        {
-        //            var descriptor =
-        //                services.SingleOrDefault(d => d.ServiceType == typeof(TestAuthenticationHandler));
-        //            if (descriptor != null)
-        //            {
-        //                services.Remove(descriptor);
-        //            }
-
-        //            var descriptor2 =
-        //                services.SingleOrDefault(d => d.ServiceType == typeof(TestAuthenticationSchemeOptions));
-        //            if (descriptor2 != null)
-        //            {
-        //                services.Remove(descriptor);
-        //            }
-        //        });
-        //    }).CreateClient();
-
-        //    var response = await client.GetAsync("");
-        //    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        //}
 
         [Fact]
         public async Task GetDailyMeals_ReturnSuccessStatusCode()

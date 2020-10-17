@@ -116,7 +116,7 @@ namespace FreeYourFridge.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CreateTime")
+                    b.Property<DateTime>("CreateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CreatedBy")
@@ -166,6 +166,9 @@ namespace FreeYourFridge.API.Migrations
 
                     b.Property<int?>("FridgeId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -228,6 +231,9 @@ namespace FreeYourFridge.API.Migrations
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsOnShoppingList")
                         .HasColumnType("INTEGER");

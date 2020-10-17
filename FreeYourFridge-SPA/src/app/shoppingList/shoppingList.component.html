@@ -1,15 +1,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="container">
-<ul class="list-group-item">
-  <h1 class="mb-3 mt-3">Shopping List</h1>
-  <li class="list-group-item d-flex justify-content-between" *ngFor="let toDoItem of toDoItems">
-    <div class="row">
-      <div class="item">{{toDoItem.amount+" "+toDoItem.unit+" "+toDoItem.name}}</div>
-      <div class="buttons">
-      <button class="btn btn-success mr-2" (click)="buyTask(toDoItem)">Add to fridge</button>
-      <button class="btn btn-danger" (click)="deleteTask(toDoItem.spoonacularId)">Remove</button>
-      </div>
+  <div class="shopTable">
+  <table class="table table-hover table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Bought</th>
+        <th scope="col">Remove</th>
+      </tr>
+    </thead>
+        <tbody>
+          <tr *ngFor="let toDoItem of toDoItems; let i = index">
+            <td>{{i+1}}</td>
+            <td><img src="{{toDoItem.image}}" alt="{{toDoItem.image}}"></td>
+            <td>{{toDoItem.name}}</td>
+            <td>{{toDoItem.amount}}</td>
+            <td>{{toDoItem.unit}}</td>
+            <td><button class="btn btn-success mr-2" (click)="buyTask(toDoItem)">Add to fridge</button></td>
+            <td><button class="btn btn-danger" (click)="deleteTask(toDoItem.spoonacularId)">Remove</button></td>
+        </tr>
+        </tbody>
+    </table>
   </div>
-</li>
-</ul>
 </div>
