@@ -1,79 +1,44 @@
-<!--Section: Contact v.2-->
-<div class="header_main">
-  <div class="welcome">
-<section class="mb-4">
+<div class="container-contact100">
+  <div class="contact100-map"></div>
 
-  <!--Section heading-->
-  <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+  <div class="wrap-contact100">
+    <div class="contact100-form-title">
+      <span class="contact100-form-title-1">
+        Contact Us
+      </span>
 
+      <span class="contact100-form-title-2">
+        Feel free to drop us a line below!
+      </span>
+    </div>
 
-  <div class="row">
+    <form class="contact100-form validate-form">
+      <div class="wrap-input100 validate-input" data-validate="Name is required">
+        <span class="label-input100">Name:</span>
+        <input class="input100" type="text" name="name" placeholder="Enter full name">
+        <span class="focus-input100"></span>
+      </div>
 
-      <!--Grid column-->
-      <div class="col-md-9 mb-md-0 mb-5">
-          <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+      <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+        <span class="label-input100">Email:</span>
+        <input class="input100" type="text" name="email" placeholder="Enter email addess">
+        <span class="focus-input100"></span>
+      </div>
 
-              <!--Grid row-->
-              <div class="row">
+      <div class="wrap-input100 validate-input" data-validate="Phone is required">
+        <span class="label-input100">Phone:</span>
+        <input class="input100" type="text" name="phone" placeholder="Enter phone number">
+        <span class="focus-input100"></span>
+      </div>
 
-                  <!--Grid column-->
-                  <div class="col-md-6">
-                      <div class="md-form mb-0">
-                          <input type="text" id="name" name="name" class="form-control">
-                          <label for="name" class="">Your name</label>
-                      </div>
-                  </div>
-                  <!--Grid column-->
-
-                  <!--Grid column-->
-                  <div class="col-md-6">
-                      <div class="md-form mb-0">
-                          <input type="text" id="email" name="email" class="form-control">
-                          <label for="email" class="">Your email</label>
-                      </div>
-                  </div>
-                  <!--Grid column-->
-
-              </div>
-              <!--Grid row-->
-
-              <!--Grid row-->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="md-form mb-0">
-                          <input type="text" id="subject" name="subject" class="form-control">
-                          <label for="subject" class="">Subject</label>
-                      </div>
-                  </div>
-              </div>
-              <!--Grid row-->
-
-              <!--Grid row-->
-              <div class="row">
-
-                  <!--Grid column-->
-                  <div class="col-md-12">
-
-                      <div class="md-form">
-                          <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
-                          <label for="message">Your message</label>
-                      </div>
-
-                  </div>
-              </div>
-              <!--Grid row-->
-
-          </form>
-
-          <div class="text-center text-md-left">
-              <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-          </div>
-          <div class="status"></div>
-      </div>      
-
+      <div class="wrap-input100 validate-input" data-validate = "Message is required">
+        <span class="label-input100">Message:</span>
+        <textarea class="input100" name="message" placeholder="Your Comment..."></textarea>
+        <span class="focus-input100"></span>
+      </div>
+      <div class="button">
+        <button type="button" class="btn btn-warning">Submit</button>
+      </div>
+    </form>
   </div>
-
-</section>
-<!--Section: Contact v.2-->
-</div>
 </div>

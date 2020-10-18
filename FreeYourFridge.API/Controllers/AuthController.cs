@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FreeYourFridge.API.Data;
 using FreeYourFridge.API.DTOs;
 using FreeYourFridge.API.Models;
@@ -18,14 +19,18 @@ namespace FreeYourFridge.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IMapper _mapper;
+        private readonly IUserRepository _user;
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper, IUserRepository user)
         {
             _repo = repo;
             _config = config;
-
+            _mapper = mapper;
+            _user = user;
         }
 
         [HttpPost("register")]
+        [Consumes("application/json")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             //validate request
@@ -33,19 +38,35 @@ namespace FreeYourFridge.API.Controllers
             if (await _repo.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
 
-            var userToCreate = new User
-            {
-                Username = userForRegisterDto.Username
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForListDto>(createdUser);
+
+            var newUserDetails = new UserDetails()
+            {
+
+                DailyDemand = 0,
+                Carbohydrates = 0,
+                Fats = 0,
+                Protein = 0,
+                Description = "",
+                User = createdUser,
+                UserId = createdUser.Id,
+                ActivityLevel = 0
+            };
+            _user.Add(newUserDetails);
+            await _user.SaveAll();
+            return CreatedAtRoute("GetUser", new { Controller = "User", id = createdUser.Id }, userToReturn);
         }
+
         [HttpPost("login")]
+        [Consumes("application/json")]
+
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
-            if(userFromRepo ==null)
+            if (userFromRepo == null)
             {
                 return Unauthorized();
             }
@@ -65,7 +86,8 @@ namespace FreeYourFridge.API.Controllers
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Ok(new{
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }

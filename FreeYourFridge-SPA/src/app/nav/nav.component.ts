@@ -21,8 +21,12 @@ export class NavComponent implements OnInit {
       this.alertify.success('logged in successfully');
     }, error => {
       this.alertify.error('Failed to login');
+      this.model.username = '';
+      this.model.password = '';
     }, () =>{
       this.route.navigate(['/myProfile']);
+      this.model.username = '';
+      this.model.password = '';
     });
   }
 
