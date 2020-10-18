@@ -81,9 +81,6 @@ namespace FreeYourFridge.API.Data
         /// <returns>deserialized class IncomingRecipe</returns>
         public async Task<IncomingRecipe> GetExternalDailyMeal(int id)
         {
-
-            //var incom2 = JsonConvert.DeserializeObject<IncomingRecipe>(await File.ReadAllTextAsync("response.json"));
-
             var client = new RestClient($"{UrlToSpoon}/{id}/{QueryContent}{_apiKeyReader.getKey()}");
             var request = new RestRequest(Method.GET);
             var response = await client.ExecuteAsync<IncomingRecipe>(request);
