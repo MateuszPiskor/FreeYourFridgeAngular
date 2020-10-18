@@ -1,0 +1,73 @@
+
+.container{
+  background: #2c2b2be0;
+  height: 100%;
+  width: 50%;
+  margin-top: 5%;
+  align-items: center;
+}
+.userContent{
+  display:block;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+  width: 90%;
+  margin:0 auto;
+  justify-content: center;
+}
+.rowHeader{
+  font-size: 40px;
+  text-align: center;
+}
+.column{
+  display:block;
+  text-align: center;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.formClass{
+  text-align: center;
+  justify-content: center;
+}
+.form-control{
+  text-align: center;
+}
+.btn {
+  text-align: center;
+  justify-content: center;
+  width: 100% !important;
+  align-items: center;
+  margin: auto;
+  overflow-wrap: break-word;
+}
+
+.container .userContent .rowUser{
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+}
+@media only screen and(max-width: 650px){
+  .rowHeader{
+    font-size: 30px;
+  }
+  .column{
+    width: 100%;
+  }
+}
+
+
+@media only screen and(max-width: 450px){
+  .rowHeader{
+    font-size: 20px;
+  }
+  .column{
+    width: 100%;
+  }
+  .userContent{
+    width: 100%;
+  }
+
+}

@@ -1,38 +1,102 @@
 .header_main {
-    position: relative;
-    height: 60vh;
+  position: relative;
+  height: 70vh;
+
 }
 
 .header_main > * {
-    position: absolute;
+  position: relative;
+
 }
 .header_main .welcome {
-    top: 15%;
-    left: 25%;
-    right: 25%;
-    padding: 15px;
-    -moz-box-shadow: inset 100px 100px 100px rgb(7, 7, 7);
-    -webkit-box-shadow: inset 100px 100px 100px rgb(14, 13, 13);
-    box-shadow: inset 100px 100px 100px rgb(20, 20, 20);
-    border-radius: 15px;
+  padding:7px;
+  align-items: center;
+  width:50%;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 15px;
+  -moz-box-shadow: inset 100px 100px 100px rgb(7, 7, 7);
+  -webkit-box-shadow: inset 100px 100px 100px rgb(14, 13, 13);
+  box-shadow: inset 100px 100px 100px rgb(20, 20, 20);
+  border-radius: 15px;
 }
 .header_main p {
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-weight: bold;
-    font-size: 70px;
-    color: rgb(255, 227, 102);
-    text-transform: uppercase;
+  width:90%;
+  margin:10px auto;
+  padding:2px;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 600%;
+  color: rgb(255, 227, 102);
+  text-transform: uppercase;
 }
 
 .header_main content {
-    font-family: 'Red Rose', cursive;
+  font-family: 'Red Rose', cursive;
 }
 
 .header_main h1 {
-    margin-top: 60px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 25px;
-    color: white;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 230%;
+  color: white;
 }
+.container{
+width: 100%;
+}
+@media(max-width: 1257px){
+.header_main p {
+  font-size: 400%;
+}
+.header_main h1 {
+font-size: 170%;
+}
+}
+@media(max-width: 1024px){
+.header_main p {
+  font-size: 350%;
+}
+.header_main h1 {
+font-size: 160%;
+}
+}
+@media(max-width: 760px){
+.header_main p {
+  font-size: 300%;
+}
+.header_main h1 {
+font-size: 120%;
+}
+}
+@media(max-width: 660px){
+.header_main p {
+  font-size: 250%;
+}
+.header_main h1 {
+margin-top: 20px;
+font-size: 120%;
+}
+}
+@media(max-width: 512px){
+.header_main p {
+  font-size: 200%;
+}
+.header_main h1 {
+margin-top: 20px;
+font-size: 100%;
+}
+.header_main .welcome {
+width:90%;
+}
+.btn{
+padding:4px 4px;
+font-size:150%;
+line-height: 1;
+}
+
+}
+

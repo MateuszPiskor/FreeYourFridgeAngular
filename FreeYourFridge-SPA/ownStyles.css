@@ -1,0 +1,15 @@
+.flex-space-between{
+  display:flex;
+  justify-content: space-between;
+}
+.noHover{
+  pointer-events: none;
+}
+
+.noBoard{
+  border:none;
+}
+.hover
+{
+  pointer-events:fill;
+}

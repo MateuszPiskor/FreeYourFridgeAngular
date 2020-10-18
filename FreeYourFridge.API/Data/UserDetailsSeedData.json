@@ -1,0 +1,35 @@
+﻿[
+  {
+    "DailyDemand": 1600,
+    "DailyDemandToRealize": 1600,
+    "Carbohydrates": 0,
+    "Fats": 0,
+    "Protein": 0,
+    "Description": "",
+    "User":null,
+    "ActivityLevel": 0,
+    "UserId": 1
+  },
+  {
+    "DailyDemand": 2200,
+    "DailyDemandToRealize": 2200,
+    "Carbohydrates": 0,
+    "Fats": 0,
+    "Protein": 0,
+    "Description": "",
+    "User": null,
+    "ActivityLevel": 1,
+    "UserId": 2
+  },
+  {
+    "DailyDemand": 2200,
+    "DailyDemandToRealize": 2200,
+    "Carbohydrates": 0,
+    "Fats": 0,
+    "Protein": 0,
+    "Description": "",
+    "User": null,
+    "ActivityLevel": 2,
+    "UserId": 3
+  }
+]
