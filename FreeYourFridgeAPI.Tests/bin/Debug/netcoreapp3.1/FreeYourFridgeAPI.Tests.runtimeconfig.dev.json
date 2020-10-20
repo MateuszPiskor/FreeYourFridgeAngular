@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\gryty\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\gryty\\.nuget\\packages"
-    ]
-  }
-}

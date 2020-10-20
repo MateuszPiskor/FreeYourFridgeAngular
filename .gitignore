@@ -27,3 +27,5 @@ FreeYourFridge.API/.vs/FreeYourFridge.API/v16/.suo
 /LocalAPI/bin/Debug/netcoreapp3.1
 /LocalAPI/obj/Release/netcoreapp3.1/LocalAPI.csprojAssemblyReference.cache
 /LocalAPI/obj/Debug/netcoreapp3.1/LocalAPI.MvcApplicationPartsAssemblyInfo.cs
+/FreeYourFridgeAPI.Tests/bin
+/FreeYourFridgeAPI.Tests/obj
